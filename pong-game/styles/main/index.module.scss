@@ -1,0 +1,50 @@
+.title {
+  height: 80px;
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  .mainTitle {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    margin: 20px;
+  }
+  .subTitle {
+    color: var(--gray-scale-400, #b5b6bd);
+    text-align: center;
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.btn {
+  all: unset;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  .gameBtn {
+    font-size: 25px;
+    width: 250px;
+    height: 50px;
+    border-radius: 30px;
+    background: #2c73ff;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    cursor: pointer;
+    border: none;
+    color: var(--black-white-white, #fff);
+    text-align: center;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
