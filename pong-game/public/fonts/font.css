@@ -1,0 +1,62 @@
+@font-face {
+  font-family: 'Pretendard-Black';
+  font-weight: 900;
+  font-style: normal;
+  src: url('../public/fonts/Pretendard-Black.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Pretendard-ExtraBold';
+  font-weight: 800;
+  font-style: normal;
+  src: url('../public/fonts/Pretendard-ExtraBold.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Pretendard-Bold';
+  font-weight: 700;
+  font-style: normal;
+  src: url('../public/fonts/Pretendard-Bold.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Pretendard-SemiBold';
+  font-weight: 600;
+  font-style: normal;
+  src: url('../public/fonts/Pretendard-SemiBold.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Pretendard-Medium';
+  font-weight: 500;
+  font-style: normal;
+  src: url('../public/fonts/Pretendard-Medium.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../public/fonts/Pretendard-Regular.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Pretendard-Light';
+  font-weight: 300;
+  font-style: normal;
+  src: url('../public/fonts/Pretendard-Light.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Pretendard-ExtraLight';
+  font-weight: 200;
+  font-style: normal;
+  src: url('../public/fonts/Pretendard-ExtraLight.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Pretendard-Thin';
+  font-weight: 100;
+  font-style: normal;
+  src: url('../public/fonts/Pretendard-Thin.ttf') format('ttf');
+}
