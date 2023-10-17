@@ -6,7 +6,6 @@
 
 @import '../public/fonts/font.css';
 
-
 @media (prefers-color-scheme: dark) {
   :root {
     /* --foreground-rgb: 255, 255, 255; */
@@ -19,9 +18,9 @@ body {
   margin: 0;
   /* color: rgb(var(--foreground-rgb)); */
   /* background: linear-gradient( */
-      /* to bottom, */
-      /* transparent, */
-      /* rgb(var(--background-end-rgb)) */
-    /* ) */
-    /* rgb(var(--background-start-rgb)); */
+  /* to bottom, */
+  /* transparent, */
+  /* rgb(var(--background-end-rgb)) */
+  /* ) */
+  /* rgb(var(--background-start-rgb)); */
 }
