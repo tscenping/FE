@@ -1,5 +1,4 @@
 .backGround {
-  
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -13,12 +12,28 @@
   flex-direction: column;
   padding-top: 64px;
   .mainTitle {
-    text-align: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    // justify-content: space-between;
+    flex-direction: row;
     font-size: 64px;
     margin: 20px;
+    .prvBtn {
+      // height: 80px;
+      // margin-top: auto;
+      // margin-right: auto;
+      // padding-right: 50px;
+      // margin-bottom: auto;
+      // margin-right: auto;
+      // justify-content: center;
+      // align-items: center;
+      // left: 300px;
+      // margin: 20px;
+      position: absolute;
+    }
+    .mainTitleText {
+      margin: auto;
+      // margin-left: 50px;
+    }
   }
   .subTitle {
     color: var(--gray-scale-400, #b5b6bd);
@@ -36,7 +51,7 @@
   justify-content: center;
   align-items: center;
   gap: 30px;
-  padding-top: 134px;
+  padding-top: 64px;
   .gameBtn {
     font-size: 25px;
     width: 300px;
@@ -59,28 +74,69 @@
 }
 .pageNation {
   display: flex;
-  // position: absolute;
-  // bottom: 100px;
-  margin-bottom: 100px;
   justify-content: center;
-  text-align: center;
-  // padding-top: 56px;
-
+  padding-top: 56px;
+  gap: 8px;
   .nowPage {
-    // display: inline-block;
     width: 16px;
     height: 16px;
     background-color: #2c73ff;
     border-radius: 50%;
-    margin: 5px;
   }
 
   .prvPage {
-    // display: inline-block;
     width: 16px;
     height: 16px;
-    margin: 5px;
     background-color: #d9d9d9;
     border-radius: 50%;
   }
+}
+
+.inputRadio {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Pretendard-regular';
+  gap: 40px;
+  // height: 50px;
+  font-size: 24px;
+  text-align: center;
+  input[type='radio'] {
+    display: none; /* 또는 visibility: hidden; */
+  }
+}
+
+.selectNormalText {
+  color: black;
+  height: 50px;
+  cursor: pointer;
+}
+
+.normalText {
+  color: #d7d8e0;
+  cursor: pointer;
+}
+
+.selectSpecialText {
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.specialText {
+  color: #d7d8e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.radioImg {
+  // display: inline-block;
+  cursor: pointer;
 }
