@@ -1,7 +1,10 @@
 import PageTitle from '@/components/UI/PageTitle'
 import Layout from '@/components/layout/Layout'
 import styles from '../../styles/mypage/mypage.module.scss'
+import profileImage from '../../public/img/mypage/profileImage.svg'
+import textEditBtn from '../../public/img/mypage/textEdit.svg'
 import React from 'react'
+import Image from 'next/image'
 
 export default function Mypage() {
   return (
@@ -14,16 +17,69 @@ export default function Mypage() {
         <section className={styles.userProfile}>
           <section className={styles.lineOne}>
             <div className={styles.profileNickName}>
-              <div>1</div>
-              <div>2</div>
+              <div className={styles.profileImg}>
+                <Image
+                  src={profileImage}
+                  alt={'profileImage'}
+                  // className={styles.radioImg}
+                  width={80}
+                  // height={40}
+                />
+              </div>
+              <div className={styles.nickName}>abcdefghi</div>
             </div>
-            <div className={styles.}>3</div>
+            <div className={styles.profileMessage}>
+              <div className={styles.text}>
+                asdasdasasdzxccxzxczadsadsasdadsczxxzcczxadsasdasd3
+              </div>
+              <Image
+                src={textEditBtn}
+                alt={'textEditBtn'}
+                className={styles.textEditBtn}
+                width={30}
+                // height={40}
+              />
+            </div>
           </section>
           <section className={styles.lineTwo}>
-            <div>1</div>
-            <div>2</div>
+            <div className={styles.secondAuth}>2차 인증</div>
+            <div className={styles.record}>
+              300전&nbsp;&nbsp;&nbsp;200승&nbsp;&nbsp;&nbsp;100패
+            </div>
           </section>
-          <section className={styles.lineThree}>1</section>
+          <section className={styles.lineThree}>
+            <div>
+              <span className={styles.rankTitle}>랭킹</span>
+              <br />
+              <span className={styles.rankSubTitle}>1</span>
+            </div>
+            <div>
+              <span className={styles.rankTitle}>래더점수</span>
+              <br />
+              <span className={styles.rankSubTitle}>1234</span>
+            </div>
+            <div>
+              <span className={styles.rankTitle}>최고점수</span>
+              <br />
+              <span className={styles.rankSubTitle}>5678</span>
+            </div>
+          </section>
+        </section>
+        <section className={styles.history}>
+          <section>
+            <span>Win</span>
+            <Image
+              src={profileImage}
+              alt={'profileImage'}
+              // className={styles.radioImg}
+              width={80}
+              // height={40}
+            />
+            <span></span>
+            <span></span>
+            <span></span>
+          </section>
+          <section className={styles.pagenation}>- 1 2 3 4 5 -</section>
         </section>
       </div>
     </Layout>
