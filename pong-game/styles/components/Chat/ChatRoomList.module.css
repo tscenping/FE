@@ -29,6 +29,11 @@
   grid-gap: 30px;
 }
 
+.chatRoomList .chatRoomListSection2 {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+}
 .checkList {
   color: #544fb0;
 }
