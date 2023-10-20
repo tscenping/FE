@@ -33,9 +33,10 @@
 }
 
 .main .mainMiddle {
-  display: flex;
-  justify-content: center;
   width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .main .mainRight {

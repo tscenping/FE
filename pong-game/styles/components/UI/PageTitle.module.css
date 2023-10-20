@@ -1,0 +1,17 @@
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 36px;
+}
+
+.title {
+  font-family: 'Pretendard-SemiBold';
+  font-size: 70px;
+}
+
+.subTitle {
+  margin-top: 16px;
+  font-size: 30px;
+  color: #b5b6bd;
+}
