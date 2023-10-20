@@ -16,6 +16,7 @@
 .prvBtn {
   position: absolute;
   margin-right: 450px;
+  cursor: pointer;
 }
 
 .title {
