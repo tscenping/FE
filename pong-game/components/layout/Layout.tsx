@@ -33,7 +33,7 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
           <section className={styles.sideBarContainer}>
             <ul className={styles.sideBarContainerTop}>
               <li>
-                <Link href="/game">
+                <Link href="/main">
                   <Image src={gameIcon} alt={'game'} />
                 </Link>
               </li>
