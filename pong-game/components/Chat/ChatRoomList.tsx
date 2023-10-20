@@ -1,16 +1,106 @@
+import styles from '../../styles/components/Chat/ChatRoomList.module.css'
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import makeChatRoom from '../../public/img/chat/makeChat.svg'
+import CreatedRoomList from './createdRoomList'
+
 function ChatRoomList(): JSX.Element {
+  const [tabState, setTabState] = useState('1')
+
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>전체 목록</li>
-          <li>참여 목록</li>
-          <li>1:1 메세지</li>
-          <li>방 생성</li>
-        </ul>
+    <div className={styles.chatRoomList}>
+      <nav className={styles.chatNavBarContainer}>
+        <span>
+          <input
+            type="radio"
+            name="tab"
+            id="entireList"
+            value={1}
+            checked={tabState == '1'}
+            onChange={() => setTabState('1')}
+          />
+          <label
+            htmlFor="entireList"
+            className={tabState === '1' ? styles.checkList : ''}
+          >
+            전체 목록
+          </label>
+        </span>
+        <span>
+          <input
+            type="radio"
+            name="tab"
+            id="enterChat"
+            value="2"
+            onChange={() => setTabState('2')}
+          />
+          <label
+            htmlFor="enterChat"
+            className={tabState === '2' ? styles.checkList : ''}
+          >
+            참여 목록
+          </label>
+        </span>
+        <span>
+          <input
+            type="radio"
+            name="tab"
+            id="facetoface"
+            value="3"
+            onChange={() => setTabState('3')}
+          />
+          <label
+            htmlFor="facetoface"
+            className={tabState === '3' ? styles.checkList : ''}
+          >
+            1:1 메세지
+          </label>
+        </span>
+        <Image src={makeChatRoom} alt={'make chat room'} />
       </nav>
-      <div></div>
-      <div></div>
+      {tabState === '3' && (
+        <div className={styles.chatRoomListContainer}>
+          <ul className={styles.chatRoomListSection}>
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+          </ul>
+        </div>
+      )}
+      {tabState === '2' && (
+        <div className={styles.chatRoomListContainer}>
+          <ul className={styles.chatRoomListSection}>
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+          </ul>
+        </div>
+      )}
+      {tabState === '1' && (
+        <div className={styles.chatRoomListContainer}>
+          <ul className={styles.chatRoomListSection}>
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+            <CreatedRoomList title="채팅방 1" />
+          </ul>
+        </div>
+      )}
+      <div></div> {/* page선택 섹션*/}
     </div>
   )
 }
