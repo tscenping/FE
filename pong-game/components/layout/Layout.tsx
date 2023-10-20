@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { ReactNode } from 'react'
+import Link from 'next/link'
 import noticeIcon from '../../public/img/layout/notice.svg'
 import logoIcon from '../../public/img/layout/PONG GAME.svg'
 import gameIcon from '../../public/img/layout/game.svg'
@@ -15,7 +16,9 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
     <div className={styles.entirePage}>
       <header className={styles.header}>
         <div className={styles.headerContainer}>
-          <Image className={styles.logo} src={logoIcon} alt={'logo'} />
+          <Link href="/main">
+            <Image className={styles.logo} src={logoIcon} alt={'logo'} />
+          </Link>
           <Image
             className={styles.notice}
             src={noticeIcon}
@@ -30,16 +33,24 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
           <section className={styles.sideBarContainer}>
             <ul className={styles.sideBarContainerTop}>
               <li>
-                <Image src={gameIcon} alt={'game'} />
+                <Link href="/game">
+                  <Image src={gameIcon} alt={'game'} />
+                </Link>
               </li>
               <li>
-                <Image src={chatIcon} alt={'chat'} />
+                <Link href="/chat">
+                  <Image src={chatIcon} alt={'chat'} />
+                </Link>
               </li>
               <li>
-                <Image src={myPageIcon} alt={'mypage'} />
+                <Link href="mypage">
+                  <Image src={myPageIcon} alt={'mypage'} />
+                </Link>
               </li>
               <li>
-                <Image src={rankIcon} alt={'rank'} />
+                <Link href="rank">
+                  <Image src={rankIcon} alt={'rank'} />
+                </Link>
               </li>
             </ul>
             <ul className={styles.sideBarContainerBottom}>
