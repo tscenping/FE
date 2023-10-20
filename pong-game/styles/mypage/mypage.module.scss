@@ -142,7 +142,6 @@
 }
 
 .history {
-  width: 100%;
   height: 100%;
   background-color: #f7f8fa;
   border-radius: 30px;
@@ -152,6 +151,47 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  padding: 16px;
+  .historyList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .historyContent {
+      color: #000;
+      text-align: center;
+      font-family: Pretendard;
+      font-size: 30px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -0.3px;
+      width: 750px;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+      align-items: center;
+      .result {
+        width: 100px;
+      }
+      .leftUser {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 300px;
+      }
+      .score {
+        width: 100px;
+      }
+      .rightUser {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 300px;
+      }
+    }
+  }
 
   .pagenation {
     color: #000;
@@ -162,6 +202,5 @@
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.3px;
-    margin-bottom: 24px;
   }
 }
