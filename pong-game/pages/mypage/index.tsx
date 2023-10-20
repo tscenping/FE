@@ -8,7 +8,7 @@ import Image from 'next/image'
 
 export default function Mypage() {
   return (
-    <Layout>
+    <>
       <div className={styles.backGround}>
         <PageTitle
           title="MyPage"
@@ -66,60 +66,61 @@ export default function Mypage() {
           </section>
         </section>
         <section className={styles.history}>
-        <div className={styles.historyList}>
-          <section className={styles.historyContent}>
-            <div className={styles.result}>Win</div>
-            <div className={styles.leftUser}>
-            <Image
-              src={profileImage}
-              alt={'profileImage'}
-              // className={styles.radioImg}
-              width={64}
-              // height={40}
-            />him
-            </div>
-            <div className={styles.score}>7 : 2</div>
-            <div className={styles.rightUser}>
-            sangyeki
-            <Image
-              src={profileImage}
-              alt={'profileImage'}
-              // className={styles.radioImg}
-              width={64}
-              // height={40}
-            />
-            </div>
-            <div className={styles.result}>Win</div>
-          </section>
-          <section className={styles.historyContent}>
-            <div className={styles.result}>Win</div>
-            <div className={styles.leftUser}>
-            <Image
-              src={profileImage}
-              alt={'profileImage'}
-              // className={styles.radioImg}
-              width={64}
-              // height={40}
-            />him
-            </div>
-            <div className={styles.score}>7 : 2</div>
-            <div className={styles.rightUser}>
-            sangyeki
-            <Image
-              src={profileImage}
-              alt={'profileImage'}
-              // className={styles.radioImg}
-              width={64}
-              // height={40}
-            />
-            </div>
-            <div className={styles.result}>Win</div>
-          </section>
+          <div className={styles.historyList}>
+            <section className={styles.historyContent}>
+              <div className={styles.result}>Win</div>
+              <div className={styles.leftUser}>
+                <Image
+                  src={profileImage}
+                  alt={'profileImage'}
+                  // className={styles.radioImg}
+                  width={64}
+                  // height={40}
+                />
+                him
+              </div>
+              <div className={styles.score}>7 : 2</div>
+              <div className={styles.rightUser}>
+                sangyeki
+                <Image
+                  src={profileImage}
+                  alt={'profileImage'}
+                  // className={styles.radioImg}
+                  width={64}
+                  // height={40}
+                />
+              </div>
+              <div className={styles.result}>Win</div>
+            </section>
+            <section className={styles.historyContent}>
+              <div className={styles.result}>Win</div>
+              <div className={styles.leftUser}>
+                <Image
+                  src={profileImage}
+                  alt={'profileImage'}
+                  // className={styles.radioImg}
+                  width={64}
+                  // height={40}
+                />
+                him
+              </div>
+              <div className={styles.score}>7 : 2</div>
+              <div className={styles.rightUser}>
+                sangyeki
+                <Image
+                  src={profileImage}
+                  alt={'profileImage'}
+                  // className={styles.radioImg}
+                  width={64}
+                  // height={40}
+                />
+              </div>
+              <div className={styles.result}>Win</div>
+            </section>
           </div>
           <section className={styles.pagenation}>- 1 2 3 4 5 -</section>
         </section>
-        
       </div>
-    </Layout>
+    </>
   )
 }
