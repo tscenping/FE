@@ -5,8 +5,22 @@
   margin-top: 36px;
 }
 
+.mainTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  font-size: 64px;
+  margin: 20px;
+}
+.prvBtn {
+  position: absolute;
+  margin-right: 450px;
+}
+
 .title {
   font-family: 'Pretendard-SemiBold';
+  text-align: center;
   font-size: 70px;
 }
 
