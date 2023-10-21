@@ -1,0 +1,94 @@
+.inputNickImageContainer {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputNickImageContainer section {
+  margin-bottom: 96px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 3rem;
+}
+
+.title h1 {
+  margin-bottom: 16px;
+}
+
+.profileImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputImageButton {
+  background-color: #508bff;
+  padding: 8px;
+  border-radius: 10px;
+  color: white;
+  margin-bottom: 16px;
+}
+.inputImage {
+  display: none;
+}
+
+.imageExplanation {
+  color: #98989e;
+  font-family: 'Pretendard-Regular';
+}
+.profileImage .profileImageShow {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.profileImage .profileImageShow img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.profileNickName {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.nickNameInput {
+  width: 500px;
+  height: 60px;
+  font-size: 32px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid grey;
+}
+
+.nickNameInput::placeholder {
+  font-size: 32px;
+  color: #98989e;
+}
+
+.nickNameCharCount {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 5px;
+  font-size: 32px;
+}
+
+.button {
+  position: absolute;
+  padding: 16px;
+  border: none;
+  color: white;
+  background-color: #508bff;
+  border-radius: 20px;
+  bottom: 100px;
+  right: 100px;
+  font-size: 24px;
+}
