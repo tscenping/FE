@@ -52,25 +52,12 @@ function ChatRoomList(): JSX.Element {
             <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
           </ul>
         </div>
       )}
       {tabState === '1' && (
         <div className={styles.chatRoomListContainer}>
           <ul className={styles.chatRoomListSection}>
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />

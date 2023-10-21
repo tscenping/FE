@@ -12,16 +12,113 @@
   flex-direction: column;
   flex-grow: 3;
   margin-right: 16px;
+  width: 500px;
 }
 
-.chatRoom .chatShow .chatLog {
+.chatRoom .chatShow .chatInfoLog {
   background-color: #e2ecff;
   border-radius: 10px;
   flex-grow: 10;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 32px;
+  height: 300px;
+}
+
+.chatInfoLog .chatInfo {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 32px;
+  font-family: 'Pretendard-ExtraBold';
+}
+
+.chatInfoLog .chatLog {
+  padding: 16px 16px;
+  height: 530px;
+  overflow-x: scroll;
+}
+
+.chatInfoLog .chatLog::-webkit-scrollbar {
+  display: none;
+}
+
+.chatInfoLog .chatLog section {
+  margin-bottom: 16px;
+}
+
+.opponentMessage {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.opponentUserMessageAndTime {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+}
+
+.opponentUserNickName {
+  font-family: 'Pretendard-SemiBold';
+  margin-right: 16px;
+}
+
+.opponentUserMessage {
+  margin-right: 16px;
+  margin-bottom: 16px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: -5px 4px 8px rgba(0, 0, 0, 0.25);
+  text-align: left;
+}
+
+.opponentUserMessageTime {
+  display: flex;
+  flex-direction: column-reverse;
+  font-family: 'Pretendard-Regular';
+}
+
+.myMessage {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+}
+
+.myMessageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* width: 50%; */
+}
+
+.myUserNickName {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-left: 16px;
+  font-family: 'Pretendard-SemiBold';
+}
+
+.myUserMessageAndTime {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+  font-family: 'Pretendard-Regular';
+}
+
+.myUserMessage {
+  text-align: left;
+  word-break: break-all;
+  margin-left: 16px;
+  margin-bottom: 16px;
+  background-color: white;
+  box-shadow: 5px 4px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 16px;
 }
 
 .chatRoom .chatShow .chatInput {
+  height: 20px;
   flex-grow: 1;
   background-color: white;
   border-radius: 10px;
@@ -31,8 +128,95 @@
 
 .chatRoom .chatUserSection {
   flex-grow: 1;
+  width: 80px;
   background-color: white;
   padding: 16px;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.chatInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.messageInput {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  background-color: #fff;
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 0px 16px;
+  box-shadow: 0px 4px 4px rgb(192, 192, 192);
+}
+
+.messageInput:focus {
+  outline: none;
+}
+
+.messageInput::placeholder {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.folderNameInputPlaceHolder {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 1rem;
+  text-transform: uppercase;
+  transition: 0.5s;
+  color: #c0bebe;
+}
+
+.messageInput:valid ~ .folderNameInputPlaceHolder,
+.messageInput:focus ~ .folderNameInputPlaceHolder {
+  transform: translateY(-1.4rem);
+  padding: 0 10px;
+  background-color: transparent;
+  color: rgb(90, 90, 90);
+}
+
+.submitMessage {
+  background-color: transparent;
+  position: absolute;
+  right: 5px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.chatUserListContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatUserListContainer li {
+  margin-bottom: 8px;
+}
+.chatUserListContainer .chatUserListElement {
+  display: flex;
+  align-items: center;
+}
+
+.userProfileImage {
+  position: relative;
+  margin-right: 16px;
+}
+
+.userProfileImage::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: green;
+  position: absolute;
+  top: 25px;
+  right: 0px;
+}
+.userNickName {
+  margin-right: 16px;
 }
