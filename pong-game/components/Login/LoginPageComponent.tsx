@@ -7,8 +7,8 @@ function LoginPageComponent(): JSX.Element {
   return (
     <div className={styles.loginPageComponent}>
       <LoginPageTitle />
-      <LoginPageContents />
-      {/* <InputNickImage /> */}
+      {/* <LoginPageContents /> */}
+      <InputNickImage />
     </div>
   )
 }

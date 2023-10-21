@@ -66,6 +66,7 @@
   outline: none;
   border: none;
   border-bottom: 1px solid grey;
+  background-color: transparent;
 }
 
 .nickNameInput::placeholder {
