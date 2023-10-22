@@ -1,10 +1,11 @@
 import styles from '../../styles/components/Chat/ChatRoom.module.css'
 import Image from 'next/image'
-import closeRoom from '../../public/img/chat/closeRoom.svg'
-import roomOut from '../../public/img/chat/roomOut.svg'
-import submitMessage from '../../public/img/chat/enterInput.svg'
-import userToggle from '../../public/img/chat/userToggle.svg'
-import userImage from '../../public/img/chat/userProfileImage.svg'
+import closeRoom from '@/public/img/chat/closeRoom.svg'
+import roomOut from '@/public/img/chat/roomOut.svg'
+import submitMessage from '@/public/img/chat/enterInput.svg'
+import userToggle from '@/public/img/chat/userToggle.svg'
+import userImage from '@/public/img/chat/userProfileImage.svg'
+import lock from '@/public/img/chat/lock.svg'
 
 function ChatRoom(): JSX.Element {
   return (
@@ -20,7 +21,7 @@ function ChatRoom(): JSX.Element {
               <Image src={roomOut} alt={'roomOut'} />
             </span>
           </div>
-          <div className={styles.chatLog}>
+          {/* <div className={styles.chatLog}>
             <section className={styles.opponentMessage}>
               <div className={styles.opponentUserMessageAndTime}>
                 <strong className={styles.opponentUserNickName}>
@@ -88,15 +89,30 @@ function ChatRoom(): JSX.Element {
                 <div className={styles.myUserMessage}>네 안녕하세요</div>
               </div>
             </section>
+          </div> */}
+          <div className={styles.chatPassword}>
+            <div className={styles.chatRoomName}>
+              <Image src={lock} alt={'password room'} />
+              <h1 className={styles.RoomName}>채팅방 이름</h1>
+            </div>
+            <p className={styles.wrongPassword}>잘못된 비밀번호 입니다.</p>
+            <div className={styles.chatPasswordInput}>
+              <input
+                type="password"
+                className={styles.passwordInput}
+                required
+              />
+              <span className={styles.passwordInputPlaceHolder}>
+                비밀번호를 입력해주세요.
+              </span>
+              <button className={styles.submitPassword}>
+                <Image src={submitMessage} alt={'submit message'} width={30} />
+              </button>
+            </div>
           </div>
         </div>
         <div className={styles.chatInput}>
-          <input
-            type="text"
-            id="makeFolder"
-            className={styles.messageInput}
-            required
-          />
+          <input type="text" className={styles.messageInput} required />
           <span className={styles.folderNameInputPlaceHolder}>
             Message Input
           </span>
