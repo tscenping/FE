@@ -3,7 +3,11 @@ import Image from 'next/image'
 import styles from '../../styles/components/Login/InputNickImage.module.css'
 import defaultProfileImage from '../../public/img/login/noProfileImage.svg'
 
-function InputNickImage(): JSX.Element {
+interface InputNickImageProps {
+  state: boolean
+}
+
+function InputNickImage(props: InputNickImageProps): JSX.Element {
   const [nickName, setNickName] = useState<string>('')
   const [uploadImage, setUploadImage] = useState<string[]>([])
   const fileRef = useRef<HTMLInputElement>(null)

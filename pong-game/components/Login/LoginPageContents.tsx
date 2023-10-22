@@ -4,7 +4,10 @@ import logo from '../../public/img/login/logo.svg'
 import loginGoogle from '../../public/img/login/google.svg'
 import login42 from '../../public/img/login/42.svg'
 
-function LoginPageContents(): JSX.Element {
+interface LoginPageContentsProps {
+  state: boolean
+}
+function LoginPageContents(props: LoginPageContentsProps): JSX.Element {
   return (
     <div className={styles.loginPageContents}>
       <ul className={styles.loginPageContentsContainer}>
