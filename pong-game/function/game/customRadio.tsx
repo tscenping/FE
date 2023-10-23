@@ -4,7 +4,8 @@ import normalBtn from '../../public/img/game/normal.svg'
 import selectSpecialBtn from '../../public/img/game/selectSpecial.svg'
 import selectNormalBtn from '../../public/img/game/selectNormal.svg'
 import Image from 'next/image'
-import styles from '../../styles/components/game/normalGame.module.scss'
+// import styles from '../../styles/components/game/normalGame.module.scss'
+import styles from '../../styles/function/game/customRadio.module.scss'
 
 interface radioOption{
   value: string;
@@ -17,7 +18,7 @@ interface radioOption{
 
 export default function CustomRadio({value, name, id, setGameMode, gameMode, width}:radioOption) {
   return (
-    <section>
+    <section className={styles.customRadio}>
       <input
         type="radio"
         value={value} // special
