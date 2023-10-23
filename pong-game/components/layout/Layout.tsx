@@ -8,8 +8,8 @@ import chatIcon from '@/public/img/layout/chat.svg'
 import myPageIcon from '@/public/img/layout/mypage.svg'
 import rankIcon from '@/public/img/layout/rank.svg'
 import logoutIcon from '@/public/img/layout/logout.svg'
-
-import styles from '@/styles/components/Layout/Layout.module.css'
+import friendsIcon from '@/public/img/layout/friend.svg'
+import styles from '../../styles/components/Layout/Layout.module.css'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   return (
@@ -34,7 +34,21 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
             <ul className={styles.sideBarContainerTop}>
               <li>
                 <Link href="/main">
-                  <Image src={gameIcon} alt={'game'} />
+                  <Image
+                    src={gameIcon}
+                    alt={'game'}
+                    className={styles.gameImg}
+                  />
+                </Link>
+              </li>
+              <li>
+                <Link href="/rank">
+                  <Image src={rankIcon} alt={'rank'} />
+                </Link>
+              </li>
+              <li>
+                <Link href="/friends">
+                  <Image src={friendsIcon} alt={'friends'} />
                 </Link>
               </li>
               <li>
@@ -43,13 +57,8 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
                 </Link>
               </li>
               <li>
-                <Link href="mypage">
+                <Link href="/mypage">
                   <Image src={myPageIcon} alt={'mypage'} />
-                </Link>
-              </li>
-              <li>
-                <Link href="rank">
-                  <Image src={rankIcon} alt={'rank'} />
                 </Link>
               </li>
             </ul>
