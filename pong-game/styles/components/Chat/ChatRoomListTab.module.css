@@ -1,0 +1,8 @@
+.tab {
+  display: flex;
+  align-items: center;
+}
+
+.checkList {
+  color: #544fb0;
+}

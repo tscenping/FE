@@ -6,6 +6,7 @@ import addDmChat from '@/public/img/chat/addDmChat.svg'
 import CreatedRoomList from './CreatedRoomList'
 import DmChat from './DmChat'
 import ModalLayout from '../layout/ModalLayout'
+import ChatRoomListTab from './ChatRoomListTab'
 
 function ChatRoomList(): JSX.Element {
   const [tabState, setTabState] = useState('1')
@@ -13,52 +14,30 @@ function ChatRoomList(): JSX.Element {
   return (
     <div className={styles.chatRoomList}>
       <nav className={styles.chatNavBarContainer}>
-        <span>
-          <input
-            type="radio"
-            name="tab"
-            id="entireList"
-            value={1}
-            checked={tabState == '1'}
-            onChange={() => setTabState('1')}
-          />
-          <label
-            htmlFor="entireList"
-            className={tabState === '1' ? styles.checkList : ''}
-          >
-            전체 목록
-          </label>
-        </span>
-        <span>
-          <input
-            type="radio"
-            name="tab"
-            id="enterChat"
-            value="2"
-            onChange={() => setTabState('2')}
-          />
-          <label
-            htmlFor="enterChat"
-            className={tabState === '2' ? styles.checkList : ''}
-          >
-            참여 목록
-          </label>
-        </span>
-        <span>
-          <input
-            type="radio"
-            name="tab"
-            id="facetoface"
-            value="3"
-            onChange={() => setTabState('3')}
-          />
-          <label
-            htmlFor="facetoface"
-            className={tabState === '3' ? styles.checkList : ''}
-          >
-            1:1 메세지
-          </label>
-        </span>
+        <ChatRoomListTab
+          name="tab"
+          id="entireList"
+          value="1"
+          tabState={tabState}
+          setTabState={setTabState}
+          title="전체 목록"
+        />
+        <ChatRoomListTab
+          name="tab"
+          id="joined"
+          value="2"
+          tabState={tabState}
+          setTabState={setTabState}
+          title="참여 목록"
+        />
+        <ChatRoomListTab
+          name="tab"
+          id="facetoface"
+          value="3"
+          tabState={tabState}
+          setTabState={setTabState}
+          title="1:1 메세지"
+        />
         {tabState === '3' ? (
           <Image src={addDmChat} alt={'make dm chat'} />
         ) : (
@@ -82,25 +61,12 @@ function ChatRoomList(): JSX.Element {
             <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
           </ul>
         </div>
       )}
       {tabState === '1' && (
         <div className={styles.chatRoomListContainer}>
           <ul className={styles.chatRoomListSection}>
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />
