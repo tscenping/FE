@@ -89,6 +89,26 @@ function ChatRoom(): JSX.Element {
                 <div className={styles.myUserMessage}>네 안녕하세요</div>
               </div>
             </section>
+            <section className={styles.opponentMessage}>
+              <div className={styles.opponentUserMessageAndTime}>
+                <strong className={styles.opponentUserNickName}>
+                  sangyeki
+                </strong>
+                <div className={styles.opponentUserMessageTime}>12 : 32</div>
+              </div>
+              <div className={styles.opponentUserMessage}>
+                다른 감자를 만나다니 반갑네요
+              </div>
+            </section>
+            <section className={styles.myMessage}>
+              <div className={styles.myMessageContainer}>
+                <div className={styles.myUserMessageAndTime}>
+                  <div className={styles.myUserMessageTime}>12 : 32</div>
+                  <strong className={styles.myUserNickName}>sangyeki</strong>
+                </div>
+                <div className={styles.myUserMessage}>저는</div>
+              </div>
+            </section>
           </div> */}
           <div className={styles.chatPassword}>
             <div className={styles.chatRoomName}>

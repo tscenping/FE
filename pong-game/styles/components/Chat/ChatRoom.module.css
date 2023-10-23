@@ -294,7 +294,7 @@
 
 .passwordInput:valid ~ .passwordInputPlaceHolder,
 .passwordInput:focus ~ .passwordInputPlaceHolder {
-  transform: translateY(-1.3rem);
+  transform: translateY(-2.2rem);
   padding: 0 16px;
   background-color: transparent;
   font-family: 'Pretendard-SemiBold';
