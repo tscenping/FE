@@ -9,7 +9,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <Reset />
-      
+
       {loginPage ? (
         <Component {...pageProps} />
       ) : (
