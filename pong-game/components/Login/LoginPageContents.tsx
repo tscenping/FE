@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import styles from '../../styles/components/Login/LoginPageContents.module.css'
 import logo from '../../public/img/login/logo.svg'
+import stick from '../../public/img/login/stick.svg'
 import loginGoogle from '../../public/img/login/google.svg'
 import login42 from '../../public/img/login/42.svg'
 
@@ -13,6 +14,7 @@ function LoginPageContents(props: LoginPageContentsProps): JSX.Element {
       <ul className={styles.loginPageContentsContainer}>
         <li className={styles.logo}>
           <Image src={logo} alt={'logo'} width={300} height={300} />
+          <Image src={stick} alt={'logo stick'} width={80} height={80} />
         </li>
         <li>
           <button className={styles.login42Button}>
