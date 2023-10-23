@@ -1,8 +1,11 @@
-import styles from '../../styles/components/Chat/ChatRoomList.module.css'
+import styles from '@/styles/components/Chat/ChatRoomList.module.css'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import makeChatRoom from '../../public/img/chat/makeChat.svg'
+import makeChatRoom from '@/public/img/chat/makeChat.svg'
+import addDmChat from '@/public/img/chat/addDmChat.svg'
 import CreatedRoomList from './CreatedRoomList'
+import DmChat from './DmChat'
+import ModalLayout from '../layout/ModalLayout'
 import ChatRoomListTab from './ChatRoomListTab'
 
 function ChatRoomList(): JSX.Element {
@@ -35,14 +38,20 @@ function ChatRoomList(): JSX.Element {
           setTabState={setTabState}
           title="1:1 메세지"
         />
-        <Image src={makeChatRoom} alt={'make chat room'} />
+        {tabState === '3' ? (
+          <Image src={addDmChat} alt={'make dm chat'} />
+        ) : (
+          <Image src={makeChatRoom} alt={'make chat room'} />
+        )}
       </nav>
       {tabState === '3' && (
         <div className={styles.chatRoomListContainer}>
-          <ul className={styles.chatRoomListSection}>
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
-            <CreatedRoomList title="채팅방 1" />
+          <ul className={styles.chatRoomListSection2}>
+            <DmChat />
+            <DmChat />
+            <DmChat />
+            <DmChat />
+            <DmChat />
           </ul>
         </div>
       )}

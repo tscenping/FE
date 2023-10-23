@@ -18,6 +18,9 @@
   margin-right: 450px;
   cursor: pointer;
 }
+.prvBtn:hover{
+  transform: scale(1.3);
+}
 
 .title {
   font-family: 'Pretendard-SemiBold';

@@ -5,6 +5,8 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
+        <div id="modalOverlay"></div>
+        <div id="modalContent"></div>
         <Main />
         <NextScript />
       </body>

@@ -1,15 +1,15 @@
 import Image from 'next/image'
 import { ReactNode } from 'react'
 import Link from 'next/link'
-import noticeIcon from '../../public/img/layout/notice.svg'
-import logoIcon from '../../public/img/layout/PONG GAME.svg'
-import gameIcon from '../../public/img/layout/game.svg'
-import chatIcon from '../../public/img/layout/chat.svg'
-import myPageIcon from '../../public/img/layout/mypage.svg'
-import rankIcon from '../../public/img/layout/rank.svg'
-import logoutIcon from '../../public/img/layout/logout.svg'
+import noticeIcon from '@/public/img/layout/notice.svg'
+import logoIcon from '@/public/img/layout/PONG GAME.svg'
+import gameIcon from '@/public/img/layout/game.svg'
+import chatIcon from '@/public/img/layout/chat.svg'
+import myPageIcon from '@/public/img/layout/mypage.svg'
+import rankIcon from '@/public/img/layout/rank.svg'
+import logoutIcon from '@/public/img/layout/logout.svg'
 
-import styles from '../../styles/components/Layout/Layout.module.css'
+import styles from '@/styles/components/Layout/Layout.module.css'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   return (
