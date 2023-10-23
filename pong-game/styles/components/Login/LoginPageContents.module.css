@@ -101,7 +101,7 @@
   background-color: black;
   border-radius: 50%;
   position: absolute;
-  animation: bounce 2s ease-in-out infinite alternate;
+  animation: bounce 1.5s ease-in-out infinite alternate;
   animation-delay: 10s;
   right: 30px;
   bottom: 0;
