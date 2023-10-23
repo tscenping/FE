@@ -5,13 +5,14 @@ import styles from '../../styles/components/Chat/DmChat.module.css'
 function DmChat(): JSX.Element {
   return (
     <li className={styles.dmChatListContainer}>
-      <Image
-        src={OpponentProfileImage}
-        alt={'Opponent Profile image'}
-        width={50}
-        height={50}
-      />
-      <div className={styles.opponentLoginState}></div>
+      <div className={styles.profileImage}>
+        <Image
+          src={OpponentProfileImage}
+          alt={'Opponent Profile image'}
+          width={50}
+          height={50}
+        />
+      </div>
       <span className={styles.opponentNickName}>nickName</span>
     </li>
   )
