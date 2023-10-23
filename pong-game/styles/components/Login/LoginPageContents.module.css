@@ -56,6 +56,11 @@
   cursor: pointer;
   text-align: center;
   animation: buttonShow 10s ease-in-out forwards;
+  transition: 0.2s transform;
+}
+
+.login42Button:hover {
+  transform: scale(1.2);
 }
 
 .login42Button img {
@@ -78,6 +83,11 @@
   cursor: pointer;
   position: relative;
   animation: buttonShow 10s ease-in-out forwards;
+  transition: 0.2s transform;
+}
+
+.loginGoogleButton:hover {
+  transform: scale(1.2);
 }
 
 .loginGoogleButton img {
@@ -91,7 +101,7 @@
   background-color: black;
   border-radius: 50%;
   position: absolute;
-  animation: bounce 1s ease-in-out infinite alternate;
+  animation: bounce 2s ease-in-out infinite alternate;
   animation-delay: 10s;
   right: 30px;
   bottom: 0;
@@ -110,13 +120,15 @@
 }
 
 @keyframes bounce {
-  0%,
-  100% {
+  0% {
     transform: translateY(0);
   }
 
   50% {
     transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(10px);
   }
 }
 
@@ -144,7 +156,7 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-150px);
+    transform: translateY(-200px);
   }
 }
 
