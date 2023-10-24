@@ -11,23 +11,29 @@ interface ModalProps {
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
   return (
-    <>{modalName !== null && <div className={styles.modalOverlay} onClick={()=> setModalName(null)}></div>}</>
+    <>
+      {modalName !== null && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setModalName(null)}
+        ></div>
+      )}
+    </>
   )
 }
 
 function ModalContent({}): JSX.Element {
   const { modalName, setModalName } = useModalState()
   const modalContent: { [key: string]: JSX.Element | null } = {
-    'userProfile': <UserProfile />,
+    userProfile: <UserProfile />,
   }
   return (
     <>
       {modalName !== null && (
         <div className={styles.modalContent}>
-          
           <div className={styles.modal}>
-          {modalName ? modalContent[modalName]: null}
-          <button onClick={() => setModalName(null)}>asd</button>
+            {modalName ? modalContent[modalName] : null}
+            <button onClick={() => setModalName(null)}>asd</button>
           </div>
         </div>
       )}

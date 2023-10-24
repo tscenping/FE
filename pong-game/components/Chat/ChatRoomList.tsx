@@ -41,7 +41,12 @@ function ChatRoomList(): JSX.Element {
         {tabState === '3' ? (
           <Image src={addDmChat} alt={'make dm chat'} />
         ) : (
-          <Image src={makeChatRoom} alt={'make chat room'} />
+          <Image
+            src={makeChatRoom}
+            alt={'make chat room'}
+            width={40}
+            height={40}
+          />
         )}
       </nav>
       {tabState === '3' && (
