@@ -3,8 +3,8 @@ import Image from 'next/image'
 import styles from '../../styles/main/index.module.scss'
 import Layout from '@/components/layout/Layout'
 import { useState } from 'react'
-import NomalGame from '@/components/game/normalGame'
-import RankGame from '@/components/game/rankGame'
+import NomalGame from '@/components/game/NormalGame'
+import RankGame from '@/components/game/RankGame'
 import PageTitle from '@/components/UI/PageTitle'
 
 export default function Home() {
