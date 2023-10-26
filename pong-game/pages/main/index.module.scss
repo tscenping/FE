@@ -79,7 +79,7 @@
     background-color: #2c73ff;
     border-radius: 50%;
     margin: 8px;
-    animation: reduction 0.3s ease-in-out forwards;
+    animation: reduction 0.3s linear forwards;
   }
 
   .prvPage {
@@ -89,7 +89,7 @@
     margin: 8px;
     background-color: #d9d9d9;
     border-radius: 50%;
-    animation: enlargement 0.3s ease-in-out forwards;
+    animation: enlargement 0.3s linear forwards;
   }
 }
 
