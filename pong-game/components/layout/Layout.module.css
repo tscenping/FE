@@ -66,8 +66,8 @@
 }
 
 .sideBar .sideBarContainerTop li {
-  transition: 0.2s;
   margin-top: 48px;
+  transition: 0.2s;
 }
 
 .sideBar .sideBarContainerTop li img {
@@ -83,4 +83,17 @@
 
 .sideBar .sideBarContainerBottom li {
   margin-bottom: 48px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.sideBar .sideBarContainerBottom li img {
+  padding: 16px;
+}
+
+.sideBar .sideBarContainerBottom li:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  background-color: #9bbeff;
 }
