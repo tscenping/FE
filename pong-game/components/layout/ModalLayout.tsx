@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import styles from '../../styles/components/Layout/ModalLayout.module.css'
+import styles from './ModalLayout.module.css'
 import UserProfile from '../Modal/UserProfile/UserProfile'
 import { useModalState, useUserProfileModalState } from '@/store/store'
 

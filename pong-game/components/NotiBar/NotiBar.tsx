@@ -1,4 +1,4 @@
-import styles from '@/styles/components/NotiBar/NotiBar.module.scss'
+import styles from './NotiBar.module.scss'
 import noticeIcon from '@/public/img/notiBar/notiBell.svg'
 import chatIcon from '@/public/img/layout/chat.svg'
 import gameIcon from '@/public/img/layout/game.svg'

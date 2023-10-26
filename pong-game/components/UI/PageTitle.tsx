@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import styles from '../../styles/components/UI/PageTitle.module.css'
+import styles from './PageTitle.module.css'
 import prvBtn from '../../public/img/pageNation/left.svg'
 
 interface TitleData {

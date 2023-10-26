@@ -1,4 +1,4 @@
-import styles from '../../styles/components/Chat/ChatRoomListTab.module.css'
+import styles from './ChatRoomListTab.module.css'
 
 interface ChatRoomListTabProps {
   name: string

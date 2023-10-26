@@ -1,6 +1,6 @@
 import PageTitle from '@/components/UI/PageTitle'
 import Layout from '@/components/layout/Layout'
-import styles from '@/styles/mypage/mypage.module.scss'
+import styles from './mypage.module.scss'
 import profileImage from '@/public/img/mypage/profileImage.svg'
 import textEditBtn from '@/public/img/mypage/textEdit.svg'
 import React from 'react'

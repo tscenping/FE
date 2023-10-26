@@ -1,4 +1,4 @@
-import styles from '@/styles/components/Chat/ChatRoomList.module.css'
+import styles from './ChatRoomList.module.css'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import makeChatRoom from '@/public/img/chat/makeChat.svg'

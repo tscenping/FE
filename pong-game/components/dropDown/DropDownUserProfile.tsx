@@ -1,4 +1,4 @@
-import styles from '@/styles/components/DropDown/DropDownIUserProfile.module.scss'
+import styles from './DropDownIUserProfile.module.scss'
 
 interface DropDownUserProfileProps {
   isFriend?: boolean

@@ -1,4 +1,4 @@
-import styles from '../../styles/components/game/normalGame.module.scss'
+import styles from './normalGame.module.scss'
 import prvBtn from '../../public/img/pageNation/left.svg'
 import Image from 'next/image'
 import specialBtn from '../../public/img/game/special.svg'

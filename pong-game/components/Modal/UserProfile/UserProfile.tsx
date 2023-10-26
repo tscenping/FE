@@ -1,4 +1,4 @@
-import styles from '@/styles/components/Modal/UserProfileModal.module.scss'
+import styles from './UserProfileModal.module.scss'
 import profileImage from '@/public/img/mypage/profileImage.svg'
 import closeBtn from '@/public/img/modal/modalClose.svg'
 import friendEdit from '@/public/img/modal/friendEdit.svg'
