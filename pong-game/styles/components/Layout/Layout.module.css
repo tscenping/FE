@@ -24,6 +24,7 @@
 
 .header .headerContainer .notice {
   position: absolute;
+  cursor: pointer;
   right: 30px;
 }
 
@@ -80,3 +81,4 @@
 .sideBar .sideBarContainerBottom li {
   margin-bottom: 48px;
 }
+

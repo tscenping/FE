@@ -32,9 +32,11 @@
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.3px;
+    
     .userInfo {
       display: flex;
       align-items: center;
+      cursor: pointer;
       .rank {
         width: 50px;
         margin-right: 15px;

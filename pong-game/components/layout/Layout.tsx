@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import Link from 'next/link'
 import noticeIcon from '@/public/img/layout/notice.svg'
 import logoIcon from '@/public/img/layout/PONG GAME.svg'
@@ -10,22 +10,30 @@ import rankIcon from '@/public/img/layout/rank.svg'
 import logoutIcon from '@/public/img/layout/logout.svg'
 import friendsIcon from '@/public/img/layout/friend.svg'
 import styles from '../../styles/components/Layout/Layout.module.css'
+import NotiBar from '../NotiBar/NotiBar'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
+  const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)
+
+
   return (
-    <div className={styles.entirePage}>
+    <div className={styles.entirePage} onClick={()=> (viewNotiBar && setViewNotiBar(false))}>
       <header className={styles.header}>
         <div className={styles.headerContainer}>
           <Link href="/main">
             <Image className={styles.logo} src={logoIcon} alt={'logo'} />
           </Link>
+          {/* <button onClick={() => setViewNotiBar(prev => !prev)} className={styles.btn}> */}
           <Image
             className={styles.notice}
             src={noticeIcon}
             alt={'notice'}
             width={40}
             height={40}
+            onClick={() => setViewNotiBar(prev => !prev)} 
           />
+          {/* </button> */}
+          
         </div>
       </header>
       <main className={styles.main}>
@@ -70,7 +78,7 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
           </section>
         </aside>
         <section className={styles.mainMiddle}>{children}</section>
-        <section className={styles.mainRight}></section>
+        <section className={styles.mainRight}>{viewNotiBar && <NotiBar/>}</section>
       </main>
     </div>
   )

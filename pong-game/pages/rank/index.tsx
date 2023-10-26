@@ -16,7 +16,13 @@ export default function Rank() {
 
       <section className={styles.rankList}>
         <div className={styles.rankContent}>
-          <div className={styles.userInfo}>
+          <div
+            className={styles.userInfo}
+            onClick={() => {
+              setModalName('userProfile')
+              console.log(modalName)
+            }}
+          >
             <span className={styles.rank}>10. </span>
             <span className={styles.userName}>
               <Image
@@ -27,11 +33,11 @@ export default function Rank() {
                 // height={40}
               />
               abcdabcdab
-              <DropDown
+              {/* <DropDown
                 isDropDownView={true}
                 dropDownState="userProfile"
                 userProfile={{ isFriend: true, isBlock: false }}
-              />
+              /> */}
             </span>
           </div>
           <div className={styles.score}>4242</div>
@@ -59,16 +65,6 @@ export default function Rank() {
 
           <div className={styles.score}>4242</div>
         </div>
-
-        <button
-          onClick={() => {
-            setModalName('userProfile')
-            console.log(modalName)
-          }}
-        >
-          {' '}
-          asdasd
-        </button>
       </section>
 
       <section className={styles.pagenation}>- 1 2 3 4 5 -</section>
