@@ -9,7 +9,7 @@ import myPageIcon from '@/public/img/layout/mypage.svg'
 import rankIcon from '@/public/img/layout/rank.svg'
 import logoutIcon from '@/public/img/layout/logout.svg'
 import friendsIcon from '@/public/img/layout/friend.svg'
-import styles from '../../styles/components/Layout/Layout.module.css'
+import styles from './Layout.module.css'
 import NotiBar from '../NotiBar/NotiBar'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {

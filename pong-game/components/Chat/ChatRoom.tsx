@@ -1,4 +1,4 @@
-import styles from '../../styles/components/Chat/ChatRoom.module.css'
+import styles from './ChatRoom.module.css'
 import Image from 'next/image'
 import closeRoom from '@/public/img/chat/closeRoom.svg'
 import roomOut from '@/public/img/chat/roomOut.svg'

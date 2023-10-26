@@ -1,4 +1,4 @@
-import styles from '../../styles/components/Login/LoginPageTitle.module.css'
+import styles from './LoginPageTitle.module.css'
 
 function LoginPageTitle(): JSX.Element {
   return (

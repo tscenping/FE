@@ -1,4 +1,4 @@
-import styles from '@/styles/components/Friends/FriendsNaviTab.module.css'
+import styles from './FriendsNaviTab.module.css'
 
 interface FriendNaviTabProps {
   name: string

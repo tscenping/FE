@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import styles from '../../styles/components/Login/LoginPageContents.module.css'
+import styles from './LoginPageContents.module.css'
 import logo from '../../public/img/login/logo.svg'
 import stick from '../../public/img/login/stick.svg'
 import loginGoogle from '../../public/img/login/google.svg'

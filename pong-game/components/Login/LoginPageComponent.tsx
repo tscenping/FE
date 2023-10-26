@@ -3,7 +3,7 @@ import { useState } from 'react'
 import LoginPageTitle from './LoginPageTitle'
 import LoginPageContents from './LoginPageContents'
 import InputNickImage from './InputNickImage'
-import styles from '../../styles/components/Login/LoginPageComponent.module.css'
+import styles from './LoginPageComponent.module.css'
 
 function LoginPageComponent(): JSX.Element {
   const [input, setInput] = useState<boolean>(true)

@@ -1,4 +1,4 @@
-import styles from '../../styles/components/Chat/CreatedRoomList.module.css'
+import styles from './CreatedRoomList.module.css'
 import Image from 'next/image'
 import passwordRoom from '../../public/img/chat/lock.svg'
 
