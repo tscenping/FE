@@ -219,7 +219,7 @@
   margin-right: 16px;
 }
 
-.userProfileImage::after {
+/* .userProfileImage::after {
   content: '';
   width: 10px;
   height: 10px;
@@ -228,7 +228,8 @@
   position: absolute;
   top: 25px;
   right: 0px;
-}
+} */
+
 .userNickName {
   margin-right: 16px;
 }

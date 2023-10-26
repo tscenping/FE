@@ -68,7 +68,10 @@
 .sideBar .sideBarContainerTop li {
   transition: 0.2s;
   margin-top: 48px;
-  padding: 8px 16px;
+}
+
+.sideBar .sideBarContainerTop li img {
+  padding: 16px;
 }
 
 .sideBar .sideBarContainerTop li:hover {
@@ -81,4 +84,3 @@
 .sideBar .sideBarContainerBottom li {
   margin-bottom: 48px;
 }
-
