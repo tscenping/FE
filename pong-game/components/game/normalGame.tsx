@@ -6,7 +6,7 @@ import normalBtn from '../../public/img/game/normal.svg'
 import selectSpecialBtn from '../../public/img/game/selectSpecial.svg'
 import selectNormalBtn from '../../public/img/game/selectNormal.svg'
 import { useState } from 'react'
-import CustomRadio from '@/function/game/customRadio'
+import CustomRadio from '@/Function/Game/CustomRadio'
 import PageTitle from '../UI/PageTitle'
 
 interface props {

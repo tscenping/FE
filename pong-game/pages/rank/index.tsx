@@ -1,5 +1,5 @@
 import PageTitle from '@/components/UI/PageTitle'
-import styles from './Rank.module.scss'
+import styles from './rank.module.scss'
 import profileImage from '../../public/img/mypage/profileImage.svg'
 import Image from 'next/image'
 import DropDown from '@/components/dropDown/DropDown'
