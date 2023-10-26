@@ -4,9 +4,6 @@ import styles from '../../styles/components/Layout/ModalLayout.module.css'
 import UserProfile from '../Modal/UserProfile/UserProfile'
 import { useModalState, useUserProfileModalState } from '@/store/store'
 
-interface ModalProps {
-  modalName: string
-}
 
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
@@ -31,10 +28,9 @@ function ModalContent({}): JSX.Element {
     <>
       {modalName !== null && (
         <div className={styles.modalContent}>
-          <div className={styles.modal}>
+          {/* <div className={styles.modal}> */}
             {modalName ? modalContent[modalName] : null}
-            <button onClick={() => setModalName(null)}>asd</button>
-          </div>
+          {/* </div> */}
         </div>
       )}
     </>
