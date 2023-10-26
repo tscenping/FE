@@ -1,5 +1,5 @@
 import styles1 from './DropDown.module.scss'
-import styles from '../../pages/rank/rank.module.scss'
+import styles from '@/pages/rank/rank.module.scss'
 import DropDownUserProfile from './DropDownUserProfile'
 
 interface dropDownProps {

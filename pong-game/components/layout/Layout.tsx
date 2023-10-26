@@ -15,9 +15,11 @@ import NotiBar from '../NotiBar/NotiBar'
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)
 
-
   return (
-    <div className={styles.entirePage} onClick={()=> (viewNotiBar && setViewNotiBar(false))}>
+    <div
+      className={styles.entirePage}
+      onClick={() => viewNotiBar && setViewNotiBar(false)}
+    >
       <header className={styles.header}>
         <div className={styles.headerContainer}>
           <Link href="/main">
@@ -30,10 +32,8 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
             alt={'notice'}
             width={40}
             height={40}
-            onClick={() => setViewNotiBar(prev => !prev)} 
+            onClick={() => setViewNotiBar((prev) => !prev)}
           />
-          {/* </button> */}
-          
         </div>
       </header>
       <main className={styles.main}>
@@ -78,7 +78,9 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
           </section>
         </aside>
         <section className={styles.mainMiddle}>{children}</section>
-        <section className={styles.mainRight}>{viewNotiBar && <NotiBar/>}</section>
+        <section className={styles.mainRight}>
+          {viewNotiBar && <NotiBar />}
+        </section>
       </main>
     </div>
   )
