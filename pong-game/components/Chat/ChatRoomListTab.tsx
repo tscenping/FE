@@ -22,7 +22,9 @@ function ChatRoomListTab(props: ChatRoomListTabProps): JSX.Element {
       />
       <label
         htmlFor={props.id}
-        className={props.tabState === props.value ? styles.checkList : ''}
+        className={
+          props.tabState === props.value ? styles.checkList : styles.noCheckList
+        }
       >
         {props.title}
       </label>
