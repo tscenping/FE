@@ -40,15 +40,15 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
         <aside className={styles.sideBar}>
           <section className={styles.sideBarContainer}>
             <ul className={styles.sideBarContainerTop}>
-              <Link href="/main">
-                <li>
+              <li>
+                <Link href="/main">
                   <Image
                     src={gameIcon}
                     alt={'game'}
                     className={styles.gameImg}
                   />
-                </li>
-              </Link>
+                </Link>
+              </li>
               <li>
                 <Link href="/rank">
                   <Image src={rankIcon} alt={'rank'} />
