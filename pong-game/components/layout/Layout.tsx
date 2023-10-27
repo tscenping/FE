@@ -34,6 +34,7 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
             height={40}
             onClick={() => setViewNotiBar((prev) => !prev)}
           />
+          <div className={styles.notiBar}>{<NotiBar />}</div>
         </div>
       </header>
       <main className={styles.main}>
@@ -79,7 +80,7 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
         </aside>
         <section className={styles.mainMiddle}>{children}</section>
         <section className={styles.mainRight}>
-          {viewNotiBar && <NotiBar />}
+          
         </section>
       </main>
     </div>
