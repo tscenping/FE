@@ -2,11 +2,13 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  min-height: 1080px;
 }
 
 .header {
   position: relative;
   width: 100%;
+  min-width: 1920px;
 }
 
 .logo:hover {
@@ -36,6 +38,8 @@
 .main .mainMiddle {
   width: 1920px;
   height: 1080px;
+  min-width: 960px;
+  min-height: 540px;
   margin-left: auto;
   margin-right: auto;
 }
