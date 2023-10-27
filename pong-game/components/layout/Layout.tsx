@@ -19,12 +19,9 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
   return (
     <div
       className={styles.entirePage}
-      // onClick={() => viewNotiBar && setViewNotiBar(false)}
+      onClick={() => viewNotiBar && setViewNotiBar(false)}
     >
-      <header
-        className={styles.header}
-        // onClick={() => viewNotiBar && setViewNotiBar(false)}
-      >
+      <header className={styles.header}>
         <div className={styles.headerContainer}>
           <Link href="/main">
             <Image className={styles.logo} src={logoIcon} alt={'logo'} />
@@ -36,10 +33,9 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
             alt={'notice'}
             width={40}
             height={40}
-            // onClick={() => setViewNotiBar((prev) => !prev)}
-            onMouseEnter={() => setViewNotiBar((prev) => !prev)}
+            onClick={() => setViewNotiBar((prev) => !prev)}
           />
-          {/* </button> */}
+          <div className={styles.notiBar}>{<NotiBar />}</div>
         </div>
       </header>
       <main
@@ -87,9 +83,7 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
           </section>
         </aside>
         <section className={styles.mainMiddle}>{children}</section>
-        <section className={styles.mainRight}>
-          {viewNotiBar && <NotiBar />}
-        </section>
+        <section className={styles.mainRight}></section>
       </main>
     </div>
   )

@@ -1,12 +1,29 @@
 import PageTitle from '@/components/UI/PageTitle'
-import styles from './Rank.module.scss'
+import styles from './rank.module.scss'
 import profileImage from '../../public/img/mypage/profileImage.svg'
 import Image from 'next/image'
 import DropDown from '@/components/dropDown/DropDown'
 import { useModalState, useUserProfileModalState } from '@/store/store'
+import Pagination from 'react-js-pagination'
+import { useEffect, useState } from 'react'
 
 export default function Rank() {
   const { modalName, setModalName } = useModalState()
+  const [page, setPage] = useState(1);
+  const handlePageChange = (page: number) => {
+    setPage(page)
+    console.log(page)
+  }
+  const state1 = [1, 2, 3, 4];
+  const state4 = [3, 2, 3, 4];
+  const state3 = [4, 2, 3, 4];
+  const state2 = [5, 2, 3, 4];
+  const pages = ['state1', 'state2', 'state3', 'state4']
+  
+  useEffect(() => {
+    console.log(pages[page])
+  },[page])
+
   return (
     <div className={styles.backGround}>
       <PageTitle
@@ -67,7 +84,25 @@ export default function Rank() {
         </div>
       </section>
 
-      <section className={styles.pagenation}>- 1 2 3 4 5 -</section>
+      <section className={styles.pagenation}>
+        - 1 2 3 4 5 -
+        <Pagination
+        activePage={page}// 현제 보고있는 페이지 
+        itemsCountPerPage={5}// 한페이지에 출력할 아이템수
+        totalItemsCount={30}// 총 아이템수
+        pageRangeDisplayed={3}// 표시할 페이지수
+        prevPageText={"‹"}
+        nextPageText={"›"}
+        onChange={handlePageChange}
+        />
+        {pages[page]}
+              {/* 
+                useEffect에 setContent 를 넣어두고
+                Pagination컴포넌트 통해서 page벨류가 변경되면
+                setContent가 호출되고
+                JSX리턴에 content를 map을 통해 보여준다.
+               */}
+      </section>
     </div>
   )
 }
