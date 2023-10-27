@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { createPortal } from 'react-dom'
 import { ReactNode, useState } from 'react'
 import Link from 'next/link'
 import noticeIcon from '@/public/img/layout/notice.svg'
@@ -18,9 +19,12 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
   return (
     <div
       className={styles.entirePage}
-      onClick={() => viewNotiBar && setViewNotiBar(false)}
+      // onClick={() => viewNotiBar && setViewNotiBar(false)}
     >
-      <header className={styles.header}>
+      <header
+        className={styles.header}
+        // onClick={() => viewNotiBar && setViewNotiBar(false)}
+      >
         <div className={styles.headerContainer}>
           <Link href="/main">
             <Image className={styles.logo} src={logoIcon} alt={'logo'} />
@@ -32,12 +36,16 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
             alt={'notice'}
             width={40}
             height={40}
-            onClick={() => setViewNotiBar((prev) => !prev)}
+            // onClick={() => setViewNotiBar((prev) => !prev)}
+            onMouseEnter={() => setViewNotiBar((prev) => !prev)}
           />
           {/* </button> */}
         </div>
       </header>
-      <main className={styles.main}>
+      <main
+        className={styles.main}
+        // onClick={() => viewNotiBar && setViewNotiBar(false)}
+      >
         <aside className={styles.sideBar}>
           <section className={styles.sideBarContainer}>
             <ul className={styles.sideBarContainerTop}>

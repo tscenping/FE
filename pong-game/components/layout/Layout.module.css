@@ -9,17 +9,17 @@
   width: 100%;
 }
 
+.logo:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
 .header .headerContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 16px;
   background-color: #b3cdff;
-}
-
-.header .headerContainer .logo {
-  font-family: 'LeferiPointBlackOblique';
-  font-size: 50px;
 }
 
 .header .headerContainer .notice {

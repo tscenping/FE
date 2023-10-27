@@ -39,13 +39,18 @@ function ChatRoomList(): JSX.Element {
           title="1:1 메세지"
         />
         {tabState === '3' ? (
-          <Image src={addDmChat} alt={'make dm chat'} />
+          <Image
+            src={addDmChat}
+            alt={'make dm chat'}
+            className={styles.createDmChat}
+          />
         ) : (
           <Image
             src={makeChatRoom}
             alt={'make chat room'}
             width={40}
             height={40}
+            className={styles.createChatRoom}
           />
         )}
       </nav>

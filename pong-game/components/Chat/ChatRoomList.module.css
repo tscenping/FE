@@ -18,6 +18,23 @@
   color: #d7d8e0;
 }
 
+.chatNavBarContainer img:hover {
+  transform: scale(1.2);
+  transition: 0.2s;
+}
+
+.createDmChat:hover {
+  transform: scale(1.2);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.createChatRoom:hover {
+  transform: scale(1.2);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
 .chatNavBarContainer input[type='radio'] {
   display: none;
 }
