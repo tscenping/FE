@@ -82,3 +82,11 @@
   margin-bottom: 48px;
 }
 
+
+.notiBar{
+  display: none;
+}
+
+.notice:hover + .notiBar, .notiBar:hover  {
+  display: block;
+}
