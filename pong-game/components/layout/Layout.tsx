@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { createPortal } from 'react-dom'
 import { ReactNode, useState } from 'react'
 import Link from 'next/link'
 import noticeIcon from '@/public/img/layout/notice.svg'
@@ -10,7 +9,7 @@ import myPageIcon from '@/public/img/layout/mypage.svg'
 import rankIcon from '@/public/img/layout/rank.svg'
 import logoutIcon from '@/public/img/layout/logout.svg'
 import friendsIcon from '@/public/img/layout/friend.svg'
-import styles from './Layout.module.css'
+import styles from './Layout.module.scss'
 import NotiBar from '../NotiBar/NotiBar'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
@@ -38,13 +37,11 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
           <div className={styles.notiBar}>{<NotiBar />}</div>
         </div>
       </header>
-      <main
-        className={styles.main}
-        // onClick={() => viewNotiBar && setViewNotiBar(false)}
-      >
+      <main className={styles.main}>
         <aside className={styles.sideBar}>
           <section className={styles.sideBarContainer}>
             <ul className={styles.sideBarContainerTop}>
+              {/* "li"요소들 컴포넌트화 진행예정 */}
               <li>
                 <Link href="/main">
                   <Image

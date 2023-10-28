@@ -12,16 +12,16 @@ interface TitleData {
 function PageTitle(props: TitleData): JSX.Element {
   return (
     <div className={styles.titleContainer}>
+      {props.prvBtn == true && (
+        <Image
+          src={prvBtn}
+          alt={'prvBtn'}
+          className={styles.prvBtn}
+          width={64}
+          onClick={props.handlePrvBtn}
+        />
+      )}
       <div className={styles.mainTitle}>
-        {props.prvBtn == true && (
-          <Image
-            src={prvBtn}
-            alt={'prvBtn'}
-            className={styles.prvBtn}
-            width={64}
-            onClick={props.handlePrvBtn}
-          />
-        )}
         <h1 className={styles.title}>{props.title}</h1>
       </div>
       <h3 className={styles.subTitle}>{props.subTitle}</h3>
