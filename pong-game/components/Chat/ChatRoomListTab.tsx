@@ -1,4 +1,4 @@
-import styles from './ChatRoomListTab.module.css'
+import styles from './ChatRoomListTab.module.scss'
 
 interface ChatRoomListTabProps {
   name: string
@@ -11,7 +11,7 @@ interface ChatRoomListTabProps {
 
 function ChatRoomListTab(props: ChatRoomListTabProps): JSX.Element {
   return (
-    <span className={styles.tab}>
+    <span className={styles.naviBar}>
       <input
         type="radio"
         name={props.name}
@@ -23,7 +23,7 @@ function ChatRoomListTab(props: ChatRoomListTabProps): JSX.Element {
       <label
         htmlFor={props.id}
         className={
-          props.tabState === props.value ? styles.checkList : styles.noCheckList
+          props.tabState === props.value ? styles.checkTab : styles.noCheckTab
         }
       >
         {props.title}
