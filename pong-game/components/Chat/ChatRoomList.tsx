@@ -13,6 +13,7 @@ function ChatRoomList(): JSX.Element {
 
   return (
     <div className={styles.chatListNavBar}>
+      {/* "nav"요소도 컴포넌트로 따로 구분할 예정 */}
       <nav className={styles.chatListNavBarContainer}>
         <ChatRoomListTab
           name="tab"
@@ -54,6 +55,7 @@ function ChatRoomList(): JSX.Element {
           />
         )}
       </nav>
+      {/* 아래 "div", "ul"도 재사용이므로 컴포넌트화 예정 */}
       {tabState === '3' && (
         <div className={styles.chatTypeListContainer}>
           <ul className={styles.chatDmRoomListSection}>
