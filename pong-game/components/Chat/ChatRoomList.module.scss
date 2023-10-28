@@ -1,0 +1,44 @@
+.chatListNavBar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 700px;
+  .chatListNavBarContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    font-size: 30px;
+    color: #d7d8e0;
+    img:hover {
+      transform: scale(1.2);
+      transition: 0.2s;
+    }
+    input[type='radio'] {
+      display: none;
+    }
+    .createDmChat:hover,
+    .createChatRoom:hover {
+      transform: scale(1.2);
+      transition: 0.2s;
+      cursor: pointer;
+    }
+  }
+  .chatTypeListContainer {
+    display: flex;
+    justify-content: center;
+    .chatRoomListSection {
+      padding: 48px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 30px;
+    }
+    .chatDmRoomListSection {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .checkList {
+    color: #544fb0;
+  }
+}

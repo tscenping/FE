@@ -1,4 +1,4 @@
-import styles from './ChatRoomList.module.css'
+import styles from './ChatRoomList.module.scss'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import makeChatRoom from '@/public/img/chat/makeChat.svg'
@@ -12,8 +12,8 @@ function ChatRoomList(): JSX.Element {
   const [tabState, setTabState] = useState('1')
 
   return (
-    <div className={styles.chatRoomList}>
-      <nav className={styles.chatNavBarContainer}>
+    <div className={styles.chatListNavBar}>
+      <nav className={styles.chatListNavBarContainer}>
         <ChatRoomListTab
           name="tab"
           id="entireList"
@@ -55,8 +55,8 @@ function ChatRoomList(): JSX.Element {
         )}
       </nav>
       {tabState === '3' && (
-        <div className={styles.chatRoomListContainer}>
-          <ul className={styles.chatRoomListSection2}>
+        <div className={styles.chatTypeListContainer}>
+          <ul className={styles.chatDmRoomListSection}>
             <DmChat />
             <DmChat />
             <DmChat />
@@ -66,7 +66,7 @@ function ChatRoomList(): JSX.Element {
         </div>
       )}
       {tabState === '2' && (
-        <div className={styles.chatRoomListContainer}>
+        <div className={styles.chatTypeListContainer}>
           <ul className={styles.chatRoomListSection}>
             <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />
@@ -75,7 +75,7 @@ function ChatRoomList(): JSX.Element {
         </div>
       )}
       {tabState === '1' && (
-        <div className={styles.chatRoomListContainer}>
+        <div className={styles.chatTypeListContainer}>
           <ul className={styles.chatRoomListSection}>
             <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />
