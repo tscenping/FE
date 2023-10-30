@@ -43,7 +43,7 @@ function InputNickImage(props: InputNickImageProps): JSX.Element {
         )}
         {uploadImage.map((url, i) => (
           <div key={url} className={styles.profileImageShow}>
-            <img src={url} alt={'selectedImage'} width={100} height={100} />
+            <Image src={url} alt={'selectedImage'} width={100} height={100} />
           </div>
         ))}
         <label htmlFor="profileImage" className={styles.inputImageButton}>
