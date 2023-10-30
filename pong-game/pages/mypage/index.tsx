@@ -5,8 +5,97 @@ import profileImage from '@/public/img/mypage/profileImage.svg'
 import textEditBtn from '@/public/img/mypage/textEdit.svg'
 import React from 'react'
 import Image from 'next/image'
+import MatchHistory from '@/components/History/MatchHistory'
+import MyPageHistory from '@/components/MyPage/MyPageHistory'
+import MyPageProfile from '@/components/MyPage/MyPageProfile'
+import CustomPagination from '@/components/pagination/CustomPagination'
+
+interface MatchHistoryProps {
+  rivalName: string
+  rivalAvatar: string
+  rivalScore: number
+  myScore: number
+  isWinner: boolean
+}
+interface pageInfo {
+  requestPage: number //
+  requestDataSzie: number //
+  totalPage: number //
+  totalDateSize: number //
+}
+
+interface MyPageProfileProps {
+  nickName: string
+  avatar: string
+  statusMessage: string
+  loseCount: number
+  winCount: number
+  totalCount: number
+  ladderRank: number
+  ladderScore: number
+  ladderMaxScore: number
+  gameInfo?: {
+    gameHistories: MatchHistoryProps[]
+    pageInfo: pageInfo
+  }
+}
 
 export default function Mypage() {
+  var props: MyPageProfileProps = {
+    nickName: 'him',
+    avatar: 'hhh',
+    statusMessage: 'asdasdasdasdsadasdas',
+    loseCount: 123,
+    winCount: 123,
+    totalCount: 246,
+    ladderRank: 2,
+    ladderScore: 1234,
+    ladderMaxScore: 2345,
+  }
+
+  const pageInfo: pageInfo = {
+    requestPage: 1, // 유저가 보고싶은 현재 페이지
+    requestDataSzie: 10, // 각 페이지마다 보여줄 데이터 개수
+    totalPage: 10, // 전체 데이터 수 / 각 페이지별 데이터 개수
+    totalDateSize: 89, // 전체 데이터 개수
+  }
+  const gameHistories: MatchHistoryProps[] = [
+    {
+      rivalName: 'sangyeki',
+      rivalAvatar: '',
+      rivalScore: 3,
+      myScore: 5,
+      isWinner: true,
+    },
+    {
+      rivalName: 'sangyeki',
+      rivalAvatar: '',
+      rivalScore: 3,
+      myScore: 5,
+      isWinner: true,
+    },  
+    {
+      rivalName: 'sangyeki',
+      rivalAvatar: '',
+      rivalScore: 3,
+      myScore: 5,
+      isWinner: true,
+    },
+    {
+      rivalName: 'sangyeki',
+      rivalAvatar: '',
+      rivalScore: 3,
+      myScore: 5,
+      isWinner: true,
+    },
+    {
+      rivalName: 'sangyeki',
+      rivalAvatar: '',
+      rivalScore: 3,
+      myScore: 5,
+      isWinner: true,
+    },
+  ]
   return (
     <>
       <div className={styles.backGround}>
@@ -14,186 +103,27 @@ export default function Mypage() {
           title="MyPage"
           subTitle="프로필 사진, 상태메세지 변경과 내 전적을 확인할 수 있어요."
         />
-        <section className={styles.userProfile}>
-          <section className={styles.lineOne}>
-            <div className={styles.profileNickName}>
-              <div className={styles.profileImg}>
-                <Image
-                  src={profileImage}
-                  alt={'profileImage'}
-                  // className={styles.radioImg}
-                  width={80}
-                  // height={40}
-                />
-              </div>
-              <div className={styles.nickName}>abcdefghi</div>
-            </div>
-            <div className={styles.profileMessage}>
-              <div className={styles.text}>
-                asdasdasasdzxccxzxczadsadsasdadsczxxzcczxadsasdasd3
-              </div>
-              <Image
-                src={textEditBtn}
-                alt={'textEditBtn'}
-                className={styles.textEditBtn}
-                width={30}
-                // height={40}
-              />
-            </div>
-          </section>
-          <section className={styles.lineTwo}>
-            <div className={styles.secondAuth}>2차 인증</div>
-            <div className={styles.record}>
-              300전&nbsp;&nbsp;&nbsp;200승&nbsp;&nbsp;&nbsp;100패
-            </div>
-          </section>
-          <section className={styles.lineThree}>
-            <div>
-              <span className={styles.rankTitle}>랭킹</span>
-              <br />
-              <span className={styles.rankSubTitle}>1</span>
-            </div>
-            <div>
-              <span className={styles.rankTitle}>래더점수</span>
-              <br />
-              <span className={styles.rankSubTitle}>1234</span>
-            </div>
-            <div>
-              <span className={styles.rankTitle}>최고점수</span>
-              <br />
-              <span className={styles.rankSubTitle}>5678</span>
-            </div>
-          </section>
-        </section>
+        <MyPageProfile
+          nickName={'him'}
+          avatar={'hhh'}
+          statusMessage={'asdasdasdasdsadasdas'}
+          loseCount={123}
+          winCount={123}
+          totalCount={246}
+          ladderRank={2}
+          ladderScore={1234}
+          ladderMaxScore={2345}
+        />
         <section className={styles.history}>
           <div className={styles.historyList}>
-            <section className={styles.historyContent}>
-              <div className={styles.result}>Win</div>
-              <div className={styles.leftUser}>
-                <Image
-                  src={profileImage}
-                  alt={'profileImage'}
-                  // className={styles.radioImg}
-                  width={64}
-                  // height={40}
-                />
-                him
-              </div>
-              <div className={styles.score}>7 : 2</div>
-              <div className={styles.rightUser}>
-                sangyeki
-                <Image
-                  src={profileImage}
-                  alt={'profileImage'}
-                  // className={styles.radioImg}
-                  width={64}
-                  // height={40}
-                />
-              </div>
-              <div className={styles.result}>Win</div>
-            </section>
-            <section className={styles.historyContent}>
-              <div className={styles.result}>Win</div>
-              <div className={styles.leftUser}>
-                <Image
-                  src={profileImage}
-                  alt={'profileImage'}
-                  // className={styles.radioImg}
-                  width={64}
-                  // height={40}
-                />
-                him
-              </div>
-              <div className={styles.score}>7 : 2</div>
-              <div className={styles.rightUser}>
-                sangyeki
-                <Image
-                  src={profileImage}
-                  alt={'profileImage'}
-                  // className={styles.radioImg}
-                  width={64}
-                  // height={40}
-                />
-              </div>
-              <div className={styles.result}>Win</div>
-            </section>
-            <section className={styles.historyContent}>
-              <div className={styles.result}>Win</div>
-              <div className={styles.leftUser}>
-                <Image
-                  src={profileImage}
-                  alt={'profileImage'}
-                  // className={styles.radioImg}
-                  width={64}
-                  // height={40}
-                />
-                him
-              </div>
-              <div className={styles.score}>7 : 2</div>
-              <div className={styles.rightUser}>
-                sangyeki
-                <Image
-                  src={profileImage}
-                  alt={'profileImage'}
-                  // className={styles.radioImg}
-                  width={64}
-                  // height={40}
-                />
-              </div>
-              <div className={styles.result}>Win</div>
-            </section>
-            <section className={styles.historyContent}>
-              <div className={styles.result}>Win</div>
-              <div className={styles.leftUser}>
-                <Image
-                  src={profileImage}
-                  alt={'profileImage'}
-                  // className={styles.radioImg}
-                  width={64}
-                  // height={40}
-                />
-                him
-              </div>
-              <div className={styles.score}>7 : 2</div>
-              <div className={styles.rightUser}>
-                sangyeki
-                <Image
-                  src={profileImage}
-                  alt={'profileImage'}
-                  // className={styles.radioImg}
-                  width={64}
-                  // height={40}
-                />
-              </div>
-              <div className={styles.result}>Win</div>
-            </section>
-            <section className={styles.historyContent}>
-              <div className={styles.result}>Win</div>
-              <div className={styles.leftUser}>
-                <Image
-                  src={profileImage}
-                  alt={'profileImage'}
-                  // className={styles.radioImg}
-                  width={64}
-                  // height={40}
-                />
-                him
-              </div>
-              <div className={styles.score}>7 : 2</div>
-              <div className={styles.rightUser}>
-                sangyeki
-                <Image
-                  src={profileImage}
-                  alt={'profileImage'}
-                  // className={styles.radioImg}
-                  width={64}
-                  // height={40}
-                />
-              </div>
-              <div className={styles.result}>Win</div>
-            </section>
+            <MyPageHistory gameHistories={gameHistories} />
           </div>
-          <section className={styles.pagenation}>- 1 2 3 4 5 -</section>
+          <div className={styles.pagenation}>
+            <CustomPagination
+              itemsCountPerPage={pageInfo.requestDataSzie}
+              totalItemsCount={pageInfo.totalDateSize}
+            />
+          </div>
         </section>
       </div>
     </>

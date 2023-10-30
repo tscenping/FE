@@ -1,0 +1,40 @@
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .historyContent {
+    color: #000;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.3px;
+    width: 750px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    .result {
+      width: 100px;
+    }
+    .leftUser {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      gap: 10px;
+      width: 300px;
+    }
+    .score {
+      width: 100px;
+    }
+    .rightUser {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      gap: 10px;
+      width: 300px;
+    }
+  }
+}

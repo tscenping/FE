@@ -4,9 +4,56 @@ import closeBtn from '@/public/img/modal/modalClose.svg'
 import friendEdit from '@/public/img/modal/friendEdit.svg'
 import Image from 'next/image'
 import { useModalState } from '@/store/store'
+import MyPageHistory from '@/components/MyPage/MyPageHistory'
+
+interface MatchHistoryProps {
+  rivalName: string
+  rivalAvatar: string
+  rivalScore: number
+  myScore: number
+  isWinner: boolean
+}
 
 export default function UserProfile() {
   const { modalName, setModalName } = useModalState()
+
+  const gameHistories: MatchHistoryProps[] = [
+    {
+      rivalName: 'sangyeki',
+      rivalAvatar: '',
+      rivalScore: 3,
+      myScore: 5,
+      isWinner: false,
+    },
+    {
+      rivalName: 'sangyeki',
+      rivalAvatar: '',
+      rivalScore: 3,
+      myScore: 5,
+      isWinner: true,
+    },  
+    {
+      rivalName: 'sangyeki',
+      rivalAvatar: '',
+      rivalScore: 3,
+      myScore: 5,
+      isWinner: true,
+    },
+    {
+      rivalName: 'sangyeki',
+      rivalAvatar: '',
+      rivalScore: 3,
+      myScore: 5,
+      isWinner: false,
+    },
+    {
+      rivalName: 'sangyeki',
+      rivalAvatar: '',
+      rivalScore: 3,
+      myScore: 5,
+      isWinner: true,
+    },
+  ]
   return (
     <div className={styles.backGround}>
       <div>
@@ -71,31 +118,7 @@ export default function UserProfile() {
               <div className={styles.divideLine}></div>
             </div>
             <div className={styles.historyList}>
-              <section className={styles.historyContent}>
-                <div className={styles.result}>Win</div>
-                <div className={styles.leftUser}>
-                  <Image
-                    src={profileImage}
-                    alt={'profileImage'}
-                    // className={styles.radioImg}
-                    width={64}
-                    // height={40}
-                  />
-                  him
-                </div>
-                <div className={styles.score}>7 : 2</div>
-                <div className={styles.rightUser}>
-                  sangyeki
-                  <Image
-                    src={profileImage}
-                    alt={'profileImage'}
-                    // className={styles.radioImg}
-                    width={64}
-                    // height={40}
-                  />
-                </div>
-                <div className={styles.result}>Win</div>
-              </section>
+            <MyPageHistory gameHistories={gameHistories} />
             </div>
           </section>
         </section>
