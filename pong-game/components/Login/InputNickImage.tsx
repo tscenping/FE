@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import Image from 'next/image'
-import styles from './InputNickImage.module.css'
+import styles from './InputNickImage.module.scss'
 import defaultProfileImage from '../../public/img/login/noProfileImage.svg'
 
 interface InputNickImageProps {
