@@ -9,28 +9,28 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    li {
+    .logo {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:first-child {
+        transform: scale(0);
+        animation: appear 10s ease-in-out forwards;
+        text-align: center;
+      }
+      img:nth-child(2) {
+        transform: scale(0);
+        position: absolute;
+        animation: appear 1.5s ease-in-out forwards;
+        animation-delay: 9s;
+        top: 80px;
+      }
+    }
+    .loginButton {
       display: flex;
       justify-content: center;
       margin-bottom: 32px;
-      .logo {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        &:first-child {
-          transform: scale(0);
-          animation: appear 10s ease-in-out forwards;
-          text-align: center;
-        }
-        &:nth-child(2) {
-          transform: scale(0);
-          position: absolute;
-          animation: appear 1.5s ease-in-out forwards;
-          animation-delay: 9s;
-          top: 80px;
-        }
-      }
       .login42Button {
         display: flex;
         align-items: center;
@@ -82,6 +82,7 @@
       }
     }
   }
+
   .pingpong {
     width: 30px;
     height: 30px;

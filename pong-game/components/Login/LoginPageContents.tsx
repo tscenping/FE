@@ -17,13 +17,13 @@ function LoginPageContents(props: LoginPageContentsProps): JSX.Element {
           <Image src={logo} alt={'logo'} width={300} height={300} />
           <Image src={stick} alt={'logo stick'} width={80} height={80} />
         </li>
-        <li>
+        <li className={styles.loginButton}>
           <button className={styles.login42Button}>
             <Image src={login42} alt={'42 login button'} />
             42 Login
           </button>
         </li>
-        <li>
+        <li className={styles.loginButton}>
           <button className={styles.loginGoogleButton}>
             <Image src={loginGoogle} alt={'google login button'} />
             Google Login
