@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import styles from './LoginPageContents.module.css'
+import styles from './LoginPageContents.module.scss'
 import logo from '../../public/img/login/logo.svg'
 import stick from '../../public/img/login/stick.svg'
 import loginGoogle from '../../public/img/login/google.svg'
@@ -8,6 +8,7 @@ import login42 from '../../public/img/login/42.svg'
 interface LoginPageContentsProps {
   state: boolean
 }
+
 function LoginPageContents(props: LoginPageContentsProps): JSX.Element {
   return (
     <div className={styles.loginPageContents}>
