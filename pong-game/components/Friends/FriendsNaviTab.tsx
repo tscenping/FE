@@ -1,4 +1,4 @@
-import styles from './FriendsNaviTab.module.css'
+import styles from './FriendsNaviTab.module.scss'
 
 interface FriendNaviTabProps {
   name: string
@@ -22,7 +22,9 @@ function FriendsNaviTab(props: FriendNaviTabProps): JSX.Element {
       />
       <label
         htmlFor={props.id}
-        className={props.tabState === props.value ? styles.checkList : ''}
+        className={
+          props.tabState === props.value ? styles.checkList : styles.noCheckList
+        }
       >
         {props.title}
       </label>

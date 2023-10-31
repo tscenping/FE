@@ -1,4 +1,4 @@
-import styles from './rankGame.module.scss'
+import styles from './RankGame.module.scss'
 
 export default function RankGame() {
   return (

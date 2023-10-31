@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import styles from './PageTitle.module.css'
+import styles from './PageTitle.module.scss'
 import prvBtn from '../../public/img/pageNation/left.svg'
 
 interface TitleData {
@@ -18,7 +18,7 @@ function PageTitle(props: TitleData): JSX.Element {
             src={prvBtn}
             alt={'prvBtn'}
             className={styles.prvBtn}
-            width={32}
+            width={64}
             onClick={props.handlePrvBtn}
           />
         )}

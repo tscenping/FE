@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import OpponentProfileImage from '../../public/img/chat/DmChatImage.svg'
-import styles from './DmChat.module.css'
+import styles from './DmChat.module.scss'
 
 function DmChat(): JSX.Element {
   return (

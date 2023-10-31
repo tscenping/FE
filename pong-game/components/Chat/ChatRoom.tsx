@@ -1,4 +1,4 @@
-import styles from './ChatRoom.module.css'
+import styles from './ChatRoom.module.scss'
 import Image from 'next/image'
 import closeRoom from '@/public/img/chat/closeRoom.svg'
 import roomOut from '@/public/img/chat/roomOut.svg'
@@ -21,7 +21,7 @@ function ChatRoom(): JSX.Element {
               <Image src={roomOut} alt={'roomOut'} />
             </span>
           </div>
-          <div className={styles.chatLog}>
+          {/* <div className={styles.chatLog}>
             <section className={styles.opponentMessage}>
               <div className={styles.opponentUserMessageAndTime}>
                 <strong className={styles.opponentUserNickName}>
@@ -109,8 +109,8 @@ function ChatRoom(): JSX.Element {
                 <div className={styles.myUserMessage}>저는</div>
               </div>
             </section>
-          </div>
-          {/* <div className={styles.chatPassword}>
+          </div> */}
+          <div className={styles.chatPassword}>
             <div className={styles.chatRoomName}>
               <Image src={lock} alt={'password room'} />
               <h1 className={styles.RoomName}>채팅방 이름</h1>
@@ -129,7 +129,7 @@ function ChatRoom(): JSX.Element {
                 <Image src={submitMessage} alt={'submit message'} width={30} />
               </button>
             </div>
-          </div> */}
+          </div>
         </div>
         <div className={styles.chatInput}>
           <input type="text" className={styles.messageInput} required />
