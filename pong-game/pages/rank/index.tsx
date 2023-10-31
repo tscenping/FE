@@ -6,23 +6,29 @@ import DropDown from '@/components/dropDown/DropDown'
 import { useModalState, useUserProfileModalState } from '@/store/store'
 import Pagination from 'react-js-pagination'
 import { useEffect, useState } from 'react'
+import CustomPagination from '@/components/pagination/CustomPagination'
 
 export default function Rank() {
   const { modalName, setModalName } = useModalState()
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1)
   const handlePageChange = (page: number) => {
     setPage(page)
     console.log(page)
   }
-  const state1 = [1, 2, 3, 4];
-  const state4 = [3, 2, 3, 4];
-  const state3 = [4, 2, 3, 4];
-  const state2 = [5, 2, 3, 4];
+  const state1 = [1, 2, 3, 4]
+  const state4 = [3, 2, 3, 4]
+  const state3 = [4, 2, 3, 4]
+  const state2 = [5, 2, 3, 4]
   const pages = ['state1', 'state2', 'state3', 'state4']
-  
+
   useEffect(() => {
     console.log(pages[page])
-  },[page])
+  }, [page])
+  const paginationStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    // 다른 스타일 속성 추가
+  }
 
   return (
     <div className={styles.backGround}>
@@ -84,9 +90,9 @@ export default function Rank() {
         </div>
       </section>
 
-      <section className={styles.pagenation}>
-        - 1 2 3 4 5 -
-        <Pagination
+      <section className={styles.page}>
+        <CustomPagination itemsCountPerPage={5} totalItemsCount={10} />
+        {/* <Pagination
         activePage={page}// 현제 보고있는 페이지 
         itemsCountPerPage={5}// 한페이지에 출력할 아이템수
         totalItemsCount={30}// 총 아이템수
@@ -94,9 +100,8 @@ export default function Rank() {
         prevPageText={"‹"}
         nextPageText={"›"}
         onChange={handlePageChange}
-        />
-        {pages[page]}
-              {/* 
+        /> */}
+        {/* 
                 useEffect에 setContent 를 넣어두고
                 Pagination컴포넌트 통해서 page벨류가 변경되면
                 setContent가 호출되고

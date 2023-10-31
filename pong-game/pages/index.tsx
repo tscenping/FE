@@ -1,14 +1,14 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import { GetServerSideProps } from 'next'
 
-const inter = Inter({ subsets: ['latin'] })
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    redirect: {
+      destination: '/main',
+      permanent: false,
+    },
+  }
+}
 
 export default function Home() {
-  return (
-    // <main
-    //   className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    // >
-    <div></div>
-    // </main>
-  )
+  return <div></div>
 }

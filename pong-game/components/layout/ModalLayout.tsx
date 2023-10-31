@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import styles from './ModalLayout.module.scss'
-import UserProfile from '../Modal/UserProfile/UserProfile'
+import UserProfile from '../Modal/UserProfile/UserProfileModal'
 import { useModalState, useUserProfileModalState } from '@/store/store'
 
 function ModalOverlay(): JSX.Element {

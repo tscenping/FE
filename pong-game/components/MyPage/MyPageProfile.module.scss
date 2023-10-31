@@ -1,11 +1,3 @@
-.backGround {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .userProfile {
   margin-top: 24px;
   padding: 24px;
@@ -55,7 +47,6 @@
       justify-content: center;
       border-radius: 30px;
       padding: 12px;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       .text {
         width: 420px;
         word-break: break-all;
@@ -115,7 +106,6 @@
       font-weight: 400;
       line-height: normal;
       letter-spacing: -0.3px;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
   }
   .lineThree {
@@ -127,7 +117,6 @@
     text-align: center;
     align-items: center;
     padding: 12px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     .rankTitle {
       color: #000;
       text-align: center;
@@ -149,70 +138,5 @@
       line-height: normal;
       letter-spacing: -0.3px;
     }
-  }
-}
-
-.history {
-  height: 440px;
-  background-color: #f7f8fa;
-  border-radius: 30px;
-  margin-bottom: 48px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  .historyList {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    .historyContent {
-      color: #000;
-      text-align: center;
-      font-family: 'Pretendard-Regular';
-      font-family: Pretendard;
-      font-size: 30px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-      letter-spacing: -0.3px;
-      width: 750px;
-      display: flex;
-      justify-content: space-around;
-      flex-direction: row;
-      align-items: center;
-      .result {
-        width: 100px;
-      }
-      .leftUser {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        width: 300px;
-      }
-      .score {
-        width: 100px;
-      }
-      .rightUser {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        width: 300px;
-      }
-    }
-  }
-
-  .pagenation {
-    color: #000;
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.3px;
-    margin-bottom: 10px;
   }
 }
