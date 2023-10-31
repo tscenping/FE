@@ -1,0 +1,19 @@
+.tab {
+  display: flex;
+  align-items: center;
+  .checkList {
+    color: #544fb0;
+    transform: scale(1.2);
+    transition: transform 0.3s;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  .noCheckList {
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 0.3s;
+    &:hover {
+      transform: scale(1.2);
+      transition: 0.3s;
+    }
+  }
+}
