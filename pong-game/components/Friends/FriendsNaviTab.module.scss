@@ -1,8 +1,10 @@
+@import '../../styles/colors.scss';
+
 .tab {
   display: flex;
   align-items: center;
   .checkList {
-    color: #544fb0;
+    color: $main_600;
     transform: scale(1.2);
     transition: transform 0.3s;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

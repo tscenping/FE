@@ -1,3 +1,5 @@
+@import '../../styles/colors.scss';
+
 .entirePage {
   display: flex;
   flex-direction: column;
@@ -14,7 +16,7 @@
       justify-content: center;
       align-items: center;
       padding: 16px;
-      background-color: #b3cdff;
+      background-color: $main_200;
       .logo:hover {
         transform: scale(1.1);
         transition: 0.2s;
@@ -39,7 +41,7 @@
     display: flex;
     height: 100%;
     .sideBar {
-      background-color: #f2f7ff;
+      background-color: $sidebar;
       height: 100%;
       .sideBarContainer {
         color: black;
@@ -64,7 +66,7 @@
             transform: translate(-3px, -3px);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
             border-radius: 10px;
-            background-color: #9bbeff;
+            background-color: $main_300;
           }
         }
         .sideBarContainerBottom {
@@ -80,7 +82,7 @@
             transform: translate(-3px, -3px);
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
             border-radius: 10px;
-            background-color: #9bbeff;
+            background-color: $main_300;
           }
         }
       }

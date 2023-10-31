@@ -1,7 +1,9 @@
+@import '../../styles/colors.scss';
+
 .loginPageTitleContainer {
   width: 100%;
   height: 100vh;
-  background-color: #d2e0fb;
+  background-color: $main_100;
   display: flex;
   justify-content: center;
   align-items: center;

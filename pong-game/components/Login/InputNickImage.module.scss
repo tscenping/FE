@@ -32,17 +32,17 @@
       }
     }
     .inputImageButton {
-      background-color: #508bff;
+      background-color: $main_300;
       padding: 8px;
       border-radius: 10px;
-      color: white;
+      color: $gray_scale_0;
       margin-bottom: 16px;
     }
     .inputImage {
       display: none;
     }
     .imageExplanation {
-      color: #98989e;
+      color: $gray_scale_400;
       font-family: 'Pretendard-Regular';
     }
   }
@@ -56,11 +56,11 @@
       font-size: 32px;
       outline: none;
       border: none;
-      border-bottom: 1px solid grey;
+      border-bottom: 1px solid $gray_scale_400;
       background-color: transparent;
       &::placeholder {
         font-size: 32px;
-        color: #98989e;
+        color: $gray_scale_500;
       }
     }
     .nickNameCharCount {
@@ -76,8 +76,8 @@
       position: absolute;
       padding: 16px;
       border: none;
-      color: white;
-      background-color: #508bff;
+      color: $gray_scale_0;
+      background-color: $main_600;
       border-radius: 20px;
       bottom: 100px;
       right: 100px;
