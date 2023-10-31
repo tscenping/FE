@@ -1,10 +1,11 @@
+import styles from './DropDownChating.module.scss'
 interface DropDownChatingProps {
-  isFriend: boolean
-  isBlock: boolean
-  isOwner: boolean
-  isAdmin: boolean
-  isMeAdmin: boolean
-  isMeOwner: boolean
+  isFriend?: boolean
+  isBlock?: boolean
+  isOwner?: boolean
+  isAdmin?: boolean
+  isMeAdmin?: boolean
+  isMeOwner?: boolean
 }
 
 export default function DropDownChating({
@@ -15,8 +16,44 @@ export default function DropDownChating({
   isMeAdmin,
   isMeOwner,
 }: DropDownChatingProps) {
+  const adminOnClick = () => {
+
+  }
+
+  const kickOnClick = () => {
+    
+  }
+
+  const muteOnClick = () => {
+    
+  }
+
+  const benOnClick = () => {
+    
+  }
+
+  const friendOnClick = () => {
+   // isFriend 확인해서 post or delete 보내야함. 
+  }
+
+  const blockOnClick = () => {
+    // isBlock 확인해서 post or delete 보내야함.
+  }
+
+  const profileOnClick = () => {
+    
+  }
+
+  const gameOnClick = () => {
+    
+  }
+
+  const dmOnClick = () => {
+    
+  }
+  
   return (
-    <div>
+    <div className={styles.DropDownChating}>
       {isMeOwner && (
         <>
           {isAdmin ? <button>관리자 해제</button> : <button>관리자 임명</button>}

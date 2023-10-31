@@ -42,7 +42,7 @@ interface MyPageProfileProps {
 
 export default function Mypage() {
   var props: MyPageProfileProps = {
-    nickName: 'him',
+    nickName: 'abcdefghhhhh',
     avatar: 'hhh',
     statusMessage: 'asdasdasdasdsadasdas',
     loseCount: 123,
@@ -61,7 +61,7 @@ export default function Mypage() {
   }
   const gameHistories: MatchHistoryProps[] = [
     {
-      rivalName: 'sangyeki',
+      rivalName: 'abcdefghhhh',
       rivalAvatar: '',
       rivalScore: 3,
       myScore: 5,

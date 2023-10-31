@@ -2,11 +2,11 @@ import PageTitle from '@/components/UI/PageTitle'
 import styles from './rank.module.scss'
 import profileImage from '../../public/img/mypage/profileImage.svg'
 import Image from 'next/image'
-import DropDown from '@/components/dropDown/DropDown'
 import { useModalState, useUserProfileModalState } from '@/store/store'
 import Pagination from 'react-js-pagination'
 import { useEffect, useState } from 'react'
 import CustomPagination from '@/components/pagination/CustomPagination'
+import DropDown from '@/components/DropDown/DropDown'
 
 export default function Rank() {
   const { modalName, setModalName } = useModalState()
@@ -78,10 +78,21 @@ export default function Rank() {
                 // height={40}
               />
               abcdabcdab
-              <DropDown
+              {/* <DropDown
                 isDropDownView={true}
                 dropDownState="userProfile"
                 userProfile={{ isFriend: true, isBlock: false }}
+              /> */}
+              <DropDown
+                isDropDownView={true}
+                dropDownState="chating"
+                chating={{   
+                  isFriend: true,
+                  isBlock: false,
+                  isAdmin: true,
+                  isOwner: true,
+                  isMeAdmin: true,
+                  isMeOwner: true, }}
               />
             </span>
           </div>

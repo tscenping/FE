@@ -29,7 +29,7 @@ export default function MatchHistory({
             width={64}
             // height={40}
           />
-          him
+          abcdefghhhh
         </div>
         <div className={styles.score}>
           {myScore} : {rivalScore}
