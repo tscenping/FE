@@ -5,7 +5,7 @@
   .historyContent {
     color: #000;
     text-align: center;
-    font-family: Pretendard;
+    font-family: 'Pretendard-Regular';
     font-size: 30px;
     font-style: normal;
     font-weight: 400;
@@ -22,7 +22,7 @@
     .leftUser {
       display: flex;
       align-items: center;
-      justify-content: start;
+      justify-content: flex-start;
       gap: 10px;
       width: 300px;
     }
@@ -32,7 +32,7 @@
     .rightUser {
       display: flex;
       align-items: center;
-      justify-content: end;
+      justify-content: flex-end;
       gap: 10px;
       width: 300px;
     }

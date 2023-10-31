@@ -45,13 +45,13 @@ const PaginationBox = styled.div`
   }
   ul.pagination li {
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     border: 1px solid #e2e2e2;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1rem;
+    font-size: 14px;
     cursor: pointer;
   }
   ul.pagination li:first-child {
@@ -63,7 +63,7 @@ const PaginationBox = styled.div`
   ul.pagination li a {
     text-decoration: none;
     color: #337ab7;
-    font-size: 1rem;
+    font-size: 14px;
   }
   ul.pagination li.active a {
     color: white;
