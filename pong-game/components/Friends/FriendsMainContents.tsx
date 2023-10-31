@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from './FriendsMainContents.module.css'
+import styles from './FriendsMainContents.module.scss'
 import FriendsNaviTab from './FriendsNaviTab'
 import Image from 'next/image'
 import profileImage from '@/public/img/chat/userProfileImage.svg'

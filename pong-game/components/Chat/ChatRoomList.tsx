@@ -1,4 +1,4 @@
-import styles from './ChatRoomList.module.css'
+import styles from './ChatRoomList.module.scss'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import makeChatRoom from '@/public/img/chat/makeChat.svg'
@@ -12,8 +12,9 @@ function ChatRoomList(): JSX.Element {
   const [tabState, setTabState] = useState('1')
 
   return (
-    <div className={styles.chatRoomList}>
-      <nav className={styles.chatNavBarContainer}>
+    <div className={styles.chatListNavBar}>
+      {/* "nav"요소도 컴포넌트로 따로 구분할 예정 */}
+      <nav className={styles.chatListNavBarContainer}>
         <ChatRoomListTab
           name="tab"
           id="entireList"
@@ -39,19 +40,25 @@ function ChatRoomList(): JSX.Element {
           title="1:1 메세지"
         />
         {tabState === '3' ? (
-          <Image src={addDmChat} alt={'make dm chat'} />
+          <Image
+            src={addDmChat}
+            alt={'make dm chat'}
+            className={styles.createDmChat}
+          />
         ) : (
           <Image
             src={makeChatRoom}
             alt={'make chat room'}
             width={40}
             height={40}
+            className={styles.createChatRoom}
           />
         )}
       </nav>
+      {/* 아래 "div", "ul"도 재사용이므로 컴포넌트화 예정 */}
       {tabState === '3' && (
-        <div className={styles.chatRoomListContainer}>
-          <ul className={styles.chatRoomListSection2}>
+        <div className={styles.chatTypeListContainer}>
+          <ul className={styles.chatDmRoomListSection}>
             <DmChat />
             <DmChat />
             <DmChat />
@@ -61,7 +68,7 @@ function ChatRoomList(): JSX.Element {
         </div>
       )}
       {tabState === '2' && (
-        <div className={styles.chatRoomListContainer}>
+        <div className={styles.chatTypeListContainer}>
           <ul className={styles.chatRoomListSection}>
             <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />
@@ -70,7 +77,7 @@ function ChatRoomList(): JSX.Element {
         </div>
       )}
       {tabState === '1' && (
-        <div className={styles.chatRoomListContainer}>
+        <div className={styles.chatTypeListContainer}>
           <ul className={styles.chatRoomListSection}>
             <CreatedRoomList title="채팅방 1" />
             <CreatedRoomList title="채팅방 1" />

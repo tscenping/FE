@@ -1,4 +1,4 @@
-import styles from "./ChatMainContents.module.css"
+import styles from './ChatMainContents.module.scss'
 import ChatRoomList from './ChatRoomList'
 import ChatRoom from './ChatRoom'
 

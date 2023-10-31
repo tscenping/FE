@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import styles from './ModalLayout.module.css'
+import styles from './ModalLayout.module.scss'
 import UserProfile from '../Modal/UserProfile/UserProfile'
 import { useModalState, useUserProfileModalState } from '@/store/store'
-
 
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
@@ -29,7 +28,7 @@ function ModalContent({}): JSX.Element {
       {modalName !== null && (
         <div className={styles.modalContent}>
           {/* <div className={styles.modal}> */}
-            {modalName ? modalContent[modalName] : null}
+          {modalName ? modalContent[modalName] : null}
           {/* </div> */}
         </div>
       )}
