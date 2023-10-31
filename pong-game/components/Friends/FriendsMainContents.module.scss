@@ -1,0 +1,105 @@
+.friendTypeNaviContainer {
+  margin-top: 64px;
+  display: flex;
+  justify-content: center;
+  span {
+    font-size: 32px;
+    color: grey;
+    padding: 0px 80px;
+  }
+}
+
+.friendTypeNaviContainer input[type='radio'] {
+  display: none;
+}
+
+.frinedUsersListContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  .friendUserListContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background-color: #f7f8fa;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    width: 900px;
+    margin-bottom: 32px;
+    .friendUserImageNickName {
+      display: flex;
+      align-items: center;
+      font-family: 'Pretendard-SemiBold';
+      font-size: 2rem;
+      strong {
+        margin-left: 32px;
+      }
+    }
+    .friendUserToggle {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.searchUsers {
+  margin-top: 64px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  .searchInputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    .searchInput {
+      width: 700px;
+      height: 50px;
+      outline: none;
+      border: none;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      background-color: #f2f3f5;
+      font-size: 2rem;
+      border-radius: 80px;
+      padding: 16px 48px;
+      &:focus {
+        outline: none;
+      }
+      &::placeholder {
+        font-size: 2rem;
+        text-align: center;
+      }
+      &:valid ~ .searchInputPlaceholder,
+      &:focus ~ .searchInputPlaceholder {
+        transform: translateY(-2.5rem);
+        /* padding: 0 16px; */
+        background-color: transparent;
+        color: black;
+        font-family: 'Pretendard-SemiBold';
+      }
+    }
+    .searchInputPlaceholder {
+      position: absolute;
+      padding: 10px;
+      pointer-events: none;
+      font-size: 1rem;
+      transition: 0.5s;
+      color: #c0bebe;
+      font-family: 'Pretendard-Regular';
+      padding: 16px 48px;
+      font-size: 2rem;
+    }
+    .searchUserButton {
+      position: absolute;
+      border: none;
+      right: 10px;
+      background-color: transparent;
+    }
+  }
+  .findUserlist {
+    margin-top: 32px;
+    background-color: black;
+  }
+}
