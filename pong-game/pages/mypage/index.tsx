@@ -73,7 +73,7 @@ export default function Mypage() {
       rivalScore: 3,
       myScore: 5,
       isWinner: true,
-    },  
+    },
     {
       rivalName: 'sangyeki',
       rivalAvatar: '',
@@ -97,35 +97,33 @@ export default function Mypage() {
     },
   ]
   return (
-    <>
-      <div className={styles.backGround}>
-        <PageTitle
-          title="MyPage"
-          subTitle="프로필 사진, 상태메세지 변경과 내 전적을 확인할 수 있어요."
-        />
-        <MyPageProfile
-          nickName={'him'}
-          avatar={'hhh'}
-          statusMessage={'asdasdasdasdsadasdas'}
-          loseCount={123}
-          winCount={123}
-          totalCount={246}
-          ladderRank={2}
-          ladderScore={1234}
-          ladderMaxScore={2345}
-        />
-        <section className={styles.history}>
-          <div className={styles.historyList}>
-            <MyPageHistory gameHistories={gameHistories} />
-          </div>
-          <div className={styles.pagenation}>
-            <CustomPagination
-              itemsCountPerPage={pageInfo.requestDataSzie}
-              totalItemsCount={pageInfo.totalDateSize}
-            />
-          </div>
-        </section>
-      </div>
-    </>
+    <div className={styles.backGround}>
+      <PageTitle
+        title="MyPage"
+        subTitle="프로필 사진, 상태메세지 변경과 내 전적을 확인할 수 있어요."
+      />
+      <MyPageProfile
+        nickName={'him'}
+        avatar={'hhh'}
+        statusMessage={'asdasdasdasdsadasdas'}
+        loseCount={123}
+        winCount={123}
+        totalCount={246}
+        ladderRank={2}
+        ladderScore={1234}
+        ladderMaxScore={2345}
+      />
+      <section className={styles.history}>
+        <div className={styles.historyList}>
+          <MyPageHistory gameHistories={gameHistories} />
+        </div>
+        <div className={styles.pagenation}>
+          <CustomPagination
+            itemsCountPerPage={pageInfo.requestDataSzie}
+            totalItemsCount={pageInfo.totalDateSize}
+          />
+        </div>
+      </section>
+    </div>
   )
 }

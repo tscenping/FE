@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import Pagination from 'react-js-pagination'
 import styled from 'styled-components'
-// import styles from "./CustomPagination.module.css";
-// import "./page.css"
 
 interface paginationProps {
   totalItemsCount: number // Required. Total count of items which you are going to display

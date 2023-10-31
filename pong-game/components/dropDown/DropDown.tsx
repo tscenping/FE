@@ -13,25 +13,16 @@ interface userProfileDorpDownProps {
   isBlock: boolean
 }
 
-export default function DropDown({
-  isDropDownView,
-  dropDownState,
-  userProfile,
-}: dropDownProps) {
+export default function DropDown({ isDropDownView, dropDownState, userProfile }: dropDownProps) {
   const content: { [key: string]: JSX.Element | null } = {
     userProfile: (
-      <DropDownUserProfile
-        isBlock={userProfile?.isBlock}
-        isFriend={userProfile?.isFriend}
-      />
+      <DropDownUserProfile isBlock={userProfile?.isBlock} isFriend={userProfile?.isFriend} />
     ),
   }
   return (
     <>
       {isDropDownView && (
-        <div className={`${styles.dropDown} ${styles1.dropDown}`}>
-          {content[dropDownState]}
-        </div>
+        <div className={`${styles.dropDown} ${styles1.dropDown}`}>{content[dropDownState]}</div>
       )}
     </>
   )

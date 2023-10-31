@@ -18,7 +18,7 @@ export default function MyPageHistory(props: MyPageHistoryProps) {
     <div className={styles.historyList}>
       {props.gameHistories.map((history, index) => (
         <MatchHistory
-          key={index}  // React에서 각 항목을 식별하기 위한 고유한 키가 필요합니다.
+          key={index} // React에서 각 항목을 식별하기 위한 고유한 키가 필요합니다.
           rivalName={history.rivalName}
           rivalAvatar={history.rivalAvatar}
           rivalScore={history.rivalScore}

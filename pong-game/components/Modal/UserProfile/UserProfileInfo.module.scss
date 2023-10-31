@@ -1,0 +1,83 @@
+.lineOne {
+  display: flex;
+  // height: 100px;
+  flex-direction: row;
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: center; /* 가로 중앙 정렬 */
+  .profileNickName {
+    display: flex;
+    gap: 24px;
+    width: 250px;
+    align-items: center;
+    flex-direction: row;
+    margin-right: 24px;
+    .profileImg {
+      width: 80px;
+      text-align: center;
+    }
+    .nickName {
+      width: 126px;
+      color: #000;
+      text-align: center;
+      font-family: Pretendard;
+      font-size: 30px;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+}
+.lineTwo {
+  height: 70px;
+  border-radius: 20px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+  padding: 12px;
+  color: #000;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.3px;
+}
+
+.lineThree {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+  .lineThreeSub{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+  }
+  .lineThreeContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    .recordText {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      text-align: center;
+      font-family: Pretendard;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      letter-spacing: -0.3px;
+    }
+  }
+}

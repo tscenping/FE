@@ -5,6 +5,8 @@ import friendEdit from '@/public/img/modal/friendEdit.svg'
 import Image from 'next/image'
 import { useModalState } from '@/store/store'
 import MyPageHistory from '@/components/MyPage/MyPageHistory'
+import CustomPagination from '@/components/pagination/CustomPagination'
+import UserProfileInfo from './UserProfileInfo'
 
 interface MatchHistoryProps {
   rivalName: string
@@ -31,7 +33,7 @@ export default function UserProfile() {
       rivalScore: 3,
       myScore: 5,
       isWinner: true,
-    },  
+    },
     {
       rivalName: 'sangyeki',
       rivalAvatar: '',
@@ -54,6 +56,7 @@ export default function UserProfile() {
       isWinner: true,
     },
   ]
+
   return (
     <div className={styles.backGround}>
       <div>
@@ -62,69 +65,22 @@ export default function UserProfile() {
             onClick={() => setModalName(null)}
             className={styles.closeBtn}
           >
-            <Image
-              src={closeBtn}
-              alt={'closeBtn'}
-              width={30}
-            />
+            <Image src={closeBtn} alt={'closeBtn'} width={30} />
           </button>
-          <section className={styles.lineOne}>
-            <div className={styles.profileNickName}>
-              <div className={styles.profileImg}>
-                <Image
-                  src={profileImage}
-                  alt={'profileImage'}
-                  width={80}
-                />
-              </div>
-              <div className={styles.nickName}>abcdefghi</div>
-              <Image
-                src={friendEdit}
-                alt={'friendEdit'}
-                width={30}
-              />
-            </div>
-          </section>
-          <section className={styles.lineTwo}>상태메세지</section>
-          <section className={styles.lineThree}>
-          <div className={styles.lineThreeSub}>
-            <div className={styles.lineThreeContent}>
-              <span className={styles.recordText}>랭킹</span>
-              <br />
-              <span className={styles.recordText}>1</span>
-            </div>
-            <div className={styles.lineThreeContent}>
-              <span className={styles.recordText}>래더점수</span>
-              <br />
-              <span className={styles.recordText}>12s34</span>
-            </div>
-            <div className={styles.lineThreeContent}>
-              <span className={styles.recordText}>최고점수</span>
-              <br />
-              <span className={styles.recordText}>5678</span>
-            </div>
-            </div>
-            <div className={styles.lineThreeSub}>
-            <div className={styles.lineThreeContent}>
-              <span className={styles.recordText}>통계</span>
-              <br />
-              <span className={styles.recordText}>500전 300승 200패</span>
-            </div>
-            </div>
-          </section>
+          <UserProfileInfo />
           <section className={styles.recentHistory}>
             <div className={styles.recentHistoryTitle}>
               <div className={styles.divideLine}></div>최 근 전 적
               <div className={styles.divideLine}></div>
             </div>
             <div className={styles.historyList}>
-            <MyPageHistory gameHistories={gameHistories} />
+              <MyPageHistory gameHistories={gameHistories} />
             </div>
           </section>
         </section>
       </div>
       <section className={styles.pagenation}>
-        {'<'}- 1 2 3 4 5 -{'>'}
+        <CustomPagination totalItemsCount={10} itemsCountPerPage={5} />
       </section>
     </div>
   )
