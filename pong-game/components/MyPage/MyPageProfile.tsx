@@ -92,18 +92,9 @@ export default function MyPageProfile({
                     rows={4}
                     cols={50}
                     id="profileMsg"
-                    style={{
-                      all: 'unset',
-                      maxHeight: '80px',
-                      padding: '10px',
-                      border: '2px solid #ccc',
-                      borderRadius: '5px',
-                      boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)',
-                      outline: 'none',
-                      width: '100%',
-                    }}
                     value={profileMsg}
                     onChange={handleTextChange}
+                    className={styles.textarea}
                     ref={textareaRef}
                   />
                 ) : (
