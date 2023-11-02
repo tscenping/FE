@@ -1,3 +1,5 @@
+@import '@/styles/colors.scss';
+
 .loginPageContents {
   display: flex;
   width: 0%;
@@ -27,60 +29,60 @@
         top: 80px;
       }
     }
-    .loginButton {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 32px;
-      .login42Button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 400px;
-        height: 75px;
-        border-radius: 30px;
-        border: none;
-        color: $gray_scale_0;
-        font-family: 'ABeeZee';
-        font-size: 2rem;
-        background-color: $gray_scale_900;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        cursor: pointer;
-        text-align: center;
-        animation: buttonShow 10s ease-in-out forwards;
-        transition: 0.2s transform;
-        &:hover {
-          transform: scale(1.2);
-        }
-        img {
-          position: relative;
-          right: 64px;
-        }
-      }
-      .loginGoogleButton {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 400px;
-        height: 75px;
-        border-radius: 30px;
-        border: none;
-        font-family: 'ABeeZee';
-        font-size: 2rem;
-        background-color: $gray_scale_100;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        cursor: pointer;
-        position: relative;
-        animation: buttonShow 10s ease-in-out forwards;
-        transition: 0.2s transform;
-        &:hover {
-          transform: scale(1.2);
-        }
-        img {
-          position: relative;
-          right: 32px;
-        }
-      }
-    }
+    // .loginButton {
+    //   display: flex;
+    //   justify-content: center;
+    //   margin-bottom: 32px;
+    //   .login42Button {
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    //     width: 400px;
+    //     height: 75px;
+    //     border-radius: 30px;
+    //     border: none;
+    //     color: $gray_scale_0;
+    //     font-family: 'ABeeZee';
+    //     font-size: 2rem;
+    //     background-color: $gray_scale_900;
+    //     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    //     cursor: pointer;
+    //     text-align: center;
+    //     animation: buttonShow 10s ease-in-out forwards;
+    //     transition: 0.2s transform;
+    //     &:hover {
+    //       transform: scale(1.2);
+    //     }
+    //     img {
+    //       position: relative;
+    //       right: 64px;
+    //     }
+    //   }
+    //   .loginGoogleButton {
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    //     width: 400px;
+    //     height: 75px;
+    //     border-radius: 30px;
+    //     border: none;
+    //     font-family: 'ABeeZee';
+    //     font-size: 2rem;
+    //     background-color: $gray_scale_100;
+    //     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    //     cursor: pointer;
+    //     position: relative;
+    //     animation: buttonShow 10s ease-in-out forwards;
+    //     transition: 0.2s transform;
+    //     &:hover {
+    //       transform: scale(1.2);
+    //     }
+    //     img {
+    //       position: relative;
+    //       right: 32px;
+    //     }
+    //   }
+    // }
   }
 
   .pingpong {
@@ -183,19 +185,19 @@
   }
 }
 
-@keyframes buttonShow {
-  0% {
-    opacity: 0;
-  }
+// @keyframes buttonShow {
+//   0% {
+//     opacity: 0;
+//   }
 
-  90% {
-    opacity: 0;
-  }
+//   90% {
+//     opacity: 0;
+//   }
 
-  100% {
-    opacity: 1;
-  }
-}
+//   100% {
+//     opacity: 1;
+//   }
+// }
 
 @keyframes contentShow {
   0%,

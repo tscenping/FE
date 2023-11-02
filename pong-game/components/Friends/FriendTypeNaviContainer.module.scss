@@ -1,0 +1,16 @@
+@import '../../styles/colors.scss';
+
+.friendTypeNaviContainer {
+  margin-top: 64px;
+  display: flex;
+  justify-content: center;
+  span {
+    font-size: 32px;
+    color: $gray_scale_500;
+    padding: 0px 80px;
+  }
+}
+
+.friendTypeNaviContainer input[type='radio'] {
+  display: none;
+}

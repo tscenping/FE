@@ -1,0 +1,30 @@
+.opponentMessage {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  .opponentUserMessageAndTime {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 8px;
+    .opponentUserNickName {
+      font-family: 'Pretendard-SemiBold';
+      margin-right: 16px;
+    }
+    .opponentUserMessageTime {
+      display: flex;
+      flex-direction: column-reverse;
+      font-family: 'Pretendard-Regular';
+    }
+  }
+  .opponentUserMessage {
+    margin-right: 16px;
+    margin-bottom: 16px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 5px 4px 8px rgba(0, 0, 0, 0.25);
+    text-align: left;
+    max-width: 20rem;
+  }
+}

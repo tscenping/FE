@@ -1,0 +1,13 @@
+@import '../../../styles/colors.scss';
+
+.chatLog {
+  padding: 16px 16px;
+  height: 630px;
+  overflow-x: scroll;
+  position: absolute;
+  bottom: 0px;
+  width: 90%;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

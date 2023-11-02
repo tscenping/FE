@@ -1,15 +1,17 @@
 import styles from './ChatRoomListTab.module.scss'
+import { useNavBarState } from '@/store/chat'
 
 interface ChatRoomListTabProps {
   name: string
   id: string
   value: string
   tabState: string
-  setTabState: (v: string) => void
   title: string
 }
 
 function ChatRoomListTab(props: ChatRoomListTabProps): JSX.Element {
+  const { setTabState } = useNavBarState()
+
   return (
     <span className={styles.naviBar}>
       <input
@@ -18,13 +20,11 @@ function ChatRoomListTab(props: ChatRoomListTabProps): JSX.Element {
         id={props.id}
         value={props.value}
         checked={props.tabState == props.value}
-        onChange={() => props.setTabState(props.value)}
+        onChange={() => setTabState(props.value)}
       />
       <label
         htmlFor={props.id}
-        className={
-          props.tabState === props.value ? styles.checkTab : styles.noCheckTab
-        }
+        className={props.tabState === props.value ? styles.checkTab : styles.noCheckTab}
       >
         {props.title}
       </label>
