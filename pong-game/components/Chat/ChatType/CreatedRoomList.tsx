@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styles from './CreatedRoomList.module.scss'
-import passwordRoom from '../../public/img/chat/lock.svg'
+import passwordRoom from '../../../public/img/chat/lock.svg'
 
 interface CreatedRoomListProps {
   title: string

@@ -1,0 +1,35 @@
+.myMessage {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  margin-bottom: 16px;
+  .myMessageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    .myUserMessageAndTime {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 8px;
+      font-family: 'Pretendard-Regular';
+      .myUserNickName {
+        display: flex;
+        flex-direction: row-reverse;
+        margin-left: 16px;
+        font-family: 'Pretendard-SemiBold';
+      }
+    }
+    .myUserMessage {
+      text-align: left;
+      word-break: break-all;
+      margin-left: 16px;
+      margin-bottom: 16px;
+      background-color: white;
+      box-shadow: -5px 4px 8px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      padding: 16px;
+      max-width: 20rem;
+    }
+  }
+}

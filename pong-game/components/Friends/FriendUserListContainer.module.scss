@@ -1,0 +1,26 @@
+@import '../../styles/colors.scss';
+
+.friendUserListContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: $gray_scale_50;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  width: 900px;
+  margin-bottom: 32px;
+  .friendUserImageNickName {
+    display: flex;
+    align-items: center;
+    font-family: 'Pretendard-SemiBold';
+    font-size: 2rem;
+    strong {
+      margin-left: 32px;
+    }
+  }
+  .friendUserToggle {
+    display: flex;
+    align-items: center;
+  }
+}

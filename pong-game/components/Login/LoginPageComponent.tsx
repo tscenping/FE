@@ -6,15 +6,11 @@ import InputNickImage from './InputNickImage'
 import styles from './LoginPageComponent.module.scss'
 
 function LoginPageComponent(): JSX.Element {
-  const [input, setInput] = useState<boolean>(false)
+  const [input, setInput] = useState<boolean>(true)
   return (
     <div className={styles.loginPageComponent}>
       <LoginPageTitle />
-      {input ? (
-        <LoginPageContents state={input} />
-      ) : (
-        <InputNickImage state={input} />
-      )}
+      {input ? <LoginPageContents state={input} /> : <InputNickImage state={input} />}
     </div>
   )
 }
