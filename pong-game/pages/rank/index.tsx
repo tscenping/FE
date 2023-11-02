@@ -83,7 +83,7 @@ export default function Rank() {
                 dropDownState="userProfile"
                 userProfile={{ isFriend: true, isBlock: false }}
               /> */}
-              <DropDown
+              {/* <DropDown
                 isDropDownView={true}
                 dropDownState="chating"
                 chating={{   
@@ -93,7 +93,7 @@ export default function Rank() {
                   isOwner: true,
                   isMeAdmin: true,
                   isMeOwner: true, }}
-              />
+              /> */}
             </span>
           </div>
 

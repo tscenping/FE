@@ -2,9 +2,12 @@ import styles1 from './DropDown.module.scss'
 import styles from '@/pages/rank/rank.module.scss'
 import DropDownUserProfile from './DropDownUserProfile'
 import DropDownChating from './DropDownChating'
+import { useEffect, useRef, useState } from 'react'
+import useOutsideClickHandler from '@/hooks/useOutsideClickHandler'
 
 interface dropDownProps {
   isDropDownView: boolean
+  setIsDropDownView: (v: boolean) => void
   dropDownState: 'userProfile' | 'chating' | 'friendList'
   userProfile?: userProfileDorpDownProps
   chating?: DropDownChatingProps
@@ -24,8 +27,10 @@ interface DropDownChatingProps {
   isMeOwner: boolean
 }
 
+
 export default function DropDown({
   isDropDownView,
+  setIsDropDownView,
   dropDownState,
   userProfile,
   chating,
@@ -45,11 +50,25 @@ export default function DropDown({
       />
     ),
   }
+
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const handleModalClose = (): void => {
+    setIsDropDownView(false);
+  };
+
+  useOutsideClickHandler(modalRef, handleModalClose);
+
+
+
+
   return (
     <>
-      {isDropDownView && (
+      {/* {isDropDownView && (
         <div className={`${styles.dropDown} ${styles1.dropDown}`}>{content[dropDownState]}</div>
-      )}
+      )} */}
+      <div className={isDropDownView ? styles.viewDropDown : styles.dropDown} ref={modalRef}>
+        {content[dropDownState]}
+      </div>
     </>
   )
 }

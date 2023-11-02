@@ -2,6 +2,8 @@ import Image from 'next/image'
 import textEditBtn from '@/public/img/mypage/textEdit.svg'
 import styles from './MyPageProfile.module.scss'
 import profileImage from '@/public/img/mypage/profileImage.svg'
+import React, { useState, ChangeEvent, useRef, useEffect } from 'react'
+
 interface MatchHistoryProps {
   rivalName: string
   rivalAvatar: string
@@ -9,11 +11,12 @@ interface MatchHistoryProps {
   myScore: number
   isWinner: boolean
 }
+
 interface PageInfo {
   requestPage: number
-  requestDataSzie: number
+  requestDataSize: number
   totalPage: number
-  totalDateSize: number
+  totalDataSize: number
 }
 
 interface MyPageProfileProps {
@@ -43,54 +46,95 @@ export default function MyPageProfile({
   ladderScore,
   ladderMaxScore,
 }: MyPageProfileProps) {
+  const [editProfileMsgFlag, setEditProfileMsgFlag] = useState(false)
+  const [profileMsg, setProfileMsg] = useState(statusMessage)
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+  const handleEditProfileMsg = () => {
+    setEditProfileMsgFlag(!editProfileMsgFlag)
+  }
+
+  const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const inputText = e.target.value
+
+    if (inputText.length <= 20) {
+      // 입력한 텍스트가 80자 이하인 경우에만 업데이트
+      setProfileMsg(inputText)
+    }
+  }
+  useEffect(() => {
+    if (editProfileMsgFlag && textareaRef.current) {
+      textareaRef.current.focus()
+      textareaRef.current.setSelectionRange(
+        textareaRef.current.value.length,
+        textareaRef.current.value.length,
+      )
+    }
+  }, [editProfileMsgFlag])
+
   return (
-    <div>
+    <div className={styles.backGround}>
       <section className={styles.userProfile}>
-        <section className={styles.lineOne}>
-          <div className={styles.profileNickName}>
-            <div className={styles.profileImg}>
+        <div className={styles.lineOneTwo}>
+          <section className={styles.lineOne}>
+            <div className={styles.profileNickName}>
+              <div className={styles.profileImg}>
+                <Image src={profileImage} alt={'profileImage'} width={80} />
+              </div>
+              <div className={styles.nickName}>{nickName}</div>
+            </div>
+            <div className={styles.secondAuth}>2차 인증</div>
+          </section>
+          <section className={styles.lineTwo}>
+            <div className={styles.profileMessage}>
+              <div className={styles.text}>
+                {editProfileMsgFlag ? (
+                  <textarea
+                    rows={4}
+                    cols={50}
+                    id="profileMsg"
+                    style={{
+                      all: 'unset',
+                      maxHeight: '80px',
+                      padding: '10px',
+                      border: '2px solid #ccc',
+                      borderRadius: '5px',
+                      boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)',
+                      outline: 'none',
+                      width: '100%',
+                    }}
+                    value={profileMsg}
+                    onChange={handleTextChange}
+                    ref={textareaRef}
+                  />
+                ) : (
+                  <div>{profileMsg}</div>
+                )}
+              </div>
               <Image
-                src={profileImage}
-                alt={'profileImage'}
-                // className={styles.radioImg}
-                width={80}
-                // height={40}
+                src={textEditBtn}
+                alt={'textEditBtn'}
+                width={30}
+                className={styles.textEditBtn}
+                onClick={handleEditProfileMsg}
               />
             </div>
-            <div className={styles.nickName}>{nickName}</div>
-          </div>
-          <div className={styles.profileMessage}>
-            <div className={styles.text}>{statusMessage}</div>
-            <Image
-              src={textEditBtn}
-              alt={'textEditBtn'}
-              className={styles.textEditBtn}
-              width={30}
-              // height={40}
-            />
-          </div>
-        </section>
-        <section className={styles.lineTwo}>
-          <div className={styles.secondAuth}>2차 인증</div>
-          <div className={styles.record}>
-            {totalCount}전&nbsp;&nbsp;&nbsp;{winCount}승&nbsp;&nbsp;&nbsp;
-            {loseCount}패
-          </div>
-        </section>
+            <div className={styles.record}>
+              {totalCount}전&nbsp;&nbsp;&nbsp;{winCount}승&nbsp;&nbsp;&nbsp;
+              {loseCount}패
+            </div>
+          </section>
+        </div>
         <section className={styles.lineThree}>
           <div>
             <span className={styles.rankTitle}>랭킹</span>
-            <br />
             <span className={styles.rankSubTitle}>{ladderRank}</span>
           </div>
           <div>
             <span className={styles.rankTitle}>래더점수</span>
-            <br />
             <span className={styles.rankSubTitle}>{ladderScore}</span>
           </div>
           <div>
             <span className={styles.rankTitle}>최고점수</span>
-            <br />
             <span className={styles.rankSubTitle}>{ladderMaxScore}</span>
           </div>
         </section>
