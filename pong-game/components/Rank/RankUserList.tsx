@@ -1,4 +1,4 @@
-import { useModalState, useUserProfileModalState } from '@/store/store'
+import { useModalState } from '@/store/store'
 import profileImage from '../../public/img/mypage/profileImage.svg'
 import styles from './RankUserList.module.scss'
 import Image from 'next/image'
@@ -7,18 +7,21 @@ interface RankUserListProps {
   nickname: string
   avatar: string
   ladderScore: number
-  ranking: number,
+  ranking: number
 }
 
+export default function RankUserList({
+  nickname,
+  // avatar,
+  ladderScore,
+  ranking,
+}: RankUserListProps) {
+  const { setModalName } = useModalState()
+  const { setModalProps } = useModalState()
 
-
-export default function RankUserList({ nickname, avatar, ladderScore, ranking }: RankUserListProps) {
-  const { modalName, setModalName } = useModalState()
-  const { modalProps, setModalProps } = useModalState()
-
-  async function setModalPropsValue(nickname: string){
-    setModalProps({nickname: nickname})
-    setModalName('userProfile');
+  async function setModalPropsValue(nickname: string) {
+    setModalName('userProfile')
+    setModalProps({ nickname: nickname })
   }
   return (
     <>
@@ -26,24 +29,13 @@ export default function RankUserList({ nickname, avatar, ladderScore, ranking }:
         <div
           className={styles.userInfo}
           onClick={() => {
-            setModalPropsValue(nickname);
+            setModalPropsValue(nickname)
           }}
         >
           <span className={styles.rank}>{ranking}. </span>
           <span className={styles.userName}>
-            <Image
-              src={profileImage}
-              alt={'profileImage'}
-              // className={styles.radioImg}
-              width={64}
-              // height={40}
-            />
+            <Image src={profileImage} alt={'profileImage'} width={64} />
             {nickname}
-            {/* <DropDown
-                isDropDownView={true}
-                dropDownState="userProfile"
-                userProfile={{ isFriend: true, isBlock: false }}
-              /> */}
           </span>
         </div>
         <div className={styles.score}>{ladderScore}</div>

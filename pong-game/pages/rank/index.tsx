@@ -17,7 +17,6 @@ interface RankUsers {
 }
 
 export default function Rank() {
-  const [page, setPage] = useState(1)
   const rankDummyData: RankInfo = {
     rankUsers: [
       {

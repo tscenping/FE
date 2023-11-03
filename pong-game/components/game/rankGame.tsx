@@ -6,9 +6,7 @@ export default function RankGame() {
       <section>
         <div className={styles.title}>
           <h1 className={styles.mainTitle}>Game Start</h1>
-          <div className={styles.subTitle}>
-            일반게임과 래더게임 중 하나를 선택해주세요.
-          </div>
+          <div className={styles.subTitle}>일반게임과 래더게임 중 하나를 선택해주세요.</div>
         </div>
       </section>
       <section className={styles.btn}>

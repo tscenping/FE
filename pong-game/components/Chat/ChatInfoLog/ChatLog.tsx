@@ -1,6 +1,6 @@
 import styles from './ChatLog.module.scss'
 import OpponentMessage from './OpponentMessage'
-import MyMessage from './Mymessage'
+import MyMessage from './MyMessage'
 
 function ChatLog(): JSX.Element {
   return (

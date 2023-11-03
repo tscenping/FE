@@ -1,7 +1,5 @@
 import styles from './UserProfileModal.module.scss'
-import profileImage from '@/public/img/mypage/profileImage.svg'
 import closeBtn from '@/public/img/modal/modalClose.svg'
-import friendEdit from '@/public/img/modal/friendEdit.svg'
 import Image from 'next/image'
 import { useModalState } from '@/store/store'
 import MyPageHistory from '@/components/MyPage/MyPageHistory'
@@ -17,16 +15,40 @@ interface MatchHistoryProps {
   isWinner: boolean
 }
 
-export default function UserProfile() {
-  const { modalName, setModalName } = useModalState()
-  // const { modalProps, setModalProps } = useModalState()
-  var count = 1
+interface UserProfileProps {
+  id: number
+  nickname: string
+  avatar: string
+  statusMessage: string
+  loseCount: number
+  winCount: number
+  totalCount: number
+  ladderRank: number
+  ladderScore: number
+  ladderMaxScore: number
+  gameHistories: MatchHistoryProps[]
+  isFriend: boolean
+  isBlocked: boolean
+}
 
-  useEffect(() => {
-    // console.log(modalProps?.nickname);
-    console.log(modalName)
-    console.log(count++)
-  }, [])
+export default function UserProfile() {
+  const { setModalName } = useModalState()
+  const { modalProps } = useModalState()
+
+  const userProfileProps = {
+    id: 1,
+    nickname: 'abcdefgadas',
+    avatar: 'avatar-url',
+    statusMessage: 'Hello, World!',
+    loseCount: 5,
+    winCount: 10,
+    totalCount: 15,
+    ladderRank: 3,
+    ladderScore: 1200,
+    ladderMaxScore: 1300,
+    isFriend: true,
+    isBlocked: false,
+  }
 
   const gameHistories: MatchHistoryProps[] = [
     {
@@ -73,7 +95,7 @@ export default function UserProfile() {
           <button onClick={() => setModalName(null)} className={styles.closeBtn}>
             <Image src={closeBtn} alt={'closeBtn'} width={30} />
           </button>
-          <UserProfileInfo />
+          <UserProfileInfo userProfileProps={userProfileProps} />
           <section className={styles.recentHistory}>
             <div className={styles.recentHistoryTitle}>
               <div className={styles.divideLine}></div>최 근 전 적
@@ -86,7 +108,7 @@ export default function UserProfile() {
         </section>
       </div>
       <section className={styles.pagenation}>
-        <CustomPagination totalItemsCount={10} itemsCountPerPage={5} />
+        <CustomPagination totalItemsCount={5} itemsCountPerPage={5} />
       </section>
     </div>
   )
