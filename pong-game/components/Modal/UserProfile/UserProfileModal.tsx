@@ -7,6 +7,7 @@ import { useModalState } from '@/store/store'
 import MyPageHistory from '@/components/MyPage/MyPageHistory'
 import CustomPagination from '@/components/pagination/CustomPagination'
 import UserProfileInfo from './UserProfileInfo'
+import { useEffect } from 'react'
 
 interface MatchHistoryProps {
   rivalName: string
@@ -18,6 +19,14 @@ interface MatchHistoryProps {
 
 export default function UserProfile() {
   const { modalName, setModalName } = useModalState()
+  // const { modalProps, setModalProps } = useModalState()
+  var count = 1
+
+  useEffect(() => {
+    // console.log(modalProps?.nickname);
+    console.log(modalName)
+    console.log(count++)
+  }, [])
 
   const gameHistories: MatchHistoryProps[] = [
     {
@@ -61,10 +70,7 @@ export default function UserProfile() {
     <div className={styles.backGround}>
       <div>
         <section className={styles.userProfile}>
-          <button
-            onClick={() => setModalName(null)}
-            className={styles.closeBtn}
-          >
+          <button onClick={() => setModalName(null)} className={styles.closeBtn}>
             <Image src={closeBtn} alt={'closeBtn'} width={30} />
           </button>
           <UserProfileInfo />
