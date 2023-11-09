@@ -2,7 +2,7 @@ import styles from './index.module.scss'
 import Layout from '@/components/layout/Layout'
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
-import NomalGame from '@/components/game/NormalGame'
+import NormalGame from '@/components/game/normalGame'
 import PageTitle from '@/components/UI/PageTitle'
 import RankGame from '@/components/game/rankGame'
 
@@ -21,7 +21,7 @@ export default function Home() {
     <div className={styles.backGround}>
       {gameState ? (
         gameState === 'nomal' ? (
-          <NomalGame setPageState={setPageState} setGameState={setGameState} />
+          <NormalGame setPageState={setPageState} setGameState={setGameState} />
         ) : (
           <RankGame />
         )

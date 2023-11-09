@@ -3,13 +3,13 @@ import styles from './FriendUserListContainer.module.scss'
 import profileImage from '@/public/img/chat/userProfileImage.svg'
 import toggle from '@/public/img/chat/userToggle.svg'
 import React, { useState } from 'react'
-import DropDown from '../dropDown/DropDown'
+import DropDown from '../DropDown/DropDown'
 
-interface FriendUserListContainerProps {
-  blockFlag: boolean
-}
+// interface FriendUserListContainerProps {
+//   blockFlag: boolean
+// }
 
-function FriendUserListContainer({ blockFlag }: Fri): JSX.Element {
+function FriendUserListContainer(): JSX.Element {
   const [dropDownState, setDropDownState] = useState(false)
 
   return (

@@ -1,6 +1,6 @@
 import styles from './normalGame.module.scss'
 import { useState } from 'react'
-import CustomRadio from '@/Function/Game/CustomRadio'
+import CustomRadio from '@/function/game/customRadio'
 import PageTitle from '../UI/PageTitle'
 
 interface props {
