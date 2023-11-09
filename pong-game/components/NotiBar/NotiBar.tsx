@@ -25,27 +25,15 @@ export default function NotiBar() {
             <div>4시간 전</div>
           </section>
           <section className={styles.msg}>
-            <div className={styles.contentMsg}>
-              김철수님이 채팅에 초대하였습니다.
-            </div>
+            <div className={styles.contentMsg}>김철수님이 채팅에 초대하였습니다.</div>
             <div className={styles.answer}>
-              <Image
-                src={agreeIcon}
-                alt={'friend'}
-                width={30}
-                className={styles.img}
-              />
-              <Image
-                src={denyIcon}
-                alt={'friend'}
-                width={30}
-                className={styles.img}
-              />
+              <Image src={agreeIcon} alt={'friend'} width={30} className={styles.img} />
+              <Image src={denyIcon} alt={'friend'} width={30} className={styles.img} />
             </div>
           </section>
         </section>
       </section>
-      
+
       <div className={styles.divideLine}></div>
       <section>
         <section className={styles.notiContent}>
@@ -57,22 +45,10 @@ export default function NotiBar() {
             <div>4시간 전</div>
           </section>
           <section className={styles.msg}>
-            <div className={styles.contentMsg}>
-              김철수님이 게임에 초대하였습니다.
-            </div>
+            <div className={styles.contentMsg}>김철수님이 게임에 초대하였습니다.</div>
             <div className={styles.answer}>
-              <Image
-                src={agreeIcon}
-                alt={'friend'}
-                width={30}
-                className={styles.img}
-              />
-              <Image
-                src={denyIcon}
-                alt={'friend'}
-                width={30}
-                className={styles.img}
-              />
+              <Image src={agreeIcon} alt={'friend'} width={30} className={styles.img} />
+              <Image src={denyIcon} alt={'friend'} width={30} className={styles.img} />
             </div>
           </section>
         </section>

@@ -1,10 +1,4 @@
 import styles from './normalGame.module.scss'
-import prvBtn from '../../public/img/pageNation/left.svg'
-import Image from 'next/image'
-import specialBtn from '../../public/img/game/special.svg'
-import normalBtn from '../../public/img/game/normal.svg'
-import selectSpecialBtn from '../../public/img/game/selectSpecial.svg'
-import selectNormalBtn from '../../public/img/game/selectNormal.svg'
 import { useState } from 'react'
 import CustomRadio from '@/Function/Game/CustomRadio'
 import PageTitle from '../UI/PageTitle'
@@ -14,7 +8,7 @@ interface props {
   setGameState: (newGameState: string) => void // setPageState 함수
 }
 
-export default function normalGame({ setPageState, setGameState }: props) {
+export default function NormalGame({ setPageState, setGameState }: props) {
   const [gameMode, setGameMode] = useState('Normal')
   const handlePrvBtn = () => {
     setGameState('')
@@ -24,12 +18,12 @@ export default function normalGame({ setPageState, setGameState }: props) {
   return (
     <div className={styles.backGround}>
       <section className={styles.title}>
-          <PageTitle
-            title="Game Start"
-            subTitle="친구나 다른 유저들과 점수에 관계 없이 게임을 즐겨보세요."
-            prvBtn={true}
-            handlePrvBtn={handlePrvBtn}
-          />
+        <PageTitle
+          title="Game Start"
+          subTitle="친구나 다른 유저들과 점수에 관계 없이 게임을 즐겨보세요."
+          prvBtn={true}
+          handlePrvBtn={handlePrvBtn}
+        />
       </section>
       <section className={styles.btn}>
         <section className={styles.inputRadio}>

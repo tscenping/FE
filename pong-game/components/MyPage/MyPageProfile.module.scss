@@ -1,3 +1,5 @@
+@import '../../styles/colors.scss';
+
 .backGround {
   button {
     cursor: pointer;
@@ -61,6 +63,7 @@
       flex-direction: row;
       padding-top: 12px;
       padding-bottom: 12px;
+      
       .profileImg {
         width: 80px;
         text-align: center;
@@ -84,6 +87,7 @@
     align-items: center; /* 세로 중앙 정렬 */
     justify-content: center; /* 가로 중앙 정렬 */
     gap: 16px;
+    
     .record {
       background-color: white;
       display: flex;
@@ -100,6 +104,7 @@
       font-weight: 400;
       line-height: normal;
       letter-spacing: -0.3px;
+      
     }
     .profileMessage {
       width: 100%;

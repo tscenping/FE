@@ -2,24 +2,21 @@ import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import styles from './ModalLayout.module.scss'
 import UserProfile from '../Modal/UserProfile/UserProfileModal'
-import { useModalState, useUserProfileModalState } from '@/store/store'
+import { useModalState } from '@/store/store'
 
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
   return (
     <>
       {modalName !== null && (
-        <div
-          className={styles.modalOverlay}
-          onClick={() => setModalName(null)}
-        ></div>
+        <div className={styles.modalOverlay} onClick={() => setModalName(null)}></div>
       )}
     </>
   )
 }
 
 function ModalContent({}): JSX.Element {
-  const { modalName, setModalName } = useModalState()
+  const { modalName } = useModalState()
   const modalContent: { [key: string]: JSX.Element | null } = {
     userProfile: <UserProfile />,
   }
@@ -38,7 +35,6 @@ function ModalContent({}): JSX.Element {
 
 function ModalLayout({}): JSX.Element {
   const [isMounted, setIsMounted] = useState<boolean>(false)
-  const { modalName } = useModalState()
 
   useEffect(() => {
     setIsMounted(true)
@@ -49,14 +45,8 @@ function ModalLayout({}): JSX.Element {
 
   return (
     <>
-      {createPortal(
-        <ModalOverlay />,
-        document.getElementById('modalOverlay') as HTMLElement,
-      )}
-      {createPortal(
-        <ModalContent />,
-        document.getElementById('modalContent') as HTMLElement,
-      )}
+      {createPortal(<ModalOverlay />, document.getElementById('modalOverlay') as HTMLElement)}
+      {createPortal(<ModalContent />, document.getElementById('modalContent') as HTMLElement)}
     </>
   )
 }

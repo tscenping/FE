@@ -37,7 +37,7 @@ interface MyPageProfileProps {
 
 export default function MyPageProfile({
   nickName,
-  avatar,
+  // avatar,
   statusMessage,
   loseCount,
   winCount,

@@ -7,7 +7,7 @@ import DropDown from '../DropDown/DropDown'
 
 function FriendUserListContainer(): JSX.Element {
   const [dropDownState, setDropDownState] = useState(false)
-
+  
 
   return (
     <>
