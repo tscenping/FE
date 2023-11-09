@@ -1,6 +1,7 @@
 import styles from './index.module.scss'
 import Layout from '@/components/layout/Layout'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams } from 'next/navigation'
 import NomalGame from '@/components/game/NormalGame'
 import RankGame from '@/components/game/RankGame'
 import PageTitle from '@/components/UI/PageTitle'
@@ -8,7 +9,6 @@ import PageTitle from '@/components/UI/PageTitle'
 export default function Home() {
   const [gameState, setGameState] = useState<string>('')
   const [pageState, setPageState] = useState(1)
-
   const onClickLadderBtn = () => {
     // setGameState('rank')
   }
