@@ -4,11 +4,11 @@ import logo from '../../public/img/login/logo.svg'
 import stick from '../../public/img/login/stick.svg'
 import LoginButton from './LoginButton/LoginButton'
 
-interface LoginPageContentsProps {
-  state: boolean
-}
+// interface LoginPageContentsProps {
+//   state: boolean
+// }
 
-function LoginPageContents(props: LoginPageContentsProps): JSX.Element {
+function LoginPageContents(): JSX.Element {
   return (
     <div className={styles.loginPageContents}>
       <ul className={styles.loginPageContentsContainer}>

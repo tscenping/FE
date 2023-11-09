@@ -3,11 +3,11 @@ import Image from 'next/image'
 import styles from './InputNickImage.module.scss'
 import defaultProfileImage from '../../public/img/login/noProfileImage.svg'
 
-interface InputNickImageProps {
-  state: boolean
-}
+// interface InputNickImageProps {
+//   state: boolean
+// }
 
-function InputNickImage(props: InputNickImageProps): JSX.Element {
+function InputNickImage(): JSX.Element {
   const [nickName, setNickName] = useState<string>('')
   const [uploadImage, setUploadImage] = useState<string[]>([])
   const fileRef = useRef<HTMLInputElement>(null)
@@ -57,9 +57,7 @@ function InputNickImage(props: InputNickImageProps): JSX.Element {
           ref={fileRef}
           onChange={imageHandler}
         />
-        <p className={styles.imageExplanation}>
-          사진은 1장, 최대 15MB만 가능합니다.
-        </p>
+        <p className={styles.imageExplanation}>사진은 1장, 최대 15MB만 가능합니다.</p>
       </section>
       <section className={styles.profileNickName}>
         <input
