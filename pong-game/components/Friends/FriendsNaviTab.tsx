@@ -22,9 +22,7 @@ function FriendsNaviTab(props: FriendNaviTabProps): JSX.Element {
       />
       <label
         htmlFor={props.id}
-        className={
-          props.tabState === props.value ? styles.checkList : styles.noCheckList
-        }
+        className={props.tabState === props.value ? styles.checkList : styles.noCheckList}
       >
         {props.title}
       </label>

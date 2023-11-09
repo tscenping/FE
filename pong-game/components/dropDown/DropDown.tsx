@@ -27,7 +27,6 @@ interface DropDownChatingProps {
   isMeOwner: boolean
 }
 
-
 export default function DropDown({
   isDropDownView,
   setIsDropDownView,
@@ -51,15 +50,12 @@ export default function DropDown({
     ),
   }
 
-  const modalRef = useRef<HTMLDivElement | null>(null);
+  const modalRef = useRef<HTMLDivElement | null>(null)
   const handleModalClose = (): void => {
-    setIsDropDownView(false);
-  };
+    setIsDropDownView(false)
+  }
 
-  useOutsideClickHandler(modalRef, handleModalClose);
-
-
-
+  useOutsideClickHandler(modalRef, handleModalClose)
 
   return (
     <>

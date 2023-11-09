@@ -3,7 +3,7 @@ const { parse } = require('url')
 const next = require('next')
 
 const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
+const app = next({})
 const handle = app.getRequestHandler()
 
 const PORT = 8000
@@ -22,8 +22,8 @@ app.prepare().then(() => {
   const https = require('https')
   const fs = require('fs')
   const options = {
-    key: fs.readFileSync('./cert.key'),
-    cert: fs.readFileSync('./cert.crt'),
+    key: fs.readFileSync('./localhost-key.pem'),
+    cert: fs.readFileSync('./localhost.pem'),
   }
   https
     .createServer(options, function (req, res) {

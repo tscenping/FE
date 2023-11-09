@@ -1,5 +1,4 @@
-import CanvasRect from '@/components/game/CanvasRect'
-import Layout from '@/components/layout/Layout'
+import CanvasRect from '@/components/game/canvasRect'
 
 export default function Game() {
   return (
