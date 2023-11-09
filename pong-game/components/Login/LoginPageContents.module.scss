@@ -2,11 +2,11 @@
 
 .loginPageContents {
   display: flex;
-  width: 0%;
+  width: 40%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: contentShow 10s ease-in-out forwards;
+  // animation: contentShow 10s ease-in-out forwards;
   .loginPageContentsContainer {
     display: flex;
     flex-direction: column;
@@ -17,14 +17,14 @@
       align-items: center;
       justify-content: center;
       &:first-child {
-        transform: scale(0);
-        animation: appear 10s ease-in-out forwards;
+        // transform: scale(0);
+        // animation: appear 10s ease-in-out forwards;
         text-align: center;
       }
       img:nth-child(2) {
-        transform: scale(0);
+        // transform: scale(0);
         position: absolute;
-        animation: appear 1.5s ease-in-out forwards;
+        // animation: appear 1.5s ease-in-out forwards;
         animation-delay: 9s;
         top: 80px;
       }
@@ -91,8 +91,8 @@
     background-color: $gray_scale_900;
     border-radius: 50%;
     position: absolute;
-    animation: bounce 1.5s ease-in-out infinite alternate;
-    animation-delay: 10s;
+    // animation: bounce 1.5s ease-in-out infinite alternate;
+    // animation-delay: 10s;
     right: 30px;
     bottom: 0;
     &::after {
@@ -104,7 +104,7 @@
       background-color: $gray_scale_900;
       right: -5px;
       bottom: 0px;
-      animation: remove 7.3s ease-in-out;
+      // animation: remove 7.3s ease-in-out;
     }
   }
 }

@@ -1,13 +1,13 @@
 @import '../../styles/colors.scss';
 
 .loginPageTitleContainer {
-  width: 100%;
+  width: 60%;
   height: 100vh;
   background-color: $main_100;
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeInEntire 10s ease-in-out forwards;
+  // animation: fadeInEntire 10s ease-in-out forwards;
   .titleContainer {
     position: relative;
     font-size: 3rem;
@@ -20,7 +20,7 @@
       position: relative;
       left: -100px;
       opacity: 0;
-      animation: fadeInFirst 4s ease-in-out forwards;
+      // animation: fadeInFirst 4s ease-in-out forwards;
     }
     .titleSecondLine {
       margin-bottom: 16px;
@@ -28,11 +28,11 @@
       position: relative;
       left: -200px;
       opacity: 0;
-      animation: fadeInSecond 8s ease-in-out forwards;
+      // animation: fadeInSecond 8s ease-in-out forwards;
     }
     .mainTitle {
-      opacity: 0;
-      animation: fadeInMain 10s ease-in-out forwards;
+      // opacity: 0;
+      // animation: fadeInMain 10s ease-in-out forwards;
       text-shadow: 0px 8px 4px rgba(0, 0, 0, 0.25);
       font-size: 4rem;
     }
