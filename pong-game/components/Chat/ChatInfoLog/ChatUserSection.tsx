@@ -1,5 +1,5 @@
 import styles from './ChatUserSection.module.scss'
-import ChatUserListContainer from './chatUserListContainer'
+import ChatUserListContainer from './ChatUserListContainer'
 
 function ChatUserSection(): JSX.Element {
   return (

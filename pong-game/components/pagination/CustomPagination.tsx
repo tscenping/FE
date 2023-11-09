@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 interface paginationProps {
   totalItemsCount: number // Required. Total count of items which you are going to display
-  onChange?: Function //Required. Page change handler. Receive pageNumber as arg
+  // onChange?: Function //Required. Page change handler. Receive pageNumber as arg
   activePage?: number // Required. Active page
   itemsCountPerPage?: number // Count of items per page
   pageRangeDisplayed?: number //Range of pages in paginator, exclude navigation blocks (prev, next, first, last pages)
@@ -12,7 +12,7 @@ interface paginationProps {
   firstPageText?: string // or ReactElement Text of first page navigation button
   lastPageText?: string // or ReactElement Text of first page navigation button
   nextPageText?: string // or ReactElement Text of first page navigation button
-  getPageUrl?: Function // Generate href attribute for page
+  // getPageUrl?: Function // Generate href attribute for page
   innerClass?: string // default: pagination Class name of <ul> tag
   activeClass?: string // default: active Class name of active <li> tag
   activeLinkClass?: string // Class name of active <a> tag
@@ -83,11 +83,6 @@ export default function CustomPagination(props: paginationProps) {
     setPage(page)
     console.log(page)
   }
-  const state1 = [1, 2, 3, 4]
-  const state4 = [3, 2, 3, 4]
-  const state3 = [4, 2, 3, 4]
-  const state2 = [5, 2, 3, 4]
-  const pages = ['state1', 'state2', 'state3', 'state4']
 
   return (
     <div>

@@ -3,8 +3,8 @@ import Layout from '@/components/layout/Layout'
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import NomalGame from '@/components/game/NormalGame'
-import RankGame from '@/components/game/RankGame'
 import PageTitle from '@/components/UI/PageTitle'
+import RankGame from '@/components/game/rankGame'
 
 export default function Home() {
   const [gameState, setGameState] = useState<string>('')
