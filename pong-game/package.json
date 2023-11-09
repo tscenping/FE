@@ -3,13 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@svgr/webpack": "^8.1.0",
+    "axios": "^1.6.0",
+    "cookie": "^0.6.0",
+    "cookies-next": "^4.0.0",
     "next": "13.5.4",
     "next-transpile-modules": "^10.0.1",
     "react": "^18",

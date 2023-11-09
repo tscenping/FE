@@ -5,7 +5,8 @@ import Layout from '@/components/layout/Layout'
 import ModalLayout from '@/components/layout/ModalLayout'
 
 export default function App({ Component, pageProps, router }: AppProps) {
-  const loginPage = router.pathname === '/login'
+  const loginPage = router.pathname === '/login' || router.pathname === '/login/info'
+
   return (
     <>
       <Reset />

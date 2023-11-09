@@ -1,16 +1,18 @@
-import { useState } from 'react'
-
 import LoginPageTitle from './LoginPageTitle'
 import LoginPageContents from './LoginPageContents'
 import InputNickImage from './InputNickImage'
 import styles from './LoginPageComponent.module.scss'
+import { useRouter } from 'next/router'
 
 function LoginPageComponent(): JSX.Element {
-  const [input, setInput] = useState<boolean>(true)
+  // const [input, setInput] = useState<boolean>(false)
+
+  const router = useRouter()
+
   return (
     <div className={styles.loginPageComponent}>
       <LoginPageTitle />
-      {input ? <LoginPageContents state={input} /> : <InputNickImage state={input} />}
+      {router.pathname === '/login' ? <LoginPageContents /> : <InputNickImage />}
     </div>
   )
 }
