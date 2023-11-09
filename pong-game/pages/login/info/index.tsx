@@ -1,12 +1,10 @@
 import LoginPageComponent from '@/components/Login/LoginPageComponent'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import https from 'https'
 // import cookies from 'next-cookies'
 
 function LoginInfoPage({ sendCode }) {
   const [data, setData] = useState(null)
-  // const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     console.log(sendCode)
@@ -29,7 +27,6 @@ function LoginInfoPage({ sendCode }) {
         console.error('Error fetching data:', error)
       }
     }
-
     fetchData()
   }, [])
 
