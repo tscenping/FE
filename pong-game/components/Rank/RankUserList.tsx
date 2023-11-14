@@ -19,7 +19,7 @@ export default function RankUserList({
   const { setModalName } = useModalState()
   const { setModalProps } = useModalState()
 
-  async function setModalPropsValue(nickname: string) {
+  function setModalPropsValue(nickname: string) {
     setModalName('userProfile')
     setModalProps({ nickname: nickname })
   }

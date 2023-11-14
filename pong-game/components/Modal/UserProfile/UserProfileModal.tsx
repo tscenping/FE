@@ -5,7 +5,7 @@ import { useModalState } from '@/store/store'
 import MyPageHistory from '@/components/MyPage/MyPageHistory'
 import CustomPagination from '@/components/pagination/CustomPagination'
 import UserProfileInfo from './UserProfileInfo'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 interface MatchHistoryProps {
   rivalName: string
@@ -34,10 +34,11 @@ interface UserProfileProps {
 export default function UserProfile() {
   const { setModalName } = useModalState()
   const { modalProps } = useModalState()
+  const [page, setPage] = useState(1)
 
   const userProfileProps = {
     id: 1,
-    nickname: 'abcdefgadas',
+    nickname: modalProps.nickname,
     avatar: 'avatar-url',
     statusMessage: 'Hello, World!',
     loseCount: 5,
@@ -108,7 +109,7 @@ export default function UserProfile() {
         </section>
       </div>
       <section className={styles.pagenation}>
-        <CustomPagination totalItemsCount={5} itemsCountPerPage={5} />
+        <CustomPagination page={page} setPage={setPage} totalItemsCount={5} itemsCountPerPage={5} />
       </section>
     </div>
   )

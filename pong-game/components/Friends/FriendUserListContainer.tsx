@@ -32,8 +32,11 @@ function FriendUserListContainer(): JSX.Element {
                 setIsDropDownView={setDropDownState}
                 dropDownState="userProfile"
                 userProfile={{
+                  id: 3,
+                  nickname: 'him',
+                  avatar: '1',
                   isFriend: true,
-                  isBlock: false,
+                  isBlocked: false,
                 }}
               />
             )}

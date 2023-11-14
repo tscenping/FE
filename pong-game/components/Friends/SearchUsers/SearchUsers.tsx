@@ -1,5 +1,4 @@
 import styles from './SearchUsers.module.scss'
-import Image from 'next/image'
 import FrinedUsersListContainer from '../FriendUsersListContainer'
 import SearchInputContainer from './SearchInputContainer'
 

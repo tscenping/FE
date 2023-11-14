@@ -14,17 +14,23 @@ interface dropDownProps {
 }
 
 interface userProfileDorpDownProps {
+  id: number
+  avatar: string
+  nickname: string
   isFriend: boolean
-  isBlock: boolean
+  isBlocked: boolean
+  // setIsDropDownView: (v: boolean) => void
 }
 
 interface DropDownChatingProps {
+  id: number
+  nickname: string
+  avatar: string
   isFriend: boolean
-  isBlock: boolean
-  isOwner: boolean
-  isAdmin: boolean
-  isMeAdmin: boolean
-  isMeOwner: boolean
+  isBlocked: boolean
+  myChannelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
+  channelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
+  // setIsDropDownView: (v: boolean) => void
 }
 
 export default function DropDown({
@@ -36,16 +42,25 @@ export default function DropDown({
 }: dropDownProps) {
   const content: { [key: string]: JSX.Element | null } = {
     userProfile: (
-      <DropDownUserProfile isBlock={userProfile?.isBlock} isFriend={userProfile?.isFriend} />
+      <DropDownUserProfile
+        id={userProfile?.id}
+        avatar={userProfile?.avatar}
+        nickname={userProfile?.nickname}
+        isFriend={userProfile?.isFriend}
+        isBlocked={userProfile?.isBlocked}
+        setIsDropDownView={setIsDropDownView}
+      />
     ),
     chating: (
       <DropDownChating
-        isAdmin={chating?.isAdmin}
-        isBlock={chating?.isBlock}
+        id={chating?.id}
+        nickname={chating?.nickname}
+        avatar={chating?.avatar}
         isFriend={chating?.isFriend}
-        isMeAdmin={chating?.isMeAdmin}
-        isMeOwner={chating?.isMeOwner}
-        isOwner={chating?.isOwner}
+        isBlocked={chating?.isBlocked}
+        myChannelUserType={chating?.myChannelUserType}
+        channelUserType={chating?.channelUserType}
+        setIsDropDownView={setIsDropDownView}
       />
     ),
   }

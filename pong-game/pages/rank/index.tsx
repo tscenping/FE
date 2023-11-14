@@ -13,7 +13,7 @@ interface RankUsers {
   nickname: string
   avatar: string
   ladderScore: number
-  ranking: number,
+  ranking: number
 }
 
 export default function Rank() {
@@ -31,9 +31,62 @@ export default function Rank() {
         ladderScore: 950,
         ranking: 2,
       },
+      {
+        nickname: 'User2',
+        avatar: 'avatar2.jpg',
+        ladderScore: 950,
+        ranking: 3,
+      },
+      {
+        nickname: 'User2',
+        avatar: 'avatar2.jpg',
+        ladderScore: 950,
+        ranking: 4,
+      },
+      {
+        nickname: 'User2',
+        avatar: 'avatar2.jpg',
+        ladderScore: 950,
+        ranking: 5,
+      },
+      {
+        nickname: 'User2',
+        avatar: 'avatar2.jpg',
+        ladderScore: 950,
+        ranking: 6,
+      },
+      {
+        nickname: 'User2',
+        avatar: 'avatar2.jpg',
+        ladderScore: 950,
+        ranking: 7,
+      },
+      {
+        nickname: 'User2',
+        avatar: 'avatar2.jpg',
+        ladderScore: 950,
+        ranking: 8,
+      },
+      {
+        nickname: 'User2',
+        avatar: 'avatar2.jpg',
+        ladderScore: 950,
+        ranking: 9,
+      },
+      {
+        nickname: 'User2',
+        avatar: 'avatar2.jpg',
+        ladderScore: 950,
+        ranking: 10,
+      },
     ],
     totalDataSize: 20,
   }
+  const [page, setPage] = useState(1)
+  useEffect(() => {
+    console.log(page)
+  }, [page]) // 여기에 api호출 넣으면 될듯~
+  
 
   return (
     <div className={styles.backGround}>
@@ -51,7 +104,12 @@ export default function Rank() {
       </section>
 
       <section className={styles.page}>
-        <CustomPagination itemsCountPerPage={10} totalItemsCount={rankDummyData.totalDataSize} />
+        <CustomPagination
+          page={page}
+          setPage={setPage}
+          itemsCountPerPage={10}
+          totalItemsCount={rankDummyData.totalDataSize}
+        />
         {/* 
                 useEffect에 setContent 를 넣어두고
                 Pagination컴포넌트 통해서 page벨류가 변경되면
