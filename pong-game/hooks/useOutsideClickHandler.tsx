@@ -8,14 +8,14 @@ const useOutsideClickHandler = (
     const handleClickOutside = (event: Event): void => {
       // console.log("Handle Click", ref.current);
       if (ref.current === null || ref.current.contains(event.target as Node)) {
-        return ;
+        return
       }
-      callBack?.(event);
-    };
-    window.addEventListener("mousedown", handleClickOutside);
+      callBack?.(event)
+    }
+    window.addEventListener('mousedown', handleClickOutside)
     return () => {
-      window.removeEventListener("mousedown", handleClickOutside);
-    };
+      window.removeEventListener('mousedown', handleClickOutside)
+    }
   }, [ref, callBack])
 }
 

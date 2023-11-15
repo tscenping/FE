@@ -32,8 +32,6 @@ interface paginationProps {
   linkClassLast?: string // Class of the last <a> tag
 }
 
-
-
 const PaginationBox = styled.div`
   .pagination {
     display: flex;
@@ -82,11 +80,15 @@ interface CustomPaginationProps {
   page: number
   setPage: (v: number) => void
   totalItemsCount: number
-  itemsCountPerPage:number
+  itemsCountPerPage: number
 }
 
-export default function CustomPagination({page, setPage, totalItemsCount, itemsCountPerPage}: CustomPaginationProps) {
-
+export default function CustomPagination({
+  page,
+  setPage,
+  totalItemsCount,
+  itemsCountPerPage,
+}: CustomPaginationProps) {
   const handlePageChange = (page: number) => {
     setPage(page)
   }

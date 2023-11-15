@@ -86,7 +86,6 @@ export default function Rank() {
   useEffect(() => {
     console.log(page)
   }, [page]) // 여기에 api호출 넣으면 될듯~
-  
 
   return (
     <div className={styles.backGround}>

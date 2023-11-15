@@ -41,7 +41,7 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
     isBlocked,
   } = userProfileInfo.userProfileProps
   const [dropDownState, setDropDownState] = useState(false)
-  
+
   function LineThreeContent(props: { title: string; content: string }) {
     return (
       <div className={styles.lineThreeContent}>
@@ -55,15 +55,13 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
   function RenderLadderScore() {
     return (
       <>
-      <LineThreeContent title="랭킹" content={`${ladderRank}`}/>
-      <LineThreeContent title="래더점수" content={`${ladderScore}`}/>
-      <LineThreeContent title="최고점수" content={`${ladderMaxScore}`}/>
-      <LineThreeContent title="통계" content={`${totalCount}전 ${winCount}승 ${loseCount}패`}/>
+        <LineThreeContent title="랭킹" content={`${ladderRank}`} />
+        <LineThreeContent title="래더점수" content={`${ladderScore}`} />
+        <LineThreeContent title="최고점수" content={`${ladderMaxScore}`} />
+        <LineThreeContent title="통계" content={`${totalCount}전 ${winCount}승 ${loseCount}패`} />
       </>
     )
   }
-
-  
 
   return (
     <>
@@ -100,7 +98,7 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
       </section>
       <section className={styles.lineTwo}>{statusMessage}</section>
       <section className={styles.lineThree}>
-        <RenderLadderScore/>
+        <RenderLadderScore />
       </section>
     </>
   )
