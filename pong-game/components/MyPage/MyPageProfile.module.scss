@@ -63,7 +63,7 @@
       flex-direction: row;
       padding-top: 12px;
       padding-bottom: 12px;
-      
+
       .profileImg {
         width: 80px;
         text-align: center;
@@ -87,7 +87,7 @@
     align-items: center; /* 세로 중앙 정렬 */
     justify-content: center; /* 가로 중앙 정렬 */
     gap: 16px;
-    
+
     .record {
       background-color: white;
       display: flex;
@@ -104,7 +104,6 @@
       font-weight: 400;
       line-height: normal;
       letter-spacing: -0.3px;
-      
     }
     .profileMessage {
       width: 100%;
@@ -143,7 +142,7 @@
     border-radius: 30px;
     background-color: white;
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
     text-align: center;
     align-items: center;
     width: 100%;
@@ -179,14 +178,13 @@
   }
 }
 
-
-.textarea{
+.textarea {
   all: unset;
   max-height: 80px;
   padding: 10px;
   border: 2px solid #ccc;
-  border-Radius: 5px;
-  box-Shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   outline: none;
   width: 100%;
 }

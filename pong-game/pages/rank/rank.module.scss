@@ -1,8 +1,7 @@
-
 .backGround {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  // height: 100%;
   justify-content: space-between;
   align-items: center;
   .page {
@@ -18,7 +17,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    .pagination{
+    .pagination {
       display: flex;
       color: black;
       scale: 1.8;
@@ -29,7 +28,7 @@
 .rankList {
   margin-top: 48px;
   padding: 16px;
-  height: 100%;
+  height: 810px;
   background-color: white;
   display: flex;
   flex-direction: column;
