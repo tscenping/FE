@@ -1,0 +1,43 @@
+@import '../../styles/colors.scss';
+
+.profileNickName {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  .nickInputContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    .nickNameInput {
+      width: 500px;
+      height: 60px;
+      font-size: 32px;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid $gray_scale_400;
+      background-color: transparent;
+      &::placeholder {
+        font-size: 32px;
+        color: $gray_scale_500;
+      }
+      &:focus {
+        border-bottom: 1px solid black;
+        &::placeholder {
+          color: transparent;
+        }
+      }
+    }
+    .nickNameCharCount {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      right: 5px;
+      font-size: 32px;
+    }
+  }
+  p {
+    color: $gray_scale_400;
+    font-family: 'Pretendard-Regular';
+    font-size: 16px;
+  }
+}
