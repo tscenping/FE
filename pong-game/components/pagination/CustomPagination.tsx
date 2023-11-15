@@ -76,12 +76,21 @@ const PaginationBox = styled.div`
     color: blue;
   }
 `
-export default function CustomPagination(props: paginationProps) {
-  const [page, setPage] = useState(1)
+interface CustomPaginationProps {
+  page: number
+  setPage: (v: number) => void
+  totalItemsCount: number
+  itemsCountPerPage: number
+}
 
+export default function CustomPagination({
+  page,
+  setPage,
+  totalItemsCount,
+  itemsCountPerPage,
+}: CustomPaginationProps) {
   const handlePageChange = (page: number) => {
     setPage(page)
-    console.log(page)
   }
 
   return (
@@ -89,8 +98,8 @@ export default function CustomPagination(props: paginationProps) {
       <PaginationBox>
         <Pagination
           activePage={page} // 현재 페이지
-          itemsCountPerPage={props.itemsCountPerPage} // 한 페이지에 보여줄 아이템 개수
-          totalItemsCount={props.totalItemsCount} // 전체 아이템 개수
+          itemsCountPerPage={itemsCountPerPage} // 한 페이지에 보여줄 아이템 개수
+          totalItemsCount={totalItemsCount} // 전체 아이템 개수
           pageRangeDisplayed={5} // 페이지 범위
           prevPageText={'‹'}
           nextPageText={'›'}

@@ -1,6 +1,6 @@
 import PageTitle from '@/components/UI/PageTitle'
 import styles from './mypage.module.scss'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import MyPageHistory from '@/components/MyPage/MyPageHistory'
 import MyPageProfile from '@/components/MyPage/MyPageProfile'
 import CustomPagination from '@/components/pagination/CustomPagination'
@@ -13,10 +13,9 @@ interface MatchHistoryProps {
   isWinner: boolean
 }
 interface pageInfo {
-  requestPage: number //
-  requestDataSzie: number //
-  totalPage: number //
-  totalDateSize: number //
+  requestPage: number
+  totalPage: number
+  totalDateSize: number
 }
 
 interface MyPageProfileProps {
@@ -36,6 +35,10 @@ interface MyPageProfileProps {
 }
 
 export default function Mypage() {
+  const [page, setPage] = useState(1)
+  useEffect(() => {
+    console.log(page)
+  }, [page])
   var props: MyPageProfileProps = {
     nickName: 'abcdefghhhhh',
     avatar: 'hhh',
@@ -50,7 +53,6 @@ export default function Mypage() {
 
   const pageInfo: pageInfo = {
     requestPage: 1, // 유저가 보고싶은 현재 페이지
-    requestDataSzie: 10, // 각 페이지마다 보여줄 데이터 개수
     totalPage: 10, // 전체 데이터 수 / 각 페이지별 데이터 개수
     totalDateSize: 89, // 전체 데이터 개수
   }
@@ -67,7 +69,7 @@ export default function Mypage() {
       rivalAvatar: '',
       rivalScore: 3,
       myScore: 5,
-      isWinner: true,
+      isWinner: false,
     },
     {
       rivalName: 'sangyeki',
@@ -76,20 +78,20 @@ export default function Mypage() {
       myScore: 5,
       isWinner: true,
     },
-    {
-      rivalName: 'sangyeki',
-      rivalAvatar: '',
-      rivalScore: 3,
-      myScore: 5,
-      isWinner: true,
-    },
-    {
-      rivalName: 'sangyeki',
-      rivalAvatar: '',
-      rivalScore: 3,
-      myScore: 5,
-      isWinner: true,
-    },
+    // {
+    //   rivalName: 'sangyeki',
+    //   rivalAvatar: '',
+    //   rivalScore: 3,
+    //   myScore: 5,
+    //   isWinner: true,
+    // },
+    // {
+    //   rivalName: 'sangyeki',
+    //   rivalAvatar: '',
+    //   rivalScore: 3,
+    //   myScore: 5,
+    //   isWinner: true,
+    // },
   ]
   return (
     <div className={styles.backGround}>
@@ -114,7 +116,9 @@ export default function Mypage() {
         </div>
         <div className={styles.pagenation}>
           <CustomPagination
-            itemsCountPerPage={pageInfo.requestDataSzie}
+            page={page}
+            setPage={setPage}
+            itemsCountPerPage={5}
             totalItemsCount={pageInfo.totalDateSize}
           />
         </div>
