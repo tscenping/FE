@@ -4,9 +4,21 @@ import Image from 'next/image'
 import { useNavBarState } from '@/store/chat'
 import addDmChat from '@/public/img/chat/addDmChat.svg'
 import makeChatRoom from '@/public/img/chat/makeChat.svg'
+import { useModalState } from '@/store/store'
+import { create } from 'domain'
 
 function ChatListNavBarContainer(): JSX.Element {
+  const { setModalName } = useModalState()
   const { tabState } = useNavBarState()
+
+  const createRoomModalHandler = () => {
+    setModalName('createRoom')
+  }
+
+  const createDmModalHandler = () => {
+    setModalName('createDmRoom')
+  }
+
   return (
     <nav className={styles.chatListNavBarContainer}>
       <ChatRoomListTab name="tab" id="entireList" value="1" tabState={tabState} title="전체 목록" />
@@ -19,7 +31,12 @@ function ChatListNavBarContainer(): JSX.Element {
         title="1:1 메세지"
       />
       {tabState === '3' ? (
-        <Image src={addDmChat} alt={'make dm chat'} className={styles.createDmChat} />
+        <Image
+          src={addDmChat}
+          alt={'make dm chat'}
+          className={styles.createDmChat}
+          onClick={createDmModalHandler}
+        />
       ) : (
         <Image
           src={makeChatRoom}
@@ -27,6 +44,7 @@ function ChatListNavBarContainer(): JSX.Element {
           width={40}
           height={40}
           className={styles.createChatRoom}
+          onClick={createRoomModalHandler}
         />
       )}
     </nav>

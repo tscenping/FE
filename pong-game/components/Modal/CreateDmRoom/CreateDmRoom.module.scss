@@ -1,0 +1,38 @@
+@import '../../../styles/colors.scss';
+
+.back {
+  display: flex;
+  flex-direction: column;
+  background-color: $gray_scale_0;
+  border-radius: 30px;
+  padding: 32px;
+  .usersContainer {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(2, 2fr);
+    grid-gap: 40px;
+    align-items: center;
+    margin-top: 32px;
+    padding: 32px;
+    .user {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 8px 8px;
+      background-color: $gray_scale_200;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      &:hover {
+        transform: scale(1.2);
+      }
+      img {
+        padding: 0px 16px;
+      }
+      span {
+        font-family: 'Pretendard-SemiBold';
+      }
+    }
+  }
+}
