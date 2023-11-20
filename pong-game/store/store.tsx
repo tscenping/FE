@@ -1,13 +1,14 @@
 import { create } from 'zustand'
 
-
-interface ModalProps{
-  nickname?: string;
+interface ModalProps {
+  nickname?: string
 }
 
 interface ModalState {
-  modalName?: 'userProfile' | 'chating' | 'friendList' | null
-  setModalName: (modalName: 'userProfile' | 'chating' | 'friendList' | null) => void
+  modalName?: 'createChatRoom' | 'userProfile' | 'chating' | 'friendList' | 'createDmRoom' | null
+  setModalName: (
+    modalName: 'createChatRoom' | 'userProfile' | 'chating' | 'friendList' | 'createDmRoom' | null,
+  ) => void
   modalProps?: ModalProps | null
   setModalProps: (modalProps: ModalProps | null) => void
 }
@@ -28,5 +29,5 @@ export const useModalState = create<ModalState>((set) => ({
 export const useUserProfileModalState = create<userProfileModalState>((set) => ({
   isFriend: false,
   isBlock: false,
-  setUseUserProfileModalState: (isFriend: boolean, isBlock: boolean) => set({isFriend, isBlock}),
+  setUseUserProfileModalState: (isFriend: boolean, isBlock: boolean) => set({ isFriend, isBlock }),
 }))

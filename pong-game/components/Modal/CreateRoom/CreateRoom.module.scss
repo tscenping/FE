@@ -1,0 +1,117 @@
+@import '../../../styles/colors.scss';
+
+.createChatRoomContents {
+  // padding: 32px;
+  // border-radius: 30px;
+  // background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .chatType {
+    width: 100%;
+    margin-top: 32px;
+    .chatTypeUnorderList {
+      display: flex;
+      justify-content: space-around;
+      li {
+        font-size: 1.5rem;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        transition: 0.3s;
+        input {
+          display: none;
+        }
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+      .selected {
+        color: $main_900;
+        transform: scale(1.2);
+      }
+      .noSelected {
+        color: $gray_scale_500;
+      }
+      label {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  label {
+    color: $gray_scale_500;
+    padding: 8px;
+  }
+  input {
+    width: 450px;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color: $gray_scale_200;
+    padding: 8px 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  .chatTitle {
+    margin: 32px 0px;
+    display: flex;
+    flex-direction: column;
+  }
+  .chatTitleInput {
+    &:focus {
+      outline: none;
+      &::placeholder {
+        opacity: 0;
+        transition: 0.3s;
+      }
+    }
+    &::placeholder {
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
+  .chatPassword {
+    margin-bottom: 32px;
+  }
+  .chatPasswordInput {
+    &:focus {
+      outline: none;
+      &::placeholder {
+        opacity: 0;
+        transition: 0.3s;
+      }
+    }
+    &::placeholder {
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
+  .btn {
+    width: 100%;
+    margin-top: 64px;
+    display: flex;
+    justify-content: space-evenly;
+    button {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: none;
+      font-size: 24px;
+      color: white;
+      background-color: $main_500;
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover {
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+}
+
+.error {
+  color: $error;
+}
