@@ -1,5 +1,4 @@
 import styles from './ChatRoomList.module.scss'
-import ModalLayout from '../Layout/ModalLayout'
 import ChatListNavBarContainer from './ChatInfoLog/ChatListNavBarContainer'
 import ChatTypeListContainer from './ChatType/ChatTypeListContainer'
 

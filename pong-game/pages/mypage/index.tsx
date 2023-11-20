@@ -3,7 +3,7 @@ import styles from './mypage.module.scss'
 import React, { useEffect, useState } from 'react'
 import MyPageHistory from '@/components/MyPage/MyPageHistory'
 import MyPageProfile from '@/components/MyPage/MyPageProfile'
-import CustomPagination from '@/components/pagination/CustomPagination'
+import CustomPagination from '@/components/Pagination/CustomPagination'
 
 interface MatchHistoryProps {
   rivalName: string
@@ -38,7 +38,7 @@ export default function Mypage() {
   const [page, setPage] = useState(1)
   useEffect(() => {
     console.log(page)
-  }, [page])
+  }, [page]) // api넣으면 될듯~
   var props: MyPageProfileProps = {
     nickName: 'abcdefghhhhh',
     avatar: 'hhh',
