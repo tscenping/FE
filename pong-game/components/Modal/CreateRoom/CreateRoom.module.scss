@@ -1,36 +1,39 @@
 @import '../../../styles/colors.scss';
 
-.back {
-  padding: 32px;
-  border-radius: 30px;
-  background-color: white;
+.createChatRoomContents {
+  // padding: 32px;
+  // border-radius: 30px;
+  // background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.type {
-  width: 100%;
-  margin-top: 32px;
-  .nav {
-    display: flex;
-    justify-content: space-around;
-    li {
-      font-size: 1.5rem;
-      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      input {
-        display: none;
+  .chatType {
+    width: 100%;
+    margin-top: 32px;
+    .chatTypeUnorderList {
+      display: flex;
+      justify-content: space-around;
+      li {
+        font-size: 1.5rem;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        transition: 0.3s;
+        input {
+          display: none;
+        }
+        &:hover {
+          transform: scale(1.2);
+        }
       }
-      .on {
+      .selected {
         color: $main_900;
+        transform: scale(1.2);
       }
-      .off {
+      .noSelected {
         color: $gray_scale_500;
       }
-    }
-    label {
-      cursor: pointer;
-      transition: 0.3s;
+      label {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -40,12 +43,11 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  p {
+  label {
     color: $gray_scale_500;
     padding: 8px;
   }
   input {
-    // margin-top: 32px;
     width: 450px;
     font-size: 16px;
     outline: none;
@@ -57,6 +59,8 @@
   }
   .chatTitle {
     margin: 32px 0px;
+    display: flex;
+    flex-direction: column;
   }
   .chatTitleInput {
     &:focus {

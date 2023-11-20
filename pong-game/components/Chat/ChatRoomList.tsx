@@ -1,11 +1,9 @@
 import styles from './ChatRoomList.module.scss'
-import ModalLayout from '../layout/ModalLayout'
-import { useNavBarState } from '@/store/chat'
+import ModalLayout from '../Layout/ModalLayout'
 import ChatListNavBarContainer from './ChatInfoLog/ChatListNavBarContainer'
 import ChatTypeListContainer from './ChatType/ChatTypeListContainer'
 
 function ChatRoomList(): JSX.Element {
-  const { tabState } = useNavBarState()
   return (
     <div className={styles.chatListNavBar}>
       <ChatListNavBarContainer />

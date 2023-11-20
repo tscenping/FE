@@ -1,11 +1,11 @@
 @import '../../../styles/colors.scss';
 
-.back {
+.createDmRoomContent {
   display: flex;
   flex-direction: column;
-  background-color: $gray_scale_0;
-  border-radius: 30px;
-  padding: 32px;
+  // background-color: $gray_scale_0;
+  // border-radius: 30px;
+  // padding: 32px;
   .usersContainer {
     display: grid;
     place-items: center;
@@ -25,7 +25,7 @@
       transition: 0.3s;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       &:hover {
-        transform: scale(1.2);
+        transform: scale(1.1);
       }
       img {
         padding: 0px 16px;

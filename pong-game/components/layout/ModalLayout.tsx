@@ -3,11 +3,12 @@ import { createPortal } from 'react-dom'
 import styles from './ModalLayout.module.scss'
 import UserProfile from '../Modal/UserProfile/UserProfileModal'
 import { useModalState } from '@/store/store'
-import CreateRoom from '../Modal/CreateRoom/CreateRoom'
+import CreateChatRoom from '../Modal/CreateRoom/CreateRoom'
 import CreateDmRoom from '../Modal/CreateDmRoom/CreateDmRoom'
 
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
+
   return (
     <>
       {modalName !== null && (
@@ -21,8 +22,8 @@ function ModalContent({}): JSX.Element {
   const { modalName } = useModalState()
   const modalContent: { [key: string]: JSX.Element | null } = {
     userProfile: <UserProfile />,
-    createRoom: <CreateRoom />,
     createDmRoom: <CreateDmRoom />,
+    createChatRoom: <CreateChatRoom />,
   }
   return (
     <>

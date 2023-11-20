@@ -1,10 +1,10 @@
 import styles from './index.module.scss'
-import Layout from '@/components/layout/Layout'
+import Layout from '@/components/Layout/Layout'
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
-import NormalGame from '@/components/game/normalGame'
+import NormalGame from '@/components/Game/normalGame'
 import PageTitle from '@/components/UI/PageTitle'
-import RankGame from '@/components/game/rankGame'
+import RankGame from '@/components/Game/rankGame'
 
 export default function Home() {
   const [gameState, setGameState] = useState<string>('')

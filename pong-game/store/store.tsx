@@ -5,9 +5,9 @@ interface ModalProps {
 }
 
 interface ModalState {
-  modalName?: 'userProfile' | 'chating' | 'friendList' | 'createRoom' | 'createDmRoom' | null
+  modalName?: 'createChatRoom' | 'userProfile' | 'chating' | 'friendList' | 'createDmRoom' | null
   setModalName: (
-    modalName: 'userProfile' | 'chating' | 'friendList' | 'createRoom' | 'createDmRoom' | null,
+    modalName: 'createChatRoom' | 'userProfile' | 'chating' | 'friendList' | 'createDmRoom' | null,
   ) => void
   modalProps?: ModalProps | null
   setModalProps: (modalProps: ModalProps | null) => void

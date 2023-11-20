@@ -5,17 +5,16 @@ import { useNavBarState } from '@/store/chat'
 import addDmChat from '@/public/img/chat/addDmChat.svg'
 import makeChatRoom from '@/public/img/chat/makeChat.svg'
 import { useModalState } from '@/store/store'
-import { create } from 'domain'
 
 function ChatListNavBarContainer(): JSX.Element {
   const { setModalName } = useModalState()
   const { tabState } = useNavBarState()
 
-  const createRoomModalHandler = () => {
-    setModalName('createRoom')
+  const createRoomModalHandler = (event) => {
+    setModalName('createChatRoom')
   }
 
-  const createDmModalHandler = () => {
+  const createDmModalHandler = (event) => {
     setModalName('createDmRoom')
   }
 

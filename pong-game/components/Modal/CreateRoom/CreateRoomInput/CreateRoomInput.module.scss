@@ -1,0 +1,39 @@
+@import '../../../../styles/colors.scss';
+
+.chatTitle {
+  display: flex;
+  flex-direction: column;
+  margin: 32px 0px;
+}
+.chatTitleInput {
+  &:focus {
+    outline: none;
+    &::placeholder {
+      opacity: 0;
+      transition: 0.3s;
+    }
+  }
+  &::placeholder {
+    font-size: 1rem;
+    text-align: center;
+  }
+}
+
+.chatPassword {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+.chatPasswordInput {
+  &:focus {
+    outline: none;
+    &::placeholder {
+      opacity: 0;
+      transition: 0.3s;
+    }
+  }
+  &::placeholder {
+    font-size: 1rem;
+    text-align: center;
+  }
+}
