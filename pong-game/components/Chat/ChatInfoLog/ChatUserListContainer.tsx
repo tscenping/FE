@@ -9,6 +9,11 @@ function ChatUserListContainer(): JSX.Element {
       <ChatUserListElement />
       <ChatUserListElement />
       <ChatUserListElement />
+      <ChatUserListElement />
+      <ChatUserListElement />
+      <ChatUserListElement />
+      <ChatUserListElement />
+      <ChatUserListElement />
     </ul>
   )
 }

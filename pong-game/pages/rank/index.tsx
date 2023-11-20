@@ -2,7 +2,7 @@ import PageTitle from '@/components/UI/PageTitle'
 import styles from './rank.module.scss'
 import Pagination from 'react-js-pagination'
 import { useEffect, useState } from 'react'
-import CustomPagination from '@/components/pagination/CustomPagination'
+import CustomPagination from '@/components/Pagination/CustomPagination'
 import RankUserList from '@/components/Rank/RankUserList'
 
 interface RankInfo {

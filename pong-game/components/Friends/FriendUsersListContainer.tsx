@@ -1,6 +1,6 @@
 import styles from './FriendUsersListContainer.module.scss'
 import FriendUserListContainer from './FriendUserListContainer'
-import CustomPagination from '../pagination/CustomPagination'
+import CustomPagination from '../Pagination/CustomPagination'
 import { useState } from 'react'
 
 function FrinedUsersListContainer(): JSX.Element {

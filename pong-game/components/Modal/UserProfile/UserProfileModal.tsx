@@ -3,7 +3,7 @@ import closeBtn from '@/public/img/modal/modalClose.svg'
 import Image from 'next/image'
 import { useModalState } from '@/store/store'
 import MyPageHistory from '@/components/MyPage/MyPageHistory'
-import CustomPagination from '@/components/pagination/CustomPagination'
+import CustomPagination from '@/components/Pagination/CustomPagination'
 import UserProfileInfo from './UserProfileInfo'
 import { useEffect, useState } from 'react'
 
