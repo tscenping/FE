@@ -13,13 +13,13 @@ function ChatShow(): JSX.Element {
         {/* <ChatLog /> */}
         <ChatPassword />
       </div>
-      <div className={styles.chatInput}>
+      <form className={styles.chatInput}>
         <input type="text" className={styles.messageInput} required />
         <span className={styles.folderNameInputPlaceHolder}>Message Input</span>
         <button className={styles.submitMessage}>
           <Image src={submitMessage} alt={'submit message'} />
         </button>
-      </div>
+      </form>
     </div>
   )
 }

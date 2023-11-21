@@ -11,13 +11,13 @@ function ChatPassword(): JSX.Element {
         <h1 className={styles.RoomName}>채팅방 이름</h1>
       </div>
       {/* <p className={styles.wrongPassword}>잘못된 비밀번호 입니다.</p> */}
-      <div className={styles.chatPasswordInput}>
+      <form className={styles.chatPasswordInput}>
         <input type="password" className={styles.passwordInput} required />
         <span className={styles.passwordInputPlaceHolder}>비밀번호를 입력해주세요.</span>
         <button className={styles.submitPassword}>
           <Image src={submitMessage} alt={'submit message'} width={30} />
         </button>
-      </div>
+      </form>
     </div>
   )
 }
