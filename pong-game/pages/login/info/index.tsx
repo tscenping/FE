@@ -7,12 +7,13 @@ import { useRouter } from 'next/router'
 function LoginInfoPage({ sendCode }) {
   const [data, setData] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+
   const router = useRouter()
 
   useEffect(() => {
     if (document.cookie) {
       //이미 토큰을 발급받은 상태라면
-      router.push('/main') //router.push를 이용해서 "main"페이지로 리다이렉션
+      router.replace('/main') //router.push를 이용해서 "main"페이지로 리다이렉션
     }
     console.log(sendCode)
     const headers = { 'Content-Type': 'application/json' }
@@ -38,7 +39,7 @@ function LoginInfoPage({ sendCode }) {
       }
     }
     fetchData()
-    router.push('/login/info') //router.push를 이용해서 "code"값을 제거한 상태인 페이지로 리다이렉션
+    router.replace('/login/info') //router.push를 이용해서 "code"값을 제거한 상태인 페이지로 리다이렉션
   }, [])
 
   if (isLoading) return <Loading />
