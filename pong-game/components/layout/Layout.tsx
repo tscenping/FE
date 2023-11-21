@@ -6,8 +6,7 @@ import logoIcon from '@/public/img/layout/PONG GAME.svg'
 import logoutIcon from '@/public/img/layout/logout.svg'
 import styles from './Layout.module.scss'
 import NotiBar from '../NotiBar/NotiBar'
-import SideBarContent from './SideBar/SideBarContent'
-
+import SideBarContent from './sideBar/SideBarContent'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)

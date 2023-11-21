@@ -3,6 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Loading from '@/components/Login/Loading'
 import { useRouter } from 'next/router'
+import https from 'https'
 
 function LoginInfoPage({ sendCode }) {
   const [data, setData] = useState(null)
