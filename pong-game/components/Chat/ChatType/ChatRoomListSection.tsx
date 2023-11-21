@@ -15,6 +15,9 @@ function ChatRoomListSection(): JSX.Element {
       <CreatedRoomList title={'채팅방 9'} />
       <CreatedRoomList title={'채팅방 10'} />
       <CreatedRoomList title={'채팅방 11'} />
+      <CreatedRoomList title={'채팅방 12'} />
+      <CreatedRoomList title={'채팅방 13'} />
+      <CreatedRoomList title={'채팅방 14'} />
     </ul>
   )
 }

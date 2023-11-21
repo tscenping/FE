@@ -8,8 +8,10 @@ function ChatRoomList(): JSX.Element {
   const [page, setPage] = useState(1)
   return (
     <div className={styles.chatListNavBar}>
-      <ChatListNavBarContainer />
-      <ChatTypeListContainer />
+      <div className={styles.chatListTop}>
+        <ChatListNavBarContainer />
+        <ChatTypeListContainer />
+      </div>
       <div>
         <CustomPagination
           page={page}
