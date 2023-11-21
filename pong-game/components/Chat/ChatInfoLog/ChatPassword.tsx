@@ -3,13 +3,14 @@ import Image from 'next/image'
 import lock from '@/public/img/chat/lock.svg'
 import submitMessage from '@/public/img/chat/enterInput.svg'
 import styles from './ChatPassword.module.scss'
-import ChatPasswordInput from './ChatPasswordInput'
+import ChatPasswordInput from '../Input/ChatPasswordInput'
 
 function ChatPassword(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement>(null)
 
   const passwordHandler = (e) => {
     e.preventDefault()
+    passwordRef.current.value = ''
   }
 
   return (
