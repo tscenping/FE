@@ -1,8 +1,8 @@
 import styles from './index.module.scss'
 import { useState, useEffect } from 'react'
-import NormalGame from '@/components/Game/normalGame'
+import NormalGame from '@/components/Game/NormalGame'
 import PageTitle from '@/components/UI/PageTitle'
-import RankGame from '@/components/Game/rankGame'
+import RankGame from '@/components/Game/RankGame'
 
 export default function Home() {
   const [gameState, setGameState] = useState<string>('')

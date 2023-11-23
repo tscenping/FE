@@ -1,4 +1,4 @@
-import { useState, useEffect, RefObject } from 'react'
+import { useState, RefObject } from 'react'
 import styles from './NickNameInput.module.scss'
 
 interface NickNameInputProps {
@@ -29,6 +29,7 @@ function NickNameInput(props: NickNameInputProps): JSX.Element {
           maxLength={10}
           ref={props.inputRef}
           onChange={handleChange}
+          required
         />
         <div className={styles.nickNameCharCount}>
           <span>{nickName.length}</span>

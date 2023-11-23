@@ -17,7 +17,7 @@ function LoginButton({ content }: LoginButtonProps): JSX.Element {
 
   return (
     <li className={styles.loginButton}>
-      <Link href="https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-d9692dbade8cb4303d270d1ec51af232af123dd53aec7470bfa64921bdc6ccdc&redirect_uri=https%3A%2F%2Flocalhost%3A8001%2Flogin%2Finfo&response_type=code">
+      <Link href="https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-d9692dbade8cb4303d270d1ec51af232af123dd53aec7470bfa64921bdc6ccdc&redirect_uri=https%3A%2F%2Flocalhost%3A8001%2Flogin&response_type=code">
         <button className={content === 'google' ? styles.loginGoogleButton : styles.login42Button}>
           <Image src={icon} alt={content} />
           {icon === login42Button ? '42' : 'Google'} Login

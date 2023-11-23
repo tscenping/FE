@@ -18,8 +18,8 @@ function InputNickImage(): JSX.Element {
     new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
-        300 /* width */,
-        300 /* height */,
+        200 /* width */,
+        200 /* height */,
         'SVG' /* 파일형식 */,
         100 /* quality */,
         0 /* rotation */,

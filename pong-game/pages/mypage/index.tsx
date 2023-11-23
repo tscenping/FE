@@ -134,24 +134,32 @@ export default function Mypage(props) {
 export async function getServerSideProps(context) {
   const mycookie = cookie.parse((context.req && context.req.headers.cookie) || '')
 
-  const accessToken = mycookie.accessToken
-  const refreshToken = mycookie.refreshToken
+  if (!Object.keys(mycookie).length) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  } else {
+    const accessToken = mycookie.accessToken
+    const refreshToken = mycookie.refreshToken
 
-  const header = {
-    'Content-Type': 'application/json',
-    Cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`,
+    const header = {
+      'Content-Type': 'application/json',
+      Cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`,
+    }
+
+    const instance = axios.create({
+      httpsAgent: new https.Agent({
+        rejectUnauthorized: false,
+      }),
+    })
+    const response = await instance({
+      url: 'https://localhost:3000/users/me',
+      method: 'get',
+      headers: header,
+    })
+    return { props: { data: response.data } }
   }
-
-  const instance = axios.create({
-    httpsAgent: new https.Agent({
-      rejectUnauthorized: false,
-    }),
-  })
-  const response = await instance({
-    url: 'https://localhost:3000/users/me',
-    method: 'get',
-    headers: header,
-  })
-  console.log(response)
-  return { props: { data: response.data } }
 }
