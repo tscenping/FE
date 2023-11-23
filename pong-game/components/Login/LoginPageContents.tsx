@@ -29,9 +29,9 @@ function LoginPageContents(): JSX.Element {
   useEffect(() => {
     if (responseData && responseData.isFirstLogin !== undefined) {
       if (responseData.isFirstLogin) {
-        router.push('/login/info')
+        router.replace('/login/info')
       } else {
-        router.push('/main')
+        router.replace('/main')
       }
     }
   }, [responseData, router])
@@ -67,9 +67,9 @@ function LoginPageContents(): JSX.Element {
             headers: headers,
           })
           if (response.data.avatar) {
-            router.push('/main')
+            router.replace('/main')
           } else {
-            router.push('/login/info')
+            router.replace('/login/info')
           }
         }
       } catch (error) {
