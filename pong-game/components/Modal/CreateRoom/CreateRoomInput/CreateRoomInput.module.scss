@@ -6,6 +6,7 @@
   margin: 32px 0px;
 }
 .chatTitleInput {
+  text-align: center;
   &:focus {
     outline: none;
     &::placeholder {
@@ -24,7 +25,9 @@
   flex-direction: column;
   margin-bottom: 32px;
 }
+
 .chatPasswordInput {
+  text-align: center;
   &:focus {
     outline: none;
     &::placeholder {

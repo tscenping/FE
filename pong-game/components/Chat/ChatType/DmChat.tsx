@@ -6,7 +6,7 @@ function DmChat(): JSX.Element {
   return (
     <li className={styles.dmChatListContainer}>
       <div className={styles.profileImage}>
-        <Image src={OpponentProfileImage} alt={'Opponent Profile image'} width={50} height={50} />
+        <Image src={OpponentProfileImage} alt={'Opponent Profile image'} width={40} height={40} />
       </div>
       <span className={styles.opponentNickName}>nickName</span>
     </li>

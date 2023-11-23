@@ -37,7 +37,7 @@ interface MyPageProfileProps {
 
 export default function MyPageProfile({
   nickName,
-  // avatar,
+  avatar,
   statusMessage,
   loseCount,
   winCount,
@@ -78,7 +78,8 @@ export default function MyPageProfile({
           <section className={styles.lineOne}>
             <div className={styles.profileNickName}>
               <div className={styles.profileImg}>
-                <Image src={profileImage} alt={'profileImage'} width={80} />
+                {/* height안들어가면 에러나서 추가 */}
+                <Image src={avatar} alt={'profileImage'} width={80} height={80} />
               </div>
               <div className={styles.nickName}>{nickName}</div>
             </div>

@@ -1,20 +1,26 @@
 /* 1:1 채팅 유저 리스트 */
 
 .dmChatListContainer {
-  width: 700px;
-  height: 50px;
+  width: 350px;
+  height: 60px;
   background-color: #f2f3f5;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
-  margin-bottom: 32px;
-  padding: 16px;
-  font-size: 32px;
+  font-size: 16px;
   position: relative;
   cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.1);
+  }
   .profileImage {
+    display: flex;
     margin-right: 32px;
+    img {
+      padding: 16px;
+    }
   }
   .profileImage::after {
     position: absolute;
@@ -23,7 +29,7 @@
     height: 20px;
     border-radius: 50%;
     background-color: green;
-    left: 50px;
-    bottom: 20px;
+    left: 40px;
+    bottom: 5px;
   }
 }
