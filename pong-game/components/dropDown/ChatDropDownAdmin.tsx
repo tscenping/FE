@@ -25,7 +25,7 @@ export default function ChatDropDownAdmin(props: ChatDropDownOwnerProps) {
           <ChatBen />
         </>
       )}
-      <EditFriend isFriend={props.isFriend} friendId={3} />
+      <EditFriend isFriend={props.isFriend} />
       <EditBlock isBlocked={props.isBlocked} />
       <OpenProfile nickname={props.nickname} setIsDropDownView={props.setIsDropDownView} />
       <InviteGame />
