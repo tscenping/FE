@@ -16,8 +16,7 @@ export default function RankUserList({
   ladderScore,
   ranking,
 }: RankUserListProps) {
-  const { setModalName } = useModalState()
-  const { setModalProps } = useModalState()
+  const { setModalName, setModalProps } = useModalState()
 
   function setModalPropsValue(nickname: string) {
     setModalName('userProfile')

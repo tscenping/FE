@@ -13,6 +13,10 @@
     .profileImg {
       width: 80px;
       text-align: center;
+      img{
+        border-radius: 50%;
+        object-fit: cover;
+      }
     }
     .friendEditBtn {
       cursor: pointer;

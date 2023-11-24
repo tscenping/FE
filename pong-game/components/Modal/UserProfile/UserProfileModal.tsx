@@ -6,13 +6,19 @@ import MyPageHistory from '@/components/MyPage/MyPageHistory'
 import CustomPagination from '@/components/Pagination/CustomPagination'
 import UserProfileInfo from './UserProfileInfo'
 import { useEffect, useState } from 'react'
+import { instance } from '@/util/axios'
 
-interface MatchHistoryProps {
+interface GameHistoryContents {
   rivalName: string
   rivalAvatar: string
   rivalScore: number
   myScore: number
   isWinner: boolean
+}
+
+interface GameHistoryProps {
+  gameHistories: GameHistoryContents[]
+  totalItemsCount: number
 }
 
 interface UserProfileProps {
@@ -26,68 +32,43 @@ interface UserProfileProps {
   ladderRank: number
   ladderScore: number
   ladderMaxScore: number
-  gameHistories: MatchHistoryProps[]
   isFriend: boolean
   isBlocked: boolean
 }
 
 export default function UserProfile() {
-  const { setModalName } = useModalState()
-  const { modalProps } = useModalState()
+  const { setModalName, modalProps } = useModalState()
+  const [userNickname, setUserNickname] = useState<string>();
+  const [userProfileInfo, setUserProfileInfo] = useState<UserProfileProps>()
   const [page, setPage] = useState(1)
+  const [gameHistories, setGameHistories] = useState<GameHistoryProps>()
 
-  const userProfileProps = {
-    id: 1,
-    nickname: modalProps.nickname,
-    avatar: 'avatar-url',
-    statusMessage: 'Hello, World!',
-    loseCount: 5,
-    winCount: 10,
-    totalCount: 15,
-    ladderRank: 3,
-    ladderScore: 1200,
-    ladderMaxScore: 1300,
-    isFriend: true,
-    isBlocked: false,
+  const getUserProfileHandler = async () => {
+    if (userNickname === undefined) return
+    await instance.get(`/users/profile/${userNickname}`, {}).then(function (res) {
+      setUserProfileInfo(res.data)
+      console.log(res)
+    })
+    
   }
+  const getGameHistoryHandler = async () => {
+    if (userNickname === undefined) return
+    await instance.get(`/users/games/${userNickname}/?page=${page}`, {}).then(function (res) {
+      setGameHistories(res.data)
+      
+    })
+  }
+  useEffect(() => {
+    setUserNickname(modalProps.nickname)
+  },[modalProps])
 
-  const gameHistories: MatchHistoryProps[] = [
-    {
-      rivalName: 'sangyeki',
-      rivalAvatar: '',
-      rivalScore: 3,
-      myScore: 5,
-      isWinner: false,
-    },
-    {
-      rivalName: 'sangyeki',
-      rivalAvatar: '',
-      rivalScore: 3,
-      myScore: 5,
-      isWinner: true,
-    },
-    {
-      rivalName: 'sangyeki',
-      rivalAvatar: '',
-      rivalScore: 3,
-      myScore: 5,
-      isWinner: true,
-    },
-    {
-      rivalName: 'sangyeki',
-      rivalAvatar: '',
-      rivalScore: 3,
-      myScore: 5,
-      isWinner: false,
-    },
-    {
-      rivalName: 'sangyeki',
-      rivalAvatar: '',
-      rivalScore: 3,
-      myScore: 5,
-      isWinner: true,
-    },
-  ]
+  useEffect(() => {
+    getUserProfileHandler()
+  }, [userNickname])
+  
+  useEffect(() => {
+    getGameHistoryHandler()
+  }, [page])
 
   return (
     <div className={styles.backGround}>
@@ -96,20 +77,32 @@ export default function UserProfile() {
           <button onClick={() => setModalName(null)} className={styles.closeBtn}>
             <Image src={closeBtn} alt={'closeBtn'} width={30} />
           </button>
-          <UserProfileInfo userProfileProps={userProfileProps} />
+          {userProfileInfo && <UserProfileInfo userProfileProps={userProfileInfo} />}
           <section className={styles.recentHistory}>
             <div className={styles.recentHistoryTitle}>
               <div className={styles.divideLine}></div>최 근 전 적
               <div className={styles.divideLine}></div>
             </div>
             <div className={styles.historyList}>
-              <MyPageHistory gameHistories={gameHistories} />
+              {gameHistories && (
+                <MyPageHistory
+                  gameHistories={gameHistories.gameHistories}
+                  totalItemsCount={gameHistories.totalItemsCount}
+                />
+              )}
             </div>
           </section>
         </section>
       </div>
       <section className={styles.pagenation}>
-        <CustomPagination page={page} setPage={setPage} totalItemsCount={5} itemsCountPerPage={5} />
+        {gameHistories && gameHistories.totalItemsCount > 5 && (
+          <CustomPagination
+            page={page}
+            setPage={setPage}
+            totalItemsCount={gameHistories.totalItemsCount}
+            itemsCountPerPage={5}
+          />
+        )}
       </section>
     </div>
   )
