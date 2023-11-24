@@ -29,12 +29,15 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
       if (document.cookie) {
         if (nickName !== null && avatar !== null) {
           router.push('/main')
-        } else if (nickName === null && avatar === null) {
+        } else if (nickName === null || avatar === null) {
           router.push('/login/info')
         }
       }
     } else if (isSignPage && nickName !== null && avatar !== null) {
       router.push('/main')
+    }
+    if (!document.cookie && !isLoginPage) {
+      router.push('/login')
     }
   }, [router.pathname])
 
@@ -49,7 +52,7 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
       if (document.cookie) {
         if (nickName !== null && avatar !== null) {
           router.push('/main')
-        } else if (nickName === null && avatar === null) {
+        } else if (nickName === null || avatar === null) {
           router.push('/login/info')
         }
       }
@@ -61,23 +64,10 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
     } else {
       if (!document.cookie) {
         router.push('/login')
-      } else if (nickName === null && avatar === null) {
+      } else if (nickName === null || avatar === null) {
         router.push('/login/info')
       }
     }
-
-    // else if (isSignPage) {
-    //   if (!document.cookie) {
-    //     router.push('/login')
-    //   }
-    // }
-    // if (!document.cookie) {
-    //   if (nickName !== null && avatar !== null) {
-    //     setIsLogin(true)
-    //   } else if (!isLoginPage) {
-    //     getUserInfo()
-    //   }
-    // }
   }, [nickName, avatar])
 
   // 1. 쿠키 있는지 확인 -> 없으면 login

@@ -1,7 +1,7 @@
 import { instance } from '@/util/axios'
 interface EditBlockProps {
   isBlocked: boolean
-  friendId: number
+  // friendId: number
 }
 export default function EditBlock(props: EditBlockProps) {
   const blockHandler = async () => {

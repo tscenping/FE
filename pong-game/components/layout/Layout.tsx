@@ -8,6 +8,7 @@ import styles from './Layout.module.scss'
 import NotiBar from '../NotiBar/NotiBar'
 import SideBarContent from './SideBar/SideBarContent'
 import { useRouter, NextRouter } from 'next/router'
+import { useNickNameImage } from '@/store/login'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)
@@ -15,6 +16,11 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
   const router: NextRouter = useRouter()
   const loginPage = router.pathname === '/login' || router.pathname === '/login/info'
 
+  const { setAvatar, setNickName } = useNickNameImage()
+
+  const logoutHandler = () => {
+    setNickName(null)
+  }
   return (
     <>
       {!loginPage ? (
@@ -47,7 +53,7 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
                 </ul>
                 <ul className={styles.sideBarContainerBottom}>
                   <li>
-                    <Image src={logoutIcon} alt={'logout'} />
+                    <Image src={logoutIcon} alt={'logout'} onClick={logoutHandler} />
                   </li>
                 </ul>
               </section>
