@@ -4,7 +4,7 @@ interface ChatEditAdminProps {
 }
 
 export default function ChatEditAdmin(props: ChatEditAdminProps) {
-  return (<>
+  return (<li>
   {props.channelUserType == 'ADMIN' ? <button>관리자 해제</button> : <button>관리자 임명</button>}
-  </>)
+  </li>)
 }

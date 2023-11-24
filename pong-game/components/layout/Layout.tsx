@@ -6,7 +6,7 @@ import logoIcon from '@/public/img/layout/PONG GAME.svg'
 import logoutIcon from '@/public/img/layout/logout.svg'
 import styles from './Layout.module.scss'
 import NotiBar from '../NotiBar/NotiBar'
-import SideBarContent from './sideBar/SideBarContent'
+import SideBarContent from './SideBar/SideBarContent'
 import { useRouter, NextRouter } from 'next/router'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
@@ -14,14 +14,6 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
 
   const router: NextRouter = useRouter()
   const loginPage = router.pathname === '/login' || router.pathname === '/login/info'
-
-  useEffect(() => {
-    if (!document.cookie) {
-      if (!router.query.code) {
-        router.replace('/login')
-      }
-    }
-  }, [router.pathname, router.query.code])
 
   return (
     <>

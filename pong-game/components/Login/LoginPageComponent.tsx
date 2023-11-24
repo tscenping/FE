@@ -8,6 +8,7 @@ function LoginPageComponent(): JSX.Element {
   // const [input, setInput] = useState<boolean>(false)
 
   const router = useRouter()
+  
 
   return (
     <div className={styles.loginPageComponent}>

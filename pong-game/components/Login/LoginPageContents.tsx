@@ -30,8 +30,6 @@ function LoginPageContents(): JSX.Element {
     if (responseData && responseData.isFirstLogin !== undefined) {
       if (responseData.isFirstLogin) {
         router.replace('/login/info')
-      } else {
-        router.replace('/main')
       }
     }
   }, [responseData, router])
@@ -40,12 +38,13 @@ function LoginPageContents(): JSX.Element {
     if (!codeValue) {
       return
     }
-
+    console.log(codeValue)
     const headers = { 'Content-Type': 'application/json' }
     const instance = axios.create({})
     const fetchData = async () => {
       try {
         if (!document.cookie) {
+          console.log(codeValue)
           const response = await instance
             .post(
               'https://localhost:3000/auth/signin',
@@ -59,18 +58,6 @@ function LoginPageContents(): JSX.Element {
               console.log(res.data)
               setResponseData(res.data)
             })
-        } else {
-          const response = await instance({
-            url: 'https://localhost:3000/users/me',
-            method: 'get',
-            withCredentials: true,
-            headers: headers,
-          })
-          if (response.data.avatar) {
-            router.replace('/main')
-          } else {
-            router.replace('/login/info')
-          }
         }
       } catch (error) {
         console.error('Error fetching data:', error)

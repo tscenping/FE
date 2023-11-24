@@ -56,7 +56,7 @@ function InputNickImage(): JSX.Element {
       inputRef.current.value = ''
     } else {
       const finalData = { nickname: inputRef.current.value, avatar: uploadImage }
-      const response = await axios('https://localhost:3000/auth/login', {
+      const response = await axios('https://localhost:3000/auth/signup', {
         headers: headers,
         method: 'patch',
         withCredentials: true,

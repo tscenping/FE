@@ -31,7 +31,7 @@ export default function DropDownChating(props: DropDownChatingProps) {
   }
 
   return (
-    <div className={styles.DropDownChating}>
+    <ul className={styles.DropDownChating}>
       {dropDownContent[props.myChannelUserType]}
 {/* 
       <EditFriend isFriend={props.isFriend} />
@@ -40,6 +40,6 @@ export default function DropDownChating(props: DropDownChatingProps) {
       <InviteGame />
       <DirectMsg />
        */}
-    </div>
+    </ul>
   )
 }
