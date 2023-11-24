@@ -15,14 +15,6 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
   const router: NextRouter = useRouter()
   const loginPage = router.pathname === '/login' || router.pathname === '/login/info'
 
-  // useEffect(() => {
-  //   if (!document.cookie) {
-  //     if (!router.query.code) {
-  //       router.replace('/login')
-  //     }
-  //   }
-  // }, [router.pathname, router.query.code])
-
   return (
     <>
       {!loginPage ? (
