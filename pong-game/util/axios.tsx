@@ -29,10 +29,10 @@ instance.interceptors.response.use(
     return response
   },
   function handleError(error) {
-    const router: NextRouter = useRouter()
+    // const router: NextRouter = useRouter()
     if (error.response && error.response.status === 401) {
       // window.location.href = '/login'
-      router.push('/login')
+      // router.push('/login')
     }
     return Promise.reject(error)
   },
