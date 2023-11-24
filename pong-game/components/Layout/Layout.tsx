@@ -9,6 +9,7 @@ import NotiBar from '../NotiBar/NotiBar'
 import SideBarContent from './SideBar/SideBarContent'
 import { useRouter, NextRouter } from 'next/router'
 import { useNickNameImage } from '@/store/login'
+import { instance } from '@/util/axios'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)
@@ -18,8 +19,12 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
 
   const { setAvatar, setNickName } = useNickNameImage()
 
-  const logoutHandler = () => {
+  const logoutHandler = async () => {
+    await instance.patch('/auth/signout', {}).then(function (res) {
+      console.log(res)
+    })
     setNickName(null)
+    setAvatar(null)
   }
   return (
     <>

@@ -16,7 +16,7 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
         if (res.data) {
           setNickName(res.data.nickName)
           setAvatar(res.data.avatar)
-          console.log(res.data)
+          // console.log(res.data)
         }
       })
     } catch (e) {

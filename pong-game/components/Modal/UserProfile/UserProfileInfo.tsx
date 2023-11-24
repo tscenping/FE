@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import styles from './UserProfileInfo.module.scss'
-import profileImage from '@/public/img/mypage/profileImage.svg'
 import friendEdit from '@/public/img/modal/friendEdit.svg'
 import { useModalState } from '@/store/store'
 import { useEffect, useState } from 'react'
@@ -68,13 +67,14 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
       <section className={styles.lineOne}>
         <div className={styles.profileNickName}>
           <div className={styles.profileImg}>
-            <Image src={profileImage} alt={'profileImage'} width={80} />
+            <Image src={avatar} alt={'profileImage'} width={80} height={80}/>
           </div>
           <div className={styles.nickName}>{nickname}</div>
           <Image
             src={friendEdit}
             alt={'friendEdit'}
             width={30}
+            height={30}
             onClick={() => setDropDownState((prev) => !prev)}
             className={styles.friendEditBtn}
           />
