@@ -40,7 +40,7 @@ function LoginPageContents(): JSX.Element {
     if (!codeValue) {
       return
     }
-
+    console.log(codeValue)
     const headers = { 'Content-Type': 'application/json' }
     const instance = axios.create({})
     const fetchData = async () => {

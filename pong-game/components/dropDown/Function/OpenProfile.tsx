@@ -14,12 +14,14 @@ export default function OpenProfile(props: ChatDropDownOwnerProps) {
     setModalName('userProfile')
   }
   return (
-    <button
-      onClick={() => {
-        setModalPropsValue(props.nickname)
-      }}
-    >
-      프로필보기
-    </button>
+    <li>
+      <button
+        onClick={() => {
+          setModalPropsValue(props.nickname)
+        }}
+      >
+        프로필보기
+      </button>
+    </li>
   )
 }

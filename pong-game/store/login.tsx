@@ -8,8 +8,8 @@ interface useNicknameImageProps {
 }
 
 export const useNickNameImage = create<useNicknameImageProps>((set) => ({
-  nickName: '',
-  avatar: '',
+  nickName: null,
+  avatar: null,
   setNickName: (nickName) => set({ nickName }),
   setAvatar: (avatar) => set({ avatar }),
 }))

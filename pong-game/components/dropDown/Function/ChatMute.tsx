@@ -1,20 +1,21 @@
-import { instance } from "@/util/axios";
+import { instance } from '@/util/axios'
 
 export default function ChatMute() {
-
-  const chatUserMuteHandler =async () => {
-    await instance.patch(
-      `/mute`,{
+  const chatUserMuteHandler = async () => {
+    console.log(process.env.NEXT_PUBLIC_API_ENDPOINT)
+    await instance
+      .patch(`/mute`, {
         userId: 1,
         channelId: 123,
-      }
-    ).then(function(res){
-      console.log(res);
-    
-    });
+      })
+      .then(function (res) {
+        console.log(res)
+      })
   }
-  
-  return (<>
-  <button>채팅금지</button>
-  </>)
+
+  return (
+    <li>
+      <button onClick={chatUserMuteHandler}>채팅금지</button>
+    </li>
+  )
 }
