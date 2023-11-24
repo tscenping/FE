@@ -1,20 +1,20 @@
-const http = require('http')
-const { parse } = require('url')
-const next = require('next')
+import http from 'http'
+import { parse } from 'url'
+import next from 'next'
 
-const dev = process.env.NODE_ENV !== 'production'
+const dev: boolean = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-const PORT = 8000
+const PORT: number = 8000
 
 app.prepare().then(() => {
   http
-    .createServer((req, res) => {
-      const parsedUrl = parse(req.url, true)
+    .createServer((req: http.IncomingMessage, res: http.ServerResponse) => {
+      const parsedUrl = parse(req.url!, true)
       handle(req, res, parsedUrl)
     })
-    .listen(PORT, (err) => {
+    .listen(PORT, (err?: Error) => {
       if (err) throw err
       console.log(`> Ready on http://localhost:${PORT}`)
     })
@@ -26,13 +26,13 @@ app.prepare().then(() => {
     cert: fs.readFileSync('./localhost.pem'),
   }
   https
-    .createServer(options, function (req, res) {
+    .createServer(options, function (req: http.IncomingMessage, res: http.ServerResponse) {
       // Be sure to pass `true` as the second argument to `url.parse`.
       // This tells it to parse the query portion of the URL.
-      const parsedUrl = parse(req.url, true)
+      const parsedUrl = parse(req.url!, true)
       handle(req, res, parsedUrl)
     })
-    .listen(PORT + 1, (err) => {
+    .listen(PORT + 1, (err?: Error) => {
       if (err) throw err
       console.log(`> Ready on https://localhost:${PORT + 1}`)
     })
