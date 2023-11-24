@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Loading from './Loading'
+import { useNickNameImage } from '@/store/login'
 
 interface siginInResponse {
   userId: number
@@ -18,6 +19,7 @@ interface siginInResponse {
 function LoginPageContents(): JSX.Element {
   const [responseData, setResponseData] = useState<siginInResponse>()
   const [codeValue, setCodeValue] = useState<string>('')
+  const { setAvatar, setNickName } = useNickNameImage()
   const router = useRouter()
 
   useEffect(() => {
@@ -29,7 +31,11 @@ function LoginPageContents(): JSX.Element {
   useEffect(() => {
     if (responseData && responseData.isFirstLogin !== undefined) {
       if (responseData.isFirstLogin) {
+        setAvatar(null)
+        setNickName(null)
         router.replace('/login/info')
+      } else {
+        router.replace('/main')
       }
     }
   }, [responseData, router])
