@@ -3,26 +3,28 @@ import styles from './mypage.module.scss'
 import React, { useEffect, useState } from 'react'
 import MyPageHistory from '@/components/MyPage/MyPageHistory'
 import MyPageProfile from '@/components/MyPage/MyPageProfile'
-import CustomPagination from '@/components/Pagination/CustomPagination'
+import CustomPagination from '@/components/Pagination/CustomPagination' 
 import https from 'https'
 import axios from 'axios'
 import cookie from 'cookie'
+import { instance } from '@/util/axios'
+import { useNickNameImage } from '@/store/login'
 
-interface MatchHistoryProps {
+interface GameHistoryContents {
   rivalName: string
   rivalAvatar: string
   rivalScore: number
   myScore: number
   isWinner: boolean
 }
-interface pageInfo {
-  requestPage: number
-  totalPage: number
-  totalDateSize: number
+
+interface GameHistoryProps {
+  gameHistories: GameHistoryContents[]
+  totalItemsCount: number
 }
 
 interface MyPageProfileProps {
-  nickName: string
+  nickname: string
   avatar: string
   statusMessage: string
   loseCount: number
@@ -31,71 +33,32 @@ interface MyPageProfileProps {
   ladderRank: number
   ladderScore: number
   ladderMaxScore: number
-  gameInfo?: {
-    gameHistories: MatchHistoryProps[]
-    pageInfo: pageInfo
-  }
 }
 
 export default function Mypage(props) {
   const [page, setPage] = useState(1)
-  useEffect(() => {
-    console.log(page)
-  }, [page]) // api넣으면 될듯~
-  // var props: MyPageProfileProps = {
-  //   nickName: 'abcdefghhhhh',
-  //   avatar: 'hhh',
-  //   statusMessage: 'asdasdasdasdsadasdas',
-  //   loseCount: 123,
-  //   winCount: 123,
-  //   totalCount: 246,
-  //   ladderRank: 2,
-  //   ladderScore: 1234,
-  //   ladderMaxScore: 2345,
+  const [gameHistories, setGameHistories] = useState<GameHistoryProps>()
+  const [userProfile, setUserProfile] = useState<MyPageProfileProps>(props.data)
+  const { nickName } = useNickNameImage()
+  const getGameHistoryHandler = async () => {
+    await instance.get(`/users/games/:${nickName}/?page=${page}`, {}).then(function (res) {
+      setGameHistories(res.data)
+    })
+  }
+  // const getUserProfileHandler = async () => {
+  //   await instance.get(`/users/me`, {}).then(function (res) {
+  //     setUserProfile(res.data)
+  //   })
   // }
 
-  const pageInfo: pageInfo = {
-    requestPage: 1, // 유저가 보고싶은 현재 페이지
-    totalPage: 10, // 전체 데이터 수 / 각 페이지별 데이터 개수
-    totalDateSize: 89, // 전체 데이터 개수
-  }
-  const gameHistories: MatchHistoryProps[] = [
-    {
-      rivalName: 'abcdefghhhh',
-      rivalAvatar: '',
-      rivalScore: 3,
-      myScore: 5,
-      isWinner: true,
-    },
-    {
-      rivalName: 'sangyeki',
-      rivalAvatar: '',
-      rivalScore: 3,
-      myScore: 5,
-      isWinner: false,
-    },
-    {
-      rivalName: 'sangyeki',
-      rivalAvatar: '',
-      rivalScore: 3,
-      myScore: 5,
-      isWinner: true,
-    },
-    {
-      rivalName: 'sangyeki',
-      rivalAvatar: '',
-      rivalScore: 3,
-      myScore: 5,
-      isWinner: true,
-    },
-    {
-      rivalName: 'sangyeki',
-      rivalAvatar: '',
-      rivalScore: 3,
-      myScore: 5,
-      isWinner: true,
-    },
-  ]
+  useEffect(() => {
+    getGameHistoryHandler
+  }, [page])
+
+  // useEffect(() => {
+  //   getUserProfileHandler
+  // }, [])
+
   return (
     <div className={styles.backGround}>
       <PageTitle
@@ -104,27 +67,34 @@ export default function Mypage(props) {
       />
       {/* serverSide 데이터 페칭으로 한 데이터 props로 전달 */}
       <MyPageProfile
-        nickName={props.data.nickname}
-        avatar={props.data.avatar}
-        statusMessage={props.data.statusMessage}
-        loseCount={props.data.loseCount}
-        winCount={props.data.winCount}
-        totalCount={props.data.totalCount}
-        ladderRank={props.data.ladderRank}
-        ladderScore={props.data.ladderScore}
-        ladderMaxScore={props.data.ladderMaxScore}
+        nickName={userProfile.nickname}
+        avatar={userProfile.avatar}
+        statusMessage={userProfile.statusMessage}
+        loseCount={userProfile.loseCount}
+        winCount={userProfile.winCount}
+        totalCount={userProfile.totalCount}
+        ladderRank={userProfile.ladderRank}
+        ladderScore={userProfile.ladderScore}
+        ladderMaxScore={userProfile.ladderMaxScore}
       />
       <section className={styles.history}>
         <div className={styles.historyList}>
-          <MyPageHistory gameHistories={gameHistories} />
+          {gameHistories && (
+            <MyPageHistory
+              gameHistories={gameHistories.gameHistories}
+              totalItemsCount={gameHistories.totalItemsCount}
+            />
+          )}
         </div>
         <div className={styles.pagenation}>
-          <CustomPagination
-            page={page}
-            setPage={setPage}
-            itemsCountPerPage={5}
-            totalItemsCount={pageInfo.totalDateSize}
-          />
+          {gameHistories && gameHistories.totalItemsCount > 5 && (
+            <CustomPagination
+              page={page}
+              setPage={setPage}
+              itemsCountPerPage={5}
+              totalItemsCount={gameHistories.totalItemsCount}
+            />
+          )}
         </div>
       </section>
     </div>

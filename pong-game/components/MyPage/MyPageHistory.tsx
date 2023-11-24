@@ -1,7 +1,7 @@
 import MatchHistory from '../History/MatchHistory'
 import styles from './MyPageHistory.module.scss'
 
-interface MatchHistoryProps {
+interface GameHistoryContents {
   rivalName: string
   rivalAvatar: string
   rivalScore: number
@@ -9,11 +9,13 @@ interface MatchHistoryProps {
   isWinner: boolean
 }
 
-interface MyPageHistoryProps {
-  gameHistories: MatchHistoryProps[]
+interface GameHistoryProps {
+  gameHistories: GameHistoryContents[]
+  totalItemsCount: number
 }
 
-export default function MyPageHistory(props: MyPageHistoryProps) {
+
+export default function MyPageHistory(props: GameHistoryProps) {
   return (
     <div className={styles.historyList}>
       {props.gameHistories.map((history, index) => (

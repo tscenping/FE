@@ -1,0 +1,33 @@
+.DropDownChating {
+  border-radius: 10px;
+  font-family: 'Pretendard-Regular';
+  background: var(--gray-scale-50, #f7f8fa);
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.25);
+  width: 150px;
+  position: absolute;
+  display: flex;
+  gap: 5px;
+  padding: 15px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  button {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 40px;
+    width: 150px;
+    &:hover {
+      background-color: #bcd3ff;
+      transform: scaleY(1.2) scaleX(1.2);
+      color: var(--gray-scale-900, var(--gray-scale-900, #1f2021));
+      font-size: 20px;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -0.3px;
+      transition: transform 0.3s;
+    }
+  }
+}
