@@ -20,7 +20,7 @@ export default function Rank() {
   const rankDummyData: RankInfo = {
     rankUsers: [
       {
-        nickname: 'User1',
+        nickname: 'zxc',
         avatar: 'avatar1.jpg',
         ladderScore: 1000,
         ranking: 1,
