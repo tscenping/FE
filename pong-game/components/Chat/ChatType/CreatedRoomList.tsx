@@ -4,6 +4,7 @@ import passwordRoom from '../../../public/img/chat/lock.svg'
 
 interface CreatedRoomListProps {
   title: string
+  // channelType: string //채널 타입에 따라서 자물쇠 표시 여부
 }
 
 function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
