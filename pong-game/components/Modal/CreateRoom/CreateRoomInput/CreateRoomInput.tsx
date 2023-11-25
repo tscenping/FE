@@ -41,7 +41,7 @@ function CreateRoomInput(props: CreateRoomInputProps): JSX.Element {
           <input
             type="password"
             className={styles.chatPasswordInput}
-            maxLength={10}
+            maxLength={16}
             placeholder="If you want a password, please enter it"
             ref={props.passwordRef}
             id="inputPassword"
