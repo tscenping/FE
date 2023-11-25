@@ -33,10 +33,9 @@ function CreateRoomInput(props: CreateRoomInputProps): JSX.Element {
           id="inputTitle"
           ref={props.titleRef}
           onChange={titleHandleChange}
-          required
         ></input>
       </section>
-      {props.tabState === '1' && (
+      {props.tabState === 'publicOrProtected' && (
         <section className={styles.chatPassword}>
           <label htmlFor="inputPassword">Password</label>
           <input
