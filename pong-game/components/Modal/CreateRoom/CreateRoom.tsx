@@ -1,16 +1,56 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import styles from './CreateRoom.module.scss'
 import ModalPageTitle from '@/components/UI/ModalPageTitle'
 import { useCreateRoomNavBarState } from '@/store/chat'
 import CreateRoomInput from './CreateRoomInput/CreateRoomInput'
+import { instance } from '@/util/axios'
+import { useModalState } from '@/store/store'
 
 function CreateChatRoom(): JSX.Element {
   const { tabState, setTabState } = useCreateRoomNavBarState()
+  const { setModalName } = useModalState()
+  const [error, setError] = useState('')
   const titleRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
-  const submitHandler = (e) => {
+  const createChannel = async (channelType, password = null) => {
+    if (!titleRef.current || !titleRef.current.value) {
+      setError('noTitle')
+      return
+    }
+
+    const datas = {
+      name: titleRef.current.value,
+      channelType: password ? 'PRIVATE' : 'PUBLIC',
+      password: channelType === 'PUBLIC' || 'DM' ? null : password,
+    }
+    try {
+      const response = await instance({
+        method: 'post',
+        url: 'https://localhost:3000/channels',
+        data: JSON.stringify(datas),
+      })
+      console.log(response)
+      setModalName(null)
+      titleRef.current.value = ''
+      channelType !== 'PRIVATE' ? (passwordRef.current.value = '') : ''
+    } catch (error) {
+      console.log('Api Request fail : ', error)
+    }
+  }
+
+  const submitHandler = async (e) => {
     e.preventDefault()
+    switch (tabState) {
+      case 'private':
+        createChannel('PRIVATE')
+        break
+      case 'publicOrProtected':
+        createChannel('PROTECTED', passwordRef.current.value)
+        break
+      default:
+        break
+    }
   }
 
   return (
@@ -18,22 +58,26 @@ function CreateChatRoom(): JSX.Element {
       <ModalPageTitle title="채팅방 생성" subTitle="유저들과 대화를 나눌 채팅방을 만들어보세요" />
       <nav className={styles.chatType}>
         <ul className={styles.chatTypeUnorderList}>
-          <li className={tabState === '1' ? styles.selected : styles.noSelected}>
+          <li className={tabState === 'publicOrProtected' ? styles.selected : styles.noSelected}>
             <input
               type="radio"
-              id="public"
+              id="publicOrProtected"
               onClick={() => {
-                setTabState('1')
+                setTabState('publicOrProtected')
+                setError('')
+                titleRef.current.value = ''
               }}
             />
-            <label htmlFor="public">Public</label>
+            <label htmlFor="publicOrProtected">Public</label>
           </li>
-          <li className={tabState === '2' ? styles.selected : styles.noSelected}>
+          <li className={tabState === 'private' ? styles.selected : styles.noSelected}>
             <input
               type="radio"
               id="private"
               onClick={() => {
-                setTabState('2')
+                setTabState('private')
+                setError('')
+                titleRef.current.value = ''
               }}
             />
             <label htmlFor="private">Private</label>
@@ -42,10 +86,16 @@ function CreateChatRoom(): JSX.Element {
       </nav>
       <form className={styles.form} onSubmit={submitHandler}>
         <CreateRoomInput tabState={tabState} titleRef={titleRef} passwordRef={passwordRef} />
-        {/* <p className={styles.error}>이미 존재하는 채팅방 이름 입니다.</p> */}
+        {error === 'noTitle' && <p className={styles.error}>채널 타이틀을 입력해야 합니다.</p>}
         <section className={styles.btn}>
           <button>Create</button>
-          <button>Cancel</button>
+          <button
+            onClick={() => {
+              setModalName(null)
+            }}
+          >
+            Cancel
+          </button>
         </section>
       </form>
     </div>
