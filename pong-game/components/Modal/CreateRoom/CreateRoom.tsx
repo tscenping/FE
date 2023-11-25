@@ -18,7 +18,11 @@ function CreateChatRoom(): JSX.Element {
       setError('noTitle')
       return
     }
-
+    if (passwordRef.current.value.length <= 8) {
+      setError('lessPassword')
+      passwordRef.current.value = ''
+      return
+    }
     const datas = {
       name: titleRef.current.value,
       channelType: password ? 'PRIVATE' : 'PUBLIC',
@@ -86,7 +90,12 @@ function CreateChatRoom(): JSX.Element {
       </nav>
       <form className={styles.form} onSubmit={submitHandler}>
         <CreateRoomInput tabState={tabState} titleRef={titleRef} passwordRef={passwordRef} />
-        {error === 'noTitle' && <p className={styles.error}>채널 타이틀을 입력해야 합니다.</p>}
+        {error === 'noTitle' && <p className={styles.error}>채널 타이틀을 입력해 주세요.</p>}
+        {error === 'lessPassword' && (
+          <p className={styles.error}>
+            채널의 비밀번호는 8 ~ 16자의 영문, 숫자, 특수문자를 사용해주세요.
+          </p>
+        )}
         <section className={styles.btn}>
           <button>Create</button>
           <button
