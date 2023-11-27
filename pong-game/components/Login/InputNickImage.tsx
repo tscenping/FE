@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Resizer from 'react-image-file-resizer'
 import styles from './InputNickImage.module.scss'
 import defaultProfileImage from '../../public/img/login/noProfileImage.svg'
-import axios from 'axios'
+import { instance } from '@/util/axios'
 import NickNameInput from './NickNameInput'
 
 function InputNickImage(): JSX.Element {
@@ -56,19 +56,15 @@ function InputNickImage(): JSX.Element {
   /* 입력한 닉네임, 아바타 서버로 보내는 함수 */
   const submitNicKImage = async (e) => {
     e.preventDefault()
-    const headers = { 'Content-Type': 'application/json' }
     if (patternSpecial.test(inputRef.current.value)) {
       setIsValidNick(true)
       inputRef.current.value = ''
     } else {
       const finalData = { nickname: inputRef.current.value, avatar: uploadImage }
-      const response = await axios('https://localhost:3000/auth/signup', {
-        headers: headers,
+      const response = await instance('https://localhost:3000/auth/signup', {
         method: 'patch',
-        withCredentials: true,
         data: JSON.stringify(finalData),
       })
-      console.log(response)
       if (response.statusText === 'OK') {
         window.location.href = 'https://localhost:8001/main'
       }
