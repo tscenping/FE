@@ -35,6 +35,10 @@ function InputNickImage(): JSX.Element {
   const onImageHandler = async (e) => {
     const file = await e.target.files[0]
     const suppertedFormats = ['image/jpeg', 'image/png']
+    console.log(e.target.files[0])
+    if (!e.target.files[0]) {
+      return
+    }
     const objectUrl = URL.createObjectURL(e.target.files[0])
     if (!suppertedFormats.includes(file.type)) {
       alert('지원되지 않은 이미지 형식입니다. JPEG, PNG형식의 이미지를 업로드해주세요.')
@@ -44,7 +48,9 @@ function InputNickImage(): JSX.Element {
       const compressedFile = await resizeFile(file)
       setImagePreview(objectUrl)
       setUploadImage(String(compressedFile))
-    } catch {}
+    } catch (error) {
+      console.log('file resizing failed')
+    }
   }
 
   /* 입력한 닉네임, 아바타 서버로 보내는 함수 */
