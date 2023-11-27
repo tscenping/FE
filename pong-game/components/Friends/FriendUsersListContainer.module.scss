@@ -1,6 +1,6 @@
 .frinedUsersListContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 32px;
+  padding: 48px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 40px;
 }

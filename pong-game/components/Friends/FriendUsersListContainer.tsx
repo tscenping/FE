@@ -13,6 +13,11 @@ function FrinedUsersListContainer(): JSX.Element {
         <FriendUserListContainer />
         <FriendUserListContainer />
         <FriendUserListContainer />
+        <FriendUserListContainer />
+        <FriendUserListContainer />
+        <FriendUserListContainer />
+        <FriendUserListContainer />
+        <FriendUserListContainer />
       </ul>
       <CustomPagination page={page} setPage={setPage} itemsCountPerPage={10} totalItemsCount={20} />
     </>
