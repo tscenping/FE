@@ -4,14 +4,16 @@ import passwordRoom from '../../../public/img/chat/lock.svg'
 
 interface CreatedRoomListProps {
   title: string
-  // channelType: string //채널 타입에 따라서 자물쇠 표시 여부
+  channelType: string //채널 타입에 따라서 자물쇠 표시 여부
 }
 
 function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
+  const passwordIconClassName = props.channelType === 'PROTECTED' ? styles.show : styles.none
+
   return (
     <li className={styles.createdRoom}>
       <div className={styles.createdRoomContainer}>
-        <Image src={passwordRoom} alt={'password chat room'} />
+        <Image src={passwordRoom} alt={'password chat room'} className={passwordIconClassName} />
         <strong className={styles.createdRoomTitle}>{props.title}</strong>
       </div>
       <div>
