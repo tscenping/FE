@@ -13,10 +13,10 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
   return (
     <li className={styles.createdRoom}>
       <div className={styles.createdRoomContainer}>
-        <Image src={passwordRoom} alt={'password chat room'} className={passwordIconClassName} />
         <strong className={styles.createdRoomTitle}>{props.title}</strong>
       </div>
-      <div>
+      <div className={styles.createdRoomTypeAndParicipants}>
+        <Image src={passwordRoom} alt={'password chat room'} className={passwordIconClassName} />
         <span className={styles.createdRoomParticipants}>1 / 4</span>
       </div>
     </li>

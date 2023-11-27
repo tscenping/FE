@@ -21,6 +21,14 @@
     font-size: 20px;
     font-family: 'Pretendard-Regular';
     justify-content: space-between;
+    .createdRoomTitle {
+      margin-left: 16px;
+      font-family: 'Pretendard-SemiBold';
+    }
+  }
+  .createdRoomTypeAndParicipants {
+    display: flex;
+    align-items: center;
     .none {
       opacity: 0;
     }
@@ -28,13 +36,10 @@
     .show {
       opacity: 1;
     }
-    .createdRoomTitle {
-      margin-left: 16px;
+    .createdRoomParticipants {
+      padding: 16px;
+      font-size: 20px;
+      font-family: 'Pretendard-Regular';
     }
-  }
-  .createdRoomParticipants {
-    padding: 16px;
-    font-size: 20px;
-    font-family: 'Pretendard-Regular';
   }
 }
