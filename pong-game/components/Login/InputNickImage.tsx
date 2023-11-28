@@ -1,14 +1,16 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Resizer from 'react-image-file-resizer'
 import styles from './InputNickImage.module.scss'
-import defaultProfileImage from '../../public/img/login/noProfileImage.svg'
+// import defaultProfileImage from '../../public/img/login/noProfileImage.svg'
 import { instance } from '@/util/axios'
 import NickNameInput from './NickNameInput'
 
+const defaultProfileImage = process.env.NEXT_PUBLIC_API_DEFAULT_PROFILE_IMAGE
+
 function InputNickImage(): JSX.Element {
-  const [uploadImage, setUploadImage] = useState<string>('')
-  const [imagePreview, setImagePreview] = useState<string>('')
+  const [uploadImage, setUploadImage] = useState<string>(defaultProfileImage) //기본 이미지를 초기값으로 세팅
+  const [imagePreview, setImagePreview] = useState<string>(defaultProfileImage)
   const [isValidNick, setIsValidNick] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const patternSpecial = /[~₩;'"!@#$%^&*()_+|<>?:{}\s]/ //특수문자 입력 정규식
@@ -34,7 +36,7 @@ function InputNickImage(): JSX.Element {
   /* 아바타 사진 1차 유효성 검증 함수 */
   const onImageHandler = async (e) => {
     const file = await e.target.files[0]
-    const suppertedFormats = ['image/jpeg', 'image/png']
+    const suppertedFormats = ['image/jpeg', 'image/png', 'image/svg+xml']
     console.log(e.target.files[0])
     if (!e.target.files[0]) {
       return
@@ -61,6 +63,7 @@ function InputNickImage(): JSX.Element {
       inputRef.current.value = ''
     } else {
       const finalData = { nickname: inputRef.current.value, avatar: uploadImage }
+      console.log(finalData)
       const response = await instance('https://localhost:3000/auth/signup', {
         method: 'patch',
         data: JSON.stringify(finalData),

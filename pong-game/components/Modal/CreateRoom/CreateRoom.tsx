@@ -40,7 +40,8 @@ function CreateChatRoom(): JSX.Element {
       //보내려는 데이터를 channel 타입에 맞춰서 값을 초기화
       name: titleRef.current.value, //모든 타입에는 공통적으로 title이 들어간다.
       channelType: channelType,
-      password: channelType === 'PUBLIC' || 'PRIVATE' ? null : password, //채널의 타입이 PUBLIC이거나 PRIVATE라면 패스워드는 "null"
+      password: channelType === 'PUBLIC' || channelType === 'PRIVATE' ? null : password,
+      //채널의 타입이 PUBLIC이거나 PRIVATE라면 패스워드는 "null"
     }
     try {
       const response = await instance({

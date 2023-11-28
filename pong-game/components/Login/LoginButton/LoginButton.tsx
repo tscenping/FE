@@ -16,7 +16,6 @@ function LoginButton({ content }: LoginButtonProps): JSX.Element {
   //     'google': <button className={styles.loginGoogleButton}/>,
   //     '42': <button className={styles.login42Button}/>,
   //   }
-
   return (
     <li className={styles.loginButton}>
       <Link href={lgoinURL}>

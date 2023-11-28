@@ -5,6 +5,7 @@ import UserProfile from '../Modal/UserProfile/UserProfileModal'
 import { useModalState } from '@/store/store'
 import CreateChatRoom from '../Modal/CreateRoom/CreateRoom'
 import CreateDmRoom from '../Modal/CreateDmRoom/CreateDmRoom'
+import ExitRoom from '../Modal/ExitRoom/ExitRoom'
 
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
@@ -24,6 +25,7 @@ function ModalContent({}): JSX.Element {
     userProfile: <UserProfile />,
     createDmRoom: <CreateDmRoom />,
     createChatRoom: <CreateChatRoom />,
+    exitRoom: <ExitRoom />,
   }
   return (
     <>

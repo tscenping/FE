@@ -9,15 +9,18 @@ import { instance } from '@/util/axios'
 function CreateDmRoom(): JSX.Element {
   const [page, setPage] = useState(1)
 
-  const createDmChatHandler = (e) => {
-    console.log(e.currentTarget.querySelector('span').textContent)
-    // try {
-    //   const response = instance({
-    //     url : "https://localhost"
-    //   })
-    // } catch (error) {
-    //   console.log('Error : ', error)
-    // }
+  const createDmChatHandler = async (e) => {
+    const datas = { name: null, channelType: 'DM', password: null, userId: 2 }
+    try {
+      const response = await instance({
+        url: 'https://localhost:3000/channels',
+        method: 'post',
+        data: JSON.stringify(datas),
+      })
+      console.log(response)
+    } catch (error) {
+      console.log('Error : ', error)
+    }
   }
   return (
     <div className={styles.createDmRoomContent}>

@@ -1,3 +1,5 @@
+import ChatPasswordInput from '@/components/Chat/Input/ChatPasswordInput'
+import { channel } from 'diagnostics_channel'
 import { create } from 'zustand'
 
 interface useNavBarStateProps {
@@ -17,11 +19,6 @@ interface sendData {
   userId: string
 }
 
-interface useCreateRoomData {
-  data: sendData
-  setData: (v: string) => void
-}
-
 export const useNavBarState = create<useNavBarStateProps>((set) => ({
   tabState: '1',
   setTabState: (tabState) => set({ tabState }),
@@ -32,6 +29,19 @@ export const useCreateRoomNavBarState = create<useCreateRoomNavBarStateProps>((s
   setTabState: (tabState) => set({ tabState }),
 }))
 
-// export const useCreateRoomData = create<useCreateRoomData>((set) => ({
-//   data: { name: '', channelType: '', password: '', userId: '' },
-// }))
+interface useJoinProtectedChannelProps {
+  channelId?: number
+  channelTitle: string
+  passwordInputRender: string
+  setChannelId: (v: number) => void
+  setPasswordInputRender: (v: string) => void
+  setChannelTitle: (v: string) => void
+}
+
+export const useJoinProtectedChannel = create<useJoinProtectedChannelProps>((set) => ({
+  passwordInputRender: 'DEFAULT',
+  channelTitle: '',
+  setChannelId: (channelId) => set({ channelId }),
+  setPasswordInputRender: (passwordInputRender) => set({ passwordInputRender }),
+  setChannelTitle: (channelTitle) => set({ channelTitle }),
+}))
