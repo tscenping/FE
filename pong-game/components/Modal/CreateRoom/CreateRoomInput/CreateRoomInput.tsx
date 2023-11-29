@@ -33,16 +33,15 @@ function CreateRoomInput(props: CreateRoomInputProps): JSX.Element {
           id="inputTitle"
           ref={props.titleRef}
           onChange={titleHandleChange}
-          required
         ></input>
       </section>
-      {props.tabState === '1' && (
+      {props.tabState === 'publicOrProtected' && (
         <section className={styles.chatPassword}>
           <label htmlFor="inputPassword">Password</label>
           <input
             type="password"
             className={styles.chatPasswordInput}
-            maxLength={10}
+            maxLength={16}
             placeholder="If you want a password, please enter it"
             ref={props.passwordRef}
             id="inputPassword"

@@ -10,6 +10,10 @@ function ChatDmRoomListSection(): JSX.Element {
       <DmChat />
       <DmChat />
       <DmChat />
+      <DmChat />
+      <DmChat />
+      <DmChat />
+      <DmChat />
     </ul>
   )
 }

@@ -6,6 +6,7 @@ interface useNicknameImageProps {
   userId: string
   setNickName: (v: string) => void
   setAvatar: (v: string) => void
+  setUserId: (v: string) => void
 }
 
 export const useNickNameImage = create<useNicknameImageProps>((set) => ({

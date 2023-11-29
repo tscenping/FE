@@ -1,14 +1,16 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Resizer from 'react-image-file-resizer'
 import styles from './InputNickImage.module.scss'
-import defaultProfileImage from '../../public/img/login/noProfileImage.svg'
-import axios from 'axios'
+// import defaultProfileImage from '../../public/img/login/noProfileImage.svg'
+import { instance } from '@/util/axios'
 import NickNameInput from './NickNameInput'
 
+const defaultProfileImage = process.env.NEXT_PUBLIC_API_DEFAULT_PROFILE_IMAGE
+
 function InputNickImage(): JSX.Element {
-  const [uploadImage, setUploadImage] = useState<string>('')
-  const [imagePreview, setImagePreview] = useState<string>('')
+  const [uploadImage, setUploadImage] = useState<string>(defaultProfileImage) //기본 이미지를 초기값으로 세팅
+  const [imagePreview, setImagePreview] = useState<string>(defaultProfileImage)
   const [isValidNick, setIsValidNick] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const patternSpecial = /[~₩;'"!@#$%^&*()_+|<>?:{}\s]/ //특수문자 입력 정규식
@@ -34,7 +36,11 @@ function InputNickImage(): JSX.Element {
   /* 아바타 사진 1차 유효성 검증 함수 */
   const onImageHandler = async (e) => {
     const file = await e.target.files[0]
-    const suppertedFormats = ['image/jpeg', 'image/png']
+    const suppertedFormats = ['image/jpeg', 'image/png', 'image/svg+xml']
+    console.log(e.target.files[0])
+    if (!e.target.files[0]) {
+      return
+    }
     const objectUrl = URL.createObjectURL(e.target.files[0])
     if (!suppertedFormats.includes(file.type)) {
       alert('지원되지 않은 이미지 형식입니다. JPEG, PNG형식의 이미지를 업로드해주세요.')
@@ -44,25 +50,24 @@ function InputNickImage(): JSX.Element {
       const compressedFile = await resizeFile(file)
       setImagePreview(objectUrl)
       setUploadImage(String(compressedFile))
-    } catch {}
+    } catch (error) {
+      console.log('file resizing failed')
+    }
   }
 
   /* 입력한 닉네임, 아바타 서버로 보내는 함수 */
   const submitNicKImage = async (e) => {
     e.preventDefault()
-    const headers = { 'Content-Type': 'application/json' }
     if (patternSpecial.test(inputRef.current.value)) {
       setIsValidNick(true)
       inputRef.current.value = ''
     } else {
       const finalData = { nickname: inputRef.current.value, avatar: uploadImage }
-      const response = await axios('https://localhost:3000/auth/signup', {
-        headers: headers,
+      console.log(finalData)
+      const response = await instance('https://localhost:3000/auth/signup', {
         method: 'patch',
-        withCredentials: true,
         data: JSON.stringify(finalData),
       })
-      console.log(response)
       if (response.statusText === 'OK') {
         window.location.href = 'https://localhost:8001/main'
       }

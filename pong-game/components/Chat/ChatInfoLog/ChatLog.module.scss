@@ -7,6 +7,12 @@
   position: absolute;
   bottom: 0px;
   width: 90%;
+  .defaultView {
+    text-align: center;
+    font-family: 'KOTRAHOPE';
+    font-size: 48px;
+    margin-top: 200px;
+  }
   &::-webkit-scrollbar {
     display: none;
   }

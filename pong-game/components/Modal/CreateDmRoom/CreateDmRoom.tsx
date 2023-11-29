@@ -4,14 +4,29 @@ import ModalPageTitle from '@/components/UI/ModalPageTitle'
 import Image from 'next/image'
 import opponentProfileImage from '@/public/img/chat/userProfileImage.svg'
 import CustomPagination from '@/components/Pagination/CustomPagination'
+import { instance } from '@/util/axios'
 
 function CreateDmRoom(): JSX.Element {
   const [page, setPage] = useState(1)
+
+  const createDmChatHandler = async (e) => {
+    const datas = { name: null, channelType: 'DM', password: null, userId: 2 }
+    try {
+      const response = await instance({
+        url: 'https://localhost:3000/channels',
+        method: 'post',
+        data: JSON.stringify(datas),
+      })
+      console.log(response)
+    } catch (error) {
+      console.log('Error : ', error)
+    }
+  }
   return (
     <div className={styles.createDmRoomContent}>
       <ModalPageTitle title="DM 생성" subTitle="대화를 나눌 유저를 선택해주세요" />
       <ul className={styles.usersContainer}>
-        <li className={styles.user}>
+        <li className={styles.user} onClick={createDmChatHandler}>
           <Image src={opponentProfileImage} alt={'user profile image'} />
           <span>sangyeki</span>
         </li>

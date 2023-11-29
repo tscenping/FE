@@ -1,5 +1,5 @@
-@import '../../styles/colors.scss';
-@import '../DropDown/DropDown.module.scss';
+@import '../../../styles/colors.scss';
+@import '../../DropDown/DropDown.module.scss';
 
 .friendUserListContainer {
   display: flex;
@@ -9,8 +9,8 @@
   background-color: $gray_scale_50;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
-  width: 400px;
-  margin-bottom: 32px;
+  width: 800px;
+  margin-bottom: 48px;
   .friendUserImageNickName {
     display: flex;
     align-items: center;
