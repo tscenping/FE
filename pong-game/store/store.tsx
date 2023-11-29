@@ -12,6 +12,7 @@ interface ModalState {
     | 'friendList'
     | 'createDmRoom'
     | 'exitRoom'
+    | 'response'
     | null
   setModalName: (
     modalName:
@@ -20,6 +21,7 @@ interface ModalState {
       | 'chating'
       | 'friendList'
       | 'createDmRoom'
+      | 'response'
       | 'exitRoom'
       | null,
   ) => void
@@ -27,10 +29,10 @@ interface ModalState {
   setModalProps: (modalProps: ModalProps | null) => void
 }
 
-interface userProfileModalState {
+interface UserProfileModalState {
   isFriend: boolean
   isBlock: boolean
-  setUseUserProfileModalState: (isFriend: boolean, isBlock: boolean) => void
+  setProfileModalState: (isFriend: boolean, isBlock: boolean) => void
 }
 
 export const useModalState = create<ModalState>((set) => ({
@@ -40,8 +42,30 @@ export const useModalState = create<ModalState>((set) => ({
   setModalProps: (modalProps) => set({ modalProps }),
 }))
 
-export const useUserProfileModalState = create<userProfileModalState>((set) => ({
+export const useUserProfileModalState = create<UserProfileModalState>((set) => ({
   isFriend: false,
   isBlock: false,
-  setUseUserProfileModalState: (isFriend: boolean, isBlock: boolean) => set({ isFriend, isBlock }),
+  setProfileModalState: (isFriend: boolean, isBlock: boolean) => set({ isFriend, isBlock }),
+}))
+
+interface ResponseModalState {
+  title: string
+  content: string
+  image?: string
+  onConfirm: () => void
+  setResponseModalState: (
+    title: string,
+    content: string,
+    onConfirm: () => Promise<void>,
+    image?: string,
+  ) => void
+}
+
+export const useResponseModalState = create<ResponseModalState>((set) => ({
+  title: '',
+  content: '',
+  image: null,
+  onConfirm: () => {},
+  setResponseModalState: (title: string, content: string, onConfirm: () => void, image?: string) =>
+    set({ title, content, onConfirm }),
 }))

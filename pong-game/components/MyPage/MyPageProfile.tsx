@@ -3,6 +3,7 @@ import textEditBtn from '@/public/img/mypage/textEdit.svg'
 import styles from './MyPageProfile.module.scss'
 import profileImage from '@/public/img/mypage/profileImage.svg'
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react'
+import { instance } from '@/util/axios'
 
 interface MatchHistoryProps {
   rivalName: string
@@ -50,17 +51,35 @@ export default function MyPageProfile({
   const [profileMsg, setProfileMsg] = useState(statusMessage)
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const handleEditProfileMsg = () => {
-    setEditProfileMsgFlag(!editProfileMsgFlag)
+    if (editProfileMsgFlag) {
+      submitStatusMessage()
+      setEditProfileMsgFlag(!editProfileMsgFlag)
+    } else {
+      setEditProfileMsgFlag(!editProfileMsgFlag)
+    }
   }
 
   const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const inputText = e.target.value
 
     if (inputText.length <= 20) {
-      // 입력한 텍스트가 80자 이하인 경우에만 업데이트
+      // 입력한 텍스트가 20자 이하인 경우에만 업데이트
       setProfileMsg(inputText)
     }
   }
+
+  const submitStatusMessage = async () => {
+    try {
+      await instance
+        .patch('/users/me/statusMessage', { statusMessage: profileMsg })
+        .then(function (res) {
+          console.log(res)
+        })
+    } catch (e) {
+      alert('입력 메세지를 확인하세요. 모음, 자음만 입력 불가. ')
+    }
+  }
+
   useEffect(() => {
     if (editProfileMsgFlag && textareaRef.current) {
       textareaRef.current.focus()
