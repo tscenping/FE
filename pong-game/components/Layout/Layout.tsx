@@ -10,6 +10,7 @@ import SideBarContent from './SideBar/SideBarContent'
 import { useRouter, NextRouter } from 'next/router'
 import { useNickNameImage } from '@/store/login'
 import { instance } from '@/util/axios'
+import { useModalState, useResponseModalState } from '@/store/store'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)
@@ -18,6 +19,8 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
   const loginPage = router.pathname === '/login' || router.pathname === '/login/info'
 
   const { setAvatar, setNickName } = useNickNameImage()
+  const { setModalName } = useModalState()
+  const responseModal = useResponseModalState()
 
   const logoutHandler = async () => {
     await instance.patch('/auth/signout', {}).then(function (res) {
@@ -26,6 +29,11 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
     setNickName(null)
     setAvatar(null)
   }
+  const logoutModal = () => {
+    setModalName('response')
+    responseModal.setResponseModalState('로그아웃', '로그아웃 하시겠습니까?', logoutHandler)
+  }
+
   return (
     <>
       {!loginPage ? (
@@ -58,7 +66,7 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
                 </ul>
                 <ul className={styles.sideBarContainerBottom}>
                   <li>
-                    <Image src={logoutIcon} alt={'logout'} onClick={logoutHandler} />
+                    <Image src={logoutIcon} alt={'logout'} onClick={logoutModal} />
                   </li>
                 </ul>
               </section>
