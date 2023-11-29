@@ -1,5 +1,6 @@
 import styles from './ChatRoomListTab.module.scss'
 import { useNavBarState } from '@/store/chat'
+import { instance } from '@/util/axios'
 
 interface ChatRoomListTabProps {
   name: string
