@@ -1,14 +1,19 @@
 import styles from './index.module.scss'
 import { useState, useEffect } from 'react'
-import NormalGame from '@/components/Game/NormalGame'
+
 import PageTitle from '@/components/UI/PageTitle'
 import RankGame from '@/components/Game/RankGame'
+import NormalGame from '@/components/Game/NormalGame'
+import { useRouter, NextRouter } from 'next/router'
 
 export default function Home() {
   const [gameState, setGameState] = useState<string>('')
   const [pageState, setPageState] = useState(1)
+  const router: NextRouter = useRouter()
+
   const onClickLadderBtn = () => {
     // setGameState('rank')
+    router.push('/match')
   }
   const onClickNomalBtn = () => {
     setGameState('nomal')
