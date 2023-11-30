@@ -94,7 +94,7 @@ function InputNickImage(): JSX.Element {
             </div>
           ) : (
             <div className={styles.profileImageShow}>
-              <Image src={imagePreview} alt={'selectedImage'} width={100} height={100} />
+              {imagePreview && <Image src={imagePreview} alt={'selectedImage'} width={100} height={100} />}
             </div>
           )}
           <label htmlFor="profileImage" className={styles.inputImageButton}>

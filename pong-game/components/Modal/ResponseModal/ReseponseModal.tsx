@@ -20,8 +20,14 @@ export default function ReseponseModal() {
         <h2>{title}</h2>
         <p>{content}</p>
         <div className={styles.modalActions}>
-          <button onClick={handleConfirm}>예</button>
-          <button onClick={handleCancel}>아니오</button>
+          {onConfirm ? (
+            <>
+              <button onClick={handleConfirm}>예</button>
+              <button onClick={handleCancel}>아니오</button>
+            </>
+          ) : (
+            <button onClick={handleCancel}>확인</button>
+          )}
         </div>
       </div>
     </div>
