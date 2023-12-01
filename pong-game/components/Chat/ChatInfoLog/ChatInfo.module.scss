@@ -5,7 +5,38 @@
   align-items: center;
   font-size: 32px;
   font-family: 'Pretendard-ExtraBold';
-  .exitRoom {
+  .channelInvite {
     cursor: pointer;
+    transition: 0.3s;
+  }
+  .channelInvite:hover {
+    transform: scale(1.1);
+  }
+  .channelIcon {
+    display: flex;
+    align-items: center;
+    .channelSetting {
+      cursor: pointer;
+      margin-right: 8px;
+      transition: 0.3s;
+    }
+    .channelSetting:hover {
+      transform: scale(1.1);
+    }
+    .exitRoom {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .exitRoom:hober {
+      transform: scale(1.1);
+    }
+  }
+  .show {
+    opacity: 1;
+  }
+  .none {
+    opacity: 0;
   }
 }

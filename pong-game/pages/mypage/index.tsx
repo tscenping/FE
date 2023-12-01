@@ -3,7 +3,7 @@ import styles from './mypage.module.scss'
 import React, { useEffect, useState } from 'react'
 import MyPageHistory from '@/components/MyPage/MyPageHistory'
 import MyPageProfile from '@/components/MyPage/MyPageProfile'
-import CustomPagination from '@/components/Pagination/CustomPagination' 
+import CustomPagination from '@/components/Pagination/CustomPagination'
 import https from 'https'
 import axios from 'axios'
 import cookie from 'cookie'
@@ -39,7 +39,7 @@ export default function Mypage(props) {
   const [page, setPage] = useState(1)
   const [gameHistories, setGameHistories] = useState<GameHistoryProps>()
   const [userProfile, setUserProfile] = useState<MyPageProfileProps>(props.data)
-  const { nickName } = useNickNameImage()
+  const { nickName, setAvatar } = useNickNameImage()
   const getGameHistoryHandler = async () => {
     await instance.get(`/users/games/:${nickName}/?page=${page}`, {}).then(function (res) {
       setGameHistories(res.data)
@@ -53,6 +53,7 @@ export default function Mypage(props) {
 
   useEffect(() => {
     getGameHistoryHandler
+    setAvatar(props.data.avatar)
   }, [page])
 
   // useEffect(() => {

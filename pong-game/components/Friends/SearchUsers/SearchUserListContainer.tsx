@@ -38,7 +38,7 @@ function SearchUserListContainer(props: SearchUserListContainerprops): JSX.Eleme
                   id: 3,
                   nickname: 'him',
                   avatar: '1',
-                  isFriend: true,
+                  isFriend: false,
                   isBlocked: false,
                 }}
               />
