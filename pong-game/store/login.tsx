@@ -14,11 +14,8 @@ interface useNicknameImageProps {
 export const useNickNameImage = create<useNicknameImageProps>((set) => ({
   userId: null,
   myNickname: 'nickname',
-  avatar: 'avatar',
-  setMyNickname: (myNickname) => set({ myNickname }),
-  nickName: 'nickname',
   avatar: defaultProfileImage,
-  setNickName: (nickName) => set({ nickName }),
+  setMyNickname: (myNickname) => set({ myNickname }),
   setAvatar: (avatar) => set({ avatar }),
   setUserId: (userId) => set({ userId }),
 }))

@@ -52,6 +52,7 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
       </div>
     )
   }
+  console.log(myNickname, nickname)
 
   function RenderLadderScore() {
     return (

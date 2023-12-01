@@ -14,7 +14,8 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
     try {
       await instance.get('/users/me').then((res) => {
         if (res.data) {
-          setMyNickname(res.data.nickName)
+          setMyNickname(res.data.nickname)
+          // console.log(res.data)
           setAvatar(res.data.avatar)
           // console.log(res.data)
         }

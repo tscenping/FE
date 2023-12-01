@@ -128,7 +128,7 @@ export default function MyPageProfile({
                     rows={4}
                     cols={50}
                     id="profileMsg"
-                    value={profileMsg}
+                    value={profileMsg ? profileMsg : ''}
                     onChange={handleTextChange}
                     className={styles.textarea}
                     ref={textareaRef}

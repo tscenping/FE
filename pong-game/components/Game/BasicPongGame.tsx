@@ -1,4 +1,4 @@
-import styles from '@/components/Game/BasicPongGame.module.scss'
+import styles from './BasicPongGame.module.scss'
 import React, { useEffect, useRef } from 'react'
 
 const BasicPongGame: React.FC = () => {
@@ -26,6 +26,7 @@ const BasicPongGame: React.FC = () => {
       // paddle velocity
       dy: 0,
     }
+
     const rightPaddle = {
       // start in the middle of the game on the right side
       x: canvas.width - grid * 3,
@@ -36,6 +37,7 @@ const BasicPongGame: React.FC = () => {
       // paddle velocity
       dy: 0,
     }
+
     const ball = {
       // start in the middle of the game
       x: canvas.width / 2,
@@ -107,18 +109,19 @@ const BasicPongGame: React.FC = () => {
           ball.resetting = false
           ball.x = canvas.width / 2
           ball.y = canvas.height / 2
+          ball.dx = ballSpeed
+          ball.dy = -ballSpeed
         }, 400)
       }
 
       // check to see if ball collides with paddle. if they do change x velocity
       if (collides(ball, leftPaddle)) {
-        ball.dx *= -1
-
+        ball.dx *= -1.1
         // move ball next to the paddle otherwise the collision will happen again
         // in the next frame
         ball.x = leftPaddle.x + leftPaddle.width
       } else if (collides(ball, rightPaddle)) {
-        ball.dx *= -1
+        ball.dx *= -1.1
 
         // move ball next to the paddle otherwise the collision will happen again
         // in the next frame
@@ -141,30 +144,30 @@ const BasicPongGame: React.FC = () => {
 
     document.addEventListener('keydown', function (e) {
       // up arrow key
-      if (e.which === 38) {
+      if (e.key === 'ArrowUp') {
         rightPaddle.dy = -paddleSpeed
       }
       // down arrow key
-      else if (e.which === 40) {
+      else if (e.key === 'ArrowDown') {
         rightPaddle.dy = paddleSpeed
       }
 
       // w key
-      if (e.which === 87) {
+      if (e.key === 'w' || e.key === 'ㅈ') {
         leftPaddle.dy = -paddleSpeed
       }
       // a key
-      else if (e.which === 83) {
+      else if (e.key === 's' || e.key === 'ㄴ') {
         leftPaddle.dy = paddleSpeed
       }
     })
 
     document.addEventListener('keyup', function (e) {
-      if (e.which === 38 || e.which === 40) {
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
         rightPaddle.dy = 0
       }
 
-      if (e.which === 83 || e.which === 87) {
+      if (e.key === 's' || e.key === 'w' || e.key === 'ㅈ' || e.key === 'ㄴ') {
         leftPaddle.dy = 0
       }
     })

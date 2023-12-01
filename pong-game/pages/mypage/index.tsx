@@ -39,9 +39,9 @@ export default function Mypage(props) {
   const [page, setPage] = useState(1)
   const [gameHistories, setGameHistories] = useState<GameHistoryProps>()
   const [userProfile, setUserProfile] = useState<MyPageProfileProps>(props.data)
-  const { nickName, setAvatar } = useNickNameImage()
+  const { myNickname, setAvatar } = useNickNameImage()
   const getGameHistoryHandler = async () => {
-    await instance.get(`/users/games/:${nickName}/?page=${page}`, {}).then(function (res) {
+    await instance.get(`/users/games/:${myNickname}/?page=${page}`, {}).then(function (res) {
       setGameHistories(res.data)
     })
   }
