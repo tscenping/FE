@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import styles from './ChatRoomListSection.module.scss'
 import CreatedRoomList from './CreatedRoomList'
 import { useGetChannels } from '@/store/chat'
+import { all } from 'axios'
 
 function ChatRoomListSection(): JSX.Element {
   const { allChannels } = useGetChannels()
-
   const channelsToRender = allChannels || []
 
   return (
@@ -16,7 +16,8 @@ function ChatRoomListSection(): JSX.Element {
           title={channel.name}
           channelId={channel.channelId}
           channelType={channel.channelType}
-          entered={channel.entered}
+          entered={false}
+          userCount={channel.userCount}
         />
       ))}
       {/* <CreatedRoomList

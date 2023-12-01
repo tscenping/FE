@@ -1,7 +1,6 @@
 import styles from './ChatMainContents.module.scss'
 import ChatRoomList from './ChatRoomList'
 import ChatRoom from './ChatRoom'
-import CustomPagination from '../Pagination/CustomPagination'
 
 function ChatMainContents(): JSX.Element {
   return (

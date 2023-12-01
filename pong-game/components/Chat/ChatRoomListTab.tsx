@@ -1,6 +1,7 @@
 import styles from './ChatRoomListTab.module.scss'
 import { useNavBarState } from '@/store/chat'
 import { instance } from '@/util/axios'
+import { useGetChannels } from '@/store/chat'
 
 interface ChatRoomListTabProps {
   name: string
@@ -12,6 +13,7 @@ interface ChatRoomListTabProps {
 
 function ChatRoomListTab(props: ChatRoomListTabProps): JSX.Element {
   const { setTabState } = useNavBarState()
+  const { setPage } = useGetChannels()
 
   return (
     <span className={styles.naviBar}>
@@ -21,7 +23,10 @@ function ChatRoomListTab(props: ChatRoomListTabProps): JSX.Element {
         id={props.id}
         value={props.value}
         checked={props.tabState == props.value}
-        onChange={() => setTabState(props.value)}
+        onChange={() => {
+          setTabState(props.value)
+          setPage(1)
+        }}
       />
       <label
         htmlFor={props.id}

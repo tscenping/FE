@@ -61,13 +61,12 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
       </>
     )
   }
-
   return (
     <>
       <section className={styles.lineOne}>
         <div className={styles.profileNickName}>
           <div className={styles.profileImg}>
-            <Image src={avatar} alt={'profileImage'} width={80} height={80}/>
+            <Image src={avatar} alt={'profileImage'} width={80} height={80} />
           </div>
           <div className={styles.nickName}>{nickname}</div>
           <Image

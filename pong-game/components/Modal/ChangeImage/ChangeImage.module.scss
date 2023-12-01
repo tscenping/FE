@@ -1,0 +1,31 @@
+@import '../../../styles/colors.scss';
+
+.profileImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .profileImageShow {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 16px;
+    img {
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+  .inputImageButton {
+    background-color: $main_300;
+    padding: 8px;
+    border-radius: 10px;
+    color: $gray_scale_0;
+    margin-bottom: 16px;
+  }
+  .inputImage {
+    display: none;
+  }
+  .imageExplanation {
+    color: $gray_scale_400;
+    font-family: 'Pretendard-Regular';
+  }
+}

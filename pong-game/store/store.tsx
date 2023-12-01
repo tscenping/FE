@@ -2,6 +2,7 @@ import { create } from 'zustand'
 
 interface ModalProps {
   nickname?: string
+  avatar?: string
 }
 
 interface ModalState {
@@ -13,6 +14,7 @@ interface ModalState {
     | 'createDmRoom'
     | 'exitRoom'
     | 'response'
+    | 'changeImage'
     | null
   setModalName: (
     modalName:
@@ -23,6 +25,7 @@ interface ModalState {
       | 'createDmRoom'
       | 'response'
       | 'exitRoom'
+      | 'changeImage'
       | null,
   ) => void
   modalProps?: ModalProps | null

@@ -1,10 +1,23 @@
 import styles from './EnteredRoomListSection.module.scss'
 import CreatedRoomList from './CreatedRoomList'
+import { useGetChannels } from '@/store/chat'
 
 function EnteredRoomListSection(): JSX.Element {
+  const { meChannels } = useGetChannels()
+
   return (
     <ul className={styles.chatRoomListSection}>
-      <CreatedRoomList
+      {meChannels.map((channel) => (
+        <CreatedRoomList
+          key={channel.channelId}
+          title={channel.name}
+          channelId={channel.channelId}
+          channelType={channel.channelType}
+          entered={true}
+          userCount={channel.userCount}
+        />
+      ))}
+      {/* <CreatedRoomList
         title={'한글열글자한글열글자'}
         channelType={'PUBLIC'}
         channelId={1}
@@ -23,7 +36,7 @@ function EnteredRoomListSection(): JSX.Element {
       <CreatedRoomList title={'채팅방 7'} channelType={'PROTECTED'} channelId={6} entered={true} />
       <CreatedRoomList title={'채팅방 8'} channelType={'PUBLIC'} channelId={7} entered={true} />
       <CreatedRoomList title={'채팅방 9'} channelType={'PROTECTED'} channelId={8} entered={true} />
-      <CreatedRoomList title={'채팅방 10'} channelType={'PUBLIC'} channelId={9} entered={true} />
+      <CreatedRoomList title={'채팅방 10'} channelType={'PUBLIC'} channelId={9} entered={true} /> */}
     </ul>
   )
 }
