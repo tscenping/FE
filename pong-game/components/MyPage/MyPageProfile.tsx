@@ -4,6 +4,8 @@ import styles from './MyPageProfile.module.scss'
 import profileImage from '@/public/img/mypage/profileImage.svg'
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react'
 import { instance } from '@/util/axios'
+import { useModalState } from '@/store/store'
+import { useNickNameImage } from '@/store/login'
 
 interface MatchHistoryProps {
   rivalName: string
@@ -38,7 +40,7 @@ interface MyPageProfileProps {
 
 export default function MyPageProfile({
   nickName,
-  avatar,
+  // avatar,
   statusMessage,
   loseCount,
   winCount,
@@ -49,7 +51,9 @@ export default function MyPageProfile({
 }: MyPageProfileProps) {
   const [editProfileMsgFlag, setEditProfileMsgFlag] = useState(false)
   const [profileMsg, setProfileMsg] = useState(statusMessage)
+  const { setModalName, setModalProps } = useModalState()
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+  const { avatar } = useNickNameImage()
   const handleEditProfileMsg = () => {
     if (editProfileMsgFlag) {
       submitStatusMessage()
@@ -80,6 +84,11 @@ export default function MyPageProfile({
     }
   }
 
+  const changeProfileImgHandler = () => {
+    setModalProps({ avatar: avatar })
+    setModalName('changeImage')
+  }
+
   useEffect(() => {
     if (editProfileMsgFlag && textareaRef.current) {
       textareaRef.current.focus()
@@ -98,7 +107,14 @@ export default function MyPageProfile({
             <div className={styles.profileNickName}>
               <div className={styles.profileImg}>
                 {/* height안들어가면 에러나서 추가 */}
-                <Image src={avatar} alt={'profileImage'} width={80} height={80} />
+                {/* {avatar ? ( */}
+                <Image
+                  src={avatar}
+                  alt={'profileImage'}
+                  width={80}
+                  height={80}
+                  onClick={changeProfileImgHandler}
+                />
               </div>
               <div className={styles.nickName}>{nickName}</div>
             </div>

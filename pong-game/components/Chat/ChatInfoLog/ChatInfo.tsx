@@ -1,14 +1,23 @@
 import Image from 'next/image'
 import styles from './ChatInfo.module.scss'
-import closeRoom from '@/public/img/chat/closeRoom.svg'
+import channelInvite from '@/public/img/chat/channelInvite.svg'
+import channelSetting from '@/public/img/chat/channelSetting.svg'
 import roomOut from '@/public/img/chat/roomOut.svg'
-import { useJoinProtectedChannel } from '@/store/chat'
+import { useJoinChannel, useJoinProtectedChannel } from '@/store/chat'
 import { useModalState } from '@/store/store'
-import { instance } from '@/util/axios'
 
 function ChatInfo(): JSX.Element {
   const { channelTitle, channelId } = useJoinProtectedChannel()
+  const { channelAuth, channelType } = useJoinChannel()
   const { setModalName } = useModalState()
+
+  const channelInviteIcon = //채널의 타입이 "PRIVATE"가 아니고 혹은 채널의 타입은 "PRIVATE"이지만 유저의 권한이 "COMMON"일때
+    channelType !== 'PRIVATE' || channelAuth === 'COMMON' ? styles.none : styles.show
+
+  const channelSettingIcon = //채널의 타입이 "PROTECTED"이거나 "PUBLIC"이고 채널의 "OWNER"일때
+    (channelType === 'PROTECTED' || channelType === 'PUBLIC') && channelAuth === 'OWNER'
+      ? styles.show
+      : styles.none
 
   const exitChannelHandler = (e) => {
     setModalName('exitRoom')
@@ -16,12 +25,25 @@ function ChatInfo(): JSX.Element {
   return (
     <div className={styles.chatInfo}>
       <span>
-        <Image src={closeRoom} alt={'out room'} />
+        <Image
+          src={channelInvite}
+          alt={'out room'}
+          width={50}
+          className={`${styles.channelInvite} ${channelInviteIcon}`}
+        />
       </span>
       <strong>{channelTitle}</strong>
-      <span onClick={exitChannelHandler} className={styles.exitRoom}>
-        <Image src={roomOut} alt={'roomOut'} />
-      </span>
+      <section className={styles.channelIcon}>
+        <Image
+          src={channelSetting}
+          alt={'channel setting'}
+          width={40}
+          className={`${styles.channelSetting} ${channelSettingIcon}`}
+        />
+        <span onClick={exitChannelHandler} className={styles.exitRoom}>
+          <Image src={roomOut} alt={'roomOut'} />
+        </span>
+      </section>
     </div>
   )
 }

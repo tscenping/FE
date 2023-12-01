@@ -1,12 +1,17 @@
 .chatUserListElement {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 8px;
-  .userProfileImage {
-    position: relative;
-    margin-right: 16px;
-  }
-  .userNickName {
-    margin-right: 16px;
+  .userInfo {
+    display: flex;
+    align-items: center;
+    .userProfileImage {
+      position: relative;
+      margin-right: 16px;
+    }
+    .userNickName {
+      margin-right: 16px;
+    }
   }
 }

@@ -1,5 +1,7 @@
 import { create } from 'zustand'
 
+const defaultProfileImage = process.env.NEXT_PUBLIC_API_DEFAULT_PROFILE_IMAGE
+
 interface useNicknameImageProps {
   avatar: string
   myNickname: string
@@ -14,6 +16,9 @@ export const useNickNameImage = create<useNicknameImageProps>((set) => ({
   myNickname: 'nickname',
   avatar: 'avatar',
   setMyNickname: (myNickname) => set({ myNickname }),
+  nickName: 'nickname',
+  avatar: defaultProfileImage,
+  setNickName: (nickName) => set({ nickName }),
   setAvatar: (avatar) => set({ avatar }),
   setUserId: (userId) => set({ userId }),
 }))

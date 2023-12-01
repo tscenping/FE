@@ -5,6 +5,7 @@ import { useCreateRoomNavBarState } from '@/store/chat'
 import CreateRoomInput from './CreateRoomInput/CreateRoomInput'
 import { instance } from '@/util/axios'
 import { useModalState } from '@/store/store'
+import { useGetChannels } from '@/store/chat'
 
 function CreateChatRoom(): JSX.Element {
   const { tabState, setTabState } = useCreateRoomNavBarState()
@@ -12,7 +13,7 @@ function CreateChatRoom(): JSX.Element {
   const [error, setError] = useState('')
   const titleRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
-
+  const { setAllChannels, setTotalAll, setMeChannels, setTotalMe, setPage } = useGetChannels()
   const createChannel = async (channelType, password = null) => {
     if (!titleRef.current?.value) {
       //title값을 입력안했거나 null일 경우에는 set state "noTitle"로 지정
@@ -53,6 +54,19 @@ function CreateChatRoom(): JSX.Element {
       console.log(response)
       if (response.statusText === 'Created') {
         //채널 생성에 성공한다면 모달창을 꺼주고 채널뷰를 생성한 채널뷰로 바꿔줘야한다.(채널뷰 변경 추가예정)
+        const responseAll = await instance({
+          method: 'get',
+          url: 'https://localhost:3000/channels/all/?page=1',
+        })
+        const responseMe = await instance({
+          method: 'get',
+          url: 'https://localhost:3000/channels/me/?page=1',
+        })
+        setAllChannels(responseAll.data.channels)
+        setTotalAll(responseAll.data.totalDataSize)
+        setMeChannels(responseMe.data.channels)
+        setTotalMe(responseMe.data.totalDataSize)
+        setPage(1)
         setModalName(null)
       }
       titleRef.current.value = '' //기존에 남아있던 값을 비워준다.

@@ -7,6 +7,7 @@ import CreateChatRoom from '../Modal/CreateRoom/CreateRoom'
 import CreateDmRoom from '../Modal/CreateDmRoom/CreateDmRoom'
 import ReseponseModal from '../Modal/ResponseModal/ReseponseModal'
 import ExitRoom from '../Modal/ExitRoom/ExitRoom'
+import ChangeImage from '../Modal/ChangeImage/ChangeImage'
 
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
@@ -14,8 +15,7 @@ function ModalOverlay(): JSX.Element {
   useEffect(() => {
     if (modalName !== null) {
       document.body.style.overflow = 'hidden'
-    }
-    else {
+    } else {
       document.body.style.overflow = 'auto'
     }
   }, [modalName])
@@ -36,7 +36,8 @@ function ModalContent({}): JSX.Element {
     createDmRoom: <CreateDmRoom />,
     createChatRoom: <CreateChatRoom />,
     exitRoom: <ExitRoom />,
-    response: <ReseponseModal/>,
+    response: <ReseponseModal />,
+    changeImage: <ChangeImage />,
   }
   return (
     <>
