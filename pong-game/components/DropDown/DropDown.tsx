@@ -31,7 +31,7 @@ interface DropDownChatingProps {
   isBlocked: boolean
   myChannelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
   channelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
-  // setIsDropDownView: (v: boolean) => void
+  setIsDropDownView: (v: boolean) => void
 }
 
 export default function DropDown({
