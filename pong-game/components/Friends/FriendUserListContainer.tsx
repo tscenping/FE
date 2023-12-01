@@ -36,7 +36,7 @@ function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Eleme
                 dropDownState="userProfile"
                 userProfile={{
                   id: 3,
-                  nickname: 'him',
+                  nickname: props.nickname,
                   avatar: '1',
                   isFriend: true,
                   isBlocked: false,

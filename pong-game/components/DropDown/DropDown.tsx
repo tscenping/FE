@@ -1,7 +1,7 @@
 import styles1 from './DropDown.module.scss'
 import styles from '@/pages/rank/rank.module.scss'
-import DropDownUserProfile from './DropDownUserProfile'
-import DropDownChating from './DropDownChating'
+import DropDownUserProfile from './UserProfile/DropDownUserProfile'
+import DropDownChating from './Chat/DropDownChating'
 import { useEffect, useRef, useState } from 'react'
 import useOutsideClickHandler from '@/hooks/useOutsideClickHandler'
 
@@ -27,6 +27,7 @@ interface DropDownChatingProps {
   nickname: string
   avatar: string
   isFriend: boolean
+  channelUserId: number
   isBlocked: boolean
   myChannelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
   channelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
@@ -54,6 +55,7 @@ export default function DropDown({
     chating: (
       <DropDownChating
         id={chating?.id}
+        channelUserId={chating?.channelUserId}
         nickname={chating?.nickname}
         avatar={chating?.avatar}
         isFriend={chating?.isFriend}

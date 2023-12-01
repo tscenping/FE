@@ -18,7 +18,7 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
   const router: NextRouter = useRouter()
   const loginPage = router.pathname === '/login' || router.pathname === '/login/info'
 
-  const { setAvatar, setNickName } = useNickNameImage()
+  const { setAvatar, setMyNickname } = useNickNameImage()
   const { setModalName } = useModalState()
   const responseModal = useResponseModalState()
 
@@ -26,7 +26,7 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
     await instance.patch('/auth/signout', {}).then(function (res) {
       console.log(res)
     })
-    setNickName(null)
+    setMyNickname(null)
     setAvatar(null)
   }
   const logoutModal = () => {

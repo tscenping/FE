@@ -19,7 +19,7 @@ interface siginInResponse {
 function LoginPageContents(): JSX.Element {
   const [responseData, setResponseData] = useState<siginInResponse>()
   const [codeValue, setCodeValue] = useState<string>('')
-  const { setAvatar, setNickName } = useNickNameImage()
+  const { setAvatar, setMyNickname } = useNickNameImage()
   const router = useRouter()
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function LoginPageContents(): JSX.Element {
     if (responseData && responseData.isFirstLogin !== undefined) {
       if (responseData.isFirstLogin) {
         setAvatar(null)
-        setNickName(null)
+        setMyNickname(null)
         router.replace('/login/info')
       } else {
         router.replace('/main')

@@ -1,5 +1,8 @@
 import { useModalState } from '@/store/store'
 import styles from './DropDownIUserProfile.module.scss'
+import EditFriend from '../Function/EditFriend'
+import EditBlock from '../Function/EditBlock'
+import OpenProfile from '../Function/OpenProfile'
 
 interface DropDownUserProfileProps {
   id?: number
@@ -18,7 +21,7 @@ export default function DropDownUserProfile({
   isBlocked,
   setIsDropDownView,
 }: DropDownUserProfileProps) {
-  const { setModalName } = useModalState()
+  const { modalName, setModalName } = useModalState()
   const { setModalProps } = useModalState()
 
   function setModalPropsValue(nickname: string) {
@@ -27,18 +30,19 @@ export default function DropDownUserProfile({
     setModalName('userProfile')
   }
   return (
-    <div className={styles.DropDownUserProfile}>
-      {isFriend ? <button>친구삭제</button> : <button>친구추가</button>}
-      {isBlocked ? <button>차단해제</button> : <button>차단하기</button>}
-      <button
+    <ul className={styles.DropDownUserProfile}>
+      <EditFriend isFriend={isFriend} friendId={id} />
+      <EditBlock isBlocked={isBlocked} friendId={id} />
+      {modalName !== 'userProfile' && <OpenProfile nickname={nickname} setIsDropDownView={setIsDropDownView} />}
+      {/* <button
         onClick={() => {
           setModalPropsValue(nickname)
         }}
       >
         프로필보기
-      </button>
+      </button> */}
       <button>게임하기</button>
       <button>1:1메세지</button>
-    </div>
+    </ul>
   )
 }

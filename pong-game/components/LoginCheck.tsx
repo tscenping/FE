@@ -5,7 +5,7 @@ import { instance } from '@/util/axios'
 import { useRouter, NextRouter } from 'next/router'
 
 export default function LoginCheck({ children }: { children: ReactNode }) {
-  const { setNickName, setAvatar, avatar, nickName } = useNickNameImage()
+  const { setMyNickname, setAvatar, avatar, myNickname } = useNickNameImage()
   const router: NextRouter = useRouter()
   const isLoginPage = router.pathname === '/login'
   const isSignPage = router.pathname === '/login/info'
@@ -14,7 +14,8 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
     try {
       await instance.get('/users/me').then((res) => {
         if (res.data) {
-          setNickName(res.data.nickName)
+          setMyNickname(res.data.nickname)
+          // console.log(res.data)
           setAvatar(res.data.avatar)
           // console.log(res.data)
         }
@@ -27,13 +28,13 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (isLoginPage) {
       if (document.cookie) {
-        if (nickName !== null && avatar !== null) {
+        if (myNickname !== null && avatar !== null) {
           router.push('/main')
-        } else if (nickName === null || avatar === null) {
+        } else if (myNickname === null || avatar === null) {
           router.push('/login/info')
         }
       }
-    } else if (isSignPage && nickName !== null && avatar !== null) {
+    } else if (isSignPage && myNickname !== null && avatar !== null) {
       router.push('/main')
     }
     if (!document.cookie && !isLoginPage) {
@@ -50,13 +51,13 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (isLoginPage) {
       if (document.cookie) {
-        if (nickName !== null && avatar !== null) {
+        if (myNickname !== null && avatar !== null) {
           router.push('/main')
-        } else if (nickName === null || avatar === null) {
+        } else if (myNickname === null || avatar === null) {
           router.push('/login/info')
         }
       }
-    } else if (isSignPage && nickName !== null && avatar !== null) {
+    } else if (isSignPage && myNickname !== null && avatar !== null) {
       router.push('/main')
     }
     if (isLoginPage) {
@@ -64,11 +65,11 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
     } else {
       if (!document.cookie) {
         router.push('/login')
-      } else if (nickName === null || avatar === null) {
+      } else if (myNickname === null || avatar === null) {
         router.push('/login/info')
       }
     }
-  }, [nickName, avatar])
+  }, [myNickname, avatar])
 
   // 1. 쿠키 있는지 확인 -> 없으면 login
   // 2. 쿠키 있음 -> 유저정보가 없으면 -> login/info

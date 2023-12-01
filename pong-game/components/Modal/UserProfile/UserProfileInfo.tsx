@@ -4,6 +4,7 @@ import friendEdit from '@/public/img/modal/friendEdit.svg'
 import { useModalState } from '@/store/store'
 import { useEffect, useState } from 'react'
 import DropDown from '@/components/DropDown/DropDown'
+import { useNickNameImage } from '@/store/login'
 
 interface UserProfileProps {
   id: number
@@ -40,6 +41,7 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
     isBlocked,
   } = userProfileInfo.userProfileProps
   const [dropDownState, setDropDownState] = useState(false)
+  const {myNickname} = useNickNameImage()
 
   function LineThreeContent(props: { title: string; content: string }) {
     return (
@@ -50,6 +52,7 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
       </div>
     )
   }
+  console.log(myNickname, nickname)
 
   function RenderLadderScore() {
     return (
@@ -69,14 +72,14 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
             <Image src={avatar} alt={'profileImage'} width={80} height={80} />
           </div>
           <div className={styles.nickName}>{nickname}</div>
-          <Image
+          { myNickname !== nickname &&  <Image
             src={friendEdit}
             alt={'friendEdit'}
             width={30}
             height={30}
             onClick={() => setDropDownState((prev) => !prev)}
             className={styles.friendEditBtn}
-          />
+          />}
           <div>
             {dropDownState && (
               <DropDown

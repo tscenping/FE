@@ -1,7 +1,7 @@
 import styles from './UserProfileModal.module.scss'
 import closeBtn from '@/public/img/modal/modalClose.svg'
 import Image from 'next/image'
-import { useModalState } from '@/store/store'
+import { useModalState, useResponseModalState } from '@/store/store'
 import MyPageHistory from '@/components/MyPage/MyPageHistory'
 import CustomPagination from '@/components/Pagination/CustomPagination'
 import UserProfileInfo from './UserProfileInfo'
@@ -38,34 +38,45 @@ interface UserProfileProps {
 
 export default function UserProfile() {
   const { setModalName, modalProps } = useModalState()
-  const [userNickname, setUserNickname] = useState<string>();
+  const [userNickname, setUserNickname] = useState<string>()
   const [userProfileInfo, setUserProfileInfo] = useState<UserProfileProps>()
   const [page, setPage] = useState(1)
   const [gameHistories, setGameHistories] = useState<GameHistoryProps>()
+  const responseModal = useResponseModalState()
 
   const getUserProfileHandler = async () => {
-    if (userNickname === undefined) return
-    await instance.get(`/users/profile/${userNickname}`, {}).then(function (res) {
-      setUserProfileInfo(res.data)
-      console.log(res)
-    })
-    
+    try {
+      if (userNickname === undefined) return
+      await instance.get(`/users/profile/${userNickname}`, {}).then(function (res) {
+        setUserProfileInfo(res.data)
+        console.log(res)
+      })
+    } catch (e) {
+      // alert('존재하지 않는 유저입니다.')
+      setModalName('response')
+      responseModal.setResponseModalState('알림', '잘못된 접근입니다.', null)
+    }
   }
   const getGameHistoryHandler = async () => {
-    if (userNickname === undefined) return
-    await instance.get(`/users/games/${userNickname}/?page=${page}`, {}).then(function (res) {
-      setGameHistories(res.data)
-      
-    })
+    try {
+      if (userNickname === undefined) return
+      await instance.get(`/users/games/${userNickname}/?page=${page}`, {}).then(function (res) {
+        setGameHistories(res.data)
+      })
+    } catch (e) {
+      // alert('존재하지 않는 유저입니다.')
+      setModalName('response')
+      responseModal.setResponseModalState('알림', '잘못된 접근입니다.', null)
+    }
   }
   useEffect(() => {
     setUserNickname(modalProps.nickname)
-  },[modalProps])
+  }, [modalProps])
 
   useEffect(() => {
     getUserProfileHandler()
   }, [userNickname])
-  
+
   useEffect(() => {
     getGameHistoryHandler()
   }, [page])
