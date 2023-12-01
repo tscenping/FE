@@ -1,19 +1,22 @@
-import { useState } from 'react'
 import styles from './SearchUsersListContainer.module.scss'
-import FriendUserListContainer from '../FriendUserListContainer'
 import CustomPagination from '@/components/Pagination/CustomPagination'
 import SearchUserListContainer from './SearchUserListContainer'
+import { useGetUser } from '@/store/friend'
 
 function SearchUsersListContainer(): JSX.Element {
-  const [page, setPage] = useState(1)
+  const { user } = useGetUser()
   return (
     <>
       <ul className={styles.searchUsersListContainer}>
-        <SearchUserListContainer nickname={'sangyeki'} />
-        <SearchUserListContainer nickname={'him'} />
-        <SearchUserListContainer nickname={'jiyun'} />
-        <SearchUserListContainer nickname={'yubchoi'} />
-        <SearchUserListContainer nickname={'jang-cho'} />
+        {user && (
+          <SearchUserListContainer
+            nickname={user.nickname}
+            avatar={user.avatar}
+            id={user.id}
+            isFriend={user.isFriend}
+            isBlocked={user.isBlocked}
+          />
+        )}
       </ul>
       {/* <CustomPagination page={page} setPage={setPage} itemsCountPerPage={5} totalItemsCount={50} /> */}
     </>

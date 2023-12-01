@@ -51,3 +51,28 @@ export const useGetBlocks = create<useGetBlocksProps>((set) => ({
   setTotalBlockCount: (totalBlockCount) => set({ totalBlockCount }),
   setAllBlocks: (allBlocks) => set({ allBlocks }),
 }))
+
+// search에서 나온 유저 정보 전역변수
+interface useUserProps {
+  id?: number
+  nickname?: string
+  avatar?: string
+  statusMessage?: string
+  loseCount?: number
+  winCount?: number
+  totalCount?: number
+  ladderRank?: number
+  ladderMax?: number
+  ladderMaxScore?: number
+  isFriend?: boolean
+  isBlocked?: boolean
+}
+
+interface useGetUserProps {
+  user?: useUserProps
+  setUser: (v: useUserProps) => void
+}
+
+export const useGetUser = create<useGetUserProps>((set) => ({
+  setUser: (user) => set({ user }),
+}))

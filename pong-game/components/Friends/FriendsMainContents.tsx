@@ -15,7 +15,7 @@ function FriendsMainContents(): JSX.Element {
   const getAllFriend = async () => {
     try {
       const response = await instance({
-        url: 'https://localhost:3000/users/friends/?page=1',
+        url: `https://localhost:3000/users/friends/?page=1`,
         method: 'get',
       })
       setAllFriends(response.data.friends)
@@ -27,7 +27,7 @@ function FriendsMainContents(): JSX.Element {
   const getAllBlock = async () => {
     try {
       const response = await instance({
-        url: 'https://localhost:3000/users/blocks/?page=1',
+        url: `https://localhost:3000/users/blocks/?page=1`,
         method: 'get',
       })
       setAllBlocks(response.data.blocks)
@@ -38,9 +38,9 @@ function FriendsMainContents(): JSX.Element {
   }
 
   useEffect(() => {
-    getAllFriend()
-    getAllBlock()
-  }, [])
+    if (tabState === 'ALL') getAllFriend()
+    if (tabState === 'BLOCK') getAllBlock()
+  }, [tabState])
 
   return (
     <>

@@ -16,7 +16,6 @@ interface FriendUserListContainerprops {
 
 function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Element {
   const [dropDownState, setDropDownState] = useState(false)
-
   return (
     <>
       <li className={styles.friendUserListContainer}>
@@ -37,9 +36,9 @@ function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Eleme
                 setIsDropDownView={setDropDownState}
                 dropDownState="userProfile"
                 userProfile={{
-                  id: 3,
+                  id: props.id,
                   nickname: props.nickname,
-                  avatar: '1',
+                  avatar: props.avatar,
                   isFriend: props.isFriend,
                   isBlocked: props.isBlocked,
                 }}

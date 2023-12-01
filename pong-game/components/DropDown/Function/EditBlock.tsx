@@ -12,7 +12,7 @@ export default function EditBlock(props: EditBlockProps) {
           `/users/blocks`,
           {
             // blockId: props.friendId,
-            blockId: 3,
+            blockId: props.friendId,
           },
           { withCredentials: true },
         )
@@ -31,7 +31,7 @@ export default function EditBlock(props: EditBlockProps) {
         .delete(`/users/blocks`, {
           data: {
             // blockId: props.friendId,
-            blockId: 3,
+            blockId: props.friendId,
           },
           withCredentials: true,
         })

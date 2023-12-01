@@ -7,9 +7,10 @@ import DropDown from '@/components/DropDown/DropDown'
 
 interface SearchUserListContainerprops {
   nickname: string
-  // avatar: string
-  // id: number
-  // status: boolean
+  avatar: string
+  id: number
+  isFriend: boolean
+  isBlocked: boolean
 }
 
 function SearchUserListContainer(props: SearchUserListContainerprops): JSX.Element {
@@ -35,11 +36,11 @@ function SearchUserListContainer(props: SearchUserListContainerprops): JSX.Eleme
                 setIsDropDownView={setDropDownState}
                 dropDownState="userProfile"
                 userProfile={{
-                  id: 3,
-                  nickname: 'him',
-                  avatar: '1',
-                  isFriend: false,
-                  isBlocked: false,
+                  id: props.id,
+                  nickname: props.nickname,
+                  avatar: props.avatar,
+                  isFriend: props.isFriend,
+                  isBlocked: props.isBlocked,
                 }}
               />
             )}
