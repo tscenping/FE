@@ -10,7 +10,7 @@ import { instance } from '@/util/axios'
 function ChatPassword(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement>(null)
   const { channelTitle, channelId, setPasswordInputRender } = useJoinProtectedChannel() //해당 채널 이름과 채널 id를 렌더링, api요청 하기 위해 타이틀 전역변수 가져오기
-  const { setChannelUserInfo } = useJoinChannel()
+  const { setChannelUserInfo, setMyChannelUserType } = useJoinChannel()
 
   const passwordHandler = async (e) => {
     // console.log(channelTitle)
@@ -31,6 +31,7 @@ function ChatPassword(): JSX.Element {
         //채널 join에 성공했을 경우 기존 비밀번호 입력 컴포넌트를 "false"로 바꿔준다.
         console.log(response.data)
         setChannelUserInfo(response.data.channelUsers)
+        setMyChannelUserType(response.data.myChannelUserType)
         setPasswordInputRender('CHANNEL')
       }
     } catch (error) {
