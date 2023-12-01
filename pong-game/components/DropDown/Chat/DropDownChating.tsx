@@ -6,6 +6,7 @@ import DirectMsg from '../Function/DirectMsg'
 import InviteGame from '../Function/InviteGame'
 import EditBlock from '../Function/EditBlock'
 import EditFriend from '../Function/EditFriend'
+import OpenProfile from '../Function/OpenProfile'
 interface DropDownChatingProps {
   id: number
   nickname: string
@@ -41,7 +42,7 @@ export default function DropDownChating(props: DropDownChatingProps) {
       
       <EditFriend isFriend={props.isFriend} friendId={props.id}/>
       <EditBlock isBlocked={props.isBlocked} friendId={props.id}/>
-      <button>프로필보기</button>
+      <OpenProfile nickname={props.nickname} setIsDropDownView={props.setIsDropDownView}/>
       <InviteGame />
       <DirectMsg />
       

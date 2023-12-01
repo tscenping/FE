@@ -11,8 +11,8 @@ export default function EditBlock(props: EditBlockProps) {
         .post(
           `/users/blocks`,
           {
-            // blockId: props.friendId,
             blockId: props.friendId,
+            // blockId: 3,
           },
           { withCredentials: true },
         )
@@ -30,8 +30,8 @@ export default function EditBlock(props: EditBlockProps) {
       await instance
         .delete(`/users/blocks`, {
           data: {
-            // blockId: props.friendId,
             blockId: props.friendId,
+            // blockId: 3,
           },
           withCredentials: true,
         })

@@ -58,12 +58,12 @@ export const useJoinProtectedChannel = create<useJoinProtectedChannelProps>((set
 // 채널에 join했을 경우 전역 상태 변수
 interface useChannelUserInfoProps {
   channelUserId?: number
-  userid?: number
+  userId?: number
   nickname?: string
   avatar?: string
   isFriend?: boolean
   isBlocked?: boolean
-  channelUserType: string
+  channelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
 }
 
 interface useJoinChannelProps {
@@ -71,10 +71,12 @@ interface useJoinChannelProps {
   channelTitle: string
   channelType: string
   channelAuth: string
+  myChannelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
   channelUserInfo: useChannelUserInfoProps[]
   setChannelId: (v: number) => void
   setChannelTitle: (v: string) => void
   setChannelType: (v: string) => void
+  setMyChannelUserType: (v: string) => void
   setChannelAuth: (v: string) => void
   setChannelUserInfo: (v: useChannelUserInfoProps[]) => void
 }
@@ -82,10 +84,12 @@ interface useJoinChannelProps {
 export const useJoinChannel = create<useJoinChannelProps>((set) => ({
   channelTitle: '',
   channelType: '',
+  myChannelUserType: 'COMMON',
   channelAuth: '',
   channelUserInfo: [],
   setChannelId: (channelId) => set({ channelId }),
   setChannelTitle: (channelTitle) => set({ channelTitle }),
+  setMyChannelUserType: (myChannelUserType:'OWNER' | 'ADMIN' | 'COMMON') => set({ myChannelUserType }),
   setChannelType: (channelType) => set({ channelType }),
   setChannelAuth: (channelAuth) => set({ channelAuth }),
   setChannelUserInfo: (channelUserInfo) => set({ channelUserInfo }),

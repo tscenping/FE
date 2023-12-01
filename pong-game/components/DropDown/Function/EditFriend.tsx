@@ -5,8 +5,8 @@ interface EditFriendProps {
   friendId: number
 }
 export default function EditFriend(props: EditFriendProps) {
+  console.log(props.isFriend)
   const addFriendHandler = async () => {
-    console.log(process.env.NEXT_PUBLIC_API_ENDPOINT)
     try {
       await instance
         .post(
@@ -25,7 +25,6 @@ export default function EditFriend(props: EditFriendProps) {
   }
 
   const deleteFriendHandler = async () => {
-    console.log(process.env.NEXT_PUBLIC_API_ENDPOINT)
     try {
       await instance
         .delete(`/users/friends`, {
