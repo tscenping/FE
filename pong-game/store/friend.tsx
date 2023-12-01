@@ -1,5 +1,20 @@
 import { create } from 'zustand'
 
+// frined page, tabState 전역변수
+interface useFrinedSetProps {
+  friendPage: number
+  tabState: string
+  setFriendPage: (v: number) => void
+  setTabState: (v: string) => void
+}
+
+export const useFriendSetPage = create<useFrinedSetProps>((set) => ({
+  friendPage: 1,
+  tabState: 'ALL',
+  setFriendPage: (friendPage) => set({ friendPage }),
+  setTabState: (tabState) => set({ tabState }),
+}))
+
 // 내 친구를 저장하는 전역변수
 interface userinfoProps {
   id: number
@@ -11,14 +26,14 @@ interface userinfoProps {
 interface useGetFriendsProps {
   allFriends: userinfoProps[]
   totalFriendCount: number
-  setTotalCount: (v: number) => void
+  setTotalFriendCount: (v: number) => void
   setAllFriends: (v: userinfoProps[]) => void
 }
 
 export const useGetFriends = create<useGetFriendsProps>((set) => ({
   allFriends: [],
   totalFriendCount: 0,
-  setTotalCount: (totalFriendCount) => set({ totalFriendCount }),
+  setTotalFriendCount: (totalFriendCount) => set({ totalFriendCount }),
   setAllFriends: (allFriends) => set({ allFriends }),
 }))
 
@@ -26,13 +41,13 @@ export const useGetFriends = create<useGetFriendsProps>((set) => ({
 interface useGetBlocksProps {
   allBlocks: userinfoProps[]
   totalBlockCount: number
-  setTotalCount: (v: number) => void
+  setTotalBlockCount: (v: number) => void
   setAllBlocks: (v: userinfoProps[]) => void
 }
 
 export const useGetBlocks = create<useGetBlocksProps>((set) => ({
   allBlocks: [],
   totalBlockCount: 0,
-  setTotalCount: (totalBlockCount) => set({ totalBlockCount }),
+  setTotalBlockCount: (totalBlockCount) => set({ totalBlockCount }),
   setAllBlocks: (allBlocks) => set({ allBlocks }),
 }))

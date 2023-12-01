@@ -1,15 +1,16 @@
 import styles from './FriendsNaviTab.module.scss'
+import { useFriendSetPage } from '@/store/friend'
 
 interface FriendNaviTabProps {
   name: string
   id: string
   value: string
   tabState: string
-  setTabState: (v: string) => void
   title: string
 }
 
 function FriendsNaviTab(props: FriendNaviTabProps): JSX.Element {
+  const { setTabState } = useFriendSetPage()
   return (
     <span className={styles.tab}>
       <input
@@ -18,7 +19,7 @@ function FriendsNaviTab(props: FriendNaviTabProps): JSX.Element {
         id={props.id}
         value={props.value}
         checked={props.tabState === props.value}
-        onChange={() => props.setTabState(props.value)}
+        onChange={() => setTabState(props.value)}
       />
       <label
         htmlFor={props.id}

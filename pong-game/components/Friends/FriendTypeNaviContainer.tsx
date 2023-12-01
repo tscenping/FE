@@ -3,37 +3,30 @@ import styles from './FriendTypeNaviContainer.module.scss'
 
 interface FriendTypeNaviContainerProps {
   tabState: string
-  setTabState: (v: string) => void
 }
 
-function FriendTypeNaviContainer({
-  tabState,
-  setTabState,
-}: FriendTypeNaviContainerProps): JSX.Element {
+function FriendTypeNaviContainer({ tabState }: FriendTypeNaviContainerProps): JSX.Element {
   return (
     <div className={styles.friendTypeNaviContainer}>
       <FriendsNaviTab
         name={'friendUsers'}
         id={'frinedUsers'}
-        value="1"
+        value="ALL"
         tabState={tabState}
-        setTabState={setTabState}
         title="친구목록"
       />
       <FriendsNaviTab
         name={'blockUsers'}
         id={'blockUsers'}
-        value="2"
+        value="BLOCK"
         tabState={tabState}
-        setTabState={setTabState}
         title="차단목록"
       />
       <FriendsNaviTab
         name={'searchUsers'}
         id={'searchUsers'}
-        value="3"
+        value="SEARCH"
         tabState={tabState}
-        setTabState={setTabState}
         title="유저검색"
       />
     </div>
