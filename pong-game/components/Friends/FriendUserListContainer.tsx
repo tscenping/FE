@@ -7,9 +7,11 @@ import DropDown from '../DropDown/DropDown'
 
 interface FriendUserListContainerprops {
   nickname: string
-  // avatar: string
-  // id: number
-  // status: boolean
+  avatar: string
+  id: number
+  status: string
+  isFriend: boolean
+  isBlocked: boolean
 }
 
 function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Element {
@@ -38,8 +40,8 @@ function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Eleme
                   id: 3,
                   nickname: props.nickname,
                   avatar: '1',
-                  isFriend: true,
-                  isBlocked: false,
+                  isFriend: props.isFriend,
+                  isBlocked: props.isBlocked,
                 }}
               />
             )}

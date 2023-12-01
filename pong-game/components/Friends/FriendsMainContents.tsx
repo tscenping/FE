@@ -45,9 +45,9 @@ function FriendsMainContents(): JSX.Element {
   return (
     <>
       <FriendTypeNaviContainer tabState={tabState} />
-      {tabState === '1' && <FrinedUsersListContainer />}
-      {tabState === '2' && <BlockUsersListContainer />}
-      {tabState === '3' && <SearchUsers />}
+      {tabState === 'ALL' && <FrinedUsersListContainer />}
+      {tabState === 'BLOCK' && <BlockUsersListContainer />}
+      {tabState === 'SEARCH' && <SearchUsers />}
     </>
   )
 }
