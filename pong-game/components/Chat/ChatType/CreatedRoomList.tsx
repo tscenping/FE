@@ -15,7 +15,7 @@ interface CreatedRoomListProps {
 function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
   const { setPasswordInputRender, setChannelTitle, setChannelProtectedId } =
     useJoinProtectedChannel()
-  const { setChannelAuth, setChannelType, setChannelId, setChannelUserInfo } = useJoinChannel()
+  const { setChannelAuth, setChannelType, setChannelId, setChannelUserInfo, setMyChannelUserType } = useJoinChannel()
   const passwordIconClassName = props.channelType === 'PROTECTED' ? styles.show : styles.none
 
   const joinChannelHandler = async () => {
@@ -29,6 +29,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
         console.log(response)
         setChannelAuth(response.data.myChannelUserType)
         setChannelType(props.channelType)
+        setMyChannelUserType(response.data.myChannelUserType)
         setPasswordInputRender('CHANNEL')
         setChannelUserInfo(response.data.channelUsers)
         setChannelTitle(props.title)

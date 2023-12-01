@@ -32,6 +32,7 @@ function ChatPassword(): JSX.Element {
         console.log(response.data)
         setChannelUserInfo(response.data.channelUsers)
         setMyChannelUserType(response.data.myChannelUserType)
+        console.log(response.data.myChannelUserType)
         setPasswordInputRender('CHANNEL')
       }
     } catch (error) {

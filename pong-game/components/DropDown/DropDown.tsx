@@ -29,8 +29,8 @@ interface DropDownChatingProps {
   isFriend: boolean
   channelUserId: number
   isBlocked: boolean
-  myChannelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
-  channelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
+  myChannelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
+  channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
   setIsDropDownView: (v: boolean) => void
 }
 

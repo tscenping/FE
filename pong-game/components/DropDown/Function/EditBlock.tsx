@@ -2,9 +2,11 @@ import { instance } from '@/util/axios'
 interface EditBlockProps {
   isBlocked: boolean
   friendId: number
+  setIsDropDownView: (v: boolean) => void
 }
 export default function EditBlock(props: EditBlockProps) {
   const blockHandler = async () => {
+    props.setIsDropDownView(false)
     try {
       await instance
         .post(
@@ -24,6 +26,7 @@ export default function EditBlock(props: EditBlockProps) {
   }
 
   const unBlockHandler = async () => {
+    props.setIsDropDownView(false)
     try {
       await instance
         .delete(`/users/blocks`, {

@@ -10,6 +10,7 @@ function ChatUserListContainer(): JSX.Element {
       {channelUserInfo &&
         channelUserInfo.map((user) => (
           <ChatUserListElement
+            key={user.userId}
             userId={user.userId}
             nickname={user.nickname}
             channelUserId={user.channelUserId}

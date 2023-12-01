@@ -14,13 +14,16 @@ interface ChatUserListElementProps {
   avatar?: string
   isFriend?: boolean
   isBlocked?: boolean
-  channelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
+  channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
 }
 
 function ChatUserListElement(props: ChatUserListElementProps): JSX.Element {
+  const [ChatUserListElementValue, setChatUserListElementValue] = useState(props)
   const [dropDownState, setDropDownState] = useState(false)
   const { myNickname } = useNickNameImage()
   const { myChannelUserType } = useJoinChannel()
+  
+  
   return (
     <li className={styles.chatUserListElement}>
       <section className={styles.userInfo}>
@@ -43,13 +46,6 @@ function ChatUserListElement(props: ChatUserListElementProps): JSX.Element {
           isDropDownView={dropDownState}
           setIsDropDownView={setDropDownState}
           dropDownState="chating"
-          userProfile={{
-            id: props.userId,
-            nickname: props.nickname,
-            avatar: props.avatar,
-            isFriend: props.isFriend,
-            isBlocked: props.isBlocked,
-          }}
           chating={{
             id: props.userId,
             myChannelUserType: myChannelUserType,

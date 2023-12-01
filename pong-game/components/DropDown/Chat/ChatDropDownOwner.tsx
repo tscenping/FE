@@ -4,9 +4,10 @@ import ChatKick from '../Function/ChatKick'
 import ChatMute from '../Function/ChatMute'
 
 interface ChatDropDownOwnerProps {
-  channelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
+  channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
   channelUserId: number
   nickname: string
+  setIsDropDownView: (v: boolean) => void
 }
 
 export default function ChatDropDownOwner(props: ChatDropDownOwnerProps) {
@@ -14,7 +15,7 @@ export default function ChatDropDownOwner(props: ChatDropDownOwnerProps) {
     <>
       {/* {channelUserType == 'ADMIN' ? <button>관리자 해제</button> : <button>관리자 임명</button>} */}
       <ChatEditAdmin channelUserType={props.channelUserType} channelUserId={props.channelUserId} nickname={props.nickname}/>
-      <ChatKick />
+      <ChatKick channelUserType={props.channelUserType} channelUserId={props.channelUserId} nickname={props.nickname}/>
       <ChatMute />
       <ChatBen />
     </>

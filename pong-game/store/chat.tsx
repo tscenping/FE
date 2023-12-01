@@ -63,7 +63,7 @@ interface useChannelUserInfoProps {
   avatar?: string
   isFriend?: boolean
   isBlocked?: boolean
-  channelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
+  channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
 }
 
 interface useJoinChannelProps {
@@ -71,7 +71,7 @@ interface useJoinChannelProps {
   channelTitle: string
   channelType: string
   channelAuth: string
-  myChannelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
+  myChannelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
   channelUserInfo: useChannelUserInfoProps[]
   setChannelId: (v: number) => void
   setChannelTitle: (v: string) => void
@@ -84,12 +84,12 @@ interface useJoinChannelProps {
 export const useJoinChannel = create<useJoinChannelProps>((set) => ({
   channelTitle: '',
   channelType: '',
-  myChannelUserType: 'COMMON',
+  myChannelUserType: 'MEMBER',
   channelAuth: '',
   channelUserInfo: [],
   setChannelId: (channelId) => set({ channelId }),
   setChannelTitle: (channelTitle) => set({ channelTitle }),
-  setMyChannelUserType: (myChannelUserType:'OWNER' | 'ADMIN' | 'COMMON') => set({ myChannelUserType }),
+  setMyChannelUserType: (myChannelUserType:'OWNER' | 'ADMIN' | 'MEMBER') => set({ myChannelUserType }),
   setChannelType: (channelType) => set({ channelType }),
   setChannelAuth: (channelAuth) => set({ channelAuth }),
   setChannelUserInfo: (channelUserInfo) => set({ channelUserInfo }),

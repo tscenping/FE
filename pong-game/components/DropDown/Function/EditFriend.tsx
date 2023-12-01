@@ -3,10 +3,11 @@ import { instance } from '@/util/axios'
 interface EditFriendProps {
   isFriend: boolean
   friendId: number
+  setIsDropDownView: (v: boolean) => void
 }
 export default function EditFriend(props: EditFriendProps) {
-  console.log(props.isFriend)
   const addFriendHandler = async () => {
+    props.setIsDropDownView(false)
     try {
       await instance
         .post(
@@ -25,6 +26,7 @@ export default function EditFriend(props: EditFriendProps) {
   }
 
   const deleteFriendHandler = async () => {
+    props.setIsDropDownView(false)
     try {
       await instance
         .delete(`/users/friends`, {

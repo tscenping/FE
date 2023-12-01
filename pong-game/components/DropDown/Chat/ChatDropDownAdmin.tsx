@@ -8,28 +8,27 @@ import DirectMsg from '../Function/DirectMsg'
 import OpenProfile from '../Function/OpenProfile'
 
 interface ChatDropDownOwnerProps {
-  channelUserType: 'OWNER' | 'ADMIN' | 'COMMON' | null
+  channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
+  channelUserId: number
   nickname: string
-  isFriend: boolean
-  isBlocked: boolean
   setIsDropDownView: (v: boolean) => void
 }
 
 export default function ChatDropDownAdmin(props: ChatDropDownOwnerProps) {
   return (
     <>
-      {props.channelUserType === 'COMMON' && (
+      {props.channelUserType === 'MEMBER' && (
         <>
-          <ChatKick />
+          <ChatKick channelUserType={props.channelUserType} channelUserId={props.channelUserId} nickname={props.nickname}/>
           <ChatMute />
           <ChatBen />
         </>
       )}
       {/* <EditFriend isFriend={props.isFriend} /> */}
       {/* <EditBlock isBlocked={props.isBlocked} /> */}
-      <OpenProfile nickname={props.nickname} setIsDropDownView={props.setIsDropDownView} />
-      <InviteGame />
-      <DirectMsg />
+      {/* <OpenProfile nickname={props.nickname} setIsDropDownView={props.setIsDropDownView} /> */}
+      {/* <InviteGame /> */}
+      {/* <DirectMsg /> */}
     </>
   )
 }
