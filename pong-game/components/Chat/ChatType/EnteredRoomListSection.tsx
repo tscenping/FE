@@ -15,6 +15,7 @@ function EnteredRoomListSection(): JSX.Element {
           channelType={channel.channelType}
           entered={true}
           userCount={channel.userCount}
+          isJoined={channel.isJoined}
         />
       ))}
       {/* <CreatedRoomList

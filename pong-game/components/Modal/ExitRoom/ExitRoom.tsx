@@ -5,7 +5,15 @@ import { instance } from '@/util/axios'
 
 function ExitRoom(): JSX.Element {
   const { channelTitle, setPasswordInputRender } = useJoinProtectedChannel() //채널 나가기 모달에 띄워줄 채널 타이틀, api요청에 필요한 채널 id, 채널 나가기 성공할 경우 컴포넌트를 바꿔줄 플래그
-  const { setAllChannels, setTotalAll, setTotalMe, setMeChannels, setPage } = useGetChannels()
+  const {
+    setAllChannels,
+    setTotalAll,
+    setTotalMe,
+    setMeChannels,
+    setPage,
+    setDmChannels,
+    setTotalDm,
+  } = useGetChannels()
   const { channelId, setChannelUserInfo } = useJoinChannel()
   const { setModalName } = useModalState() //"확인" 버튼을 클릭했을 때, "취소" 버튼을 클릭했을 때 모달을 꺼주기 위한 set함수
   const exitRoomHandler = async (e) => {
@@ -30,10 +38,16 @@ function ExitRoom(): JSX.Element {
           method: 'get',
           url: 'https://localhost:3000/channels/me/?page=1',
         })
+        const responseDm = await instance({
+          method: 'get',
+          url: 'https://localhost:3000/channels/dm?page=1',
+        })
         setAllChannels(responseAll.data.channels)
-        setTotalAll(responseAll.data.totalDataSize)
         setMeChannels(responseMe.data.channels)
+        setDmChannels(responseDm.data.dmChannels)
+        setTotalAll(responseAll.data.totalDataSize)
         setTotalMe(responseMe.data.totalDataSize)
+        setTotalDm(responseDm.data.totalItemCount)
         setChannelUserInfo(null)
         setPage(1)
         setModalName(null) //모달 off

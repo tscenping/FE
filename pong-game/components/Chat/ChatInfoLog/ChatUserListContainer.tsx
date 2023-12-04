@@ -20,12 +20,6 @@ function ChatUserListContainer(): JSX.Element {
             channelUserType={user.channelUserType}
           />
         ))}
-      {/* <ChatUserListElement /> */}
-      {/* <ChatUserListElement /> */}
-      {/* <ChatUserListElement /> */}
-      {/* <ChatUserListElement /> */}
-      {/* <ChatUserListElement /> */}
-      {/* <ChatUserListElement /> */}
     </ul>
   )
 }

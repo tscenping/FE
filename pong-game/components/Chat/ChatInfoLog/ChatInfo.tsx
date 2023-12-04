@@ -7,8 +7,7 @@ import { useJoinChannel, useJoinProtectedChannel } from '@/store/chat'
 import { useModalState } from '@/store/store'
 
 function ChatInfo(): JSX.Element {
-  const { channelTitle, channelId } = useJoinProtectedChannel()
-  const { channelAuth, channelType } = useJoinChannel()
+  const { channelAuth, channelType, channelTitle, channelId } = useJoinChannel()
   const { setModalName } = useModalState()
 
   const channelInviteIcon = //채널의 타입이 "PRIVATE"가 아니고 혹은 채널의 타입은 "PRIVATE"이지만 유저의 권한이 "MEMBER"일때
@@ -22,6 +21,7 @@ function ChatInfo(): JSX.Element {
   const exitChannelHandler = (e) => {
     setModalName('exitRoom')
   }
+  console.log(channelTitle)
   return (
     <div className={styles.chatInfo}>
       <span>

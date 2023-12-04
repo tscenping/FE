@@ -7,19 +7,20 @@ import DropDown from '../DropDown/DropDown'
 
 interface FriendUserListContainerprops {
   nickname: string
-  // avatar: string
-  // id: number
-  // status: boolean
+  avatar: string
+  id: number
+  status: string
+  isFriend: boolean
+  isBlocked: boolean
 }
 
 function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Element {
   const [dropDownState, setDropDownState] = useState(false)
-
   return (
     <>
       <li className={styles.friendUserListContainer}>
         <div className={styles.friendUserImageNickName}>
-          <Image src={profileImage} alt={'user profile image'} width={80} height={80} />
+          <Image src={props.avatar} alt={'user profile image'} width={80} height={80} />
           <strong>{props.nickname}</strong>
         </div>
         <div className={styles.friendUserToggle}>
@@ -35,11 +36,11 @@ function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Eleme
                 setIsDropDownView={setDropDownState}
                 dropDownState="userProfile"
                 userProfile={{
-                  id: 3,
+                  id: props.id,
                   nickname: props.nickname,
-                  avatar: '1',
-                  isFriend: true,
-                  isBlocked: false,
+                  avatar: props.avatar,
+                  isFriend: props.isFriend,
+                  isBlocked: props.isBlocked,
                 }}
               />
             )}

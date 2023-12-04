@@ -15,6 +15,8 @@ interface ModalState {
     | 'exitRoom'
     | 'response'
     | 'changeImage'
+    | 'joinRoom'
+    | 'joinDmRoom'
     | null
   setModalName: (
     modalName:
@@ -26,6 +28,8 @@ interface ModalState {
       | 'response'
       | 'exitRoom'
       | 'changeImage'
+      | 'joinRoom'
+      | 'joinDmRoom'
       | null,
   ) => void
   modalProps?: ModalProps | null

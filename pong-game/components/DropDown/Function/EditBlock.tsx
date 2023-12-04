@@ -6,6 +6,7 @@ interface EditBlockProps {
 }
 export default function EditBlock(props: EditBlockProps) {
   const blockHandler = async () => {
+    console.log(process.env.NEXT_PUBLIC_API_ENDPOINT)
     props.setIsDropDownView(false)
     try {
       await instance
@@ -26,6 +27,7 @@ export default function EditBlock(props: EditBlockProps) {
   }
 
   const unBlockHandler = async () => {
+    console.log(process.env.NEXT_PUBLIC_API_ENDPOINT)
     props.setIsDropDownView(false)
     try {
       await instance

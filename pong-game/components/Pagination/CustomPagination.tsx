@@ -92,7 +92,6 @@ export default function CustomPagination({
   const handlePageChange = (page: number) => {
     setPage(page)
   }
-
   return (
     <div>
       <PaginationBox>

@@ -8,6 +8,8 @@ import CreateDmRoom from '../Modal/CreateDmRoom/CreateDmRoom'
 import ReseponseModal from '../Modal/ResponseModal/ReseponseModal'
 import ExitRoom from '../Modal/ExitRoom/ExitRoom'
 import ChangeImage from '../Modal/ChangeImage/ChangeImage'
+import JoinRoom from '../Modal/JoinRoom/JoinRoom'
+import JoinDmRoom from '../Modal/JoinDmRoom/JoinDmRoom'
 
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
@@ -38,6 +40,8 @@ function ModalContent({}): JSX.Element {
     exitRoom: <ExitRoom />,
     response: <ReseponseModal />,
     changeImage: <ChangeImage />,
+    joinRoom: <JoinRoom />,
+    joinDmRoom: <JoinDmRoom />,
   }
   return (
     <>

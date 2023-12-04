@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import styles from './ChatRoomList.module.scss'
 import ChatListNavBarContainer from './ChatInfoLog/ChatListNavBarContainer'
 import ChatTypeListContainer from './ChatType/ChatTypeListContainer'
@@ -6,6 +6,7 @@ import { instance } from '@/util/axios'
 import { useGetChannels } from '@/store/chat'
 import CustomPagination from '../Pagination/CustomPagination'
 import { useNavBarState } from '@/store/chat'
+
 function ChatRoomList(): JSX.Element {
   const {
     setAllChannels,
@@ -72,7 +73,7 @@ function ChatRoomList(): JSX.Element {
         <ChatListNavBarContainer />
         <ChatTypeListContainer />
       </div>
-      {tabState === '1' && (
+      {tabState === 'ENTIRE' && (
         <CustomPagination
           page={page}
           setPage={setPage}
@@ -80,7 +81,7 @@ function ChatRoomList(): JSX.Element {
           totalItemsCount={totalAll || 0}
         />
       )}
-      {tabState === '2' && (
+      {tabState === 'JOINED' && (
         <CustomPagination
           page={page}
           setPage={setPage}
@@ -88,7 +89,7 @@ function ChatRoomList(): JSX.Element {
           totalItemsCount={totalMe || 0}
         />
       )}
-      {tabState === '3' && (
+      {tabState === 'DM' && (
         <CustomPagination
           page={page}
           setPage={setPage}

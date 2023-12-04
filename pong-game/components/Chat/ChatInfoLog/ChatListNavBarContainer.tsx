@@ -20,16 +20,28 @@ function ChatListNavBarContainer(): JSX.Element {
 
   return (
     <nav className={styles.chatListNavBarContainer}>
-      <ChatRoomListTab name="tab" id="entireList" value="1" tabState={tabState} title="전체 목록" />
-      <ChatRoomListTab name="tab" id="joined" value="2" tabState={tabState} title="참여 목록" />
+      <ChatRoomListTab
+        name="tab"
+        id="entireList"
+        value="ENTIRE"
+        tabState={tabState}
+        title="전체 목록"
+      />
+      <ChatRoomListTab
+        name="tab"
+        id="joined"
+        value="JOINED"
+        tabState={tabState}
+        title="참여 목록"
+      />
       <ChatRoomListTab
         name="tab"
         id="facetoface"
-        value="3"
+        value="DM"
         tabState={tabState}
         title="1:1 메세지"
       />
-      {tabState === '3' ? (
+      {tabState === 'DM' ? (
         <Image
           src={addDmChat}
           alt={'make dm chat'}

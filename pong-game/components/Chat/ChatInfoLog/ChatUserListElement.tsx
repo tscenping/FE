@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import styles from './ChatUserListElement.module.scss'
 import userToggle from '@/public/img/chat/userToggle.svg'
-import userImage from '@/public/img/chat/userProfileImage.svg'
+import admin from '@/public/img/chat/Admin.svg'
+import owner from '@/public/img/chat/Owner.svg'
 import DropDown from '@/components/DropDown/DropDown'
 import { useState } from 'react'
 import { useJoinChannel } from '@/store/chat'
@@ -22,15 +23,24 @@ function ChatUserListElement(props: ChatUserListElementProps): JSX.Element {
   const [dropDownState, setDropDownState] = useState(false)
   const { myNickname } = useNickNameImage()
   const { myChannelUserType } = useJoinChannel()
-  
-  
+
+
+
   return (
     <li className={styles.chatUserListElement}>
       <section className={styles.userInfo}>
         <div className={styles.userProfileImage}>
-          <Image src={props.avatar} alt={'user profile image'} width={35} height={35} />
+          <Image src={props.avatar} alt={'user profile image'} width={45} height={45} />
         </div>
-        <span className={styles.userNickName}>{props.nickname}</span>
+        <div className={styles.userNickName}>
+          {props.channelUserType === 'ADMIN' && (
+            <Image src={admin} alt={'admin user'} width={20} height={20} />
+          )}
+          {props.channelUserType === 'OWNER' && (
+            <Image src={owner} alt={'owner user'} width={20} height={20} />
+          )}
+          <span>{props.nickname}</span>
+        </div>
       </section>
       {props.nickname !== myNickname && (
         <Image
