@@ -7,8 +7,10 @@ import EnteredRoomListSection from './EnteredRoomListSection'
 import { instance } from '@/util/axios'
 import { useGetChannels } from '@/store/chat'
 import CustomPagination from '@/components/Pagination/CustomPagination'
+import { useGetFriends } from '@/store/friend'
 
 function ChatTypeListContainer(): JSX.Element {
+  const { setAllFriends, setTotalFriendCount } = useGetFriends()
   const { tabState } = useNavBarState()
   const {
     setAllChannels,
@@ -53,6 +55,12 @@ function ChatTypeListContainer(): JSX.Element {
       })
       setDmChannels(response.data.dmChannels)
       setTotalDm(response.data.totalItemCount)
+      const responseFriend = await instance({
+        url: `https://localhost:3000/users/friends/?page=1`,
+        method: 'get',
+      })
+      setAllFriends(responseFriend.data.friends)
+      setTotalFriendCount(responseFriend.data.totalItemCount)
     } catch (error) {
       console.log('Error : ', error)
     }
@@ -60,42 +68,18 @@ function ChatTypeListContainer(): JSX.Element {
   //"tabState의 변화에 따라서 api요청 보내도록 구현"
   //"ChatRoomListTab.tsx"의 "span"요소에서 할 경우 재 렌더링 문제가 발생해서 위치 변경
   useEffect(() => {
-    if (tabState === '1') getAllChannels()
-    if (tabState === '2') getMeChannels()
-    if (tabState === '3') getDmChannels()
+    if (tabState === 'ENTIRE') getAllChannels()
+    if (tabState === 'JOINED') getMeChannels()
+    if (tabState === 'DM') getDmChannels()
   }, [tabState, page])
 
   return (
     <>
       <div className={styles.chatTypeListContainer}>
-        {tabState === '1' && <ChatRoomListSection />}
-        {tabState === '2' && <EnteredRoomListSection />}
-        {tabState === '3' && <ChatDmRoomListSection />}
+        {tabState === 'ENTIRE' && <ChatRoomListSection />}
+        {tabState === 'JOINED' && <EnteredRoomListSection />}
+        {tabState === 'DM' && <ChatDmRoomListSection />}
       </div>
-      {/* {tabState === '1' && (
-        <CustomPagination
-          page={page}
-          setPage={setPage}
-          itemsCountPerPage={10}
-          totalItemsCount={totalAll || 0}
-        />
-      )}
-      {tabState === '2' && (
-        <CustomPagination
-          page={page}
-          setPage={setPage}
-          itemsCountPerPage={10}
-          totalItemsCount={totalMe || 0}
-        />
-      )}
-      {tabState === '3' && (
-        <CustomPagination
-          page={page}
-          setPage={setPage}
-          itemsCountPerPage={10}
-          totalItemsCount={totalDm || 0}
-        />
-      )} */}
     </>
   )
 }

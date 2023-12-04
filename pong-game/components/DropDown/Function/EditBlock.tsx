@@ -5,6 +5,7 @@ interface EditBlockProps {
 }
 export default function EditBlock(props: EditBlockProps) {
   const blockHandler = async () => {
+    console.log(process.env.NEXT_PUBLIC_API_ENDPOINT)
     try {
       await instance
         .post(
@@ -24,6 +25,7 @@ export default function EditBlock(props: EditBlockProps) {
   }
 
   const unBlockHandler = async () => {
+    console.log(process.env.NEXT_PUBLIC_API_ENDPOINT)
     try {
       await instance
         .delete(`/users/blocks`, {

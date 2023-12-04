@@ -1,14 +1,37 @@
 import Image from 'next/image'
-import OpponentProfileImage from '@/public/img/chat/DmChatImage.svg'
 import styles from './DmChat.module.scss'
+import { instance } from '@/util/axios'
+import { useJoinChannel, useJoinProtectedChannel } from '@/store/chat'
 
-function DmChat(): JSX.Element {
+interface DmChantProps {
+  channelId: number //해당 dm 고유 id
+  partnerName: string //dm 챗 상대방 닉네임
+  avatar: string //dm 챗 상대방 아바타
+  status: string //dm 챗 상대방의 online/offline
+}
+
+function DmChat(props: DmChantProps): JSX.Element {
+  const { setPasswordInputRender } = useJoinProtectedChannel()
+  const { setChannelId, setChannelTitle } = useJoinChannel()
+  const joinDmChatHandler = async () => {
+    try {
+      const response = await instance({
+        url: `https://localhost:3000/channels/enter/${props.channelId}`,
+        method: 'get',
+      })
+      setChannelId(props.channelId)
+      setPasswordInputRender('CHANNEL')
+      setChannelTitle(props.partnerName)
+    } catch (error) {
+      console.log('Error : ', error)
+    }
+  }
   return (
-    <li className={styles.dmChatListContainer}>
+    <li className={styles.dmChatListContainer} onClick={joinDmChatHandler}>
       <div className={styles.profileImage}>
-        <Image src={OpponentProfileImage} alt={'Opponent Profile image'} width={60} height={60} />
+        <Image src={props.avatar} alt={'Opponent Profile image'} width={60} height={60} />
       </div>
-      <span className={styles.opponentNickName}>nickName</span>
+      <span className={styles.opponentNickName}>{props.partnerName}</span>
     </li>
   )
 }

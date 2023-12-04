@@ -1,25 +1,25 @@
 import styles from './FriendUsersListContainer.module.scss'
 import FriendUserListContainer from './FriendUserListContainer'
-import CustomPagination from '../Pagination/CustomPagination'
-import { useState } from 'react'
+import { useGetFriends } from '@/store/friend'
 
 function FrinedUsersListContainer(): JSX.Element {
-  const [page, setPage] = useState(1)
+  const { allFriends } = useGetFriends()
+
   return (
     <>
       <ul className={styles.frinedUsersListContainer}>
-        <FriendUserListContainer nickname={'sangyeki'} />
-        <FriendUserListContainer nickname={'him'} />
-        <FriendUserListContainer nickname={'jiyun'} />
-        <FriendUserListContainer nickname={'yubchoi'} />
-        <FriendUserListContainer nickname={'jang-cho'} />
-        <FriendUserListContainer nickname={'sangyeki'} />
-        <FriendUserListContainer nickname={'him'} />
-        <FriendUserListContainer nickname={'jiyun'} />
-        <FriendUserListContainer nickname={'yubchoi'} />
-        <FriendUserListContainer nickname={'jang-cho'} />
+        {allFriends.map((friend) => (
+          <FriendUserListContainer
+            key={friend.id}
+            nickname={friend.nickname}
+            avatar={friend.avatar}
+            id={friend.id}
+            status={friend.status}
+            isFriend={true}
+            isBlocked={false}
+          />
+        ))}
       </ul>
-      <CustomPagination page={page} setPage={setPage} itemsCountPerPage={10} totalItemsCount={20} />
     </>
   )
 }

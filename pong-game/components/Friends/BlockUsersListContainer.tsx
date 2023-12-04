@@ -2,19 +2,31 @@ import { useState } from 'react'
 import styles from './BlockUsersListContainer.module.scss'
 import FriendUserListContainer from './FriendUserListContainer'
 import CustomPagination from '../Pagination/CustomPagination'
-
+import { useFriendSetPage, useGetBlocks } from '@/store/friend'
 function BlockUsersListContainer(): JSX.Element {
-  const [page, setPage] = useState(1)
+  const { friendPage, setFriendPage } = useFriendSetPage()
+  const { allBlocks, totalBlockCount } = useGetBlocks()
   return (
     <>
       <ul className={styles.frinedUsersListContainer}>
-        <FriendUserListContainer nickname={'sangyeki'} />
-        <FriendUserListContainer nickname={'him'} />
-        <FriendUserListContainer nickname={'jiyun'} />
-        <FriendUserListContainer nickname={'yubchoi'} />
-        <FriendUserListContainer nickname={'jang-cho'} />
+        {allBlocks.map((block) => (
+          <FriendUserListContainer
+            key={block.id}
+            id={block.id}
+            nickname={block.nickname}
+            avatar={block.avatar}
+            status={block.status}
+            isFriend={false}
+            isBlocked={true}
+          />
+        ))}
       </ul>
-      <CustomPagination page={page} setPage={setPage} itemsCountPerPage={10} totalItemsCount={20} />
+      {/* <CustomPagination
+        page={friendPage}
+        setPage={setFriendPage}
+        itemsCountPerPage={10}
+        totalItemsCount={totalBlockCount}
+      /> */}
     </>
   )
 }

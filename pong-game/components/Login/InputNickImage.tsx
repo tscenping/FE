@@ -6,7 +6,7 @@ import styles from './InputNickImage.module.scss'
 import { instance } from '@/util/axios'
 import NickNameInput from './NickNameInput'
 
-const defaultProfileImage = process.env.NEXT_PUBLIC_API_DEFAULT_PROFILE_IMAGE
+const defaultProfileImage = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
 function InputNickImage(): JSX.Element {
   const [uploadImage, setUploadImage] = useState<string>(defaultProfileImage) //기본 이미지를 초기값으로 세팅
@@ -94,7 +94,9 @@ function InputNickImage(): JSX.Element {
             </div>
           ) : (
             <div className={styles.profileImageShow}>
-              {imagePreview && <Image src={imagePreview} alt={'selectedImage'} width={100} height={100} />}
+              {imagePreview && (
+                <Image src={imagePreview} alt={'selectedImage'} width={100} height={100} />
+              )}
             </div>
           )}
           <label htmlFor="profileImage" className={styles.inputImageButton}>

@@ -1,0 +1,9 @@
+.frindPageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  .friendPageTop {
+    height: 1000px;
+  }
+}

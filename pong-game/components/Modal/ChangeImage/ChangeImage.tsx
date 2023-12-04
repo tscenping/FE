@@ -7,7 +7,7 @@ import { useModalState } from '@/store/store'
 import { instance } from '@/util/axios'
 import { useNickNameImage } from '@/store/login'
 
-const defaultProfileImage = process.env.NEXT_PUBLIC_API_DEFAULT_PROFILE_IMAGE
+const defaultProfileImage = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
 const ChangeImage = (): JSX.Element => {
   const { modalProps, setModalName } = useModalState()
@@ -71,39 +71,38 @@ const ChangeImage = (): JSX.Element => {
     setModalName(null)
   }
   return (
-    <>
+    <div className={styles.changeImageModalContainer}>
       <ModalPageTitle title="Profile Image" subTitle="원하는 이미지로 프로필 이미지를 바꿔보세요" />
-      <div>
-        <section className={styles.profileImage}>
-          <div className={styles.profileImageShow}>
-            <Image src={imagePreview} alt={'selectedImage'} width={100} height={100} />
-          </div>
-          <button
-            onClick={() => {
-              setImagePreview(defaultProfileImage)
-              setUploadImage(defaultProfileImage)
-            }}
-          >
-            기본 이미지 변경
-          </button>
-          <label htmlFor="profileImage" className={styles.inputImageButton}>
-            사진선택
-          </label>
-          <input
-            type="file"
-            id="profileImage"
-            className={styles.inputImage}
-            accept="image/*"
-            onChange={onImageHandler}
-          />
-          <p className={styles.imageExplanation}>사진은 1장, 최대 15MB만 가능합니다.</p>
-        </section>
-        <div>
-          <button onClick={imageChangeHandler}>확 인</button>
-          <button onClick={modalHandler}>취 소</button>
+      <section className={styles.profileImage}>
+        <div className={styles.profileImageShow}>
+          <Image src={imagePreview} alt={'selectedImage'} width={100} height={100} />
         </div>
+        <button
+          onClick={() => {
+            setImagePreview(defaultProfileImage)
+            setUploadImage(defaultProfileImage)
+          }}
+          className={styles.defaultBtn}
+        >
+          기본 이미지 변경
+        </button>
+        <label htmlFor="profileImage" className={styles.inputImageButton}>
+          사진선택
+        </label>
+        <input
+          type="file"
+          id="profileImage"
+          className={styles.inputImage}
+          accept="image/*"
+          onChange={onImageHandler}
+        />
+        <p className={styles.imageExplanation}>사진은 1장, 최대 15MB만 가능합니다.</p>
+      </section>
+      <div className={styles.changeHandler}>
+        <button onClick={imageChangeHandler}>확 인</button>
+        <button onClick={modalHandler}>취 소</button>
       </div>
-    </>
+    </div>
   )
 }
 

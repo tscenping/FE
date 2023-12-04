@@ -20,6 +20,8 @@
     margin-right: 32px;
     img {
       padding: 16px;
+      object-fit: cover;
+      border-radius: 50%;
     }
   }
   .profileImage::after {
