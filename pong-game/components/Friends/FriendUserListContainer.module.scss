@@ -19,6 +19,10 @@
     strong {
       margin-left: 32px;
     }
+    img {
+      border-radius: 50%;
+      object-fit: cover;
+    }
   }
   .friendUserToggle {
     display: flex;

@@ -34,25 +34,6 @@ function ChatLog(): JSX.Element {
           <OpponentMessage />
         </>
       )}
-      {/* <OpponentMessage />
-      <MyMessage />
-      <OpponentMessage />
-      <MyMessage />
-      <OpponentMessage />
-      <MyMessage />
-      <OpponentMessage />
-      <MyMessage />
-      <OpponentMessage />
-      <MyMessage />
-      <OpponentMessage />
-      <MyMessage />
-      <OpponentMessage />
-      <MyMessage />
-      <OpponentMessage />
-      <MyMessage />
-      <OpponentMessage />
-      <OpponentMessage />
-      <OpponentMessage /> */}
     </div>
   )
 }

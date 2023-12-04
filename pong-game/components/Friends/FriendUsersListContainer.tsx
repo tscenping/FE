@@ -1,18 +1,16 @@
-import { useState } from 'react'
 import styles from './FriendUsersListContainer.module.scss'
 import FriendUserListContainer from './FriendUserListContainer'
-import CustomPagination from '../Pagination/CustomPagination'
-import { useGetFriends, useFriendSetPage } from '@/store/friend'
+import { useGetFriends } from '@/store/friend'
 
 function FrinedUsersListContainer(): JSX.Element {
-  const { friendPage, setFriendPage } = useFriendSetPage()
-  const { allFriends, totalFriendCount } = useGetFriends()
+  const { allFriends } = useGetFriends()
 
   return (
     <>
       <ul className={styles.frinedUsersListContainer}>
         {allFriends.map((friend) => (
           <FriendUserListContainer
+            key={friend.id}
             nickname={friend.nickname}
             avatar={friend.avatar}
             id={friend.id}
@@ -21,23 +19,7 @@ function FrinedUsersListContainer(): JSX.Element {
             isBlocked={false}
           />
         ))}
-        {/* <FriendUserListContainer nickname={'sangyeki'} />
-        <FriendUserListContainer nickname={'him'} />
-        <FriendUserListContainer nickname={'jiyun'} />
-        <FriendUserListContainer nickname={'yubchoi'} />
-        <FriendUserListContainer nickname={'jang-cho'} />
-        <FriendUserListContainer nickname={'sangyeki'} />
-        <FriendUserListContainer nickname={'him'} />
-        <FriendUserListContainer nickname={'jiyun'} />
-        <FriendUserListContainer nickname={'yubchoi'} />
-        <FriendUserListContainer nickname={'jang-cho'} /> */}
       </ul>
-      <CustomPagination
-        page={friendPage}
-        setPage={setFriendPage}
-        itemsCountPerPage={10}
-        totalItemsCount={totalFriendCount}
-      />
     </>
   )
 }

@@ -16,8 +16,8 @@ function SearchUsers(): JSX.Element {
         url: `https://localhost:3000/users/profile/${inputRef.current.value}`,
         method: 'get',
       })
-      setUser(response.data)
       console.log(response)
+      setUser(response.data)
     } catch (error) {
       console.log('Error : ', error)
     }

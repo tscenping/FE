@@ -6,11 +6,13 @@ import SearchUsers from './SearchUsers/SearchUsers'
 import { useFriendSetPage, useGetFriends, useGetBlocks } from '@/store/friend'
 import { instance } from '@/util/axios'
 import CustomPagination from '../Pagination/CustomPagination'
+import CustomPaginationGroup from './CustomPaginationGroup'
+import styles from './FriendsMainContents.module.scss'
 
 function FriendsMainContents(): JSX.Element {
-  const { tabState } = useFriendSetPage()
-  const { setAllFriends, setTotalFriendCount } = useGetFriends()
-  const { setAllBlocks, setTotalBlockCount } = useGetBlocks()
+  const { tabState, friendPage, setFriendPage } = useFriendSetPage()
+  const { setAllFriends, setTotalFriendCount, totalFriendCount } = useGetFriends()
+  const { setAllBlocks, setTotalBlockCount, totalBlockCount } = useGetBlocks()
 
   const getAllFriend = async () => {
     try {
@@ -43,12 +45,31 @@ function FriendsMainContents(): JSX.Element {
   }, [tabState])
 
   return (
-    <>
-      <FriendTypeNaviContainer tabState={tabState} />
-      {tabState === 'ALL' && <FrinedUsersListContainer />}
-      {tabState === 'BLOCK' && <BlockUsersListContainer />}
-      {tabState === 'SEARCH' && <SearchUsers />}
-    </>
+    <div className={styles.frindPageContainer}>
+      <div className={styles.friendPageTop}>
+        <FriendTypeNaviContainer tabState={tabState} />
+        {tabState === 'ALL' && <FrinedUsersListContainer />}
+        {tabState === 'BLOCK' && <BlockUsersListContainer />}
+        {tabState === 'SEARCH' && <SearchUsers />}
+      </div>
+      {/* <CustomPaginationGroup /> */}
+      {tabState === 'ALL' && (
+        <CustomPagination
+          page={friendPage}
+          setPage={setFriendPage}
+          itemsCountPerPage={10}
+          totalItemsCount={totalFriendCount}
+        />
+      )}
+      {tabState === 'BLOCK' && (
+        <CustomPagination
+          page={friendPage}
+          setPage={setFriendPage}
+          itemsCountPerPage={10}
+          totalItemsCount={totalBlockCount}
+        />
+      )}
+    </div>
   )
 }
 

@@ -20,7 +20,7 @@ function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Eleme
     <>
       <li className={styles.friendUserListContainer}>
         <div className={styles.friendUserImageNickName}>
-          <Image src={profileImage} alt={'user profile image'} width={80} height={80} />
+          <Image src={props.avatar} alt={'user profile image'} width={80} height={80} />
           <strong>{props.nickname}</strong>
         </div>
         <div className={styles.friendUserToggle}>

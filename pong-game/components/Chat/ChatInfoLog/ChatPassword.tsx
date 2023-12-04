@@ -9,13 +9,11 @@ import { instance } from '@/util/axios'
 
 function ChatPassword(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement>(null)
-  const { channelTitle, channelId, setPasswordInputRender } = useJoinProtectedChannel() //해당 채널 이름과 채널 id를 렌더링, api요청 하기 위해 타이틀 전역변수 가져오기
-  const { setChannelUserInfo, setMyChannelUserType } = useJoinChannel()
+  const { channelId, setPasswordInputRender } = useJoinProtectedChannel() //해당 채널 이름과 채널 id를 렌더링, api요청 하기 위해 타이틀 전역변수 가져오기
+  const { setChannelUserInfo, setMyChannelUserType, setChannelTitle, channelTitle } =
+    useJoinChannel()
 
   const passwordHandler = async (e) => {
-    // console.log(channelTitle)
-    // console.log(channelId)
-    // console.log(passwordRef.current.value)
     e.preventDefault()
     const datas = { channelId: channelId, password: passwordRef.current.value }
     try {
@@ -33,6 +31,7 @@ function ChatPassword(): JSX.Element {
         setChannelUserInfo(response.data.channelUsers)
         setMyChannelUserType(response.data.myChannelUserType)
         setPasswordInputRender('CHANNEL')
+        setChannelTitle(channelTitle)
       }
     } catch (error) {
       console.log('Error : ', error)

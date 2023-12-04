@@ -4,7 +4,7 @@ import profileImage from '@/public/img/chat/userProfileImage.svg'
 import toggle from '@/public/img/chat/userToggle.svg'
 import React, { useState } from 'react'
 import DropDown from '@/components/DropDown/DropDown'
-
+import { useNickNameImage } from '@/store/login'
 interface SearchUserListContainerprops {
   nickname: string
   avatar: string
@@ -15,20 +15,23 @@ interface SearchUserListContainerprops {
 
 function SearchUserListContainer(props: SearchUserListContainerprops): JSX.Element {
   const [dropDownState, setDropDownState] = useState(false)
-
+  const { myNickname } = useNickNameImage()
+  console.log(myNickname)
   return (
     <>
       <li className={styles.friendUserListContainer}>
         <div className={styles.friendUserImageNickName}>
-          <Image src={profileImage} alt={'user profile image'} width={80} height={80} />
+          <Image src={props.avatar} alt={'user profile image'} width={80} height={80} />
           <strong>{props.nickname}</strong>
         </div>
         <div className={styles.friendUserToggle}>
-          <Image
-            src={toggle}
-            alt={'user edit toggle button'}
-            onClick={() => setDropDownState((prev) => !prev)}
-          />
+          {myNickname !== props.nickname && (
+            <Image
+              src={toggle}
+              alt={'user edit toggle button'}
+              onClick={() => setDropDownState((prev) => !prev)}
+            />
+          )}
           <div>
             {dropDownState && (
               <DropDown

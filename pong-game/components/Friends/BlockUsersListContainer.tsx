@@ -11,6 +11,7 @@ function BlockUsersListContainer(): JSX.Element {
       <ul className={styles.frinedUsersListContainer}>
         {allBlocks.map((block) => (
           <FriendUserListContainer
+            key={block.id}
             id={block.id}
             nickname={block.nickname}
             avatar={block.avatar}
@@ -19,18 +20,13 @@ function BlockUsersListContainer(): JSX.Element {
             isBlocked={true}
           />
         ))}
-        {/* <FriendUserListContainer nickname={'sangyeki'} />
-        <FriendUserListContainer nickname={'him'} />
-        <FriendUserListContainer nickname={'jiyun'} />
-        <FriendUserListContainer nickname={'yubchoi'} />
-        <FriendUserListContainer nickname={'jang-cho'} /> */}
       </ul>
-      <CustomPagination
+      {/* <CustomPagination
         page={friendPage}
         setPage={setFriendPage}
         itemsCountPerPage={10}
         totalItemsCount={totalBlockCount}
-      />
+      /> */}
     </>
   )
 }
