@@ -16,11 +16,12 @@ interface FriendUserListContainerprops {
 
 function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Element {
   const [dropDownState, setDropDownState] = useState(false)
+  const baseImg = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
   return (
     <>
       <li className={styles.friendUserListContainer}>
         <div className={styles.friendUserImageNickName}>
-          <Image src={props.avatar} alt={'user profile image'} width={80} height={80} />
+          <Image src={props.avatar ? props.avatar : baseImg} alt={'user profile image'} width={80} height={80} />
           <strong>{props.nickname}</strong>
         </div>
         <div className={styles.friendUserToggle}>

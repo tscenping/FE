@@ -12,11 +12,14 @@ interface RankUserListProps {
 
 export default function RankUserList({
   nickname,
-  // avatar,
+  avatar,
   ladderScore,
   ranking,
 }: RankUserListProps) {
   const { setModalName, setModalProps } = useModalState()
+  const baseImg = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
+
+
 
   function setModalPropsValue(nickname: string) {
     setModalName('userProfile')
@@ -33,7 +36,7 @@ export default function RankUserList({
         >
           <span className={styles.rank}>{ranking}. </span>
           <span className={styles.userName}>
-            {/* <Image src={profileImage} alt={'profileImage'} width={64} /> */}
+            <Image src={avatar ? avatar : baseImg} alt={'profileImage'} width={64} height={64}/>
             {nickname}
           </span>
         </div>

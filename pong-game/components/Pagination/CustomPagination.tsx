@@ -47,11 +47,11 @@ const PaginationBox = styled.div`
     display: inline-block;
     width: 24px;
     height: 24px;
-    border: 1px solid #e2e2e2;
+    /* border: 1px solid #e2e2e2; */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 24px;
     cursor: pointer;
   }
   ul.pagination li:first-child {
@@ -62,18 +62,23 @@ const PaginationBox = styled.div`
   }
   ul.pagination li a {
     text-decoration: none;
-    color: #337ab7;
-    font-size: 14px;
+    color: #2c73ff;
+    font-size: 16px;
   }
   ul.pagination li.active a {
-    color: white;
+    /* color: white; */
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration-line: underline;
   }
   ul.pagination li.active {
-    background-color: #337ab7;
+    /* background-color: #337ab7; */
   }
   ul.pagination li a:hover,
   ul.pagination li a.active {
-    color: blue;
+    /* color: blue; */
+    scale: 1.3;
+    animation: scale 0.3s ease-in-out;
   }
 `
 interface CustomPaginationProps {

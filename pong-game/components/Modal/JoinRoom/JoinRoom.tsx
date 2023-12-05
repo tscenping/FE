@@ -34,7 +34,7 @@ function JoinRoom(): JSX.Element {
         setModalName(null)
       }
     } catch (error) {
-      console.log('Error : ', error)
+      setModalName(null)
     }
   }
 
