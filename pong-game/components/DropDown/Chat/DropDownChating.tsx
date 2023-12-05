@@ -51,11 +51,13 @@ export default function DropDownChating(props: DropDownChatingProps) {
       <EditFriend
         isFriend={props.isFriend}
         friendId={props.id}
+        nickname={props.nickname}
         setIsDropDownView={props.setIsDropDownView}
       />
       <EditBlock
         isBlocked={props.isBlocked}
         friendId={props.id}
+        nickname={props.nickname}
         setIsDropDownView={props.setIsDropDownView}
       />
       <OpenProfile nickname={props.nickname} setIsDropDownView={props.setIsDropDownView} />

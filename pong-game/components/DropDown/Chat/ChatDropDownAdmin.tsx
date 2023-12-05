@@ -1,4 +1,4 @@
-import ChatBen from '../Function/ChatBen'
+import ChatBan from '../Function/ChatBan'
 import ChatKick from '../Function/ChatKick'
 import ChatMute from '../Function/ChatMute'
 import EditFriend from '../Function/EditFriend'
@@ -19,9 +19,13 @@ export default function ChatDropDownAdmin(props: ChatDropDownOwnerProps) {
     <>
       {props.channelUserType === 'MEMBER' && (
         <>
-          <ChatKick channelUserType={props.channelUserType} channelUserId={props.channelUserId} nickname={props.nickname}/>
-          <ChatMute />
-          <ChatBen />
+          <ChatKick
+            channelUserType={props.channelUserType}
+            channelUserId={props.channelUserId}
+            nickname={props.nickname}
+          />
+          <ChatMute channelUserId={props.channelUserId} />
+          <ChatBan channelUserId={props.channelUserId} />
         </>
       )}
       {/* <EditFriend isFriend={props.isFriend} /> */}

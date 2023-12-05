@@ -42,6 +42,7 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
   } = userProfileInfo.userProfileProps
   const [dropDownState, setDropDownState] = useState(false)
   const {myNickname} = useNickNameImage()
+  const baseImg = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
   function LineThreeContent(props: { title: string; content: string }) {
     return (
@@ -69,7 +70,7 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
       <section className={styles.lineOne}>
         <div className={styles.profileNickName}>
           <div className={styles.profileImg}>
-            <Image src={avatar} alt={'profileImage'} width={80} height={80} />
+            <Image src={avatar ? avatar : baseImg} alt={'profileImage'} width={80} height={80} />
           </div>
           <div className={styles.nickName}>{nickname}</div>
           { myNickname !== nickname &&  <Image
@@ -87,10 +88,10 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
                 setIsDropDownView={setDropDownState}
                 dropDownState="userProfile"
                 userProfile={{
-                  id: 1,
+                  id: id,
                   nickname: nickname,
-                  isFriend: true,
-                  isBlocked: false,
+                  isFriend: isFriend,
+                  isBlocked: isBlocked,
                 }}
               />
             )}
