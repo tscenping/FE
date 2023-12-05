@@ -1,5 +1,6 @@
 import axios from 'axios'
 import https from 'https'
+
 import { NextRouter, useRouter } from 'next/router'
 
 const baseURL = process.env.NEXT_PUBLIC_API_ENDPOINT
@@ -29,8 +30,15 @@ instance.interceptors.response.use(
     return response
   },
   function handleError(error) {
+    // const { modalName } = useModalState()
+    // const { setResponseModalState }= useResponseModalState()
     // const router: NextRouter = useRouter()
-    if (error.response && error.response.status === 401) {
+    if (error.response && error.response.status === 400) {
+      alert(error.response.data.message)
+      // setResponseModalState('에러', error.response.data.message, null)
+      // setModalName('response')
+      // store.dispatch('setResponseModalState', {
+
       // window.location.href = '/login'
       // router.push('/login')
     }
