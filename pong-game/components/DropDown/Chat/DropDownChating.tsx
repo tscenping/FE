@@ -10,42 +10,57 @@ import OpenProfile from '../Function/OpenProfile'
 interface DropDownChatingProps {
   id: number
   nickname: string
-  avatar: string
   isFriend: boolean
   isBlocked: boolean
   channelUserId: number
-  myChannelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
-  channelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
+  myChannelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
+  channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
   setIsDropDownView: (v: boolean) => void
+  setChannelUserType: (v: 'OWNER' | 'ADMIN' | 'MEMBER') => void
 }
 
-type DropDownKey = 'OWNER' | 'ADMIN' | 'COMMON'
+type DropDownKey = 'OWNER' | 'ADMIN' | 'MEMBER'
 
 export default function DropDownChating(props: DropDownChatingProps) {
   const dropDownContent: { [key in DropDownKey]: JSX.Element | null } = {
-    OWNER: <ChatDropDownOwner channelUserType={props.channelUserType} nickname={props.nickname} channelUserId={props.channelUserId}/>,
+    OWNER: (
+      <ChatDropDownOwner
+        channelUserType={props.channelUserType}
+        nickname={props.nickname}
+        channelUserId={props.channelUserId}
+        setIsDropDownView={props.setIsDropDownView}
+        setChannelUserType={props.setChannelUserType}
+      />
+    ),
     ADMIN: (
       <ChatDropDownAdmin
         channelUserType={props.channelUserType}
-        setIsDropDownView={props.setIsDropDownView}
         nickname={props.nickname}
-        isBlocked={props.isBlocked}
-        isFriend={props.isFriend}
+        channelUserId={props.channelUserId}
+        setIsDropDownView={props.setIsDropDownView}
       />
     ),
-    COMMON: <ChatDropDownCommon />,
+    MEMBER: <ChatDropDownCommon />,
   }
+  console.log(props.myChannelUserType)
 
   return (
     <ul className={styles.DropDownChating}>
       {dropDownContent[props.myChannelUserType]}
-      
-      <EditFriend isFriend={props.isFriend} friendId={props.id}/>
-      <EditBlock isBlocked={props.isBlocked} friendId={props.id}/>
-      <OpenProfile nickname={props.nickname} setIsDropDownView={props.setIsDropDownView}/>
+
+      <EditFriend
+        isFriend={props.isFriend}
+        friendId={props.id}
+        setIsDropDownView={props.setIsDropDownView}
+      />
+      <EditBlock
+        isBlocked={props.isBlocked}
+        friendId={props.id}
+        setIsDropDownView={props.setIsDropDownView}
+      />
+      <OpenProfile nickname={props.nickname} setIsDropDownView={props.setIsDropDownView} />
       <InviteGame />
       <DirectMsg />
-      
     </ul>
   )
 }

@@ -1,5 +1,5 @@
-import BasicPongGame from '@/components/Game/BasicPongGame'
-import GameScore from '@/components/Game/GameScore'
+import BasicPongGame from '@/components/Game/Match/BasicPongGame'
+import GameScore from '@/components/Game/Match/GameScore'
 import PageTitle from '@/components/UI/PageTitle'
 
 export default function Game() {

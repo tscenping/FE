@@ -15,13 +15,17 @@ interface ChatUserListElementProps {
   avatar?: string
   isFriend?: boolean
   isBlocked?: boolean
-  channelUserType: 'OWNER' | 'ADMIN' | 'COMMON'
+  channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
 }
+type ChannelUserType =  'OWNER' | 'ADMIN' | 'MEMBER'
 
 function ChatUserListElement(props: ChatUserListElementProps): JSX.Element {
   const [dropDownState, setDropDownState] = useState(false)
   const { myNickname } = useNickNameImage()
   const { myChannelUserType } = useJoinChannel()
+
+  const [channelUserType, setChannelUserType] = useState<ChannelUserType>(props.channelUserType)
+
 
   return (
     <li className={styles.chatUserListElement}>
@@ -53,22 +57,15 @@ function ChatUserListElement(props: ChatUserListElementProps): JSX.Element {
           isDropDownView={dropDownState}
           setIsDropDownView={setDropDownState}
           dropDownState="chating"
-          userProfile={{
-            id: props.userId,
-            nickname: props.nickname,
-            avatar: props.avatar,
-            isFriend: props.isFriend,
-            isBlocked: props.isBlocked,
-          }}
           chating={{
             id: props.userId,
             myChannelUserType: myChannelUserType,
             channelUserId: props.channelUserId,
             nickname: props.nickname,
-            avatar: props.avatar,
             isFriend: props.isFriend,
             isBlocked: props.isBlocked,
             channelUserType: props.channelUserType,
+            setChannelUserType: setChannelUserType,
             setIsDropDownView: setDropDownState,
           }}
         />

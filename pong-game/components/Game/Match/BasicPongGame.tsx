@@ -9,8 +9,8 @@ const BasicPongGame: React.FC = () => {
 
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
-    const grid = 15
-    const paddleHeight = grid * 10 // 80
+    const grid = 10
+    const paddleHeight = grid * 25 // 80
     const maxPaddleY = canvas.height - grid - paddleHeight
 
     var paddleSpeed = 10
@@ -42,8 +42,8 @@ const BasicPongGame: React.FC = () => {
       // start in the middle of the game
       x: canvas.width / 2,
       y: canvas.height / 2,
-      width: grid,
-      height: grid,
+      width: grid * 1.5,
+      height: grid* 1.5,
 
       // keep track of when need to reset the ball position
       resetting: false,
@@ -64,7 +64,11 @@ const BasicPongGame: React.FC = () => {
 
     function loop() {
       requestAnimationFrame(loop)
+      
       context.clearRect(0, 0, canvas.width, canvas.height)
+      context.fillStyle = '#71A1FF';
+      
+      context.fillRect(0, 0, canvas.width, canvas.height)
       // move paddles by their velocity
       leftPaddle.y += leftPaddle.dy
       rightPaddle.y += rightPaddle.dy
@@ -129,6 +133,7 @@ const BasicPongGame: React.FC = () => {
       }
 
       // draw ball
+      
       context.fillRect(ball.x, ball.y, ball.width, ball.height)
 
       // draw walls

@@ -38,7 +38,6 @@ function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Eleme
                 userProfile={{
                   id: props.id,
                   nickname: props.nickname,
-                  avatar: props.avatar,
                   isFriend: props.isFriend,
                   isBlocked: props.isBlocked,
                 }}

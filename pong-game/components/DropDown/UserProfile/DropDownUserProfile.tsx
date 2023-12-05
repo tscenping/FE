@@ -31,8 +31,8 @@ export default function DropDownUserProfile({
   }
   return (
     <ul className={styles.DropDownUserProfile}>
-      <EditFriend isFriend={isFriend} friendId={id} />
-      <EditBlock isBlocked={isBlocked} friendId={id} />
+      <EditFriend isFriend={isFriend} friendId={id} setIsDropDownView={setIsDropDownView}/>
+      <EditBlock isBlocked={isBlocked} friendId={id} setIsDropDownView={setIsDropDownView}/>
       {modalName !== 'userProfile' && <OpenProfile nickname={nickname} setIsDropDownView={setIsDropDownView} />}
       {/* <button
         onClick={() => {

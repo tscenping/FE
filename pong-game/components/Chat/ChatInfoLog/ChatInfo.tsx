@@ -10,8 +10,8 @@ function ChatInfo(): JSX.Element {
   const { channelAuth, channelType, channelTitle, channelId } = useJoinChannel()
   const { setModalName } = useModalState()
 
-  const channelInviteIcon = //채널의 타입이 "PRIVATE"가 아니고 혹은 채널의 타입은 "PRIVATE"이지만 유저의 권한이 "COMMON"일때
-    channelType !== 'PRIVATE' || channelAuth === 'COMMON' ? styles.none : styles.show
+  const channelInviteIcon = //채널의 타입이 "PRIVATE"가 아니고 혹은 채널의 타입은 "PRIVATE"이지만 유저의 권한이 "MEMBER"일때
+    channelType !== 'PRIVATE' || channelAuth === 'MEMBER' ? styles.none : styles.show
 
   const channelSettingIcon = //채널의 타입이 "PROTECTED"이거나 "PUBLIC"이고 채널의 "OWNER"일때
     (channelType === 'PROTECTED' || channelType === 'PUBLIC') && channelAuth === 'OWNER'
