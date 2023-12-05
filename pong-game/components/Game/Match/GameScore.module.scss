@@ -1,0 +1,34 @@
+.scoreHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  width: 1200px;
+  .score {
+    font-size: 64px;
+    font-weight: bold;
+  }
+  .leftProfile {
+    display: flex;
+    width: 35%;
+    align-items: center;
+    .leftNickname {
+      font-size: 32px;
+    }
+    .leftAvatar {
+      margin: 0 24px 0 24px;
+    }
+  }
+  .rightProfile {
+    display: flex;
+    width: 35%;
+    align-items: center;
+    justify-content: flex-end;
+    .rightNickname {
+      font-size: 32px;
+    }
+    .rightAvatar {
+      margin: 0 24px 0 24px;
+    }
+  }
+}

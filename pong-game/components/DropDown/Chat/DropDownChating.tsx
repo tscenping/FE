@@ -10,13 +10,13 @@ import OpenProfile from '../Function/OpenProfile'
 interface DropDownChatingProps {
   id: number
   nickname: string
-  avatar: string
   isFriend: boolean
   isBlocked: boolean
   channelUserId: number
   myChannelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
   channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
   setIsDropDownView: (v: boolean) => void
+  setChannelUserType: (v: 'OWNER' | 'ADMIN' | 'MEMBER') => void
 }
 
 type DropDownKey = 'OWNER' | 'ADMIN' | 'MEMBER'
@@ -29,6 +29,7 @@ export default function DropDownChating(props: DropDownChatingProps) {
         nickname={props.nickname}
         channelUserId={props.channelUserId}
         setIsDropDownView={props.setIsDropDownView}
+        setChannelUserType={props.setChannelUserType}
       />
     ),
     ADMIN: (

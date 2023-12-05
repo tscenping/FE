@@ -89,7 +89,6 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
                 userProfile={{
                   id: 1,
                   nickname: nickname,
-                  avatar: 'avatar-url',
                   isFriend: true,
                   isBlocked: false,
                 }}

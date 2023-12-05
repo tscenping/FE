@@ -15,7 +15,6 @@ interface dropDownProps {
 
 interface userProfileDorpDownProps {
   id: number
-  avatar: string
   nickname: string
   isFriend: boolean
   isBlocked: boolean
@@ -25,13 +24,13 @@ interface userProfileDorpDownProps {
 interface DropDownChatingProps {
   id: number
   nickname: string
-  avatar: string
   isFriend: boolean
   channelUserId: number
   isBlocked: boolean
   myChannelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
   channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
   setIsDropDownView: (v: boolean) => void
+  setChannelUserType: (v: 'OWNER' | 'ADMIN' | 'MEMBER') => void
 }
 
 export default function DropDown({
@@ -45,7 +44,6 @@ export default function DropDown({
     userProfile: (
       <DropDownUserProfile
         id={userProfile?.id}
-        avatar={userProfile?.avatar}
         nickname={userProfile?.nickname}
         isFriend={userProfile?.isFriend}
         isBlocked={userProfile?.isBlocked}
@@ -57,11 +55,11 @@ export default function DropDown({
         id={chating?.id}
         channelUserId={chating?.channelUserId}
         nickname={chating?.nickname}
-        avatar={chating?.avatar}
         isFriend={chating?.isFriend}
         isBlocked={chating?.isBlocked}
         myChannelUserType={chating?.myChannelUserType}
         channelUserType={chating?.channelUserType}
+        setChannelUserType={chating?.setChannelUserType}
         setIsDropDownView={setIsDropDownView}
       />
     ),

@@ -16,7 +16,7 @@ interface CreatedRoomListProps {
 
 function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
   const { setPasswordInputRender, setChannelProtectedId } = useJoinProtectedChannel()
-  const { setChannelAuth, setChannelType, setChannelId, setChannelUserInfo, setChannelTitle } =
+  const { setChannelAuth, setMyChannelUserType,setChannelType, setChannelId, setChannelUserInfo, setChannelTitle } =
     useJoinChannel()
   const { setModalName } = useModalState()
   const { setTitle, setReadyChannelId } = useReadyToChannel()
@@ -33,6 +33,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
         setChannelType(props.channelType)
         setPasswordInputRender('CHANNEL')
         setChannelUserInfo(response.data.channelUsers)
+        setMyChannelUserType(response.data.myChannelUserType)
         setChannelTitle(props.title)
         setChannelId(props.channelId)
         setChannelTitle(props.title)
@@ -51,6 +52,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
           setChannelType(props.channelType)
           setPasswordInputRender('CHANNEL')
           setChannelUserInfo(response.data.channelUsers)
+          setMyChannelUserType(response.data.myChannelUserType)
           setChannelTitle(props.title)
           setChannelId(props.channelId)
         } catch (error) {

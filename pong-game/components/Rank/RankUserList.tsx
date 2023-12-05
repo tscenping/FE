@@ -33,7 +33,7 @@ export default function RankUserList({
         >
           <span className={styles.rank}>{ranking}. </span>
           <span className={styles.userName}>
-            <Image src={profileImage} alt={'profileImage'} width={64} />
+            {/* <Image src={profileImage} alt={'profileImage'} width={64} /> */}
             {nickname}
           </span>
         </div>
