@@ -10,9 +10,6 @@ interface ChatEditAdminProps {
 }
 
 export default function ChatEditAdmin(props: ChatEditAdminProps) {
-  const { setModalName } = useModalState()
-  const responseModal = useResponseModalState()
-  const { channelUserInfo, setChannelUserInfo } = useJoinChannel()
   // function changeArrayItem(newType, idToChange) {
   //   const result = channelUserInfo.map((item) => {
   //     if (item.nickname === idToChange) {
@@ -29,21 +26,6 @@ export default function ChatEditAdmin(props: ChatEditAdminProps) {
 
   //   setChannelUserInfo(result)
   // }
-  function changeArrayItem(newType, idToChange) {
-    const result = channelUserInfo.map((item) => {
-      if (item.nickname === idToChange) {
-        return {
-          ...item,
-          channelUserType: newType,
-        }
-      } else {
-        return {
-          ...item,
-        }
-      }
-    })
-    setChannelUserInfo(result)
-  }
   // function changeArrayItem(newType, idToChange) {
   //   const itemToChange = channelUserInfo.find((item) => item.nickname === idToChange)
   //   if (itemToChange) {
@@ -68,6 +50,25 @@ export default function ChatEditAdmin(props: ChatEditAdminProps) {
   //   setChannelUserInfo([...channelUserInfo])
   //   console.log(channelUserInfo)
   // }
+
+  const { setModalName } = useModalState()
+  const responseModal = useResponseModalState()
+  const { channelUserInfo, setChannelUserInfo } = useJoinChannel()
+  const changeArrayItem = (newType, idToChange) => {
+    const result = channelUserInfo.map((item) => {
+      if (item.nickname === idToChange) {
+        return {
+          ...item,
+          channelUserType: newType,
+        }
+      } else {
+        return {
+          ...item,
+        }
+      }
+    })
+    setChannelUserInfo(result)
+  }
 
   const setAdminHandler = async () => {
     console.log(props.channelUserId)
