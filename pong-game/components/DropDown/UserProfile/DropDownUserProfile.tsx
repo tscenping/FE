@@ -10,6 +10,7 @@ interface DropDownUserProfileProps {
   nickname?: string
   isFriend?: boolean
   isBlocked?: boolean
+  calledFrom?: 'searchUserList'
   setIsDropDownView: (v: boolean) => void
 }
 
@@ -19,28 +20,30 @@ export default function DropDownUserProfile({
   nickname,
   isFriend,
   isBlocked,
+  calledFrom,
   setIsDropDownView,
 }: DropDownUserProfileProps) {
   const { modalName, setModalName } = useModalState()
-  const { setModalProps } = useModalState()
 
-  function setModalPropsValue(nickname: string) {
-    setIsDropDownView(false)
-    setModalProps({ nickname: nickname })
-    setModalName('userProfile')
-  }
   return (
     <ul className={styles.DropDownUserProfile}>
-      <EditFriend isFriend={isFriend} friendId={id} setIsDropDownView={setIsDropDownView} nickname={nickname}/>
-      <EditBlock isBlocked={isBlocked} friendId={id} setIsDropDownView={setIsDropDownView} nickname={nickname}/>
-      {modalName !== 'userProfile' && <OpenProfile nickname={nickname} setIsDropDownView={setIsDropDownView} />}
-      {/* <button
-        onClick={() => {
-          setModalPropsValue(nickname)
-        }}
-      >
-        프로필보기
-      </button> */}
+      <EditFriend
+        isFriend={isFriend}
+        friendId={id}
+        setIsDropDownView={setIsDropDownView}
+        nickname={nickname}
+        calledFrom={calledFrom}
+      />
+      <EditBlock
+        isBlocked={isBlocked}
+        friendId={id}
+        setIsDropDownView={setIsDropDownView}
+        nickname={nickname}
+        calledFrom={calledFrom}
+      />
+      {modalName !== 'userProfile' && (
+        <OpenProfile nickname={nickname} setIsDropDownView={setIsDropDownView} />
+      )}
       <button>게임하기</button>
       <button>1:1메세지</button>
     </ul>

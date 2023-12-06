@@ -18,6 +18,7 @@ interface userProfileDorpDownProps {
   nickname: string
   isFriend: boolean
   isBlocked: boolean
+  calledFrom?: 'searchUserList'
   // setIsDropDownView: (v: boolean) => void
 }
 
@@ -48,6 +49,7 @@ export default function DropDown({
         isFriend={userProfile?.isFriend}
         isBlocked={userProfile?.isBlocked}
         setIsDropDownView={setIsDropDownView}
+        calledFrom={userProfile?.calledFrom}
       />
     ),
     chating: (
