@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 
+//채널 목록 조회 전역상태변수
 interface useNavBarStateProps {
   tabState: 'ENTIRE' | 'JOINED' | 'DM'
   setTabState: (v: string) => void
@@ -10,6 +11,7 @@ export const useNavBarState = create<useNavBarStateProps>((set) => ({
   setTabState: (tabState: 'ENTIRE' | 'JOINED' | 'DM') => set({ tabState }),
 }))
 
+//채널 생성 모달창 전역 상태변수
 interface useCreateRoomNavBarStateProps {
   tabState: string
   setTabState: (v: string) => void
@@ -18,6 +20,17 @@ interface useCreateRoomNavBarStateProps {
 export const useCreateRoomNavBarState = create<useCreateRoomNavBarStateProps>((set) => ({
   tabState: 'publicOrProtected',
   setTabState: (tabState) => set({ tabState }),
+}))
+
+//채널 수정 모달창 전역상태변수
+interface useSettingRoomNavBarStateProps {
+  settingTabState: 'PUBLIC' | 'PROTECTED'
+  setSettingTabState: (v: string) => void
+}
+
+export const useSettingRoomNavBarState = create<useSettingRoomNavBarStateProps>((set) => ({
+  settingTabState: 'PUBLIC',
+  setSettingTabState: (settingTabState: 'PUBLIC' | 'PROTECTED') => set({ settingTabState }),
 }))
 
 // 채널에 join했을 경우 전역 상태 변수
@@ -54,7 +67,8 @@ export const useJoinChannel = create<useJoinChannelProps>((set) => ({
   channelUserInfo: [],
   setChannelId: (channelId) => set({ channelId }),
   setChannelTitle: (channelTitle) => set({ channelTitle }),
-  setMyChannelUserType: (myChannelUserType:'OWNER' | 'ADMIN' | 'MEMBER') => set({ myChannelUserType }),
+  setMyChannelUserType: (myChannelUserType: 'OWNER' | 'ADMIN' | 'MEMBER') =>
+    set({ myChannelUserType }),
   setChannelType: (channelType) => set({ channelType }),
   setChannelAuth: (channelAuth) => set({ channelAuth }),
   setChannelUserInfo: (channelUserInfo) => set({ channelUserInfo }),

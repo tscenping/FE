@@ -1,11 +1,11 @@
-import { useState, useEffect, useCallback } from 'react'
-import styles from './CreateDmRoom.module.scss'
+import { useState, useEffect } from 'react'
+import styles from './FriendUsersModal.module.scss'
 import ModalPageTitle from '@/components/UI/ModalPageTitle'
-import opponentProfileImage from '@/public/img/chat/userProfileImage.svg'
 import CustomPagination from '@/components/Pagination/CustomPagination'
 import UserList from './UserList'
 import { instance } from '@/util/axios'
 import { useGetFriends } from '@/store/friend'
+import { useModalState } from '@/store/store'
 
 interface userinfoProps {
   id: number
@@ -14,8 +14,9 @@ interface userinfoProps {
   status: string
 }
 
-function CreateDmRoom(): JSX.Element {
+function FriendUsersModal(): JSX.Element {
   const [page, setPage] = useState(1)
+  const { modalProps } = useModalState()
 
   const { allFriends, setAllFriends, totalFriendCount } = useGetFriends()
   const getAllFriendHandler = async () => {
@@ -37,7 +38,12 @@ function CreateDmRoom(): JSX.Element {
   return (
     <div className={styles.createDmRoomContent}>
       <div>
-        <ModalPageTitle title="DM 생성" subTitle="대화를 나눌 유저를 선택해주세요" />
+        {modalProps.modalType === 'DM' && (
+          <ModalPageTitle title="DM 생성" subTitle="대화를 나눌 유저를 선택해주세요" />
+        )}
+        {modalProps.modalType === 'INVITE' && (
+          <ModalPageTitle title="친구 초대" subTitle="대화를 나눌 유저를 선택해주세요" />
+        )}
         <ul className={styles.usersContainer}>
           {allFriends &&
             allFriends.map((friend) => (
@@ -51,14 +57,16 @@ function CreateDmRoom(): JSX.Element {
             ))}
         </ul>
       </div>
-      <CustomPagination
-        page={page}
-        setPage={setPage}
-        itemsCountPerPage={10}
-        totalItemsCount={totalFriendCount}
-      />
+      {totalFriendCount > 10 && (
+        <CustomPagination
+          page={page}
+          setPage={setPage}
+          itemsCountPerPage={10}
+          totalItemsCount={totalFriendCount}
+        />
+      )}
     </div>
   )
 }
 
-export default CreateDmRoom
+export default FriendUsersModal

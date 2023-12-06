@@ -10,14 +10,17 @@ interface userinfoProps {
 }
 
 function UserList(props: userinfoProps): JSX.Element {
-  const { setModalName } = useModalState()
+  const { setModalName, modalProps } = useModalState()
   const { setTitle, setReadyChannelId, setDmAvatar } = useReadyToChannel()
+
   const createDmChatHandler = async (e) => {
     setTitle(props.nickname)
     setReadyChannelId(props.id)
     setDmAvatar(props.avatar)
-    setModalName('joinDmRoom')
+    if (modalProps.modalType === 'DM') setModalName('joinDmRoom')
+    if (modalProps.modalType === 'INVITE') setModalName('inviteFriend')
   }
+
   return (
     <li className={styles.user} onClick={createDmChatHandler}>
       <Image src={props.avatar} alt={'user profile image'} width={40} height={40} />

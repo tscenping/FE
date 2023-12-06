@@ -1,5 +1,6 @@
 import { RefObject } from 'react'
 import styles from './CreateRoomInput.module.scss'
+import { useModalState } from '@/store/store'
 
 interface CreateRoomInputProps {
   tabState: string
@@ -8,6 +9,7 @@ interface CreateRoomInputProps {
 }
 
 function CreateRoomInput(props: CreateRoomInputProps): JSX.Element {
+  const { modalProps } = useModalState()
   const titleHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const truncatedValue = e.target.value.slice(0, 8)
     if (props.titleRef.current) {

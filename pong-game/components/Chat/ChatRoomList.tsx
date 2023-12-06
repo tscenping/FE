@@ -73,7 +73,7 @@ function ChatRoomList(): JSX.Element {
         <ChatListNavBarContainer />
         <ChatTypeListContainer />
       </div>
-      {tabState === 'ENTIRE' && (
+      {tabState === 'ENTIRE' && totalAll > 10 && (
         <CustomPagination
           page={page}
           setPage={setPage}
@@ -81,7 +81,7 @@ function ChatRoomList(): JSX.Element {
           totalItemsCount={totalAll || 0}
         />
       )}
-      {tabState === 'JOINED' && (
+      {tabState === 'JOINED' && totalMe > 10 && (
         <CustomPagination
           page={page}
           setPage={setPage}
@@ -89,7 +89,7 @@ function ChatRoomList(): JSX.Element {
           totalItemsCount={totalMe || 0}
         />
       )}
-      {tabState === 'DM' && (
+      {tabState === 'DM' && totalDm > 10 && (
         <CustomPagination
           page={page}
           setPage={setPage}

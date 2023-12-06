@@ -4,12 +4,14 @@ import styles from './ModalLayout.module.scss'
 import UserProfile from '../Modal/UserProfile/UserProfileModal'
 import { useModalState } from '@/store/store'
 import CreateChatRoom from '../Modal/CreateRoom/CreateRoom'
-import CreateDmRoom from '../Modal/CreateDmRoom/CreateDmRoom'
 import ReseponseModal from '../Modal/ResponseModal/ReseponseModal'
 import ExitRoom from '../Modal/ExitRoom/ExitRoom'
 import ChangeImage from '../Modal/ChangeImage/ChangeImage'
 import JoinRoom from '../Modal/JoinRoom/JoinRoom'
 import JoinDmRoom from '../Modal/JoinDmRoom/JoinDmRoom'
+import FriendUsersModal from '../Modal/FriendUsersModal/FriendUsersModal'
+import InviteFriend from '../Modal/InviteFriend/InviteFriend'
+import ChannelSetting from '../Modal/ChannelSetting/ChannelSetting'
 
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
@@ -35,13 +37,15 @@ function ModalContent({}): JSX.Element {
   const { modalName } = useModalState()
   const modalContent: { [key: string]: JSX.Element | null } = {
     userProfile: <UserProfile />,
-    createDmRoom: <CreateDmRoom />,
+    friendUsers: <FriendUsersModal />,
     createChatRoom: <CreateChatRoom />,
     exitRoom: <ExitRoom />,
     response: <ReseponseModal />,
     changeImage: <ChangeImage />,
     joinRoom: <JoinRoom />,
     joinDmRoom: <JoinDmRoom />,
+    inviteFriend: <InviteFriend />,
+    channelSetting: <ChannelSetting />,
   }
   return (
     <>

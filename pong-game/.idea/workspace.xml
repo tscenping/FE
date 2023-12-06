@@ -4,7 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18d1401f-4316-452b-a86c-6cfce5e1106d" name="Changes" comment="" />
+    <list default="true" id="18d1401f-4316-452b-a86c-6cfce5e1106d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Chat/ChatInfoLog/ChatInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Chat/ChatInfoLog/ChatInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Chat/ChatInfoLog/ChatListNavBarContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Chat/ChatInfoLog/ChatListNavBarContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Chat/ChatType/ChatTypeListContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Chat/ChatType/ChatTypeListContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Layout/Layout.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/Layout/Layout.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Layout/ModalLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Layout/ModalLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Modal/CreateDmRoom/CreateDmRoom.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Modal/CreateDmRoom/CreateDmRoom.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Modal/CreateDmRoom/UserList.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Modal/CreateDmRoom/UserList.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Modal/CreateRoom/CreateRoom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Modal/CreateRoom/CreateRoom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Modal/CreateRoom/CreateRoomInput/CreateRoomInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Modal/CreateRoom/CreateRoomInput/CreateRoomInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Modal/ExitRoom/ExitRoom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Modal/ExitRoom/ExitRoom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Modal/JoinDmRoom/JoinDmRoom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Modal/JoinDmRoom/JoinDmRoom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Modal/ResponseModal/ReseponseModal.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/Modal/ResponseModal/ReseponseModal.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/chat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/store/chat.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/store.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/store/store.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,22 +43,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Feat/FriendPageApiConnection#79",
-    "last_opened_file_path": "/Users/kkssyy/FE/pong-game",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/Users/kkssyy/FE/pong-game/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Feat/inviteAndSettingApi#83&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/kkssyy/FE/pong-game&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/kkssyy/FE/pong-game/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -50,6 +69,9 @@
       <updated>1700468848712</updated>
       <workItem from="1700468849718" duration="583000" />
       <workItem from="1701405165212" duration="833000" />
+      <workItem from="1701761116254" duration="66000" />
+      <workItem from="1701761186858" duration="1000" />
+      <workItem from="1701761192442" duration="1000" />
     </task>
     <servers />
   </component>
