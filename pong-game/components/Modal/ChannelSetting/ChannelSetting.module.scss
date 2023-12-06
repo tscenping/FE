@@ -1,0 +1,111 @@
+@import '../../../styles/colors.scss';
+
+.channelSettingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 32px;
+  .chatType {
+    width: 100%;
+    margin-top: 32px;
+    .chatTypeUnorderList {
+      display: flex;
+      justify-content: space-around;
+      li {
+        font-size: 1.5rem;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        transition: 0.3s;
+        input {
+          display: none;
+        }
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+      .selected {
+        color: $main_900;
+        transform: scale(1.2);
+      }
+      .noSelected {
+        color: $gray_scale_500;
+      }
+      label {
+        cursor: pointer;
+      }
+    }
+  }
+  .form {
+    margin-top: 32px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  label {
+    color: $gray_scale_500;
+    padding: 8px;
+  }
+  input {
+    width: 450px;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color: $gray_scale_200;
+    padding: 8px 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  button {
+    font-family: 'Pretendard-Regular';
+    font-size: 24px;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 20px;
+    background-color: $main_500;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  .chatTitle {
+    margin: 32px 0px;
+    display: flex;
+    flex-direction: column;
+  }
+  .chatTitleInput {
+    &:focus {
+      outline: none;
+      &::placeholder {
+        opacity: 0;
+        transition: 0.3s;
+      }
+    }
+    &::placeholder {
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
+  .chatPassword {
+    margin-bottom: 32px;
+  }
+  .chatPasswordInput {
+    &:focus {
+      outline: none;
+      &::placeholder {
+        opacity: 0;
+        transition: 0.3s;
+      }
+    }
+    &::placeholder {
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
+}

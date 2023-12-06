@@ -15,7 +15,8 @@ function CreateChatRoom(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement>(null)
   const { setAllChannels, setTotalAll, setMeChannels, setTotalMe, setPage } = useGetChannels()
   const { setPasswordInputRender } = useJoinProtectedChannel()
-  const { setChannelTitle, setChannelUserInfo } = useJoinChannel()
+  const { setChannelTitle, setChannelUserInfo, setChannelType, setChannelAuth, setChannelId } =
+    useJoinChannel()
   const createChannel = async (channelType, password = null) => {
     if (!titleRef.current?.value) {
       //title값을 입력안했거나 null일 경우에는 set state "noTitle"로 지정
@@ -63,11 +64,18 @@ function CreateChatRoom(): JSX.Element {
           method: 'get',
           url: 'https://localhost:3000/channels/me/?page=1',
         })
+
+        //"chat"페이지의 채널 목록과 페이지 네이션 전역상태변수 초기화
         setAllChannels(responseAll.data.channels)
         setTotalAll(responseAll.data.totalDataSize)
         setMeChannels(responseMe.data.channels)
         setTotalMe(responseMe.data.totalDataSize)
+
+        //chatlog에 보이는 값들을 렌더링 하기 위한 전역 상태 변수 초기화
         setChannelTitle(titleRef.current.value)
+        setChannelAuth(response.data.myChannelUserType)
+        setChannelType(channelType)
+        setChannelId(response.data.channelId)
         setPasswordInputRender('CHANNEL')
         setChannelUserInfo(response.data.channelUser)
 

@@ -1,6 +1,7 @@
 import { useJoinChannel } from '@/store/chat'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { instance } from '@/util/axios'
+import { useGetFriends, useFriendSetPage } from '@/store/friend'
 
 interface EditFriendProps {
   isFriend: boolean
@@ -12,6 +13,9 @@ export default function EditFriend(props: EditFriendProps) {
   const { setModalName } = useModalState()
   const responseModal = useResponseModalState()
   const { channelUserInfo, setChannelUserInfo } = useJoinChannel()
+  const { setTotalFriendCount, totalFriendCount } = useGetFriends()
+  const { setTabState } = useFriendSetPage()
+
   console.log(props)
   const changeArrayItem = (newType, idToChange) => {
     const result = channelUserInfo.map((item) => {
@@ -52,6 +56,7 @@ export default function EditFriend(props: EditFriendProps) {
         )
         .then(function (res) {
           console.log(res)
+          setTotalFriendCount(totalFriendCount + 1)
           changeArrayItem(true, props.nickname)
           console.log(channelUserInfo)
         })
@@ -72,6 +77,7 @@ export default function EditFriend(props: EditFriendProps) {
         })
         .then(function (res) {
           console.log(res)
+          setTotalFriendCount(totalFriendCount - 1)
           changeArrayItem(false, props.nickname)
         })
     } catch (e) {
@@ -81,15 +87,17 @@ export default function EditFriend(props: EditFriendProps) {
 
   const setFriendkModal = () => {
     setModalName('response')
-    props.isFriend ? responseModal.setResponseModalState(
-      '친구 삭제',
-      `${props.nickname}님을 친구삭제 하시겠습니까?`,
-      deleteFriendHandler,
-    ) : responseModal.setResponseModalState(
-      '친구 추가',
-      `${props.nickname}님을 친구추가 하시겠습니까?`,
-      addFriendHandler,
-    )
+    props.isFriend
+      ? responseModal.setResponseModalState(
+          '친구 삭제',
+          `"${props.nickname}" 님을 친구삭제 하시겠습니까?`,
+          deleteFriendHandler,
+        )
+      : responseModal.setResponseModalState(
+          '친구 추가',
+          `"${props.nickname}" 님을 친구추가 하시겠습니까?`,
+          addFriendHandler,
+        )
   }
 
   return (

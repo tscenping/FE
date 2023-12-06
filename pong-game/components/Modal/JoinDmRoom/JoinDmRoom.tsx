@@ -43,7 +43,7 @@ function JoinDmRoom(): JSX.Element {
   }
 
   const modalOffHandler = () => {
-    setModalName('createDmRoom')
+    setModalName('friendUsers')
   }
 
   return (

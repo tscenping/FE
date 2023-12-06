@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import styles from './ChatUserListElement.module.scss'
 import userToggle from '@/public/img/chat/userToggle.svg'
-import admin from '@/public/img/chat/Admin.svg'
-import owner from '@/public/img/chat/Owner.svg'
+import admin from '@/public/img/chat/admin.svg'
+import owner from '@/public/img/chat/owner.svg'
+import member from '@/public/img/chat/member.svg'
 import DropDown from '@/components/DropDown/DropDown'
 import { useState } from 'react'
 import { useJoinChannel } from '@/store/chat'
@@ -17,7 +18,7 @@ interface ChatUserListElementProps {
   isBlocked?: boolean
   channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
 }
-type ChannelUserType =  'OWNER' | 'ADMIN' | 'MEMBER'
+type ChannelUserType = 'OWNER' | 'ADMIN' | 'MEMBER'
 
 function ChatUserListElement(props: ChatUserListElementProps): JSX.Element {
   const [dropDownState, setDropDownState] = useState(false)
@@ -26,20 +27,28 @@ function ChatUserListElement(props: ChatUserListElementProps): JSX.Element {
 
   const [channelUserType, setChannelUserType] = useState<ChannelUserType>(props.channelUserType)
 
-
   return (
     <li className={styles.chatUserListElement}>
       <section className={styles.userInfo}>
+        {props.channelUserType === 'ADMIN' && (
+          <Image src={admin} alt={'admin user'} width={24} height={24} />
+        )}
+        {props.channelUserType === 'OWNER' && (
+          <Image src={owner} alt={'owner user'} width={24} height={24} />
+        )}
+        {props.channelUserType === 'MEMBER' && (
+          <Image src={member} alt={'owner user'} width={24} height={24} />
+        )}
         <div className={styles.userProfileImage}>
-          <Image src={props.avatar} alt={'user profile image'} width={45} height={45} />
+          <Image
+            src={props.avatar}
+            alt={'user profile image'}
+            width={45}
+            height={45}
+            className={styles.profileImage}
+          />
         </div>
         <div className={styles.userNickName}>
-          {props.channelUserType === 'ADMIN' && (
-            <Image src={admin} alt={'admin user'} width={20} height={20} />
-          )}
-          {props.channelUserType === 'OWNER' && (
-            <Image src={owner} alt={'owner user'} width={20} height={20} />
-          )}
           <span>{props.nickname}</span>
         </div>
       </section>

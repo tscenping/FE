@@ -6,7 +6,6 @@ import SearchUsers from './SearchUsers/SearchUsers'
 import { useFriendSetPage, useGetFriends, useGetBlocks } from '@/store/friend'
 import { instance } from '@/util/axios'
 import CustomPagination from '../Pagination/CustomPagination'
-import CustomPaginationGroup from './CustomPaginationGroup'
 import styles from './FriendsMainContents.module.scss'
 
 function FriendsMainContents(): JSX.Element {
@@ -17,7 +16,7 @@ function FriendsMainContents(): JSX.Element {
   const getAllFriend = async () => {
     try {
       const response = await instance({
-        url: `https://localhost:3000/users/friends/?page=1`,
+        url: `https://localhost:3000/users/friends/?page=${friendPage}`,
         method: 'get',
       })
       setAllFriends(response.data.friends)
@@ -29,7 +28,7 @@ function FriendsMainContents(): JSX.Element {
   const getAllBlock = async () => {
     try {
       const response = await instance({
-        url: `https://localhost:3000/users/blocks/?page=1`,
+        url: `https://localhost:3000/users/blocks/?page=${friendPage}`,
         method: 'get',
       })
       setAllBlocks(response.data.blocks)
@@ -40,9 +39,10 @@ function FriendsMainContents(): JSX.Element {
   }
 
   useEffect(() => {
+    console.log('render')
     if (tabState === 'ALL') getAllFriend()
     if (tabState === 'BLOCK') getAllBlock()
-  }, [tabState])
+  }, [friendPage, tabState, totalFriendCount, totalBlockCount])
 
   return (
     <div className={styles.frindPageContainer}>
@@ -53,7 +53,7 @@ function FriendsMainContents(): JSX.Element {
         {tabState === 'SEARCH' && <SearchUsers />}
       </div>
       {/* <CustomPaginationGroup /> */}
-      {tabState === 'ALL' && (
+      {tabState === 'ALL' && totalFriendCount > 10 && (
         <CustomPagination
           page={friendPage}
           setPage={setFriendPage}
@@ -61,7 +61,7 @@ function FriendsMainContents(): JSX.Element {
           totalItemsCount={totalFriendCount}
         />
       )}
-      {tabState === 'BLOCK' && (
+      {tabState === 'BLOCK' && totalBlockCount > 10 && (
         <CustomPagination
           page={friendPage}
           setPage={setFriendPage}

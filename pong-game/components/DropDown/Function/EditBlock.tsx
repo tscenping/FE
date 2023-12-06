@@ -1,6 +1,7 @@
 import { useJoinChannel } from '@/store/chat'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { instance } from '@/util/axios'
+import { useGetBlocks } from '@/store/friend'
 interface EditBlockProps {
   isBlocked: boolean
   friendId: number
@@ -11,6 +12,8 @@ export default function EditBlock(props: EditBlockProps) {
   const { channelUserInfo, setChannelUserInfo } = useJoinChannel()
   const responseModal = useResponseModalState()
   const { setModalName } = useModalState()
+  const { setTotalBlockCount, totalBlockCount } = useGetBlocks()
+
   const changeArrayItem = (newType, idToChange) => {
     const result = channelUserInfo.map((item) => {
       if (item.nickname === idToChange) {
@@ -41,6 +44,7 @@ export default function EditBlock(props: EditBlockProps) {
         )
         .then(function (res) {
           console.log(res)
+          setTotalBlockCount(totalBlockCount + 1)
           changeArrayItem(true, props.nickname)
         })
     } catch (e) {
@@ -62,6 +66,7 @@ export default function EditBlock(props: EditBlockProps) {
         })
         .then(function (res) {
           console.log(res)
+          setTotalBlockCount(totalBlockCount - 1)
           changeArrayItem(false, props.nickname)
         })
     } catch (e) {
@@ -71,15 +76,17 @@ export default function EditBlock(props: EditBlockProps) {
 
   const setBlockModal = () => {
     setModalName('response')
-    props.isBlocked ? responseModal.setResponseModalState(
-      '유저 차단',
-      `${props.nickname}님을 차단 해제 하시겠습니까?`,
-      unBlockHandler,
-    ) : responseModal.setResponseModalState(
-      '유저 차단',
-      `${props.nickname}님을 차단 하시겠습니까?`,
-      blockHandler,
-    )
+    props.isBlocked
+      ? responseModal.setResponseModalState(
+          '유저 차단',
+          `${props.nickname}님을 차단 해제 하시겠습니까?`,
+          unBlockHandler,
+        )
+      : responseModal.setResponseModalState(
+          '유저 차단',
+          `${props.nickname}님을 차단 하시겠습니까?`,
+          blockHandler,
+        )
   }
 
   return (

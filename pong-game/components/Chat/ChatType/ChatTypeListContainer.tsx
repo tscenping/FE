@@ -6,11 +6,9 @@ import { useNavBarState } from '@/store/chat'
 import EnteredRoomListSection from './EnteredRoomListSection'
 import { instance } from '@/util/axios'
 import { useGetChannels } from '@/store/chat'
-import CustomPagination from '@/components/Pagination/CustomPagination'
 import { useGetFriends } from '@/store/friend'
 
 function ChatTypeListContainer(): JSX.Element {
-  const { setAllFriends, setTotalFriendCount } = useGetFriends()
   const { tabState } = useNavBarState()
   const {
     setAllChannels,
@@ -55,12 +53,6 @@ function ChatTypeListContainer(): JSX.Element {
       })
       setDmChannels(response.data.dmChannels)
       setTotalDm(response.data.totalItemCount)
-      const responseFriend = await instance({
-        url: `https://localhost:3000/users/friends/?page=1`,
-        method: 'get',
-      })
-      setAllFriends(responseFriend.data.friends)
-      setTotalFriendCount(responseFriend.data.totalItemCount)
     } catch (error) {
       console.log('Error : ', error)
     }
