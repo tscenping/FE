@@ -41,9 +41,9 @@ function SearchUserListContainer(props: SearchUserListContainerprops): JSX.Eleme
                 userProfile={{
                   id: props.id,
                   nickname: props.nickname,
-
                   isFriend: props.isFriend,
                   isBlocked: props.isBlocked,
+                  calledFrom: 'searchUserList',
                 }}
               />
             )}

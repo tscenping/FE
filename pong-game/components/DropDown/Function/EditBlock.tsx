@@ -1,4 +1,5 @@
 import { useJoinChannel } from '@/store/chat'
+import { useGetUser } from '@/store/friend'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { instance } from '@/util/axios'
 import { useGetBlocks } from '@/store/friend'
@@ -6,12 +7,21 @@ interface EditBlockProps {
   isBlocked: boolean
   friendId: number
   nickname: string
+  calledFrom?: 'searchUserList'
   setIsDropDownView: (v: boolean) => void
 }
 export default function EditBlock(props: EditBlockProps) {
   const { channelUserInfo, setChannelUserInfo } = useJoinChannel()
   const responseModal = useResponseModalState()
   const { setModalName } = useModalState()
+  const { user, setUser } = useGetUser()
+
+  const changeItem = (newType) => {
+    const result = user
+    result.isBlocked = newType
+    setUser(result)
+  }
+
   const { setTotalBlockCount, totalBlockCount } = useGetBlocks()
 
   const changeArrayItem = (newType, idToChange) => {
@@ -30,7 +40,6 @@ export default function EditBlock(props: EditBlockProps) {
     setChannelUserInfo(result)
   }
   const blockHandler = async () => {
-    console.log(process.env.NEXT_PUBLIC_API_ENDPOINT)
     props.setIsDropDownView(false)
     try {
       await instance
@@ -45,7 +54,11 @@ export default function EditBlock(props: EditBlockProps) {
         .then(function (res) {
           console.log(res)
           setTotalBlockCount(totalBlockCount + 1)
-          changeArrayItem(true, props.nickname)
+          if (props.calledFrom === 'searchUserList') {
+            changeItem(true)
+          } else {
+            changeArrayItem(true, props.nickname)
+          }
         })
     } catch (e) {
       console.log(e.message)
@@ -53,7 +66,6 @@ export default function EditBlock(props: EditBlockProps) {
   }
 
   const unBlockHandler = async () => {
-    console.log(process.env.NEXT_PUBLIC_API_ENDPOINT)
     props.setIsDropDownView(false)
     try {
       await instance
@@ -67,7 +79,12 @@ export default function EditBlock(props: EditBlockProps) {
         .then(function (res) {
           console.log(res)
           setTotalBlockCount(totalBlockCount - 1)
-          changeArrayItem(false, props.nickname)
+
+          if (props.calledFrom === 'searchUserList') {
+            changeItem(false)
+          } else {
+            changeArrayItem(false, props.nickname)
+          }
         })
     } catch (e) {
       console.log(e.message)

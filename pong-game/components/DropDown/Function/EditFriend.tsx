@@ -1,12 +1,13 @@
 import { useJoinChannel } from '@/store/chat'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { instance } from '@/util/axios'
-import { useGetFriends, useFriendSetPage } from '@/store/friend'
+import { useGetFriends, useFriendSetPage, useGetUser } from '@/store/friend'
 
 interface EditFriendProps {
   isFriend: boolean
   friendId: number
   nickname: string
+  calledFrom?: 'searchUserList'
   setIsDropDownView: (v: boolean) => void
 }
 export default function EditFriend(props: EditFriendProps) {
@@ -14,9 +15,15 @@ export default function EditFriend(props: EditFriendProps) {
   const responseModal = useResponseModalState()
   const { channelUserInfo, setChannelUserInfo } = useJoinChannel()
   const { setTotalFriendCount, totalFriendCount } = useGetFriends()
-  const { setTabState } = useFriendSetPage()
 
-  console.log(props)
+  const { user, setUser } = useGetUser()
+
+  const changeItem = (newType) => {
+    const result = user
+    result.isFriend = newType
+    setUser(result)
+  }
+
   const changeArrayItem = (newType, idToChange) => {
     const result = channelUserInfo.map((item) => {
       if (item.nickname === idToChange) {
@@ -57,8 +64,11 @@ export default function EditFriend(props: EditFriendProps) {
         .then(function (res) {
           console.log(res)
           setTotalFriendCount(totalFriendCount + 1)
-          changeArrayItem(true, props.nickname)
-          console.log(channelUserInfo)
+          if (props.calledFrom === 'searchUserList') {
+            changeItem(true)
+          } else {
+            changeArrayItem(true, props.nickname)
+          }
         })
     } catch (e) {
       console.log(e.message)
@@ -78,7 +88,11 @@ export default function EditFriend(props: EditFriendProps) {
         .then(function (res) {
           console.log(res)
           setTotalFriendCount(totalFriendCount - 1)
-          changeArrayItem(false, props.nickname)
+          if (props.calledFrom === 'searchUserList') {
+            changeItem(false)
+          } else {
+            changeArrayItem(false, props.nickname)
+          }
         })
     } catch (e) {
       console.log(e.message)
