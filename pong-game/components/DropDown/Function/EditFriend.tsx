@@ -20,6 +20,9 @@ export default function EditFriend(props: EditFriendProps) {
 
   const changeItem = (newType) => {
     const result = user
+    if (newType) {
+      result.isBlocked = false
+    }
     result.isFriend = newType
     setUser(result)
   }

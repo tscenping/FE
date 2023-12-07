@@ -18,6 +18,9 @@ export default function EditBlock(props: EditBlockProps) {
 
   const changeItem = (newType) => {
     const result = user
+    if (newType) {
+      result.isFriend = false
+    }
     result.isBlocked = newType
     setUser(result)
   }

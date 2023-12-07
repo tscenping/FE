@@ -55,6 +55,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
           setMyChannelUserType(response.data.myChannelUserType)
           setChannelTitle(props.title)
           setChannelId(props.channelId)
+          console.log(props.channelId)
         } catch (error) {
           console.log('Error : ', error)
         }
