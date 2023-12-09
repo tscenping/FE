@@ -11,19 +11,21 @@ function CreateChatRoom(): JSX.Element {
   const { tabState, setTabState } = useCreateRoomNavBarState()
   const { setModalName } = useModalState()
   const [error, setError] = useState('')
-  const titleRef = useRef<HTMLInputElement>(null)
-  const passwordRef = useRef<HTMLInputElement>(null)
   const { setAllChannels, setTotalAll, setMeChannels, setTotalMe, setPage } = useGetChannels()
   const { setPasswordInputRender } = useJoinProtectedChannel()
   const { setChannelTitle, setChannelUserInfo, setChannelType, setChannelAuth, setChannelId } =
     useJoinChannel()
-  const createChannel = async (channelType, password = null) => {
+  const titleRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
+
+  const createChannelHandler = async (channelType, password = null) => {
+    const koreanRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g
+
     if (!titleRef.current?.value) {
       //title값을 입력안했거나 null일 경우에는 set state "noTitle"로 지정
       setError('noTitle') //title은 어차피 비워진 상태여서 따로 초기화 안해줘도 된다.
       return
     }
-
     if (channelType === 'PROTECTED' && !passwordRef.current.value) {
       //채널의 타입이 "PROTECTED"이지만 패스워드가 없다면 채널의 타입은 "PUBLIC"
       channelType = 'PUBLIC'
@@ -31,11 +33,12 @@ function CreateChatRoom(): JSX.Element {
 
     if (
       channelType === 'PROTECTED' &&
-      passwordRef.current.value.length <= 8 &&
-      passwordRef.current.value
+      (passwordRef.current.value.length < 8 ||
+        !passwordRef.current.value ||
+        koreanRegex.test(passwordRef.current.value))
     ) {
       //password값이 8자 이하일 경우 set state "lessPassword"로 지정
-      setError('lessPassword')
+      setError('passwordError')
       passwordRef.current.value = '' //그리고 해당 비밀번호 입력 값을 비워준다.
       return
     }
@@ -47,6 +50,7 @@ function CreateChatRoom(): JSX.Element {
       password: channelType === 'PUBLIC' || channelType === 'PRIVATE' ? null : password,
       //채널의 타입이 PUBLIC이거나 PRIVATE라면 패스워드는 "null"
     }
+    console.log(datas)
     try {
       const response = await instance({
         method: 'post',
@@ -93,10 +97,10 @@ function CreateChatRoom(): JSX.Element {
     e.preventDefault()
     switch (tabState) {
       case 'private':
-        createChannel('PRIVATE')
+        createChannelHandler('PRIVATE')
         break
       case 'publicOrProtected':
-        createChannel('PROTECTED', passwordRef.current.value)
+        createChannelHandler('PROTECTED', passwordRef.current.value)
         break
     }
   }
@@ -135,19 +139,19 @@ function CreateChatRoom(): JSX.Element {
       <form className={styles.form} onSubmit={submitHandler}>
         <CreateRoomInput tabState={tabState} titleRef={titleRef} passwordRef={passwordRef} />
         {error === 'noTitle' && <p className={styles.error}>채널 타이틀을 입력해 주세요.</p>}
-        {error === 'lessPassword' && (
+        {error === 'passwordError' && (
           <p className={styles.error}>
             채널의 비밀번호는 8 ~ 16자의 영문, 숫자, 특수문자를 사용해주세요.
           </p>
         )}
         <section className={styles.btn}>
-          <button>Create</button>
+          <button>생 성</button>
           <button
             onClick={() => {
               setModalName(null)
             }}
           >
-            Cancel
+            취 소
           </button>
         </section>
       </form>

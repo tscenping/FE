@@ -1,0 +1,22 @@
+.chatTitle {
+  display: flex;
+  flex-direction: column;
+  margin: 32px 0px;
+  font-size: 1.5rem;
+  .chatTitleInput {
+    text-align: center;
+    font-family: 'Pretendard-Regular';
+    font-size: 1.5rem;
+    &:focus {
+      outline: none;
+      &::placeholder {
+        opacity: 0;
+        transition: 0.3s;
+      }
+    }
+    &::placeholder {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  }
+}

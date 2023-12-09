@@ -7,18 +7,40 @@
   height: 100vh;
   width: 40%;
   .loadingTitle {
-    font-family: 'Pretendard-SemiBold';
-    font-size: 64px;
-    margin-bottom: 32px;
+    font-family: 'Pretendard-ExtraBold';
+    font-size: 4rem;
   }
-  .loadingBall {
+  .dotContainer {
     display: flex;
-    div {
-      width: 30px;
-      height: 30px;
-      background-color: $gray_scale_900;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+    .dot {
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      background-color: black;
       border-radius: 50%;
-      margin-left: 48px;
+      margin-left: 8px;
+      animation: loadingAnimation 1.5s infinite ease-in-out;
+
+      &:nth-child(2) {
+        animation-delay: 0.35s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 0.7s;
+      }
     }
+  }
+}
+
+@keyframes loadingAnimation {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
   }
 }

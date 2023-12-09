@@ -18,7 +18,6 @@ function SearchUsersListContainer(): JSX.Element {
           />
         )}
       </ul>
-      {/* <CustomPagination page={page} setPage={setPage} itemsCountPerPage={5} totalItemsCount={50} /> */}
     </>
   )
 }

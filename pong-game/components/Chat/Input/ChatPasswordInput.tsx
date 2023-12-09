@@ -1,4 +1,4 @@
-import { RefObject } from 'react'
+import { RefObject, useState } from 'react'
 import styles from './ChatpasswordInput.module.scss'
 
 interface ChatPasswordInputProps {
@@ -6,9 +6,17 @@ interface ChatPasswordInputProps {
 }
 
 function ChatPasswordInput(props: ChatPasswordInputProps): JSX.Element {
+  const [password, setPassword] = useState('')
+
   return (
     <>
-      <input type="password" className={styles.passwordInput} ref={props.passwordRef} required />
+      <input
+        type="password"
+        className={styles.passwordInput}
+        ref={props.passwordRef}
+        required
+        maxLength={16}
+      />
       <span className={styles.passwordInputPlaceHolder}>비밀번호를 입력해주세요.</span>
     </>
   )

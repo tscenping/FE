@@ -22,67 +22,13 @@
         text-align: center;
       }
       img:nth-child(2) {
-        // transform: scale(0);
+        transform: scale(0);
         position: absolute;
-        // animation: appear 1.5s ease-in-out forwards;
-        animation-delay: 9s;
+        animation: appear 1s ease-in-out forwards;
+        // animation-delay: 9s;
         top: 80px;
       }
     }
-    // .loginButton {
-    //   display: flex;
-    //   justify-content: center;
-    //   margin-bottom: 32px;
-    //   .login42Button {
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: center;
-    //     width: 400px;
-    //     height: 75px;
-    //     border-radius: 30px;
-    //     border: none;
-    //     color: $gray_scale_0;
-    //     font-family: 'ABeeZee';
-    //     font-size: 2rem;
-    //     background-color: $gray_scale_900;
-    //     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    //     cursor: pointer;
-    //     text-align: center;
-    //     animation: buttonShow 10s ease-in-out forwards;
-    //     transition: 0.2s transform;
-    //     &:hover {
-    //       transform: scale(1.2);
-    //     }
-    //     img {
-    //       position: relative;
-    //       right: 64px;
-    //     }
-    //   }
-    //   .loginGoogleButton {
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: center;
-    //     width: 400px;
-    //     height: 75px;
-    //     border-radius: 30px;
-    //     border: none;
-    //     font-family: 'ABeeZee';
-    //     font-size: 2rem;
-    //     background-color: $gray_scale_100;
-    //     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    //     cursor: pointer;
-    //     position: relative;
-    //     animation: buttonShow 10s ease-in-out forwards;
-    //     transition: 0.2s transform;
-    //     &:hover {
-    //       transform: scale(1.2);
-    //     }
-    //     img {
-    //       position: relative;
-    //       right: 32px;
-    //     }
-    //   }
-    // }
   }
 
   .pingpong {
@@ -91,8 +37,7 @@
     background-color: $gray_scale_900;
     border-radius: 50%;
     position: absolute;
-    // animation: bounce 1.5s ease-in-out infinite alternate;
-    // animation-delay: 10s;
+    animation: bounce 1s ease-in-out infinite alternate;
     right: 30px;
     bottom: 0;
     &::after {
@@ -104,7 +49,6 @@
       background-color: $gray_scale_900;
       right: -5px;
       bottom: 0px;
-      // animation: remove 7.3s ease-in-out;
     }
   }
 }
@@ -122,52 +66,52 @@
   }
 }
 
-@keyframes remove {
-  0%,
-  90% {
-    opacity: 1;
-    background-color: #d2e0fb;
-    transform: scale(1);
-  }
+// @keyframes remove {
+//   0%,
+//   90% {
+//     opacity: 1;
+//     background-color: #d2e0fb;
+//     transform: scale(1);
+//   }
 
-  95% {
-    transform: scale(1.3);
-  }
+//   95% {
+//     transform: scale(1.3);
+//   }
 
-  100% {
-    transform: scale(1);
-    background-color: black;
-  }
-}
+//   100% {
+//     transform: scale(1);
+//     background-color: black;
+//   }
+// }
 
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-200px);
-  }
-}
+// @keyframes bounce {
+//   0%,
+//   100% {
+//     transform: translateY(0);
+//   }
+//   50% {
+//     transform: translateY(-200px);
+//   }
+// }
 
-@keyframes rotate {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+// @keyframes rotate {
+//   0%,
+//   100% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
 
 @keyframes appear {
-  80% {
+  0% {
     transform: scale(0);
   }
-  95% {
+  50% {
     transform: scale(1);
   }
-  97% {
+  70% {
     transform: scale(0.9);
   }
   100% {
@@ -175,36 +119,36 @@
   }
 }
 
-@keyframes appearStick {
-  0%,
-  95% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-// @keyframes buttonShow {
-//   0% {
-//     opacity: 0;
+// @keyframes appearStick {
+//   0%,
+//   95% {
+//     transform: scale(0);
 //   }
-
-//   90% {
-//     opacity: 0;
-//   }
-
 //   100% {
-//     opacity: 1;
+//     transform: scale(1);
 //   }
 // }
 
-@keyframes contentShow {
-  0%,
-  80% {
-    width: 0%;
-  }
-  100% {
-    width: 40%;
-  }
-}
+// // @keyframes buttonShow {
+// //   0% {
+// //     opacity: 0;
+// //   }
+
+// //   90% {
+// //     opacity: 0;
+// //   }
+
+// //   100% {
+// //     opacity: 1;
+// //   }
+// // }
+
+// @keyframes contentShow {
+//   0%,
+//   80% {
+//     width: 0%;
+//   }
+//   100% {
+//     width: 40%;
+//   }
+// }
