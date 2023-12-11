@@ -96,7 +96,7 @@ const ChangeImage = (): JSX.Element => {
           accept="image/*"
           onChange={onImageHandler}
         />
-        <p className={styles.imageExplanation}>사진은 1장, 최대 15MB만 가능합니다.</p>
+        <p className={styles.imageExplanation}>사진은 1장, JPEG, PNG, SVG파일만 가능합니다.</p>
       </section>
       <div className={styles.changeHandler}>
         <button onClick={imageChangeHandler}>확 인</button>

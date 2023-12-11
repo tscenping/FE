@@ -17,11 +17,23 @@ interface FriendUserListContainerprops {
 function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Element {
   const [dropDownState, setDropDownState] = useState(false)
   const baseImg = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
+
+  const userStyle = props.isBlocked //block유저이면 styles.block, block유저가 아니면 OFFLINE, ONLINE에 따라서 css 적용
+    ? styles.block
+    : props.status === 'ONLINE'
+    ? styles.online
+    : styles.offline
+
   return (
     <>
       <li className={styles.friendUserListContainer}>
-        <div className={styles.friendUserImageNickName}>
-          <Image src={props.avatar ? props.avatar : baseImg} alt={'user profile image'} width={80} height={80} />
+        <div className={userStyle}>
+          <Image
+            src={props.avatar ? props.avatar : baseImg}
+            alt={'user profile image'}
+            width={80}
+            height={80}
+          />
           <strong>{props.nickname}</strong>
         </div>
         <div className={styles.friendUserToggle}>

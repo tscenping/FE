@@ -91,7 +91,6 @@ export const getStaticProps = async () => {
       rejectUnauthorized: false,
     }),
   })
-  console.log(123)
   const response = await instance({
     url: 'https://localhost:3000/users/rank',
     method: 'get',

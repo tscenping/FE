@@ -20,6 +20,7 @@
     "react-hot-toast": "^2.4.1",
     "react-image-file-resizer": "^0.4.8",
     "react-js-pagination": "^3.0.3",
+    "socket.io-client": "^4.7.2",
     "styled-components": "^6.1.0",
     "styled-reset": "^4.5.1",
     "ts-node": "^10.9.1",

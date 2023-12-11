@@ -3,7 +3,7 @@ import FriendTypeNaviContainer from './FriendTypeNaviContainer'
 import FrinedUsersListContainer from './FriendUsersListContainer'
 import BlockUsersListContainer from './BlockUsersListContainer'
 import SearchUsers from './SearchUsers/SearchUsers'
-import { useFriendSetPage, useGetFriends, useGetBlocks } from '@/store/friend'
+import { useFriendSetPage, useGetFriends, useGetBlocks, useGetUser } from '@/store/friend'
 import { instance } from '@/util/axios'
 import CustomPagination from '../Pagination/CustomPagination'
 import styles from './FriendsMainContents.module.scss'
@@ -12,7 +12,7 @@ function FriendsMainContents(): JSX.Element {
   const { tabState, friendPage, setFriendPage } = useFriendSetPage()
   const { setAllFriends, setTotalFriendCount, totalFriendCount } = useGetFriends()
   const { setAllBlocks, setTotalBlockCount, totalBlockCount } = useGetBlocks()
-
+  const { setUser } = useGetUser()
   const getAllFriend = async () => {
     try {
       const response = await instance({
@@ -21,6 +21,7 @@ function FriendsMainContents(): JSX.Element {
       })
       setAllFriends(response.data.friends)
       setTotalFriendCount(response.data.totalItemCount)
+      setUser(null)
     } catch (error) {
       console.log('Error : ', error)
     }
@@ -33,13 +34,13 @@ function FriendsMainContents(): JSX.Element {
       })
       setAllBlocks(response.data.blocks)
       setTotalBlockCount(response.data.totalItemCount)
+      setUser(null)
     } catch (error) {
       console.log('Error : ', error)
     }
   }
 
   useEffect(() => {
-    console.log('render')
     if (tabState === 'ALL') getAllFriend()
     if (tabState === 'BLOCK') getAllBlock()
   }, [friendPage, tabState, totalFriendCount, totalBlockCount])
@@ -69,6 +70,13 @@ function FriendsMainContents(): JSX.Element {
           totalItemsCount={totalBlockCount}
         />
       )}
+      {/* <button
+        onClick={() => {
+          setSocketState((prevState) => !prevState)
+        }}
+      >
+        socket{' '}
+      </button> */}
     </div>
   )
 }

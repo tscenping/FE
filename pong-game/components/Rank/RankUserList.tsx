@@ -19,24 +19,22 @@ export default function RankUserList({
   const { setModalName, setModalProps } = useModalState()
   const baseImg = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
-
-
   function setModalPropsValue(nickname: string) {
     setModalName('userProfile')
     setModalProps({ nickname: nickname })
   }
   return (
     <>
-      <div className={styles.rankContent}>
-        <div
-          className={styles.userInfo}
-          onClick={() => {
-            setModalPropsValue(nickname)
-          }}
-        >
+      <div
+        className={styles.rankContent}
+        onClick={() => {
+          setModalPropsValue(nickname)
+        }}
+      >
+        <div className={styles.userInfo}>
           <span className={styles.rank}>{ranking}. </span>
           <span className={styles.userName}>
-            <Image src={avatar ? avatar : baseImg} alt={'profileImage'} width={64} height={64}/>
+            <Image src={avatar ? avatar : baseImg} alt={'profileImage'} width={64} height={64} />
             {nickname}
           </span>
         </div>
