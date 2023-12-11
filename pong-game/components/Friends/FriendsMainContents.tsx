@@ -7,14 +7,12 @@ import { useFriendSetPage, useGetFriends, useGetBlocks, useGetUser } from '@/sto
 import { instance } from '@/util/axios'
 import CustomPagination from '../Pagination/CustomPagination'
 import styles from './FriendsMainContents.module.scss'
-import { socket } from '@/socket/socket'
 
 function FriendsMainContents(): JSX.Element {
   const { tabState, friendPage, setFriendPage } = useFriendSetPage()
   const { setAllFriends, setTotalFriendCount, totalFriendCount } = useGetFriends()
   const { setAllBlocks, setTotalBlockCount, totalBlockCount } = useGetBlocks()
   const { setUser } = useGetUser()
-  // const [socketState, setSocketState] = useState<boolean>(true)
   const getAllFriend = async () => {
     try {
       const response = await instance({
