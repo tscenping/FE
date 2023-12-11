@@ -1,6 +1,5 @@
 import { FormEvent, useRef } from 'react'
 import styles from './SearchUsers.module.scss'
-import FrinedUsersListContainer from '../FriendUsersListContainer'
 import SearchInputContainer from './SearchInputContainer'
 import SearchUsersListContainer from './SearchUsersListContainer'
 import { instance } from '@/util/axios'
@@ -9,15 +8,21 @@ import { useGetUser } from '@/store/friend'
 function SearchUsers(): JSX.Element {
   const inputRef = useRef<HTMLInputElement>()
   const { setUser } = useGetUser()
+
+  const patternSpecial = /[~₩;'"!@#$%^&*()_+|<>?:{}\s]/ //특수문자 입력 정규식
   const searchNicknameHandler = async (e: FormEvent) => {
     e.preventDefault()
+    if (patternSpecial.test(inputRef.current.value)) {
+      inputRef.current.value = ''
+    }
     try {
       const response = await instance({
         url: `https://localhost:3000/users/profile/${inputRef.current.value}`,
         method: 'get',
       })
-      console.log(response)
-      setUser(response.data)
+      if (response.statusText === 'OK') {
+        setUser(response.data)
+      }
     } catch (error) {
       console.log('Error : ', error)
     }
@@ -33,7 +38,6 @@ function SearchUsers(): JSX.Element {
         <SearchInputContainer inputRef={inputRef} />
       </form>
       <div className={styles.findUserList}>
-        {/* <FrinedUsersListContainer /> */}
         <SearchUsersListContainer />
       </div>
     </div>

@@ -7,19 +7,25 @@ function ChatRoomListSection(): JSX.Element {
   const channelsToRender = allChannels || []
 
   return (
-    <ul className={styles.chatRoomListSection}>
-      {channelsToRender.map((channel) => (
-        <CreatedRoomList
-          key={channel.channelId}
-          title={channel.name}
-          channelId={channel.channelId}
-          channelType={channel.channelType}
-          entered={false}
-          userCount={channel.userCount}
-          isJoined={channel.isJoined}
-        />
-      ))}
-    </ul>
+    <>
+      {channelsToRender.length > 0 ? (
+        <ul className={styles.chatRoomListSection}>
+          {channelsToRender.map((channel) => (
+            <CreatedRoomList
+              key={channel.channelId}
+              title={channel.name}
+              channelId={channel.channelId}
+              channelType={channel.channelType}
+              entered={false}
+              userCount={channel.userCount}
+              isJoined={channel.isJoined}
+            />
+          ))}
+        </ul>
+      ) : (
+        <strong className={styles.noChannel}>생성된 채널이 없습니다.</strong>
+      )}
+    </>
   )
 }
 

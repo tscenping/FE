@@ -4,6 +4,7 @@ import passwordRoom from '../../../public/img/chat/lock.svg'
 import { instance } from '@/util/axios'
 import { useJoinChannel, useJoinProtectedChannel, useReadyToChannel } from '@/store/chat'
 import { useModalState } from '@/store/store'
+import { socket } from '@/socket/socket'
 
 interface CreatedRoomListProps {
   title: string //해당 채널의 타이틀
@@ -16,8 +17,14 @@ interface CreatedRoomListProps {
 
 function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
   const { setPasswordInputRender, setChannelProtectedId } = useJoinProtectedChannel()
-  const { setChannelAuth, setMyChannelUserType,setChannelType, setChannelId, setChannelUserInfo, setChannelTitle } =
-    useJoinChannel()
+  const {
+    setChannelAuth,
+    setMyChannelUserType,
+    setChannelType,
+    setChannelId,
+    setChannelUserInfo,
+    setChannelTitle,
+  } = useJoinChannel()
   const { setModalName } = useModalState()
   const { setTitle, setReadyChannelId } = useReadyToChannel()
   const passwordIconClassName = props.channelType === 'PROTECTED' ? styles.show : styles.none
@@ -29,6 +36,13 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
           url: `https://localhost:3000/channels/enter/${props.channelId}`, //쿼리스트링으로 해당 채널의 id값을 붙여주고 "/enter/:channelId" api요청 실행
           method: 'get',
         })
+        socket.emit(
+          'joinChannel',
+          JSON.stringify({
+            channelId: props.channelId,
+            channelSocketId: socket.id,
+          }),
+        )
         setChannelAuth(response.data.myChannelUserType)
         setChannelType(props.channelType)
         setPasswordInputRender('CHANNEL')
@@ -48,6 +62,13 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
             url: `https://localhost:3000/channels/enter/${props.channelId}`, //쿼리스트링으로 해당 채널의 id값을 붙여주고 "/enter/:channelId" api요청 실행
             method: 'get',
           })
+          socket.emit(
+            'joinChannel',
+            JSON.stringify({
+              channelId: props.channelId,
+              channelSocketId: socket.id,
+            }),
+          )
           setChannelAuth(response.data.myChannelUserType)
           setChannelType(props.channelType)
           setPasswordInputRender('CHANNEL')

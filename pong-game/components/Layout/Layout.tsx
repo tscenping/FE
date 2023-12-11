@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { ReactNode, useState, useEffect } from 'react'
+import { ReactNode, useState, useEffect, use } from 'react'
 import Link from 'next/link'
 import noticeIcon from '@/public/img/layout/notice.svg'
 import logoIcon from '@/public/img/layout/PONG GAME.svg'
@@ -11,6 +11,7 @@ import { useRouter, NextRouter } from 'next/router'
 import { useNickNameImage } from '@/store/login'
 import { instance } from '@/util/axios'
 import { useModalState, useResponseModalState } from '@/store/store'
+import { socket } from '@/socket/socket'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)
@@ -26,6 +27,7 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
     await instance.patch('/auth/signout', {}).then(function (res) {
       console.log(res)
     })
+    socket.disconnect()
     setMyNickname(null)
     setAvatar(null)
   }

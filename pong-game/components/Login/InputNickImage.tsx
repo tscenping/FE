@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Resizer from 'react-image-file-resizer'
 import styles from './InputNickImage.module.scss'
-// import defaultProfileImage from '../../public/img/login/noProfileImage.svg'
 import { instance } from '@/util/axios'
 import NickNameInput from './NickNameInput'
 
@@ -63,13 +62,16 @@ function InputNickImage(): JSX.Element {
       inputRef.current.value = ''
     } else {
       const finalData = { nickname: inputRef.current.value, avatar: uploadImage }
-      console.log(finalData)
-      const response = await instance('https://localhost:3000/auth/signup', {
-        method: 'patch',
-        data: JSON.stringify(finalData),
-      })
-      if (response.statusText === 'OK') {
-        window.location.href = 'https://localhost:8001/main'
+      try {
+        const response = await instance('https://localhost:3000/auth/signup', {
+          method: 'patch',
+          data: JSON.stringify(finalData),
+        })
+        if (response.statusText === 'OK') {
+          window.location.href = 'https://localhost:8001/main'
+        }
+      } catch (error) {
+        console.log('Error : ', error)
       }
       setIsValidNick(false)
     }
@@ -109,7 +111,7 @@ function InputNickImage(): JSX.Element {
             accept="image/*"
             onChange={onImageHandler}
           />
-          <p className={styles.imageExplanation}>사진은 1장, 최대 15MB만 가능합니다.</p>
+          <p className={styles.imageExplanation}>사진은 1장, JPEG, PNG, SVG파일만 가능합니다.</p>
         </section>
         <NickNameInput inputRef={inputRef} isValidNick={isValidNick} />
         <section className={styles.submitButton}>

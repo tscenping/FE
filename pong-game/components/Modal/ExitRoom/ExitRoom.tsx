@@ -2,6 +2,7 @@ import styles from './ExitRoom.module.scss'
 import { useGetChannels, useJoinChannel, useJoinProtectedChannel } from '@/store/chat'
 import { useModalState } from '@/store/store'
 import { instance } from '@/util/axios'
+import { socket } from '@/socket/socket'
 
 function ExitRoom(): JSX.Element {
   const { setPasswordInputRender } = useJoinProtectedChannel() //채널 나가기 모달에 띄워줄 채널 타이틀, api요청에 필요한 채널 id, 채널 나가기 성공할 경우 컴포넌트를 바꿔줄 플래그
@@ -29,6 +30,7 @@ function ExitRoom(): JSX.Element {
       // console.log(response)
       if (response.statusText === 'OK') {
         //"api"요청에 성공했을 시
+        socket.off('message')
         const responseAll = await instance({
           method: 'get',
           url: 'https://localhost:3000/channels/all/?page=1',

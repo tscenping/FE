@@ -108,13 +108,15 @@ export default function MyPageProfile({
               <div className={styles.profileImg}>
                 {/* height안들어가면 에러나서 추가 */}
                 {/* {avatar ? ( */}
-                <Image
-                  src={avatar}
-                  alt={'profileImage'}
-                  width={80}
-                  height={80}
-                  onClick={changeProfileImgHandler}
-                />
+                {avatar && (
+                  <Image
+                    src={avatar}
+                    alt={'profileImage'}
+                    width={80}
+                    height={80}
+                    onClick={changeProfileImgHandler}
+                  />
+                )}
               </div>
               <div className={styles.nickName}>{nickName}</div>
             </div>

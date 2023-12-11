@@ -5,7 +5,6 @@ import { useModalState, useResponseModalState } from '@/store/store'
 export default function ReseponseModal() {
   const { modalName, setModalName } = useModalState()
   const { title, content, onConfirm } = useResponseModalState()
-
   const handleConfirm = () => {
     onConfirm()
     setModalName(null)

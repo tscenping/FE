@@ -7,6 +7,7 @@ import {
   useNavBarState,
 } from '@/store/chat'
 import { useModalState } from '@/store/store'
+import { socket } from '@/socket/socket'
 
 function JoinRoom(): JSX.Element {
   const { title, readyChannelId, setReadyChannelId, setTitle } = useReadyToChannel()
@@ -24,6 +25,14 @@ function JoinRoom(): JSX.Element {
         data: JSON.stringify(datas),
       })
       if (response.statusText === 'Created') {
+        socket.emit(
+          'joinChannel',
+          JSON.stringify({
+            channelId: readyChannelId,
+            channelSocketId: socket.id,
+          }),
+        )
+        console.log(socket.id)
         setChannelId(readyChannelId)
         setChannelUserInfo(response.data.channelUsers)
         setPasswordInputRender('CHANNEL')

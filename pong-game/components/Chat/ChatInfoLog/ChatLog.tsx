@@ -8,9 +8,7 @@ function ChatLog(): JSX.Element {
 
   return (
     <div className={styles.chatLog}>
-      {passwordInputRender === 'DEFAULT' && (
-        <p className={styles.defaultView}>대화를 나눌 채널에 참여해 주세요.</p>
-      )}
+      {passwordInputRender === 'DEFAULT' && <p className={styles.defaultView}>42 pong</p>}
       {passwordInputRender === 'CHANNEL' && (
         <>
           <OpponentMessage />
