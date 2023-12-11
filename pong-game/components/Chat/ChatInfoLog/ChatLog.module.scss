@@ -8,6 +8,8 @@
   bottom: 0px;
   width: 90%;
   text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
   .defaultView {
     text-align: center;
     font-family: 'KOTRAHOPE';
