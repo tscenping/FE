@@ -66,6 +66,7 @@ interface useJoinChannelProps {
   setChannelAuth: (v: string) => void
   setChannelUserInfo: (v: useChannelUserInfoProps[]) => void
   setChannelLog: (channelLog: messageProps) => void
+  setChannelLogEmpty: (v: messageProps[]) => void
 }
 
 export const useJoinChannel = create<useJoinChannelProps>((set) => ({
@@ -84,6 +85,7 @@ export const useJoinChannel = create<useJoinChannelProps>((set) => ({
   setChannelUserInfo: (channelUserInfo) => set({ channelUserInfo }),
   setChannelLog: (channelLog) =>
     set((state) => ({ channelLog: [...state.channelLog, channelLog] })),
+  setChannelLogEmpty: (channelLog) => set({ channelLog }),
 }))
 
 // api로 받아온 채널 목록 데이터를 저장, page 상태 변수

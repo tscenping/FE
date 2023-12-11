@@ -20,7 +20,7 @@ function CreateChatRoom(): JSX.Element {
     setChannelType,
     setChannelAuth,
     setChannelId,
-    setChannelLog,
+    setChannelLogEmpty,
   } = useJoinChannel()
   const titleRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -67,7 +67,7 @@ function CreateChatRoom(): JSX.Element {
       console.log(response)
       if (response.statusText === 'Created') {
         //채널 생성에 성공한다면 모달창을 꺼주고 채널뷰를 생성한 채널뷰로 바꿔줘야한다.(채널뷰 변경 추가예정)
-        console.log('active')
+        setChannelLogEmpty([])
         socket.emit(
           'joinChannelRoom',
           JSON.stringify({

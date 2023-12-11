@@ -34,19 +34,23 @@ function FrinedUsersListContainer(): JSX.Element {
 
   return (
     <>
-      <ul className={styles.frinedUsersListContainer}>
-        {allFriends.map((friend) => (
-          <FriendUserListContainer
-            key={friend.id}
-            nickname={friend.nickname}
-            avatar={friend.avatar}
-            id={friend.id}
-            status={friend.status}
-            isFriend={true}
-            isBlocked={false}
-          />
-        ))}
-      </ul>
+      {allFriends.length > 0 ? (
+        <ul className={styles.frinedUsersListContainer}>
+          {allFriends.map((friend) => (
+            <FriendUserListContainer
+              key={friend.id}
+              nickname={friend.nickname}
+              avatar={friend.avatar}
+              id={friend.id}
+              status={friend.status}
+              isFriend={true}
+              isBlocked={false}
+            />
+          ))}
+        </ul>
+      ) : (
+        <p className={styles.noFriends}>새로운 친구를 만들어보세요.</p>
+      )}
     </>
   )
 }
