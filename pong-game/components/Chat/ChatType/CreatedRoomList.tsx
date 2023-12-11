@@ -37,7 +37,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
           method: 'get',
         })
         socket.emit(
-          'joinChannel',
+          'joinChannelRoom',
           JSON.stringify({
             channelId: props.channelId,
             channelSocketId: socket.id,
@@ -63,7 +63,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
             method: 'get',
           })
           socket.emit(
-            'joinChannel',
+            'joinChannelRoom',
             JSON.stringify({
               channelId: props.channelId,
               channelSocketId: socket.id,

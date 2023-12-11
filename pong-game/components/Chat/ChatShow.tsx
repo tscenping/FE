@@ -7,28 +7,27 @@ import submitMessage from '@/public/img/chat/enterInput.svg'
 import ChatPassword from './ChatInfoLog/ChatPassword'
 import MessageInput from './Input/MessageInput'
 import { useJoinProtectedChannel, useJoinChannel } from '@/store/chat'
+import { useNickNameImage } from '@/store/login'
 import { socket } from '@/socket/socket'
 
 function ChatShow(): JSX.Element {
   const messageRef = useRef<HTMLInputElement>(null)
   const { passwordInputRender } = useJoinProtectedChannel()
-  const { channelId } = useJoinChannel()
+  const { channelId, setChannelLog } = useJoinChannel()
+  const { myNickname } = useNickNameImage()
   const showType = passwordInputRender === 'CHANNEL' ? styles.show : styles.none
 
   const messageHandler = (e) => {
     e.preventDefault()
-    console.log(messageRef.current.value)
     try {
       socket.emit('message', { channelId: channelId, message: messageRef.current.value })
     } catch (error) {
       console.log('Error : ', error)
     }
+    // setChannelLog({ nickname: myNickname, message: messageRef.current.value })
     messageRef.current.value = ''
   }
   // socket.on('message', (msg) => console.log(msg))
-  useEffect(() => {
-    socket.on('message', (msg) => console.log(msg))
-  }, [socket])
   return (
     <div className={styles.chatShow}>
       <div className={styles.chatInfoLog}>

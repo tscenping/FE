@@ -1,4 +1,6 @@
 import { create } from 'zustand'
+import MyMessage from '@/components/Chat/ChatInfoLog/MyMessage'
+import OpponentMessage from '@/components/Chat/ChatInfoLog/OpponentMessage'
 
 //채널 목록 조회 전역상태변수
 interface useNavBarStateProps {
@@ -44,11 +46,17 @@ interface useChannelUserInfoProps {
   channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
 }
 
+interface messageProps {
+  nickname: string
+  message: string
+}
+
 interface useJoinChannelProps {
   channelId?: number
   channelTitle: string
   channelType: string
   channelAuth: string
+  channelLog: messageProps[]
   myChannelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
   channelUserInfo: useChannelUserInfoProps[]
   setChannelId: (v: number) => void
@@ -57,6 +65,7 @@ interface useJoinChannelProps {
   setMyChannelUserType: (v: string) => void
   setChannelAuth: (v: string) => void
   setChannelUserInfo: (v: useChannelUserInfoProps[]) => void
+  setChannelLog: (channelLog: messageProps) => void
 }
 
 export const useJoinChannel = create<useJoinChannelProps>((set) => ({
@@ -65,6 +74,7 @@ export const useJoinChannel = create<useJoinChannelProps>((set) => ({
   myChannelUserType: 'MEMBER',
   channelAuth: '',
   channelUserInfo: [],
+  channelLog: [],
   setChannelId: (channelId) => set({ channelId }),
   setChannelTitle: (channelTitle) => set({ channelTitle }),
   setMyChannelUserType: (myChannelUserType: 'OWNER' | 'ADMIN' | 'MEMBER') =>
@@ -72,6 +82,8 @@ export const useJoinChannel = create<useJoinChannelProps>((set) => ({
   setChannelType: (channelType) => set({ channelType }),
   setChannelAuth: (channelAuth) => set({ channelAuth }),
   setChannelUserInfo: (channelUserInfo) => set({ channelUserInfo }),
+  setChannelLog: (channelLog) =>
+    set((state) => ({ channelLog: [...state.channelLog, channelLog] })),
 }))
 
 // api로 받아온 채널 목록 데이터를 저장, page 상태 변수

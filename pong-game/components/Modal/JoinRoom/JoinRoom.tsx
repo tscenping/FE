@@ -12,7 +12,7 @@ import { socket } from '@/socket/socket'
 function JoinRoom(): JSX.Element {
   const { title, readyChannelId, setReadyChannelId, setTitle } = useReadyToChannel()
   const { setPasswordInputRender } = useJoinProtectedChannel()
-  const { setChannelId, setChannelUserInfo, setChannelTitle } = useJoinChannel()
+  const { setChannelId, setChannelUserInfo, setChannelTitle, setChannelLog } = useJoinChannel()
   const { setModalName } = useModalState()
   const { setTabState } = useNavBarState()
 
@@ -26,7 +26,7 @@ function JoinRoom(): JSX.Element {
       })
       if (response.statusText === 'Created') {
         socket.emit(
-          'joinChannel',
+          'joinChannelRoom',
           JSON.stringify({
             channelId: readyChannelId,
             channelSocketId: socket.id,

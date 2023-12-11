@@ -31,7 +31,6 @@ function ChatInfo(): JSX.Element {
     setModalName('channelSetting')
   }
 
-  console.log(channelTitle)
   return (
     <div className={styles.chatInfo}>
       <span className={styles.channelInviteIcon}>
