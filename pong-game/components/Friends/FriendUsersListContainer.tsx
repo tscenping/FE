@@ -4,12 +4,17 @@ import FriendUserListContainer from './FriendUserListContainer'
 import { useGetFriends } from '@/store/friend'
 import { socket } from '@/socket/socket'
 
+interface msgProps {
+  status: string
+  userId: number
+}
+
 function FrinedUsersListContainer(): JSX.Element {
   const { allFriends, setAllFriends } = useGetFriends()
 
   useEffect(() => {
     if (socket.connected) {
-      const handleUserStatus = (msg) => {
+      const handleUserStatus = (msg: msgProps) => {
         // 이벤트 핸들러 내에서의 로직은 그대로 유지
         const updatedFriends = allFriends.map((friend) => {
           if (friend.id === msg.userId) {
@@ -20,6 +25,7 @@ function FrinedUsersListContainer(): JSX.Element {
           }
           return friend
         })
+
         setAllFriends(updatedFriends)
       }
 
