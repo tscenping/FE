@@ -49,6 +49,7 @@ interface useChannelUserInfoProps {
 interface messageProps {
   nickname: string
   message: string
+  time: string
 }
 
 interface useJoinChannelProps {

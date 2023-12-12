@@ -10,11 +10,12 @@
     .opponentUserNickName {
       font-family: 'Pretendard-SemiBold';
       margin-right: 16px;
+      font-size: 1rem;
     }
     .opponentUserMessageTime {
       display: flex;
       flex-direction: column-reverse;
-      font-family: 'Pretendard-Regular';
+      font-family: 'Pretendard-SemiBold';
     }
   }
   .opponentUserMessage {
