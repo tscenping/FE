@@ -48,6 +48,7 @@ function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Eleme
                 isDropDownView={dropDownState}
                 setIsDropDownView={setDropDownState}
                 dropDownState="userProfile"
+                avatar={props.avatar}
                 userProfile={{
                   id: props.id,
                   nickname: props.nickname,

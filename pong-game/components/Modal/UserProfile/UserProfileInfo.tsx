@@ -87,6 +87,7 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
                 isDropDownView={dropDownState}
                 setIsDropDownView={setDropDownState}
                 dropDownState="userProfile"
+                avatar={avatar}
                 userProfile={{
                   id: id,
                   nickname: nickname,

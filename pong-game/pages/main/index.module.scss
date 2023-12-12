@@ -1,3 +1,4 @@
+@import '../../styles/colors.scss';
 .backGround {
   height: 800px;
   display: flex;
@@ -114,5 +115,42 @@
   }
   100% {
     transform: scale(1.4);
+  }
+}
+
+.toastBackGround {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  // width: 500px;
+  .toastMsg{
+    // width: 300px;
+  }
+  .responseBtn {
+    display: flex;
+    margin-left: 24px;
+    .acceptBtn {
+      all: unset;
+      text-align: center;
+      width: 90px;
+      height: 60px;
+      background-color: $main_500;
+      color: white;
+      border-radius: 20px;
+      // margin-right: 24px;
+    }
+
+    .declineBtn {
+      all: unset;
+      text-align: center;
+      width: 90px;
+      height: 60px;
+      background-color: $main_500;
+      color: white;
+      border-radius: 20px;
+      // padding: 10px;
+    }
   }
 }

@@ -24,6 +24,11 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
       router.push('/login/info')
     }
   }
+  useEffect(() => {
+    if (document.cookie) {
+      getUserInfo()
+    }
+  }, [router.pathname])
 
   useEffect(() => {
     if (isLoginPage) {
@@ -41,12 +46,6 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
       router.push('/login')
     }
   }, [router.pathname])
-
-  useEffect(() => {
-    if (document.cookie) {
-      getUserInfo()
-    }
-  }, [])
 
   useEffect(() => {
     if (isLoginPage) {

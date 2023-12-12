@@ -1,9 +1,11 @@
 import { create } from 'zustand'
 
 interface ModalProps {
-  nickname?: string
-  avatar?: string
-  modalType?: 'DM' | 'INVITE' | 'EDIT'
+  nickname?: string  // 상대방 닉네임
+  userId?: number
+  avatar?: string  //상대방 아바타
+  gameMode?: 'Normal' | 'Special'
+  modalType?: 'DM' | 'INVITE' | 'EDIT' | 'GAME'
 }
 
 interface ModalState {
@@ -20,6 +22,7 @@ interface ModalState {
     | 'joinDmRoom'
     | 'inviteFriend'
     | 'channelSetting'
+    | 'inviteGame'
     | null
   setModalName: (
     modalName:
@@ -35,6 +38,7 @@ interface ModalState {
       | 'joinDmRoom'
       | 'inviteFriend'
       | 'channelSetting'
+      | 'inviteGame'
       | null,
   ) => void
   modalProps?: ModalProps | null

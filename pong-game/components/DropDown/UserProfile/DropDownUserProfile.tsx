@@ -3,6 +3,7 @@ import styles from './DropDownIUserProfile.module.scss'
 import EditFriend from '../Function/EditFriend'
 import EditBlock from '../Function/EditBlock'
 import OpenProfile from '../Function/OpenProfile'
+import InviteGame from '../Function/InviteGame'
 
 interface DropDownUserProfileProps {
   id?: number
@@ -44,7 +45,11 @@ export default function DropDownUserProfile({
       {modalName !== 'userProfile' && (
         <OpenProfile nickname={nickname} setIsDropDownView={setIsDropDownView} />
       )}
-      <button>게임하기</button>
+      <InviteGame
+      friendId={id}
+      avatar={avatar}
+      setIsDropDownView={setIsDropDownView}
+      nickname={nickname}/>
       <button>1:1메세지</button>
     </ul>
   )

@@ -11,6 +11,7 @@ interface dropDownProps {
   dropDownState: 'userProfile' | 'chating' | 'friendList'
   userProfile?: userProfileDorpDownProps
   chating?: DropDownChatingProps
+  avatar?: string
 }
 
 interface userProfileDorpDownProps {
@@ -40,6 +41,7 @@ export default function DropDown({
   dropDownState,
   userProfile,
   chating,
+  avatar
 }: dropDownProps) {
   const content: { [key: string]: JSX.Element | null } = {
     userProfile: (
@@ -50,6 +52,7 @@ export default function DropDown({
         isBlocked={userProfile?.isBlocked}
         setIsDropDownView={setIsDropDownView}
         calledFrom={userProfile?.calledFrom}
+        avatar={avatar}
       />
     ),
     chating: (
@@ -59,6 +62,7 @@ export default function DropDown({
         nickname={chating?.nickname}
         isFriend={chating?.isFriend}
         isBlocked={chating?.isBlocked}
+        avatar={avatar}
         myChannelUserType={chating?.myChannelUserType}
         channelUserType={chating?.channelUserType}
         setChannelUserType={chating?.setChannelUserType}

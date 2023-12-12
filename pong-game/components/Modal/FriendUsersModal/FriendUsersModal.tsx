@@ -16,7 +16,7 @@ interface userinfoProps {
 
 function FriendUsersModal(): JSX.Element {
   const [page, setPage] = useState(1)
-  const { modalProps } = useModalState()
+  const { setModalName, modalProps } = useModalState()
 
   const { allFriends, setAllFriends, totalFriendCount } = useGetFriends()
   const getAllFriendHandler = async () => {
@@ -29,6 +29,9 @@ function FriendUsersModal(): JSX.Element {
     } catch (error) {
       console.log('Error : ', error)
     }
+  }
+  const modalOffHandler = () => {
+    setModalName(null)
   }
 
   useEffect(() => {
@@ -43,6 +46,9 @@ function FriendUsersModal(): JSX.Element {
         )}
         {modalProps.modalType === 'INVITE' && (
           <ModalPageTitle title="친구 초대" subTitle="대화를 나눌 유저를 선택해주세요" />
+        )}
+        {modalProps.modalType === 'GAME' && (
+          <ModalPageTitle title="게임 초대" subTitle="게임을 할 유저를 선택해주세요" />
         )}
         <ul className={styles.usersContainer}>
           {allFriends &&
@@ -65,6 +71,9 @@ function FriendUsersModal(): JSX.Element {
           totalItemsCount={totalFriendCount}
         />
       )}
+      <button onClick={modalOffHandler} className={styles.joinDmRoomBtn}>
+        취 소
+      </button>
     </div>
   )
 }

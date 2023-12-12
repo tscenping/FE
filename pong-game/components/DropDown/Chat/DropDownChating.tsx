@@ -11,6 +11,7 @@ interface DropDownChatingProps {
   id: number
   nickname: string
   isFriend: boolean
+  avatar?: string
   isBlocked: boolean
   channelUserId: number
   myChannelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
@@ -61,7 +62,11 @@ export default function DropDownChating(props: DropDownChatingProps) {
         setIsDropDownView={props.setIsDropDownView}
       />
       <OpenProfile nickname={props.nickname} setIsDropDownView={props.setIsDropDownView} />
-      <InviteGame />
+      <InviteGame
+      friendId={props.id}
+      avatar={props.avatar}
+      setIsDropDownView={props.setIsDropDownView}
+      nickname={props.nickname}/>
       <DirectMsg />
     </ul>
   )

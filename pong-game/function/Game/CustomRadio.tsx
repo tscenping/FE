@@ -7,11 +7,11 @@ import Image from 'next/image'
 import styles from './customRadio.module.scss'
 
 interface radioOption{
-  value: string;
+  value: 'Normal' | 'Special';
   name: string;
   id: string;
-  setGameMode: (value: string) => void
-  gameMode: string;
+  setGameMode: (value: 'Normal' | 'Special') => void
+  gameMode: 'Normal' | 'Special';
   width: number;
 }
 
