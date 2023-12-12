@@ -15,20 +15,13 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
       await instance.get('/users/me').then((res) => {
         if (res.data) {
           setMyNickname(res.data.nickname)
-          // console.log(res.data)
           setAvatar(res.data.avatar)
-          // console.log(res.data)
         }
       })
     } catch (e) {
       router.push('/login/info')
     }
   }
-  useEffect(() => {
-    if (document.cookie) {
-      getUserInfo()
-    }
-  }, [router.pathname])
 
   useEffect(() => {
     if (isLoginPage) {
@@ -44,6 +37,12 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
     }
     if (!document.cookie && !isLoginPage) {
       router.push('/login')
+    }
+  }, [router.pathname])
+
+  useEffect(() => {
+    if (document.cookie) {
+      getUserInfo()
     }
   }, [router.pathname])
 

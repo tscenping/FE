@@ -12,13 +12,14 @@ interface DmChantProps {
 
 function DmChat(props: DmChantProps): JSX.Element {
   const { setPasswordInputRender } = useJoinProtectedChannel()
-  const { setChannelId, setChannelTitle } = useJoinChannel()
+  const { setChannelId, setChannelTitle, setChannelLogEmpty } = useJoinChannel()
   const joinDmChatHandler = async () => {
     try {
       const response = await instance({
         url: `https://localhost:3000/channels/enter/${props.channelId}`,
         method: 'get',
       })
+      setChannelLogEmpty([])
       setChannelId(props.channelId)
       setPasswordInputRender('CHANNEL')
       setChannelTitle(props.partnerName)

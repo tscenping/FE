@@ -3,6 +3,8 @@ import { useGetChannels, useJoinChannel, useJoinProtectedChannel } from '@/store
 import { useModalState } from '@/store/store'
 import { instance } from '@/util/axios'
 import { socket } from '@/socket/socket'
+import { useNickNameImage } from '@/store/login'
+import NickNameInput from '@/components/Login/NickNameInput'
 
 function ExitRoom(): JSX.Element {
   const { setPasswordInputRender } = useJoinProtectedChannel() //채널 나가기 모달에 띄워줄 채널 타이틀, api요청에 필요한 채널 id, 채널 나가기 성공할 경우 컴포넌트를 바꿔줄 플래그
@@ -17,6 +19,7 @@ function ExitRoom(): JSX.Element {
   } = useGetChannels()
   const { channelId, setChannelUserInfo, channelTitle } = useJoinChannel()
   const { setModalName } = useModalState() //"확인" 버튼을 클릭했을 때, "취소" 버튼을 클릭했을 때 모달을 꺼주기 위한 set함수
+  const { myNickname } = useNickNameImage()
   const exitRoomHandler = async (e) => {
     //"확인" 버튼을 클릭했을 때, api요청을 실행할 함수
     const datas = { channelId: channelId }
@@ -29,7 +32,10 @@ function ExitRoom(): JSX.Element {
       })
       // console.log(response)
       if (response.statusText === 'OK') {
-        //"api"요청에 성공했을 시
+        socket.emit('message', {
+          channelId: channelId,
+          message: `${myNickname} 님이 채널을 나갔습니다.`,
+        })
         socket.off('message')
         const responseAll = await instance({
           method: 'get',

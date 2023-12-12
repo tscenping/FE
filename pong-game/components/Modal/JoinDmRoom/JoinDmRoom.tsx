@@ -13,7 +13,7 @@ function JoinDmRoom(): JSX.Element {
   const { title, readyChannelId, dmAvatar } = useReadyToChannel()
   const { setModalName } = useModalState()
   const { setPasswordInputRender } = useJoinProtectedChannel()
-  const { setChannelId, setChannelTitle } = useJoinChannel()
+  const { setChannelId, setChannelLogEmpty, setChannelTitle } = useJoinChannel()
   const { setDmChannels, setTotalDm } = useGetChannels()
 
   const joinDmHandler = async () => {
@@ -25,7 +25,9 @@ function JoinDmRoom(): JSX.Element {
         data: JSON.stringify(datas),
       })
       if (responseCreate.statusText === 'Created') {
+        setChannelTitle(title)
         setPasswordInputRender('CHANNEL')
+        setChannelLogEmpty([])
         setChannelId(responseCreate.data.channelId)
         const responseDm = await instance({
           url: 'https://localhost:3000/channels/dm/?page=1',

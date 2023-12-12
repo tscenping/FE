@@ -24,6 +24,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
     setChannelId,
     setChannelUserInfo,
     setChannelTitle,
+    setChannelLogEmpty,
   } = useJoinChannel()
   const { setModalName } = useModalState()
   const { setTitle, setReadyChannelId } = useReadyToChannel()
@@ -43,6 +44,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
             channelSocketId: socket.id,
           }),
         )
+        setChannelLogEmpty([])
         setChannelAuth(response.data.myChannelUserType)
         setChannelType(props.channelType)
         setPasswordInputRender('CHANNEL')
@@ -50,7 +52,6 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
         setMyChannelUserType(response.data.myChannelUserType)
         setChannelTitle(props.title)
         setChannelId(props.channelId)
-        setChannelTitle(props.title)
       } catch (error) {
         console.log('Error : ', error)
       }
@@ -69,6 +70,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
               channelSocketId: socket.id,
             }),
           )
+          setChannelLogEmpty([])
           setChannelAuth(response.data.myChannelUserType)
           setChannelType(props.channelType)
           setPasswordInputRender('CHANNEL')

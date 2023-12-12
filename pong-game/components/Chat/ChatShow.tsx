@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import Image from 'next/image'
 import styles from './ChatShow.module.scss'
 import ChatLog from './ChatInfoLog/ChatLog'
@@ -13,8 +13,7 @@ import { socket } from '@/socket/socket'
 function ChatShow(): JSX.Element {
   const messageRef = useRef<HTMLInputElement>(null)
   const { passwordInputRender } = useJoinProtectedChannel()
-  const { channelId, setChannelLog } = useJoinChannel()
-  const { myNickname } = useNickNameImage()
+  const { channelId } = useJoinChannel()
   const showType = passwordInputRender === 'CHANNEL' ? styles.show : styles.none
 
   const messageHandler = (e) => {
@@ -24,22 +23,18 @@ function ChatShow(): JSX.Element {
     } catch (error) {
       console.log('Error : ', error)
     }
-    // setChannelLog({ nickname: myNickname, message: messageRef.current.value })
     messageRef.current.value = ''
   }
-  // socket.on('message', (msg) => console.log(msg))
+
   return (
     <div className={styles.chatShow}>
       <div className={styles.chatInfoLog}>
         {passwordInputRender === 'CHANNEL' && <ChatInfo />}
         {passwordInputRender === 'PASSWORD' ? <ChatPassword /> : <ChatLog />}
         {/* "passwordInputRender값에 따라서 chat log에 보여줘야하는 컴포넌트를 결정 */}
-        {/* <ChatPassword /> */}
       </div>
       <form className={`${styles.chatInput} ${showType}`} onSubmit={messageHandler}>
         <MessageInput messageRef={messageRef} />
-        {/* <input type="text" className={styles.messageInput} required /> */}
-        {/* <span className={styles.folderNameInputPlaceHolder}>Message Input</span> */}
         <button className={styles.submitMessage}>
           <Image src={submitMessage} alt={'submit message'} />
         </button>
