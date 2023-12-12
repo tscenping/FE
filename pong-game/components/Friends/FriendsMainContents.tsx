@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import FriendTypeNaviContainer from './FriendTypeNaviContainer'
 import FrinedUsersListContainer from './FriendUsersListContainer'
 import BlockUsersListContainer from './BlockUsersListContainer'
@@ -70,13 +70,6 @@ function FriendsMainContents(): JSX.Element {
           totalItemsCount={totalBlockCount}
         />
       )}
-      {/* <button
-        onClick={() => {
-          setSocketState((prevState) => !prevState)
-        }}
-      >
-        socket{' '}
-      </button> */}
     </div>
   )
 }

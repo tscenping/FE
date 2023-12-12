@@ -15,9 +15,7 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
       await instance.get('/users/me').then((res) => {
         if (res.data) {
           setMyNickname(res.data.nickname)
-          // console.log(res.data)
           setAvatar(res.data.avatar)
-          // console.log(res.data)
         }
       })
     } catch (e) {
@@ -46,7 +44,7 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
     if (document.cookie) {
       getUserInfo()
     }
-  }, [])
+  }, [router.pathname])
 
   useEffect(() => {
     if (isLoginPage) {

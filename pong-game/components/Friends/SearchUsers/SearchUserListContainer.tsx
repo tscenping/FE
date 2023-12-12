@@ -16,6 +16,8 @@ interface SearchUserListContainerprops {
 function SearchUserListContainer(props: SearchUserListContainerprops): JSX.Element {
   const [dropDownState, setDropDownState] = useState(false)
   const { myNickname } = useNickNameImage()
+  console.log(myNickname)
+  console.log(props.nickname)
   return (
     <>
       <li className={styles.friendUserListContainer}>
