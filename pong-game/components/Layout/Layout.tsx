@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { ReactNode, useState, useEffect, use } from 'react'
+import { ReactNode, useState, useEffect } from 'react'
 import Link from 'next/link'
 import noticeIcon from '@/public/img/layout/notice.svg'
 import logoIcon from '@/public/img/layout/PONG GAME.svg'
@@ -12,10 +12,16 @@ import { useNickNameImage } from '@/store/login'
 import { instance } from '@/util/axios'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { socket } from '@/socket/socket'
+import { useJoinChannel } from '@/store/chat'
+
+interface messageProps {
+  nickname: string
+  message: string
+}
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)
-
+  const { setChannelLog } = useJoinChannel()
   const router: NextRouter = useRouter()
   const loginPage = router.pathname === '/login' || router.pathname === '/login/info'
 
@@ -35,6 +41,26 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
     setModalName('response')
     responseModal.setResponseModalState('로그아웃', '로그아웃 하시겠습니까?', logoutHandler)
   }
+
+  useEffect(() => {
+    const handleReceiveMessage = (message: messageProps) => {
+      const time = new Date()
+      const hour = String(time.getHours()).padStart(2, '0')
+      const minute = String(time.getMinutes()).padStart(2, '0')
+      setChannelLog({
+        nickname: message.nickname,
+        message: message.message,
+        time: `${hour} : ${minute}`,
+      })
+    }
+
+    socket.on('message', handleReceiveMessage)
+    console.log(socket)
+    return () => {
+      // 컴포넌트가 언마운트되면 이벤트 핸들러 정리
+      socket.off('message', handleReceiveMessage)
+    }
+  }, [socket])
 
   return (
     <>
@@ -83,23 +109,5 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
     </>
   )
 }
-
-// export async function getStaticProps(context) {
-//   if (context.req.headers.cookie) {
-//     return {
-//       redirect: {
-//         destination: '/main',
-//         permanent: false,
-//       },
-//     }
-//   } else {
-//     return {
-//       redirect: {
-//         destination: '/login',
-//         permanent: false,
-//       },
-//     }
-//   }
-// }
 
 export default Layout

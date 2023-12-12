@@ -26,14 +26,25 @@ function ChatLog(): JSX.Element {
     }
   })
 
-  useEffect(() => {
-    socket.on('message', (msg) => {
-      const time = new Date()
-      const hour = String(time.getHours()).padStart(2, '0')
-      const minute = String(time.getMinutes()).padStart(2, '0')
-      setChannelLog({ nickname: msg.nickname, message: msg.message, time: `${hour} : ${minute}` })
-    })
-  }, [socket])
+  // useEffect(() => {
+  //   const handleReceiveMessage = (msg) => {
+  //     const time = new Date()
+  //     const hour = String(time.getHours()).padStart(2, '0')
+  //     const minute = String(time.getMinutes()).padStart(2, '0')
+  //     setChannelLog({
+  //       nickname: msg.nickname,
+  //       message: msg.message,
+  //       time: `${hour} : ${minute}`,
+  //     })
+  //   }
+
+  //   socket.on('message', handleReceiveMessage)
+
+  //   return () => {
+  //     // 컴포넌트가 언마운트되면 이벤트 핸들러 정리
+  //     socket.off('message', handleReceiveMessage)
+  //   }
+  // }, [socket])
 
   useEffect(() => {
     messageEndRef.current.scrollIntoView({ behavior: 'smooth' })

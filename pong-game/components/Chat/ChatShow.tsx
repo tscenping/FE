@@ -32,12 +32,9 @@ function ChatShow(): JSX.Element {
         {passwordInputRender === 'CHANNEL' && <ChatInfo />}
         {passwordInputRender === 'PASSWORD' ? <ChatPassword /> : <ChatLog />}
         {/* "passwordInputRender값에 따라서 chat log에 보여줘야하는 컴포넌트를 결정 */}
-        {/* <ChatPassword /> */}
       </div>
       <form className={`${styles.chatInput} ${showType}`} onSubmit={messageHandler}>
         <MessageInput messageRef={messageRef} />
-        {/* <input type="text" className={styles.messageInput} required /> */}
-        {/* <span className={styles.folderNameInputPlaceHolder}>Message Input</span> */}
         <button className={styles.submitMessage}>
           <Image src={submitMessage} alt={'submit message'} />
         </button>
