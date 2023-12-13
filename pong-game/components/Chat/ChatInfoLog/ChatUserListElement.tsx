@@ -66,6 +66,7 @@ function ChatUserListElement(props: ChatUserListElementProps): JSX.Element {
           isDropDownView={dropDownState}
           setIsDropDownView={setDropDownState}
           dropDownState="chating"
+          avatar={props.avatar}
           chating={{
             id: props.userId,
             myChannelUserType: myChannelUserType,

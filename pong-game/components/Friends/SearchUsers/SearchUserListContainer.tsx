@@ -39,6 +39,7 @@ function SearchUserListContainer(props: SearchUserListContainerprops): JSX.Eleme
                 isDropDownView={dropDownState}
                 setIsDropDownView={setDropDownState}
                 dropDownState="userProfile"
+                avatar={props.avatar}
                 userProfile={{
                   id: props.id,
                   nickname: props.nickname,

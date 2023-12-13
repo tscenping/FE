@@ -1,11 +1,10 @@
 import { io } from 'socket.io-client'
 
-export let socket = io('wss://localhost:3000/channels', {
-  autoConnect: false,
-  withCredentials: true,
-})
+const channelsSocketUrl = process.env.NEXT_PUBLIC_API_CHANNELS_SOCKET_ENDPOINT
 
-export let gameSocket = io('wss://localhost:3000/game', {
+export let socket = io(channelsSocketUrl, {
   autoConnect: false,
+  // reconnection: true,
   withCredentials: true,
+  // timeout: 300000,
 })

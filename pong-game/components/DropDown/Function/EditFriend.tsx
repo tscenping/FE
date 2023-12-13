@@ -20,6 +20,9 @@ export default function EditFriend(props: EditFriendProps) {
 
   const changeItem = (newType) => {
     const result = user
+    if (newType) {
+      result.isBlocked = false
+    }
     result.isFriend = newType
     setUser(result)
   }
@@ -86,7 +89,6 @@ export default function EditFriend(props: EditFriendProps) {
           withCredentials: true,
         })
         .then(function (res) {
-          console.log(res)
           setTotalFriendCount(totalFriendCount - 1)
           if (props.calledFrom === 'searchUserList') {
             changeItem(false)
@@ -101,6 +103,7 @@ export default function EditFriend(props: EditFriendProps) {
 
   const setFriendkModal = () => {
     setModalName('response')
+    props.setIsDropDownView(false)
     props.isFriend
       ? responseModal.setResponseModalState(
           '친구 삭제',

@@ -12,6 +12,7 @@ import JoinDmRoom from '../Modal/JoinDmRoom/JoinDmRoom'
 import FriendUsersModal from '../Modal/FriendUsersModal/FriendUsersModal'
 import InviteFriend from '../Modal/InviteFriend/InviteFriend'
 import ChannelSetting from '../Modal/ChannelSetting/ChannelSetting'
+import InviteGameModal from '../Modal/InviteGame/InviteGameModal'
 
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
@@ -46,6 +47,7 @@ function ModalContent({}): JSX.Element {
     joinDmRoom: <JoinDmRoom />,
     inviteFriend: <InviteFriend />,
     channelSetting: <ChannelSetting />,
+    inviteGame: <InviteGameModal/>
   }
   return (
     <>

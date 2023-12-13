@@ -1,14 +1,13 @@
-import { useEffect } from 'react'
-import { socket, gameSocket } from '@/socket/socket'
+import GameSocketHandler from './Socket/GameSocketHandler'
+import ChannelSocketHandler from './Socket/ChannelSocketHandler'
 
 function SocketConnect() {
-  useEffect(() => {
-    socket.connect()
-    return () => {
-      socket.disconnect()
-    }
-  }, [])
-  return <></>
+  return (
+    <>
+      <ChannelSocketHandler />
+      <GameSocketHandler />
+    </>
+  )
 }
 
 export default SocketConnect

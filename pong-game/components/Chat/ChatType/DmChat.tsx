@@ -23,6 +23,7 @@ function DmChat(props: DmChantProps): JSX.Element {
       setChannelId(props.channelId)
       setPasswordInputRender('CHANNEL')
       setChannelTitle(props.partnerName)
+      console.log(response.data)
     } catch (error) {
       console.log('Error : ', error)
     }

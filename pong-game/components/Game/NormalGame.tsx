@@ -2,6 +2,7 @@ import styles from './normalGame.module.scss'
 import { useState } from 'react'
 import CustomRadio from '@/function/Game/CustomRadio'
 import PageTitle from '../UI/PageTitle'
+import { useModalState } from '@/store/store'
 
 interface props {
   setPageState: (newPageState: number) => void // setPageState 함수
@@ -9,10 +10,16 @@ interface props {
 }
 
 export default function NormalGame({ setPageState, setGameState }: props) {
-  const [gameMode, setGameMode] = useState('Normal')
+  const [gameMode, setGameMode] = useState<'Normal'|'Special'>('Normal')
   const handlePrvBtn = () => {
     setGameState('')
     setPageState(1)
+  }
+  const { setModalName, setModalProps } = useModalState()
+  const handleInviteGame = () => {
+    console.log(gameMode)
+    setModalProps({ modalType: 'GAME', gameMode: gameMode })
+    setModalName('friendUsers')
   }
 
   return (
@@ -45,7 +52,9 @@ export default function NormalGame({ setPageState, setGameState }: props) {
           />
         </section>
         <button className={styles.gameBtn}>Matching</button>
-        <button className={styles.gameBtn}>Invite a Friend</button>
+        <button className={styles.gameBtn} onClick={handleInviteGame}>
+          Invite a Friend
+        </button>
       </section>
     </div>
   )

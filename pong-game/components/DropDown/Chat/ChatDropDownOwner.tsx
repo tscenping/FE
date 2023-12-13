@@ -27,7 +27,11 @@ export default function ChatDropDownOwner(props: ChatDropDownOwnerProps) {
         nickname={props.nickname}
       />
       <ChatMute channelUserId={props.channelUserId} />
-      <ChatBan channelUserId={props.channelUserId} />
+      <ChatBan
+        channelUserType={props.channelUserType}
+        channelUserId={props.channelUserId}
+        nickname={props.nickname}
+      />
     </>
   )
 }

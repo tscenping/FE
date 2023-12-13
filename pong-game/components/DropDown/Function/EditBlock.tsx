@@ -18,6 +18,9 @@ export default function EditBlock(props: EditBlockProps) {
 
   const changeItem = (newType) => {
     const result = user
+    if (newType) {
+      result.isFriend = false
+    }
     result.isBlocked = newType
     setUser(result)
   }
@@ -93,6 +96,7 @@ export default function EditBlock(props: EditBlockProps) {
 
   const setBlockModal = () => {
     setModalName('response')
+    props.setIsDropDownView(false)
     props.isBlocked
       ? responseModal.setResponseModalState(
           '유저 차단',
