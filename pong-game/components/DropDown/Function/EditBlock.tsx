@@ -96,6 +96,7 @@ export default function EditBlock(props: EditBlockProps) {
 
   const setBlockModal = () => {
     setModalName('response')
+    props.setIsDropDownView(false)
     props.isBlocked
       ? responseModal.setResponseModalState(
           '유저 차단',
