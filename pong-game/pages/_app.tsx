@@ -9,6 +9,7 @@ import { Toaster } from 'react-hot-toast'
 import { useEffect, useState } from 'react'
 import SocketIOClient from 'socket.io-client'
 import io from 'socket.io-client'
+import Loding from '@/components/Loding/Loding'
 
 interface userStatusProps {
   userId: number
@@ -44,17 +45,19 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Reset />
       <LoginCheck>
-        <Layout>
-          <SocketConnect />
-          <Component {...pageProps} />
-          <Toaster
-            toastOptions={{
-              style: {
-                maxWidth: 850,
-              },
-            }}
-          />
-        </Layout>
+        <Loding>
+          <Layout>
+            <SocketConnect />
+            <Component {...pageProps} />
+            <Toaster
+              toastOptions={{
+                style: {
+                  maxWidth: 850,
+                },
+              }}
+            />
+          </Layout>
+        </Loding>
       </LoginCheck>
       <ModalLayout />
     </>
