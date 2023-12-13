@@ -21,11 +21,6 @@ export default function Loding({ children }: { children: ReactNode }): JSX.Eleme
           <div className={styles.lodingOverlay}></div>
           <section className={styles.lodingContent}>
             <Image src={lodingImg} alt={'out room'} width={250} />
-            {/* <img
-            src="https://blog.kakaocdn.net/dn/vqTEy/btq9s83QrTK/VNg4A0KJqj3yZ6f3KHX9Rk/img.gif"
-            alt=""
-            width={250}
-          /> */}
             <div className={styles.lodingText}>
               {lodingState.lodingTitle ? lodingText[lodingState.lodingTitle] : '로딩중 입니다.'}
               <button onClick={() => (lodingCancelHandler(), lodingState.cancelHandler())}>

@@ -75,7 +75,6 @@ export default function EditBlock(props: EditBlockProps) {
         .delete(`/users/blocks`, {
           data: {
             blockId: props.friendId,
-            // blockId: 3,
           },
           withCredentials: true,
         })
