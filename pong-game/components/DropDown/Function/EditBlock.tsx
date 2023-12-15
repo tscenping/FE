@@ -86,6 +86,7 @@ export default function EditBlock(props: EditBlockProps) {
             changeItem(false)
           }
           changeArrayItem(false, props.nickname)
+          // }
         })
     } catch (e) {
       console.log(e.message)

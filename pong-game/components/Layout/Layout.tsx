@@ -12,7 +12,7 @@ import { useNickNameImage } from '@/store/login'
 import { instance } from '@/util/axios'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { socket } from '@/socket/socket'
-import { useJoinChannel } from '@/store/chat'
+import { useJoinChannel, useJoinProtectedChannel, useNavBarState } from '@/store/chat'
 import { useGetBlocks } from '@/store/friend'
 import toast from 'react-hot-toast'
 
@@ -24,7 +24,16 @@ interface messageProps {
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)
-  const { setChannelLog, channelId, channelUserInfo } = useJoinChannel()
+  const {
+    setChannelLog,
+    channelId,
+    channelUserInfo,
+    setChannelId,
+    setChannelTitle,
+    setChannelUserInfo,
+  } = useJoinChannel()
+  const { setPasswordInputRender } = useJoinProtectedChannel()
+  const { setTabState } = useNavBarState()
   const router: NextRouter = useRouter()
   const loginPage = router.pathname === '/login' || router.pathname === '/login/info'
   const { setAvatar, setMyNickname } = useNickNameImage()
@@ -45,9 +54,34 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
     responseModal.setResponseModalState('로그아웃', '로그아웃 하시겠습니까?', logoutHandler)
   }
 
-  const handler = (t) => {
+  const acceptHandler = async (t, invitationId) => {
+    const datas = { invitationId: invitationId }
+    try {
+      const response = await instance('/channels/accept', {
+        method: 'post',
+        data: JSON.stringify(datas),
+      })
+      toast.remove(t.id)
+      if (router.pathname !== '/chat') {
+        router.replace('/chat')
+      }
+      const postData = { channelId: response.data.channelId, password: null }
+      await instance(`/channels/enter/${response.data.channelId}`, {
+        method: 'get',
+        data: JSON.stringify(postData),
+      })
+    } catch (error) {
+      console.log('Error : ', error)
+    }
+  }
+
+  const cancelHandler = async (t, invitationId) => {
+    const response = await instance(`/channels/refuse/${invitationId}`, {
+      method: 'delete',
+    })
     toast.remove(t.id)
   }
+
   useEffect(() => {
     socket.on('privateAlert', (msg) => {
       // msg.invitingUserId가 차단된 유저인지 확인
@@ -63,9 +97,9 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
                 <span> 님이 채널에서 초대를 보냈습니다.</span>
               </section>
               <section className={styles.toastButton}>
-                <button onClick={() => toast.remove()}>수 락</button>{' '}
+                <button onClick={() => acceptHandler(t, msg.invitationId)}>수 락</button>{' '}
                 {/* 채팅 초대 수락 api, 따로 핸들러 함수 만들어서 실행*/}
-                <button onClick={() => handler(t)}>거 절</button>{' '}
+                <button onClick={() => cancelHandler(t, msg.invitationId)}>거 절</button>{' '}
                 {/* 채팅 초대 거절 api, 따로 핸들러 함수 만들어서 실행*/}
               </section>
             </div>

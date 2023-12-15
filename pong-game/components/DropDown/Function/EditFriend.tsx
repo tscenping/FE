@@ -69,9 +69,8 @@ export default function EditFriend(props: EditFriendProps) {
           setTotalFriendCount(totalFriendCount + 1)
           if (props.calledFrom === 'searchUserList') {
             changeItem(true)
-          } else {
-            changeArrayItem(true, props.nickname)
           }
+          changeArrayItem(true, props.nickname)
         })
     } catch (e) {
       console.log(e.message)
@@ -92,9 +91,8 @@ export default function EditFriend(props: EditFriendProps) {
           setTotalFriendCount(totalFriendCount - 1)
           if (props.calledFrom === 'searchUserList') {
             changeItem(false)
-          } else {
-            changeArrayItem(false, props.nickname)
           }
+          changeArrayItem(false, props.nickname)
         })
     } catch (e) {
       console.log(e.message)

@@ -72,6 +72,7 @@ interface useJoinChannelProps {
 
 export const useJoinChannel = create<useJoinChannelProps>((set) => ({
   channelTitle: '',
+  channelId: null,
   channelType: '',
   myChannelUserType: 'MEMBER',
   channelAuth: '',

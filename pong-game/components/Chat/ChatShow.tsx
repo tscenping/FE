@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import Image from 'next/image'
 import styles from './ChatShow.module.scss'
 import ChatLog from './ChatInfoLog/ChatLog'

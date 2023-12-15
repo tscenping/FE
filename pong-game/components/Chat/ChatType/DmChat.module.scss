@@ -18,10 +18,11 @@
   .profileImageOnline {
     display: flex;
     margin-right: 32px;
+    padding: 16px;
     img {
-      padding: 16px;
       object-fit: cover;
       border-radius: 50%;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
     &::after {
       position: absolute;
@@ -32,15 +33,17 @@
       background-color: green;
       left: 55px;
       bottom: 5px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
   }
   .profileImageOffline {
     display: flex;
     margin-right: 32px;
+    padding: 16px;
     img {
-      padding: 16px;
       object-fit: cover;
       border-radius: 50%;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
     &::after {
       position: absolute;
@@ -51,6 +54,7 @@
       background-color: grey;
       left: 55px;
       bottom: 5px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
   }
 
