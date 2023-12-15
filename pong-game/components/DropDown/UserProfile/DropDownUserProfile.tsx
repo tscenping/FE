@@ -46,18 +46,22 @@ export default function DropDownUserProfile({
       {modalName !== 'userProfile' && (
         <OpenProfile nickname={nickname} setIsDropDownView={setIsDropDownView} />
       )}
-      <InviteGame
-        friendId={id}
-        avatar={avatar}
-        setIsDropDownView={setIsDropDownView}
-        nickname={nickname}
-      />
-      <DirectMsg
-        setIsDropDownView={setIsDropDownView}
-        avatar={avatar}
-        nickname={nickname}
-        userId={id}
-      />
+      {!isBlocked && (
+        <>
+          <InviteGame
+            friendId={id}
+            avatar={avatar}
+            setIsDropDownView={setIsDropDownView}
+            nickname={nickname}
+          />
+            <DirectMsg
+                setIsDropDownView={setIsDropDownView}
+                avatar={avatar}
+                nickname={nickname}
+                userId={id}
+            />
+        </>
+      )}
     </ul>
   )
 }

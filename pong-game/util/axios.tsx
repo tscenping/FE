@@ -42,6 +42,9 @@ instance.interceptors.response.use(
       // window.location.href = '/login'
       // router.push('/login')
     }
+    else if(error.response && error.response.status === 404){
+      alert('잘못된 요청입니다.')
+    }
     return Promise.reject(error)
   },
 )

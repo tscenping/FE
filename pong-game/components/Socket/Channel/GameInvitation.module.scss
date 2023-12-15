@@ -1,4 +1,4 @@
-@import '../../styles/colors.scss';
+@import '../../../styles/colors.scss';
 
 .toastBackGround {
   display: flex;
@@ -7,7 +7,7 @@
   align-items: center;
   font-size: 24px;
   // width: 500px;
-  .toastMsg {
+  .toastMsg{
     // width: 300px;
   }
   .responseBtn {
