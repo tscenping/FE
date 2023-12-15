@@ -1,0 +1,19 @@
+@import '../../../styles/colors.scss';
+
+.channelNotice {
+  display: flex;
+  align-items: center;
+  padding: 8px 0px;
+  position: relative;
+  width: 100%;
+  div {
+    width: 50%;
+    border-bottom: 1px solid black;
+  }
+  .channelNoticeMessage {
+    width: 100%;
+    text-align: center;
+    font-family: 'Pretendard-Regular';
+    color: $gray_scale_600;
+  }
+}

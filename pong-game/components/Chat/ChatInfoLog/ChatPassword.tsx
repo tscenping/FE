@@ -17,6 +17,7 @@ function ChatPassword(): JSX.Element {
     setChannelTitle,
     setChannelLogEmpty,
     channelTitle,
+    setChannelId,
   } = useJoinChannel()
 
   const passwordHandler = async (e) => {
@@ -32,9 +33,14 @@ function ChatPassword(): JSX.Element {
       passwordRef.current.value = '' //그리고 해당 비밀번호 입력 값을 비워준다.
       return
     }
+    if (!passwordRef.current.value) {
+      setError('noEnterPasswordError')
+      return
+    }
     const datas = { channelId: channelId, password: passwordRef.current.value }
     try {
       //전달받은 channelId와 입력한 해당 채널의 비밀번호 값을 통해서 "/join" api요청을 보낸다.
+      console.log(datas)
       const response = await instance({
         url: 'https://localhost:3000/channels/join',
         method: 'post',
@@ -49,6 +55,7 @@ function ChatPassword(): JSX.Element {
         setMyChannelUserType(response.data.myChannelUserType)
         setPasswordInputRender('CHANNEL')
         setChannelTitle(channelTitle)
+        setChannelId(channelId)
       }
     } catch (error) {
       console.log('Error : ', error)
@@ -78,6 +85,9 @@ function ChatPassword(): JSX.Element {
         <p className={styles.error}>
           채널의 비밀번호는 8 ~ 16자의 영문, 숫자, 특수문자를 입력해주세요.
         </p>
+      )}
+      {error === 'noEnterPasswordError' && (
+        <p className={styles.error}>채널의 비밀번호를 입력해주세요.</p>
       )}
     </div>
   )

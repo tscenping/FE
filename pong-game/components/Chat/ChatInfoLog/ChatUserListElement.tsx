@@ -8,6 +8,7 @@ import DropDown from '@/components/DropDown/DropDown'
 import { useState } from 'react'
 import { useJoinChannel } from '@/store/chat'
 import { useNickNameImage } from '@/store/login'
+import toast, { Toaster } from 'react-hot-toast'
 
 interface ChatUserListElementProps {
   channelUserId?: number
@@ -23,22 +24,27 @@ type ChannelUserType = 'OWNER' | 'ADMIN' | 'MEMBER'
 function ChatUserListElement(props: ChatUserListElementProps): JSX.Element {
   const [dropDownState, setDropDownState] = useState(false)
   const { myNickname } = useNickNameImage()
-  const { myChannelUserType } = useJoinChannel()
+  const { myChannelUserType, channelType } = useJoinChannel()
 
   const [channelUserType, setChannelUserType] = useState<ChannelUserType>(props.channelUserType)
 
   return (
     <li className={styles.chatUserListElement}>
       <section className={styles.userInfo}>
-        {props.channelUserType === 'ADMIN' && (
-          <Image src={admin} alt={'admin user'} width={24} height={24} />
+        {channelType !== 'DM' && (
+          <>
+            {props.channelUserType === 'ADMIN' && (
+              <Image src={admin} alt={'admin user'} width={24} height={24} />
+            )}
+            {props.channelUserType === 'OWNER' && (
+              <Image src={owner} alt={'owner user'} width={24} height={24} />
+            )}
+            {props.channelUserType === 'MEMBER' && (
+              <Image src={member} alt={'member user'} width={24} height={24} />
+            )}
+          </>
         )}
-        {props.channelUserType === 'OWNER' && (
-          <Image src={owner} alt={'owner user'} width={24} height={24} />
-        )}
-        {props.channelUserType === 'MEMBER' && (
-          <Image src={member} alt={'owner user'} width={24} height={24} />
-        )}
+
         <div className={styles.userProfileImage}>
           <Image
             src={props.avatar}
@@ -52,13 +58,14 @@ function ChatUserListElement(props: ChatUserListElementProps): JSX.Element {
           <span>{props.nickname}</span>
         </div>
       </section>
-      {props.nickname !== myNickname && (
+      {props.nickname !== myNickname && channelType !== 'DM' && (
         <Image
           src={userToggle}
           alt={'user function'}
           width={15}
           height={15}
           onClick={() => setDropDownState((prev) => !prev)}
+          className={styles.dropdown}
         />
       )}
       {dropDownState && (

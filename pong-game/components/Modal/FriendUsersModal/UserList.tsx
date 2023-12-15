@@ -13,6 +13,8 @@ function UserList(props: userinfoProps): JSX.Element {
   const { setModalName, modalProps, setModalProps } = useModalState()
   const { setTitle, setReadyChannelId, setDmAvatar } = useReadyToChannel()
 
+  const userStyle = props.status === 'ONLINE' ? styles.userOnline : styles.userOffline
+
   const createDmChatHandler = () => {
     setTitle(props.nickname)
     setReadyChannelId(props.id)
@@ -20,12 +22,18 @@ function UserList(props: userinfoProps): JSX.Element {
     if (modalProps.modalType === 'DM') setModalName('joinDmRoom')
     if (modalProps.modalType === 'INVITE') setModalName('inviteFriend')
     if (modalProps.modalType === 'GAME') {
-      setModalProps({ ...modalProps, userId: props.id, nickname: props.nickname, avatar: props.avatar })
-      setModalName('inviteGame')}
+      setModalProps({
+        ...modalProps,
+        userId: props.id,
+        nickname: props.nickname,
+        avatar: props.avatar,
+      })
+      setModalName('inviteGame')
+    }
   }
 
   return (
-    <li className={styles.user} onClick={createDmChatHandler}>
+    <li className={userStyle} onClick={createDmChatHandler}>
       <Image src={props.avatar} alt={'user profile image'} width={40} height={40} />
       <span>{props.nickname}</span>
     </li>
