@@ -91,10 +91,14 @@ export const getStaticProps = async () => {
       rejectUnauthorized: false,
     }),
   })
-  const response = await instance({
-    url: 'https://localhost:3000/users/rank',
-    method: 'get',
-    headers: header,
-  })
-  return { props: { data: response.data }, revalidate: 30 }
+  try {
+    const response = await instance({
+      url: 'https://localhost:3000/users/rank',
+      method: 'get',
+      headers: header,
+    })
+    return { props: { data: response.data }, revalidate: 30 }
+  } catch (e) {
+    console.log(e.message)
+  }
 }

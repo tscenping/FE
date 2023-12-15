@@ -7,13 +7,17 @@ interface ChatMuteProps {
 export default function ChatMute(props: ChatMuteProps) {
   const chatUserMuteHandler = async () => {
     console.log(process.env.NEXT_PUBLIC_API_ENDPOINT)
-    await instance
-      .patch(`/channels/mute`, {
-        channelUserId: props.channelUserId
-      })
-      .then(function (res) {
-        console.log(res)
-      })
+    try {
+      await instance
+        .patch(`/channels/mute`, {
+          channelUserId: props.channelUserId,
+        })
+        .then(function (res) {
+          console.log(res)
+        })
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 
   return (

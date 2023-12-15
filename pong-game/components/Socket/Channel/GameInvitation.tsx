@@ -80,11 +80,15 @@ export default function GameInvitation() {
   useEffect(() => {
     if (router.pathname !== '/match') {
       socket.on('gameInvitation', (data: toastData) => {
-        notify({
-          invitationId: data.invitationId,
-          invitingUserNickname: data.invitingUserNickname,
-          gameType: data.gameType,
-        })
+        try {
+          notify({
+            invitationId: data.invitationId,
+            invitingUserNickname: data.invitingUserNickname,
+            gameType: data.gameType,
+          })
+        } catch (e) {
+          console.log(e.message)
+        }
       })
     }
     socket.on('gameStarted', (data) => {

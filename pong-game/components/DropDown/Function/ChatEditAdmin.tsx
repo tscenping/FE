@@ -72,6 +72,7 @@ export default function ChatEditAdmin(props: ChatEditAdminProps) {
 
   const setAdminHandler = async () => {
     console.log(props.channelUserId)
+    try{
     await instance
       .patch('/channels/admin', {
         channelUserId: props.channelUserId,
@@ -86,6 +87,9 @@ export default function ChatEditAdmin(props: ChatEditAdminProps) {
           changeArrayItem('ADMIN', props.nickname)
         }
       })
+    }catch(e){
+      console.log(e.message)
+    }
   }
 
   const setAdminModal = () => {
