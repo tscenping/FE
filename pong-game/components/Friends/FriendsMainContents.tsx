@@ -13,6 +13,7 @@ function FriendsMainContents(): JSX.Element {
   const { setAllFriends, setTotalFriendCount, totalFriendCount } = useGetFriends()
   const { setAllBlocks, setTotalBlockCount, totalBlockCount } = useGetBlocks()
   const { setUser } = useGetUser()
+
   const getAllFriend = async () => {
     try {
       const response = await instance({

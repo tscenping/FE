@@ -4,7 +4,7 @@ import { useNickNameImage } from '@/store/login'
 import { useJoinProtectedChannel, useJoinChannel } from '@/store/chat'
 import MyMessage from './MyMessage'
 import OpponentMessage from './OpponentMessage'
-import { socket } from '@/socket/socket'
+import ChannelNotice from './ChannelNotice'
 
 function ChatLog(): JSX.Element {
   const { passwordInputRender } = useJoinProtectedChannel()
@@ -13,6 +13,7 @@ function ChatLog(): JSX.Element {
   const messageEndRef = useRef<HTMLDivElement | null>(null)
 
   const channelMessage = channelLog.map((message) => {
+    // return <ChannelNotice />
     if (myNickname !== message.nickname) {
       return (
         <OpponentMessage
@@ -25,26 +26,6 @@ function ChatLog(): JSX.Element {
       return <MyMessage nickname={message.nickname} message={message.message} time={message.time} />
     }
   })
-
-  // useEffect(() => {
-  //   const handleReceiveMessage = (msg) => {
-  //     const time = new Date()
-  //     const hour = String(time.getHours()).padStart(2, '0')
-  //     const minute = String(time.getMinutes()).padStart(2, '0')
-  //     setChannelLog({
-  //       nickname: msg.nickname,
-  //       message: msg.message,
-  //       time: `${hour} : ${minute}`,
-  //     })
-  //   }
-
-  //   socket.on('message', handleReceiveMessage)
-
-  //   return () => {
-  //     // 컴포넌트가 언마운트되면 이벤트 핸들러 정리
-  //     socket.off('message', handleReceiveMessage)
-  //   }
-  // }, [socket])
 
   useEffect(() => {
     messageEndRef.current.scrollIntoView({ behavior: 'smooth' })

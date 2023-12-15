@@ -15,7 +15,6 @@ function FrinedUsersListContainer(): JSX.Element {
   useEffect(() => {
     if (socket.connected) {
       const handleUserStatus = (msg: msgProps) => {
-        // 이벤트 핸들러 내에서의 로직은 그대로 유지
         const updatedFriends = allFriends.map((friend) => {
           if (friend.id === msg.userId) {
             return {

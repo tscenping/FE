@@ -12,25 +12,40 @@ interface DmChantProps {
 
 function DmChat(props: DmChantProps): JSX.Element {
   const { setPasswordInputRender } = useJoinProtectedChannel()
-  const { setChannelId, setChannelTitle, setChannelLogEmpty } = useJoinChannel()
+  const {
+    setChannelId,
+    setChannelTitle,
+    setChannelLogEmpty,
+    setChannelUserInfo,
+    setChannelType,
+    channelId,
+  } = useJoinChannel()
+
+  const userStatus =
+    props.status === 'ONLINE' ? styles.profileImageOnline : styles.profileImageOffline
+
   const joinDmChatHandler = async () => {
     try {
-      const response = await instance({
-        url: `https://localhost:3000/channels/enter/${props.channelId}`,
-        method: 'get',
-      })
-      setChannelLogEmpty([])
-      setChannelId(props.channelId)
-      setPasswordInputRender('CHANNEL')
-      setChannelTitle(props.partnerName)
-      console.log(response.data)
+      if (channelId !== props.channelId) {
+        const response = await instance({
+          url: `https://localhost:3000/channels/enter/${props.channelId}`,
+          method: 'get',
+        })
+        console.log(response)
+        setChannelLogEmpty([])
+        setChannelId(props.channelId)
+        setPasswordInputRender('CHANNEL')
+        setChannelType('DM')
+        setChannelTitle(props.partnerName)
+        setChannelUserInfo(response.data.channelUsers)
+      }
     } catch (error) {
       console.log('Error : ', error)
     }
   }
   return (
     <li className={styles.dmChatListContainer} onClick={joinDmChatHandler}>
-      <div className={styles.profileImage}>
+      <div className={userStatus}>
         <Image src={props.avatar} alt={'Opponent Profile image'} width={60} height={60} />
       </div>
       <span className={styles.opponentNickName}>{props.partnerName}</span>

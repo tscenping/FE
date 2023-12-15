@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import styles from './ChannelSetting.module.scss'
 import ModalPageTitle from '@/components/UI/ModalPageTitle'
 import { useSettingRoomNavBarState, useJoinChannel } from '@/store/chat'
@@ -7,11 +7,13 @@ import { instance } from '@/util/axios'
 import { useModalState, useResponseModalState } from '@/store/store'
 
 function ChannelSetting(): JSX.Element {
+  const [error, setError] = useState('')
   const { settingTabState, setSettingTabState } = useSettingRoomNavBarState()
   const { channelId } = useJoinChannel()
   const { setModalName } = useModalState()
   const responseModal = useResponseModalState()
   const passwordRef = useRef<HTMLInputElement>()
+  const koreanRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g
 
   const passwordSubmitHandler = async (e) => {
     e.preventDefault()
@@ -19,6 +21,17 @@ function ChannelSetting(): JSX.Element {
       channelId: channelId,
       password: settingTabState === 'PUBLIC' ? null : passwordRef.current.value,
     }
+    if (
+      passwordRef.current.value.length < 8 ||
+      !passwordRef.current.value ||
+      koreanRegex.test(passwordRef.current.value)
+    ) {
+      //password값이 8자 이하일 경우 set state "lessPassword"로 지정
+      setError('passwordError')
+      passwordRef.current.value = '' //그리고 해당 비밀번호 입력 값을 비워준다.
+      return
+    }
+
     try {
       const response = await instance({
         url: 'https://localhost:3000/channels/password',
@@ -33,6 +46,7 @@ function ChannelSetting(): JSX.Element {
       console.log('Error : ', error)
     }
   }
+
   return (
     <div className={styles.channelSettingContainer}>
       <ModalPageTitle
@@ -48,6 +62,7 @@ function ChannelSetting(): JSX.Element {
               onClick={() => {
                 passwordRef.current.value = ''
                 setSettingTabState('PUBLIC')
+                setError('')
               }}
             />
             <label htmlFor="PUBLIC">Public</label>
@@ -67,6 +82,11 @@ function ChannelSetting(): JSX.Element {
       </nav>
       <form onSubmit={passwordSubmitHandler} className={styles.form}>
         <PasswordInput passwordRef={passwordRef} />
+        {error === 'passwordError' && (
+          <p className={styles.error}>
+            채널의 비밀번호는 8 ~ 16자의 영문, 숫자, 특수문자를 사용해주세요.
+          </p>
+        )}
         <button>변 경</button>
       </form>
     </div>
