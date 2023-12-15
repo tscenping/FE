@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
+  position: relative;
   .userInfo {
     display: flex;
     align-items: center;
@@ -23,5 +24,9 @@
       align-items: center;
       margin: 0px 8px 0px 8px;
     }
+  }
+  .dropdown {
+    position: absolute;
+    right: 0px;
   }
 }

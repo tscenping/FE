@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import styles from './JoinDmRoom.module.scss'
 import Image from 'next/image'
 import { useModalState } from '@/store/store'
@@ -11,10 +12,12 @@ import { instance } from '@/util/axios'
 
 function JoinDmRoom(): JSX.Element {
   const { title, readyChannelId, dmAvatar } = useReadyToChannel()
-  const { setModalName } = useModalState()
+  const { setModalName, modalProps } = useModalState()
   const { setPasswordInputRender } = useJoinProtectedChannel()
-  const { setChannelId, setChannelLogEmpty, setChannelTitle } = useJoinChannel()
+  const { setChannelId, setChannelLogEmpty, setChannelTitle, setChannelUserInfo, setChannelType } =
+    useJoinChannel()
   const { setDmChannels, setTotalDm } = useGetChannels()
+  const router = useRouter()
 
   const joinDmHandler = async () => {
     const datas = { name: null, channelType: 'DM', password: null, userId: readyChannelId }
@@ -28,7 +31,12 @@ function JoinDmRoom(): JSX.Element {
         setChannelTitle(title)
         setPasswordInputRender('CHANNEL')
         setChannelLogEmpty([])
+        setChannelType('DM')
         setChannelId(responseCreate.data.channelId)
+        setChannelUserInfo(null)
+        if (modalProps.modalType === 'DM') {
+          router.replace('/chat')
+        }
         const responseDm = await instance({
           url: 'https://localhost:3000/channels/dm/?page=1',
           method: 'get',
@@ -45,7 +53,8 @@ function JoinDmRoom(): JSX.Element {
   }
 
   const modalOffHandler = () => {
-    setModalName('friendUsers')
+    if (modalProps.modalType === 'DM') setModalName(null)
+    else setModalName('friendUsers')
   }
 
   return (

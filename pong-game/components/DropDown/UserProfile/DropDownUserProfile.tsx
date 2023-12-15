@@ -4,6 +4,7 @@ import EditFriend from '../Function/EditFriend'
 import EditBlock from '../Function/EditBlock'
 import OpenProfile from '../Function/OpenProfile'
 import InviteGame from '../Function/InviteGame'
+import DirectMsg from '../Function/DirectMsg'
 
 interface DropDownUserProfileProps {
   id?: number
@@ -46,11 +47,17 @@ export default function DropDownUserProfile({
         <OpenProfile nickname={nickname} setIsDropDownView={setIsDropDownView} />
       )}
       <InviteGame
-      friendId={id}
-      avatar={avatar}
-      setIsDropDownView={setIsDropDownView}
-      nickname={nickname}/>
-      <button>1:1메세지</button>
+        friendId={id}
+        avatar={avatar}
+        setIsDropDownView={setIsDropDownView}
+        nickname={nickname}
+      />
+      <DirectMsg
+        setIsDropDownView={setIsDropDownView}
+        avatar={avatar}
+        nickname={nickname}
+        userId={id}
+      />
     </ul>
   )
 }

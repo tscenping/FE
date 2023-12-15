@@ -154,21 +154,13 @@ export const useReadyToChannel = create<useReadyToChannelProps>((set) => ({
 // // "Protected" 채널에 join할때 사용하는 전역 상태 변수
 interface useJoinProtectedChannelProps {
   channelId?: number
-  channelType: string
-  channelAuth: string
   passwordInputRender: string
   setChannelProtectedId: (v: number) => void
   setPasswordInputRender: (v: string) => void
-  setChannelType: (v: string) => void
-  setChannelAuth: (v: string) => void
 }
 
 export const useJoinProtectedChannel = create<useJoinProtectedChannelProps>((set) => ({
   passwordInputRender: 'DEFAULT',
-  channelType: '',
-  channelAuth: '',
   setChannelProtectedId: (channelId) => set({ channelId }),
   setPasswordInputRender: (passwordInputRender) => set({ passwordInputRender }),
-  setChannelType: (channelType) => set({ channelType }),
-  setChannelAuth: (channelAuth) => set({ channelAuth }),
 }))

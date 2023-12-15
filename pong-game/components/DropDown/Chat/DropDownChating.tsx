@@ -63,11 +63,17 @@ export default function DropDownChating(props: DropDownChatingProps) {
       />
       <OpenProfile nickname={props.nickname} setIsDropDownView={props.setIsDropDownView} />
       <InviteGame
-      friendId={props.id}
-      avatar={props.avatar}
-      setIsDropDownView={props.setIsDropDownView}
-      nickname={props.nickname}/>
-      <DirectMsg />
+        friendId={props.id}
+        avatar={props.avatar}
+        setIsDropDownView={props.setIsDropDownView}
+        nickname={props.nickname}
+      />
+      <DirectMsg
+        setIsDropDownView={props.setIsDropDownView}
+        avatar={props.avatar}
+        nickname={props.nickname}
+        userId={props.id}
+      />
     </ul>
   )
 }

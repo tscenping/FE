@@ -68,13 +68,6 @@ function CreateChatRoom(): JSX.Element {
       if (response.statusText === 'Created') {
         //채널 생성에 성공한다면 모달창을 꺼주고 채널뷰를 생성한 채널뷰로 바꿔줘야한다.(채널뷰 변경 추가예정)
         setChannelLogEmpty([])
-        socket.emit(
-          'joinChannelRoom',
-          JSON.stringify({
-            channelId: response.data.channelId,
-            channelSocketId: socket.id,
-          }),
-        )
         const responseAll = await instance({
           method: 'get',
           url: 'https://localhost:3000/channels/all/?page=1',
@@ -96,7 +89,7 @@ function CreateChatRoom(): JSX.Element {
         setChannelType(channelType)
         setChannelId(response.data.channelId)
         setPasswordInputRender('CHANNEL')
-        setChannelUserInfo(response.data.channelUser)
+        setChannelUserInfo(response.data.channelUsers)
 
         setPage(1)
         setModalName(null)

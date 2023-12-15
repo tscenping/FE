@@ -17,7 +17,7 @@ function ExitRoom(): JSX.Element {
     setDmChannels,
     setTotalDm,
   } = useGetChannels()
-  const { channelId, setChannelUserInfo, channelTitle } = useJoinChannel()
+  const { channelId, setChannelUserInfo, channelTitle, setChannelId } = useJoinChannel()
   const { setModalName } = useModalState() //"확인" 버튼을 클릭했을 때, "취소" 버튼을 클릭했을 때 모달을 꺼주기 위한 set함수
   const { myNickname } = useNickNameImage()
   const exitRoomHandler = async (e) => {
@@ -30,12 +30,8 @@ function ExitRoom(): JSX.Element {
         method: 'patch',
         data: JSON.stringify(datas),
       })
-      // console.log(response)
+      console.log(response)
       if (response.statusText === 'OK') {
-        socket.emit('message', {
-          channelId: channelId,
-          message: `${myNickname} 님이 채널을 나갔습니다.`,
-        })
         socket.off('message')
         const responseAll = await instance({
           method: 'get',
@@ -57,6 +53,8 @@ function ExitRoom(): JSX.Element {
         setTotalMe(responseMe.data.totalDataSize)
         setTotalDm(responseDm.data.totalItemCount)
         setChannelUserInfo(null)
+        setChannelId(null) //방을 나갔다면 현재 내가 보고있는(렌더링) 채널은 없으므로 null값으로 channelId를 바꿔줘야 한다.
+
         setPage(1)
         setModalName(null) //모달 off
         setPasswordInputRender('DEFAULT') //"chatlog"의 컴포넌트를 "DEFAULT"로 바꿔준다.

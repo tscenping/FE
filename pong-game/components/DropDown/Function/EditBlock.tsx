@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useJoinChannel } from '@/store/chat'
 import { useGetUser } from '@/store/friend'
 import { useModalState, useResponseModalState } from '@/store/store'
@@ -41,6 +42,7 @@ export default function EditBlock(props: EditBlockProps) {
       }
     })
     setChannelUserInfo(result)
+    console.log(channelUserInfo)
   }
   const blockHandler = async () => {
     props.setIsDropDownView(false)
@@ -59,9 +61,8 @@ export default function EditBlock(props: EditBlockProps) {
           setTotalBlockCount(totalBlockCount + 1)
           if (props.calledFrom === 'searchUserList') {
             changeItem(true)
-          } else {
-            changeArrayItem(true, props.nickname)
           }
+          changeArrayItem(true, props.nickname)
         })
     } catch (e) {
       console.log(e.message)
@@ -81,12 +82,10 @@ export default function EditBlock(props: EditBlockProps) {
         .then(function (res) {
           console.log(res)
           setTotalBlockCount(totalBlockCount - 1)
-
           if (props.calledFrom === 'searchUserList') {
             changeItem(false)
-          } else {
-            changeArrayItem(false, props.nickname)
           }
+          changeArrayItem(false, props.nickname)
         })
     } catch (e) {
       console.log(e.message)
