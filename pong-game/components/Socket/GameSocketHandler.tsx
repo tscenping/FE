@@ -11,6 +11,7 @@ export default function GameSocketHandler() {
 
     return () => {
       gameSocket.disconnect()
+      gameSocket.off('connect')
     }
   }, [gameSocket])
   return <></>

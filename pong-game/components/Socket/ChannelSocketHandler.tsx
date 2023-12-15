@@ -11,9 +11,9 @@ export default function ChannelSocketHandler() {
     socket.on('connect', () => {
       console.log('channel connect')
     })
-
     return () => {
       socket.disconnect()
+      socket.off('connect')
     }
   }, [])
   return (
