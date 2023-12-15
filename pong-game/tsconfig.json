@@ -37,6 +37,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Socket/Game/GameHandler"],
   "exclude": ["node_modules"]
 }
