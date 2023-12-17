@@ -11,7 +11,14 @@ import { useModalState } from '@/store/store'
 function JoinRoom(): JSX.Element {
   const { title, readyChannelId, setReadyChannelId, setTitle } = useReadyToChannel()
   const { setPasswordInputRender } = useJoinProtectedChannel()
-  const { setChannelId, setChannelUserInfo, setChannelTitle, setChannelLogEmpty } = useJoinChannel()
+  const {
+    setChannelId,
+    setChannelUserInfo,
+    setChannelTitle,
+    setChannelLogEmpty,
+    setMyChannelUserType,
+    setChannelAuth,
+  } = useJoinChannel()
   const { setModalName } = useModalState()
   const { setTabState } = useNavBarState()
 
@@ -27,6 +34,8 @@ function JoinRoom(): JSX.Element {
         setChannelLogEmpty([])
         setChannelId(readyChannelId)
         setChannelUserInfo(response.data.channelUsers)
+        setMyChannelUserType(response.data.myChannelUserType)
+        setChannelAuth(response.data.myChannelUserType)
         setPasswordInputRender('CHANNEL')
         setChannelTitle(title)
         setReadyChannelId(null)

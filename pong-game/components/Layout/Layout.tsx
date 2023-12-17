@@ -12,9 +12,7 @@ import { useNickNameImage } from '@/store/login'
 import { instance } from '@/util/axios'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { socket } from '@/socket/socket'
-import { useJoinChannel, useJoinProtectedChannel, useNavBarState } from '@/store/chat'
-import { useGetBlocks } from '@/store/friend'
-import toast from 'react-hot-toast'
+import { useJoinChannel } from '@/store/chat'
 
 interface messageProps {
   nickname: string
@@ -24,21 +22,11 @@ interface messageProps {
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)
-  const {
-    setChannelLog,
-    channelId,
-    channelUserInfo,
-    setChannelId,
-    setChannelTitle,
-    setChannelUserInfo,
-  } = useJoinChannel()
-  const { setPasswordInputRender } = useJoinProtectedChannel()
-  const { setTabState } = useNavBarState()
+  const { setChannelLog, channelId, channelUserInfo } = useJoinChannel()
   const router: NextRouter = useRouter()
   const loginPage = router.pathname === '/login' || router.pathname === '/login/info'
   const { setAvatar, setMyNickname } = useNickNameImage()
   const { setModalName } = useModalState()
-  const { allBlocks } = useGetBlocks()
   const responseModal = useResponseModalState()
 
   const logoutHandler = async () => {
@@ -53,66 +41,6 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
     setModalName('response')
     responseModal.setResponseModalState('로그아웃', '로그아웃 하시겠습니까?', logoutHandler)
   }
-
-  const acceptHandler = async (t, invitationId) => {
-    const datas = { invitationId: invitationId }
-    try {
-      const response = await instance('/channels/accept', {
-        method: 'post',
-        data: JSON.stringify(datas),
-      })
-      toast.remove(t.id)
-      if (router.pathname !== '/chat') {
-        router.replace('/chat')
-      }
-      const postData = { channelId: response.data.channelId, password: null }
-      await instance(`/channels/enter/${response.data.channelId}`, {
-        method: 'get',
-        data: JSON.stringify(postData),
-      })
-    } catch (error) {
-      console.log('Error : ', error)
-    }
-  }
-
-  const cancelHandler = async (t, invitationId) => {
-    const response = await instance(`/channels/refuse/${invitationId}`, {
-      method: 'delete',
-    })
-    toast.remove(t.id)
-  }
-
-  useEffect(() => {
-    socket.on('privateAlert', (msg) => {
-      // msg.invitingUserId가 차단된 유저인지 확인
-      const isBlockedUser = allBlocks.some((blockUser) => blockUser.nickname === msg.invitingUserId)
-
-      // 차단된 유저가 아닌 경우에만 toast 로직 실행
-      if (!isBlockedUser) {
-        toast(
-          (t) => (
-            <div className={styles.toastContainer}>
-              <section className={styles.toastMessage}>
-                <strong className={styles.inviteChannel}>{msg.invitingUserId}</strong>
-                <span> 님이 채널에서 초대를 보냈습니다.</span>
-              </section>
-              <section className={styles.toastButton}>
-                <button onClick={() => acceptHandler(t, msg.invitationId)}>수 락</button>{' '}
-                {/* 채팅 초대 수락 api, 따로 핸들러 함수 만들어서 실행*/}
-                <button onClick={() => cancelHandler(t, msg.invitationId)}>거 절</button>{' '}
-                {/* 채팅 초대 거절 api, 따로 핸들러 함수 만들어서 실행*/}
-              </section>
-            </div>
-          ),
-          { duration: 10000 },
-        )
-      }
-    })
-
-    return () => {
-      socket.off('privateAlert')
-    }
-  }, [socket, allBlocks])
 
   const handleReceiveMessage = (message: messageProps) => {
     const time = new Date()
@@ -140,10 +68,23 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
     }
   }
 
+  const handlerReceiveNotice = (message) => {
+    console.log(message)
+    if (channelId === message.channelId) {
+      setChannelLog({
+        nickname: message.nickname,
+        eventType: message.eventType,
+        channelId: message.channelId,
+      })
+    }
+  }
+
   useEffect(() => {
     socket.on('message', handleReceiveMessage)
+    socket.on('notice', handlerReceiveNotice)
     return () => {
       socket.off('message', handleReceiveMessage) // 컴포넌트가 언마운트되면 이벤트 핸들러 정리
+      socket.off('notice', handlerReceiveNotice)
     }
   }, [socket, channelId, channelUserInfo])
 

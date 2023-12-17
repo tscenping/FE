@@ -48,8 +48,10 @@ interface useChannelUserInfoProps {
 
 interface messageProps {
   nickname: string
-  message: string
-  time: string
+  message?: string
+  time?: string
+  eventType?: string
+  channelId?: number
 }
 
 interface useJoinChannelProps {
@@ -84,6 +86,8 @@ export const useJoinChannel = create<useJoinChannelProps>((set) => ({
     set({ myChannelUserType }),
   setChannelType: (channelType) => set({ channelType }),
   setChannelAuth: (channelAuth) => set({ channelAuth }),
+  setChannelUserInfoAdd: (channelLog) =>
+    set((state) => ({ channelLog: [...state.channelLog, channelLog] })),
   setChannelUserInfo: (channelUserInfo) => set({ channelUserInfo }),
   setChannelLog: (channelLog) =>
     set((state) => ({ channelLog: [...state.channelLog, channelLog] })),

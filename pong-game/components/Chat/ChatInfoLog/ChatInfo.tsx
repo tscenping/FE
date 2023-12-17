@@ -16,7 +16,7 @@ function ChatInfo(): JSX.Element {
   const channelSettingIcon =
     (channelType === 'PROTECTED' || channelType === 'PUBLIC') && channelAuth === 'OWNER'
       ? styles.settingShow
-      : channelType === 'DM'
+      : channelType === 'DM' || channelAuth === 'MEMBER' || channelType === 'PRIVATE'
       ? styles.settingNone
       : styles.settingShow
 
