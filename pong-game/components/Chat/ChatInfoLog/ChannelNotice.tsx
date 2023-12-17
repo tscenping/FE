@@ -55,11 +55,6 @@ function ChannelNotice(props: ChannelNoticeProps): JSX.Element {
         props.eventType === 'BAN' ||
         props.channelUserInfo
       ) {
-        // const filterChannelUsers = props.channelUserInfo.filter((channelUser) => {
-        //   if (props.nickname !== channelUser.nickname) {
-        //     return channelUser
-        //   }
-        // })
         const filterChannelUsers = props.channelUserInfo
           ? props.channelUserInfo.filter((channelUser) => props.nickname !== channelUser.nickname)
           : []
@@ -78,31 +73,8 @@ function ChannelNotice(props: ChannelNoticeProps): JSX.Element {
     }
 
     if (myNickname === props.nickname) {
-      // if (props.eventType === 'KICK') {
-      //   setChannelId(null)
-      //   setChannelLogEmpty([])
-      //   setChannelUserInfo(null)
-      //   setPasswordInputRender('DEFAULT')
-      //   setTabState('ENTIRE')
-      //   setResponseModalState(channelTitle, '채널에서 강퇴당하였습니다.', null)
-      //   setModalName('response')
-      // }
-      // if (props.eventType === 'BAN') {
-      //   setChannelId(null)
-      //   setChannelLogEmpty([])
-      //   setChannelUserInfo(null)
-      //   setPasswordInputRender('DEFAULT')
-      //   setTabState('ENTIRE')
-      //   setResponseModalState(channelTitle, '채널에서 밴 당하였습니다.', null)
-      //   setModalName('response')
-      // }
-      // if (props.eventType === 'ADMIN') {
-      //   getChannelUsersHandler()
-      // }
-      // if (props.eventType === 'ADMIN_CANCEL') {
-      //   getChannelUsersHandler()
-      // }
       const resetChannelState = () => {
+        //해당 채널에 대한 렌더링을 초기화 해준다.
         setChannelId(null)
         setChannelLogEmpty([])
         setChannelUserInfo(null)
@@ -111,6 +83,7 @@ function ChannelNotice(props: ChannelNoticeProps): JSX.Element {
       }
 
       if (props.eventType === 'KICK' || props.eventType === 'BAN') {
+        //"KICK", "BAN"은 해당 유저에게 알림을 보내주고 강제퇴장
         resetChannelState()
         setResponseModalState(
           channelTitle,

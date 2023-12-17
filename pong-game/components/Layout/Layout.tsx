@@ -12,17 +12,9 @@ import { useNickNameImage } from '@/store/login'
 import { instance } from '@/util/axios'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { socket } from '@/socket/socket'
-import { useJoinChannel } from '@/store/chat'
-
-interface messageProps {
-  nickname: string
-  message: string
-  channelId: number
-}
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)
-  const { setChannelLog, channelId, channelUserInfo } = useJoinChannel()
   const router: NextRouter = useRouter()
   const loginPage = router.pathname === '/login' || router.pathname === '/login/info'
   const { setAvatar, setMyNickname } = useNickNameImage()
@@ -41,52 +33,6 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
     setModalName('response')
     responseModal.setResponseModalState('로그아웃', '로그아웃 하시겠습니까?', logoutHandler)
   }
-
-  const handleReceiveMessage = (message: messageProps) => {
-    const time = new Date()
-    const hour = String(time.getHours()).padStart(2, '0')
-    const minute = String(time.getMinutes()).padStart(2, '0')
-    if (channelId === message.channelId) {
-      const isBlockedUser =
-        channelUserInfo &&
-        channelUserInfo.some((user) => user.isBlocked && user.nickname === message.nickname)
-      if (isBlockedUser) {
-        // 채널에 차단된 유저에게 온 메세지인 경우
-        setChannelLog({
-          nickname: '',
-          message: '차단된 유저의 메세지 입니다.',
-          time: `${hour} : ${minute}`,
-        })
-      } else {
-        // 채널에 차단된 유저에게 온 메세지가 아닌 경우
-        setChannelLog({
-          nickname: message.nickname,
-          message: message.message,
-          time: `${hour} : ${minute}`,
-        })
-      }
-    }
-  }
-
-  const handlerReceiveNotice = (message) => {
-    console.log(message)
-    if (channelId === message.channelId) {
-      setChannelLog({
-        nickname: message.nickname,
-        eventType: message.eventType,
-        channelId: message.channelId,
-      })
-    }
-  }
-
-  useEffect(() => {
-    socket.on('message', handleReceiveMessage)
-    socket.on('notice', handlerReceiveNotice)
-    return () => {
-      socket.off('message', handleReceiveMessage) // 컴포넌트가 언마운트되면 이벤트 핸들러 정리
-      socket.off('notice', handlerReceiveNotice)
-    }
-  }, [socket, channelId, channelUserInfo])
 
   return (
     <>
