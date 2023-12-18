@@ -2,24 +2,26 @@
 
 .toastContainer {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   padding: 16px;
   .toastMessage {
     font-size: 1.5rem;
+    width: 100%;
     .inviteChannel {
       font-family: 'Pretendard-SemiBold';
       font-size: 2rem;
     }
-    margin-bottom: 16px;
   }
   .toastButton {
-    width: 100%;
     display: flex;
     justify-content: space-around;
     button {
       font-family: 'Pretendard-Regular';
+      width: 80px;
+      padding: 8px 16px;
       font-size: 1.5rem;
-      padding: 8px 24px;
+      margin-left: 16px;
       border: none;
       border-radius: 20px;
       background-color: $main_500;

@@ -7,13 +7,12 @@ import submitMessage from '@/public/img/chat/enterInput.svg'
 import ChatPassword from './ChatInfoLog/ChatPassword'
 import MessageInput from './Input/MessageInput'
 import { useJoinProtectedChannel, useJoinChannel } from '@/store/chat'
-import { useNickNameImage } from '@/store/login'
 import { socket } from '@/socket/socket'
 
 function ChatShow(): JSX.Element {
   const messageRef = useRef<HTMLInputElement>(null)
   const { passwordInputRender } = useJoinProtectedChannel()
-  const { channelId, setChannelId } = useJoinChannel()
+  const { channelId } = useJoinChannel()
   const showType = passwordInputRender === 'CHANNEL' ? styles.show : styles.none
 
   const messageHandler = (e) => {

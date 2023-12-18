@@ -6,9 +6,11 @@ interface useNicknameImageProps {
   avatar: string
   myNickname: string
   userId: string
+  isMfaEnabled?: boolean
   setMyNickname: (v: string) => void
   setAvatar: (v: string) => void
   setUserId: (v: string) => void
+  setIsMfaEnabled: (v: boolean) => void
 }
 
 export const useNickNameImage = create<useNicknameImageProps>((set) => ({
@@ -18,4 +20,5 @@ export const useNickNameImage = create<useNicknameImageProps>((set) => ({
   setMyNickname: (myNickname) => set({ myNickname }),
   setAvatar: (avatar) => set({ avatar }),
   setUserId: (userId) => set({ userId }),
+  setIsMfaEnabled: (isMfaEnabled) => set({ isMfaEnabled }),
 }))

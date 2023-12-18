@@ -4,7 +4,6 @@ import passwordRoom from '../../../public/img/chat/lock.svg'
 import { instance } from '@/util/axios'
 import { useJoinChannel, useJoinProtectedChannel, useReadyToChannel } from '@/store/chat'
 import { useModalState } from '@/store/store'
-import { socket } from '@/socket/socket'
 
 interface CreatedRoomListProps {
   title: string //해당 채널의 타이틀

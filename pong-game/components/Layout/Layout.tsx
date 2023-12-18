@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { ReactNode, useState, useEffect } from 'react'
+import { ReactNode, useState } from 'react'
 import Link from 'next/link'
 import noticeIcon from '@/public/img/layout/notice.svg'
 import logoIcon from '@/public/img/layout/PONG GAME.svg'

@@ -61,13 +61,11 @@ function ChannelNotice(props: ChannelNoticeProps): JSX.Element {
 
         setChannelUserInfo(filterChannelUsers)
       }
-      if (props.eventType === 'ADMIN') {
-        getChannelUsersHandler()
-      }
-      if (props.eventType === 'ADMIN_CANCEL') {
-        getChannelUsersHandler()
-      }
-      if (props.eventType === 'MUTE') {
+      if (
+        props.eventType === 'ADMIN' ||
+        props.eventType === 'ADMIN_CANCEL' ||
+        props.eventType === 'MUTE'
+      ) {
         getChannelUsersHandler()
       }
     }

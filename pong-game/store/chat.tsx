@@ -1,6 +1,4 @@
 import { create } from 'zustand'
-import MyMessage from '@/components/Chat/ChatInfoLog/MyMessage'
-import OpponentMessage from '@/components/Chat/ChatInfoLog/OpponentMessage'
 
 //채널 목록 조회 전역상태변수
 interface useNavBarStateProps {
