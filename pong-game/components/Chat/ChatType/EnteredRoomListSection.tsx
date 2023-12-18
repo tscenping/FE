@@ -7,7 +7,7 @@ function EnteredRoomListSection(): JSX.Element {
 
   return (
     <>
-      {meChannels.length > 0 ? (
+      {meChannels && meChannels.length > 0 ? ( //"meChannels" 에 채널목록이 존재하고 1개의 채널이라도 있다면
         <ul className={styles.chatRoomListSection}>
           {meChannels.map((channel) => (
             <CreatedRoomList

@@ -1,4 +1,4 @@
-import { FormEvent, useRef } from 'react'
+import { FormEvent, useRef, useEffect } from 'react'
 import styles from './SearchUsers.module.scss'
 import SearchInputContainer from './SearchInputContainer'
 import SearchUsersListContainer from './SearchUsersListContainer'
@@ -31,7 +31,11 @@ function SearchUsers(): JSX.Element {
       inputRef.current.value = ''
     }
   }
-
+  useEffect(() => {
+    return () => {
+      setUser(null)
+    }
+  }, [])
   return (
     <div className={styles.searchUsers}>
       <form className={styles.searchInputContainer} onSubmit={searchNicknameHandler}>

@@ -11,7 +11,9 @@ function OpponentMessage(props: OpponentMessageProps): JSX.Element {
     <>
       <section className={styles.opponentMessage}>
         <div className={styles.opponentUserMessageAndTime}>
-          <strong className={styles.opponentUserNickName}>{props.nickname}</strong>
+          {props.nickname && (
+            <strong className={styles.opponentUserNickName}>{props.nickname}</strong>
+          )}
           <div className={styles.opponentUserMessageTime}>{props.time}</div>
         </div>
         <div className={styles.opponentUserMessage}>{props.message}</div>

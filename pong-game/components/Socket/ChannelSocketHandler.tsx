@@ -1,9 +1,9 @@
 import { socket } from '@/socket/socket'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-import styles from './ChannelSocketHandler.module.scss'
-import { instance } from '@/util/axios'
 import GameInvitation from './Channel/GameInvitation'
+import PrivateInvitation from './Channel/PrivateInvitation'
+import ChannelMessage from './Channel/ChannelMesage'
 
 export default function ChannelSocketHandler() {
   useEffect(() => {
@@ -18,7 +18,9 @@ export default function ChannelSocketHandler() {
   }, [])
   return (
     <>
+      <ChannelMessage />
       <GameInvitation />
+      <PrivateInvitation />
     </>
   )
 }
