@@ -19,9 +19,8 @@ interface siginInResponse {
 function LoginPageContents(): JSX.Element {
   const [responseData, setResponseData] = useState<siginInResponse>()
   const [codeValue, setCodeValue] = useState<string>('')
-  const { setAvatar, setMyNickname } = useNickNameImage()
+  const { setAvatar, setMyNickname, setIsMfaEnabled } = useNickNameImage()
   const router = useRouter()
-
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
     setCodeValue(urlParams.get('code'))
@@ -84,7 +83,7 @@ function LoginPageContents(): JSX.Element {
               <Image src={stick} alt={'logo stick'} width={80} height={80} />
             </li>
             <LoginButton content="42" />
-            <LoginButton content="google" />
+            {/* <LoginButton content="google" /> */}
           </ul>
           <div className={styles.pingpong}></div>
         </div>

@@ -8,12 +8,21 @@ import ChannelNotice from './ChannelNotice'
 
 function ChatLog(): JSX.Element {
   const { passwordInputRender } = useJoinProtectedChannel()
-  const { channelLog, setChannelLog } = useJoinChannel()
+  const { channelLog, channelUserInfo } = useJoinChannel()
   const { myNickname } = useNickNameImage()
   const messageEndRef = useRef<HTMLDivElement | null>(null)
 
   const channelMessage = channelLog.map((message) => {
-    // return <ChannelNotice />
+    if (message.eventType) {
+      return (
+        <ChannelNotice
+          nickname={message.nickname}
+          eventType={message.eventType}
+          channelId={message.channelId}
+          channelUserInfo={channelUserInfo}
+        />
+      )
+    }
     if (myNickname !== message.nickname) {
       return (
         <OpponentMessage

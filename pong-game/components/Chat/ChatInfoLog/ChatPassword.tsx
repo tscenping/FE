@@ -4,7 +4,7 @@ import lock from '@/public/img/chat/lock.svg'
 import submitMessage from '@/public/img/chat/enterInput.svg'
 import styles from './ChatPassword.module.scss'
 import ChatPasswordInput from '../Input/ChatPasswordInput'
-import { useJoinChannel, useJoinProtectedChannel } from '@/store/chat'
+import { useJoinChannel, useJoinProtectedChannel, useNavBarState } from '@/store/chat'
 import { instance } from '@/util/axios'
 
 function ChatPassword(): JSX.Element {
@@ -18,8 +18,10 @@ function ChatPassword(): JSX.Element {
     setChannelLogEmpty,
     channelTitle,
     setChannelId,
+    setChannelAuth,
   } = useJoinChannel()
 
+  const { setTabState } = useNavBarState()
   const passwordHandler = async (e) => {
     e.preventDefault()
     const koreanRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g
@@ -51,11 +53,13 @@ function ChatPassword(): JSX.Element {
       if (response.statusText === 'Created') {
         //채널 join에 성공했을 경우 기존 비밀번호 입력 컴포넌트를 "false"로 바꿔준다.
         setChannelLogEmpty([])
+        setChannelId(channelId)
         setChannelUserInfo(response.data.channelUsers)
         setMyChannelUserType(response.data.myChannelUserType)
         setPasswordInputRender('CHANNEL')
         setChannelTitle(channelTitle)
-        setChannelId(channelId)
+        setChannelAuth(response.data.myChannelUserType)
+        setTabState('JOINED')
       }
     } catch (error) {
       console.log('Error : ', error)

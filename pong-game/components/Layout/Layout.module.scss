@@ -104,36 +104,36 @@
   }
 }
 
-.toastContainer {
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  .toastMessage {
-    font-size: 1.5rem;
-    .inviteChannel {
-      font-family: 'Pretendard-SemiBold';
-      font-size: 2rem;
-    }
-    margin-bottom: 16px;
-  }
-  .toastButton {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    button {
-      font-family: 'Pretendard-Regular';
-      font-size: 1.5rem;
-      padding: 8px 24px;
-      border: none;
-      border-radius: 20px;
-      background-color: $main_500;
-      color: white;
-      cursor: pointer;
-      transition: 0.3s;
-      &:hover {
-        transform: scale(1.1);
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      }
-    }
-  }
-}
+// .toastContainer {
+//   display: flex;
+//   flex-direction: column;
+//   padding: 16px;
+//   .toastMessage {
+//     font-size: 1.5rem;
+//     .inviteChannel {
+//       font-family: 'Pretendard-SemiBold';
+//       font-size: 2rem;
+//     }
+//     margin-bottom: 16px;
+//   }
+//   .toastButton {
+//     width: 100%;
+//     display: flex;
+//     justify-content: space-around;
+//     button {
+//       font-family: 'Pretendard-Regular';
+//       font-size: 1.5rem;
+//       padding: 8px 24px;
+//       border: none;
+//       border-radius: 20px;
+//       background-color: $main_500;
+//       color: white;
+//       cursor: pointer;
+//       transition: 0.3s;
+//       &:hover {
+//         transform: scale(1.1);
+//         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+//       }
+//     }
+//   }
+// }

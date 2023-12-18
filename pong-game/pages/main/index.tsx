@@ -12,7 +12,6 @@ export default function Home() {
   const [gameState, setGameState] = useState<string>('')
   const [pageState, setPageState] = useState(1)
   const router: NextRouter = useRouter()
-
   // useEffect(() => {
   //   gameSocket.on('gameInvitation', (data) => {
   //     console.log(data)
@@ -51,43 +50,41 @@ export default function Home() {
   //   </div>
   // ))
   //   // toast.custom(
-    //   (t) => (
-    //     <div className={styles.toastBackGround}>
-    //       <section className={styles.toastMsg}>
-    //         him님이 게임에 초대하였습니다. 수락하시겠습니까?{' '}
-    //       </section>
-    //       <section className={styles.responseBtn}>
-    //         <button onClick={() => toast.dismiss(t.id)} className={styles.acceptBtn}>
-    //           수락
-    //         </button>
-    //         <button onClick={() => toast.dismiss(t.id)} className={styles.declineBtn}>
-    //           거절
-    //         </button>
-    //       </section>
-    //     </div>
-    //   ),
-    //   {
-    //     duration: 10000,
-    //     position: 'top-center',
+  //   (t) => (
+  //     <div className={styles.toastBackGround}>
+  //       <section className={styles.toastMsg}>
+  //         him님이 게임에 초대하였습니다. 수락하시겠습니까?{' '}
+  //       </section>
+  //       <section className={styles.responseBtn}>
+  //         <button onClick={() => toast.dismiss(t.id)} className={styles.acceptBtn}>
+  //           수락
+  //         </button>
+  //         <button onClick={() => toast.dismiss(t.id)} className={styles.declineBtn}>
+  //           거절
+  //         </button>
+  //       </section>
+  //     </div>
+  //   ),
+  //   {
+  //     duration: 10000,
+  //     position: 'top-center',
 
-    //     style: {backgroundColor: 'white'},
-    //     className: '',
+  //     style: {backgroundColor: 'white'},
+  //     className: '',
 
-    //     icon: '👏',
+  //     icon: '👏',
 
-    //     iconTheme: {
-    //       primary: '#000',
-    //       secondary: '#fff',
-    //     },
+  //     iconTheme: {
+  //       primary: '#000',
+  //       secondary: '#fff',
+  //     },
 
-    //     ariaProps: {
-    //       role: 'status',
-    //       'aria-live': 'polite',
-    //     },
-    //   },
-    // )
-    
-
+  //     ariaProps: {
+  //       role: 'status',
+  //       'aria-live': 'polite',
+  //     },
+  //   },
+  // )
   return (
     <div className={styles.backGround}>
       {/* <button onClick={notify}>Make me a toast</button> */}

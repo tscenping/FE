@@ -22,9 +22,10 @@ function ChannelSetting(): JSX.Element {
       password: settingTabState === 'PUBLIC' ? null : passwordRef.current.value,
     }
     if (
-      passwordRef.current.value.length < 8 ||
-      !passwordRef.current.value ||
-      koreanRegex.test(passwordRef.current.value)
+      settingTabState !== 'PUBLIC' &&
+      (passwordRef.current.value.length < 8 ||
+        !passwordRef.current.value ||
+        koreanRegex.test(passwordRef.current.value))
     ) {
       //password값이 8자 이하일 경우 set state "lessPassword"로 지정
       setError('passwordError')

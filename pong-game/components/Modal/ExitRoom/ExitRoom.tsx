@@ -4,7 +4,6 @@ import { useModalState } from '@/store/store'
 import { instance } from '@/util/axios'
 import { socket } from '@/socket/socket'
 import { useNickNameImage } from '@/store/login'
-import NickNameInput from '@/components/Login/NickNameInput'
 
 function ExitRoom(): JSX.Element {
   const { setPasswordInputRender } = useJoinProtectedChannel() //채널 나가기 모달에 띄워줄 채널 타이틀, api요청에 필요한 채널 id, 채널 나가기 성공할 경우 컴포넌트를 바꿔줄 플래그

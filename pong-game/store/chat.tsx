@@ -1,6 +1,4 @@
 import { create } from 'zustand'
-import MyMessage from '@/components/Chat/ChatInfoLog/MyMessage'
-import OpponentMessage from '@/components/Chat/ChatInfoLog/OpponentMessage'
 
 //채널 목록 조회 전역상태변수
 interface useNavBarStateProps {
@@ -48,8 +46,10 @@ interface useChannelUserInfoProps {
 
 interface messageProps {
   nickname: string
-  message: string
-  time: string
+  message?: string
+  time?: string
+  eventType?: string
+  channelId?: number
 }
 
 interface useJoinChannelProps {
@@ -72,6 +72,7 @@ interface useJoinChannelProps {
 
 export const useJoinChannel = create<useJoinChannelProps>((set) => ({
   channelTitle: '',
+  channelId: null,
   channelType: '',
   myChannelUserType: 'MEMBER',
   channelAuth: '',
@@ -83,6 +84,8 @@ export const useJoinChannel = create<useJoinChannelProps>((set) => ({
     set({ myChannelUserType }),
   setChannelType: (channelType) => set({ channelType }),
   setChannelAuth: (channelAuth) => set({ channelAuth }),
+  setChannelUserInfoAdd: (channelLog) =>
+    set((state) => ({ channelLog: [...state.channelLog, channelLog] })),
   setChannelUserInfo: (channelUserInfo) => set({ channelUserInfo }),
   setChannelLog: (channelLog) =>
     set((state) => ({ channelLog: [...state.channelLog, channelLog] })),
