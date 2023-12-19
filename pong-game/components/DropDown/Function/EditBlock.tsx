@@ -31,6 +31,13 @@ export default function EditBlock(props: EditBlockProps) {
   const changeArrayItem = (newType, idToChange) => {
     const result = channelUserInfo.map((item) => {
       if (item.nickname === idToChange) {
+        if (newType) {
+          return {
+            ...item,
+            isBlocked: newType,
+            isFriend: false,
+          }
+        }
         return {
           ...item,
           isBlocked: newType,

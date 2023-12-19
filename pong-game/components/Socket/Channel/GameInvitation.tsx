@@ -13,39 +13,47 @@ interface toastData {
   setResponseFlag?: (v: boolean) => void
 }
 
-interface acceptProps {
-  gameInvitationId: number
-}
-
 export default function GameInvitation() {
   const router: NextRouter = useRouter()
-  const [invitationSocketStatus, setInvitationSocketStatus] = useState<'ON' | 'OFF'>('OFF')
   const notify = (props: toastData) =>
     toast(
       (t) => {
-        const acceptHandler = async (props: acceptProps) => {
-          await instance
-            .post('/game/accept', { gameInvitationId: props.gameInvitationId })
-            .then((res) => {
-              console.log(res)
+        const acceptHandler = async (invitationId: number) => {
+          console.log('acceptHandler')
+          try {
+            await instance.post('/game/accept', { gameInvitationId: invitationId }).then((res) => {
+              // console.log(res)
             })
+          } catch (e) {
+            console.log(e.message)
+          }
         }
-        const declineHandler = async (props: acceptProps) => {
-          await instance
-            .delete('/game/refuse', { data: { gameInvitationId: props.gameInvitationId } })
-            .then((res) => {
-              console.log(res)
+        const declineHandler = async (invitationId: number) => {
+          console.log('declineHandler')
+          try {
+            await instance.delete(`/game/refuse/${invitationId}`).then((res) => {
             })
+          } catch (e) {
+            console.log(e.message)
+          }
         }
 
-        useEffect(() => {
-          const cancelTimeout = setTimeout(() => {
-            toast.remove(props.toastId)
-          }, 9000)
-          return () => {
-            clearTimeout(cancelTimeout)
-          }
-        }, [])
+        // useEffect(() => {
+        //   console.log('useEffect')
+        //   const invitationId = props.invitationId
+        //   const cancelTimeout = setTimeout(() => {
+        //     if (!requestFlag) {
+        //       toast.remove(t.id)
+        //     }
+        //   }, 7500)
+        //   return () => {
+        //     clearTimeout(cancelTimeout)
+        //     if (!requestFlag) {
+        //       console.log(123, invitationId)
+        //       declineHandler(invitationId)
+        //     }
+        //   }
+        // }, [])
 
         return (
           <div className={styles.toastBackGround}>
@@ -55,17 +63,13 @@ export default function GameInvitation() {
             </section>
             <section className={styles.responseBtn}>
               <button
-                onClick={() => (
-                  toast.remove(t.id), acceptHandler({ gameInvitationId: props.invitationId })
-                )}
+                onClick={() => (toast.remove(t.id), acceptHandler(props.invitationId))}
                 className={styles.acceptBtn}
               >
                 수락
               </button>
               <button
-                onClick={() => (
-                  toast.remove(t.id), declineHandler({ gameInvitationId: props.invitationId })
-                )}
+                onClick={() => (toast.remove(t.id), declineHandler(props.invitationId))}
                 className={styles.declineBtn}
               >
                 거절
@@ -74,21 +78,18 @@ export default function GameInvitation() {
           </div>
         )
       },
-      { duration: 10000 },
+      { duration: 9000 },
     )
 
   useEffect(() => {
     if (router.pathname !== '/match') {
       socket.on('gameInvitation', (data: toastData) => {
-        try {
-          notify({
-            invitationId: data.invitationId,
-            invitingUserNickname: data.invitingUserNickname,
-            gameType: data.gameType,
-          })
-        } catch (e) {
-          console.log(e.message)
-        }
+        toast.remove()
+        notify({
+          invitationId: data.invitationId,
+          invitingUserNickname: data.invitingUserNickname,
+          gameType: data.gameType,
+        })
       })
     }
     socket.on('gameStarted', (data) => {

@@ -10,7 +10,6 @@ export default function ChatBan(props: ChatBanProps) {
   const responseModal = useResponseModalState()
 
   const chatUserBanHandler = async () => {
-    console.log(process.env.NEXT_PUBLIC_API_ENDPOINT)
     try {
       await instance
         .patch(`/channels/ban`, {
@@ -26,11 +25,15 @@ export default function ChatBan(props: ChatBanProps) {
 
   const setBanModal = () => {
     setModalName('response')
-    responseModal.setResponseModalState(
-      '유저 벤',
-      `${props.nickname}님을 벤 하시겠습니까?`,
-      chatUserBanHandler,
-    )
+    if (props.channelUserType !== 'OWNER') {
+      responseModal.setResponseModalState(
+        '유저 벤',
+        `${props.nickname}님을 벤 하시겠습니까?`,
+        chatUserBanHandler,
+      )
+    } else {
+      responseModal.setResponseModalState('알림', `방장은 벤할 수 없습니다.`, null)
+    }
   }
   return (
     <li>
