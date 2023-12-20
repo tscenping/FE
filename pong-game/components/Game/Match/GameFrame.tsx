@@ -51,7 +51,7 @@ export default function GameFrame() {
 
   const raketColor = 'white'
   const canvasColor = '#71A1FF'
-  const ballColor = 'white'
+  const ballColor = '#5c5d61'
 
   useEffect(() => {
     if (!canvasRef.current) return
@@ -64,7 +64,7 @@ export default function GameFrame() {
       context.clearRect(0, 0, canvas.width, canvas.height)
 
       //배경
-      context.fillStyle = '#71A1FF'
+      context.fillStyle = canvasColor
       context.fillRect(0, 0, canvas.width, canvas.height)
 
       //중앙선

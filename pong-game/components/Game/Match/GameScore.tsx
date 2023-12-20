@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import styles from './GameScore.module.scss'
+import { gameSocket } from '@/socket/gameSocket'
+import { useEffect } from 'react'
 
 interface GameScoreProps {
   rivalScore?: number
@@ -11,6 +13,8 @@ interface GameScoreProps {
 const baseImg = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
 export default function GameScore(props: GameScoreProps) {
+
+  
   return (
     <>
       <div className={styles.scoreHeader}>
