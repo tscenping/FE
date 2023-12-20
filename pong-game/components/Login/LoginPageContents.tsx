@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import Loading from './Loading'
 import { useNickNameImage } from '@/store/login'
+import { useModalState } from '@/store/store'
 
 interface siginInResponse {
   userId: number
@@ -19,7 +20,9 @@ interface siginInResponse {
 function LoginPageContents(): JSX.Element {
   const [responseData, setResponseData] = useState<siginInResponse>()
   const [codeValue, setCodeValue] = useState<string>('')
-  const { setAvatar, setMyNickname, setIsMfaEnabled } = useNickNameImage()
+  const { setAvatar, setMyNickname, setIsMfaEnabled, setMfaQrCOde, setUserId, mfaQrCode } =
+    useNickNameImage()
+  const { setModalName } = useModalState()
   const router = useRouter()
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -34,10 +37,14 @@ function LoginPageContents(): JSX.Element {
         setMyNickname(null)
         router.replace('/login/info')
       } else {
-        router.replace('/main')
+        if (mfaQrCode) {
+          setModalName('mfa')
+        } else {
+          router.replace('/main')
+        }
       }
     }
-  }, [responseData, router])
+  }, [responseData, router, mfaQrCode])
 
   useEffect(() => {
     if (!codeValue) {
@@ -62,10 +69,19 @@ function LoginPageContents(): JSX.Element {
             .then((res) => {
               console.log(res.data)
               setResponseData(res.data)
+              setIsMfaEnabled(res.data.isMfaEnabled)
+              setUserId(res.data.userId)
+              if (res.data.mfaUrl && res.data.isMfaEnabled) {
+                setMfaQrCOde(res.data.mfaUrl)
+                setModalName('mfa')
+              }
             })
         }
       } catch (error) {
         console.error('Error fetching data:', error)
+        if (error.response.status === 401) {
+          router.replace('/login')
+        }
       }
     }
     fetchData()

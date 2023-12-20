@@ -17,6 +17,7 @@ function ChatTypeListContainer(): JSX.Element {
     setDmChannels,
     setTotalDm,
     setTotalMe,
+    totalDm,
     page,
   } = useGetChannels()
   const getAllChannels = async () => {
@@ -63,7 +64,7 @@ function ChatTypeListContainer(): JSX.Element {
     if (tabState === 'ENTIRE') getAllChannels()
     if (tabState === 'JOINED') getMeChannels()
     if (tabState === 'DM') getDmChannels()
-  }, [tabState, page])
+  }, [tabState, page, totalDm])
 
   return (
     <>

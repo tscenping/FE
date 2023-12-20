@@ -33,7 +33,7 @@ function JoinDmRoom(): JSX.Element {
         setChannelLogEmpty([])
         setChannelType('DM')
         setChannelId(responseCreate.data.channelId)
-        setChannelUserInfo(null)
+        setChannelUserInfo(responseCreate.data.channelUsers)
         if (modalProps.modalType === 'DM') {
           router.replace('/chat')
         }

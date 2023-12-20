@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
+  // padding: 8px 16px;
   .toastMessage {
     font-size: 1.5rem;
     width: 100%;
@@ -16,6 +16,9 @@
   .toastButton {
     display: flex;
     justify-content: space-around;
+    &:first-child {
+      margin-right: 24px;
+    }
     button {
       font-family: 'Pretendard-Regular';
       width: 80px;

@@ -22,7 +22,6 @@ function PrivateInvitation(): JSX.Element {
         method: 'post',
         data: JSON.stringify(datas),
       })
-      toast.remove(t.id)
       if (router.pathname !== '/chat') {
         router.replace('/chat')
       }
@@ -38,7 +37,9 @@ function PrivateInvitation(): JSX.Element {
       setChannelUserInfo(responseEnter.data.channelUsers)
       setChannelType('PRIVATE')
       setTabState('JOINED')
+      toast.remove(t.id)
     } catch (error) {
+      toast.remove(t.id)
       console.log('Error : ', error)
     }
   }

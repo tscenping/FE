@@ -1,10 +1,9 @@
 import Image from 'next/image'
 import textEditBtn from '@/public/img/mypage/textEdit.svg'
 import styles from './MyPageProfile.module.scss'
-import profileImage from '@/public/img/mypage/profileImage.svg'
 import React, { useState, ChangeEvent, useRef, useEffect } from 'react'
 import { instance } from '@/util/axios'
-import { useModalState } from '@/store/store'
+import { useModalState, useResponseModalState } from '@/store/store'
 import { useNickNameImage } from '@/store/login'
 
 interface MatchHistoryProps {
@@ -52,8 +51,9 @@ export default function MyPageProfile({
   const [editProfileMsgFlag, setEditProfileMsgFlag] = useState(false)
   const [profileMsg, setProfileMsg] = useState(statusMessage)
   const { setModalName, setModalProps } = useModalState()
+  const { setResponseModalState } = useResponseModalState()
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
-  const { avatar } = useNickNameImage()
+  const { avatar, isMfaEnabled, setIsMfaEnabled } = useNickNameImage()
   const handleEditProfileMsg = () => {
     if (editProfileMsgFlag) {
       submitStatusMessage()
@@ -62,6 +62,8 @@ export default function MyPageProfile({
       setEditProfileMsgFlag(!editProfileMsgFlag)
     }
   }
+
+  const mfaButtonStyles = isMfaEnabled ? styles.secondAuthTrue : styles.secondAuthFalse
 
   const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const inputText = e.target.value
@@ -88,6 +90,48 @@ export default function MyPageProfile({
     setModalProps({ avatar: avatar })
     setModalName('changeImage')
   }
+
+  const mfaEnabledActive = async () => {
+    const datas = { isMfaEnabled: isMfaEnabled }
+    try {
+      const response = await instance('/auth/mfa', {
+        method: 'patch',
+        data: JSON.stringify(datas),
+      })
+      if (response.statusText === 'OK') {
+        setIsMfaEnabled(response.data.isMfaEnabled)
+      }
+    } catch (error) {
+      console.log('Error : ', error)
+    }
+  }
+
+  const mfaEnabledInactive = async () => {
+    const datas = { isMfaEnabled: isMfaEnabled }
+    try {
+      const response = await instance('/auth/mfa', {
+        method: 'patch',
+        data: JSON.stringify(datas),
+      })
+      if (response.statusText === 'OK') {
+        setIsMfaEnabled(response.data.isMfaEnabled)
+      }
+    } catch (error) {
+      console.log('Error : ', error)
+    }
+  }
+
+  const mfaEnabledHandler = async () => {
+    if (isMfaEnabled) {
+      setResponseModalState('2차인증', '2차 인증을 비활성화 하시겠습니까?', mfaEnabledActive)
+      setModalName('response')
+    } else {
+      setResponseModalState('2차인증', '2차 인증을 활성화 하시겠습니까?', mfaEnabledInactive)
+      setModalName('response')
+    }
+  }
+
+  useEffect(() => {}, [isMfaEnabled])
 
   useEffect(() => {
     if (editProfileMsgFlag && textareaRef.current) {
@@ -120,7 +164,9 @@ export default function MyPageProfile({
               </div>
               <div className={styles.nickName}>{nickName}</div>
             </div>
-            <div className={styles.secondAuth}>2차 인증</div>
+            <button className={mfaButtonStyles} onClick={mfaEnabledHandler}>
+              2차 인증
+            </button>
           </section>
           <section className={styles.lineTwo}>
             <div className={styles.profileMessage}>
