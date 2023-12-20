@@ -34,16 +34,18 @@ instance.interceptors.response.use(
     // const { setResponseModalState }= useResponseModalState()
     // const router: NextRouter = useRouter()
     if (error.response && error.response.status === 400) {
-      alert(error.response.data.message)
+      alert('유효하지 않은 요청입니다.')
+      console.log(error.response.data.message)
       // setResponseModalState('에러', error.response.data.message, null)
       // setModalName('response')
       // store.dispatch('setResponseModalState', {
 
       // window.location.href = '/login'
       // router.push('/login')
-    }
-    else if(error.response && error.response.status === 404){
+    } else if (error.response && error.response.status === 404) {
       alert('잘못된 요청입니다.')
+    } else if (error.response && error.response.status === 401) {
+      alert('인증이 만료되었습니다. 다시 로그인해주세요.')
     }
     return Promise.reject(error)
   },

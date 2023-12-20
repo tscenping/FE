@@ -1,49 +1,71 @@
 import styles from './index.module.scss'
-import { useState, useEffect, JSXElementConstructor } from 'react'
+import { useState, useEffect } from 'react'
 
 import PageTitle from '@/components/UI/PageTitle'
-import RankGame from '@/components/Game/RankGame'
 import NormalGame from '@/components/Game/NormalGame'
 import { useRouter, NextRouter } from 'next/router'
-import toast from 'react-hot-toast'
 import { socket } from '@/socket/socket'
+import { instance } from '@/util/axios'
+import { useLodingState } from '@/store/loding'
+import { useMatchGameState } from '@/store/game'
 
-interface gameMatchedData {}
-
-interface gameInvitationReplyData {}
+interface gameMatchedData {
+  gameId: number
+}
 
 export default function Home() {
   const [gameState, setGameState] = useState<string>('')
   const [pageState, setPageState] = useState(1)
   const router: NextRouter = useRouter()
+  const { setLodingState } = useLodingState()
+  const { setMatchGameState } = useMatchGameState()
+  const serchCancelHandler = async () => {
+    try {
+      await instance.delete('/game/match').then((res) => {
+        console.log(res)
+      })
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
 
-  const onClickLadderBtn = () => {
-    router.push('/match')
+  const onClickLadderBtn = async () => {
+    try {
+      await instance.post('/game/match', { gameType: 'LADDER' }).then((res) => {
+        console.log(res)
+      })
+      setLodingState({
+        isLoding: true,
+        lodingTitle: 'searchGame',
+        cancelHandler: serchCancelHandler,
+      })
+      router.push('/match')
+    } catch (e) {
+      console.log(e.message)
+    }
   }
   const onClickNomalBtn = () => {
     setGameState('nomal')
     setPageState(2)
   }
 
-  const gameMatchHandler = (data: gameMatchedData) => {}
-
-  const gameInvitationReplyHandler = (data: gameInvitationReplyData) => {}
+  const gameMatchHandler = (data: gameMatchedData) => {
+    setMatchGameState({ gameId: data.gameId })
+    setLodingState({ isLoding: false })
+    router.push('/match')
+  }
 
   useEffect(() => {
     socket.on('gameMatched', gameMatchHandler)
-    socket.on('gameInvitationReply', gameInvitationReplyHandler)
     return () => {
       socket.off('gameMatched')
-      socket.off('gameInvitationReply')
     }
   }, [])
   return (
     <div className={styles.backGround}>
       {gameState ? (
-        gameState === 'nomal' ? (
+        gameState === 'nomal' && (
           <NormalGame setPageState={setPageState} setGameState={setGameState} />
-        ) : (
-          <RankGame />
         )
       ) : (
         <div>

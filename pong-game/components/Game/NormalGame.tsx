@@ -3,6 +3,8 @@ import { useState } from 'react'
 import CustomRadio from '@/function/Game/CustomRadio'
 import PageTitle from '../UI/PageTitle'
 import { useModalState } from '@/store/store'
+import { useLodingState } from '@/store/loding'
+import { instance } from '@/util/axios'
 
 interface props {
   setPageState: (newPageState: number) => void // setPageState 함수
@@ -10,16 +12,44 @@ interface props {
 }
 
 export default function NormalGame({ setPageState, setGameState }: props) {
-  const [gameMode, setGameMode] = useState<'Normal'|'Special'>('Normal')
+  const [gameMode, setGameMode] = useState<'Normal' | 'Special'>('Normal')
   const handlePrvBtn = () => {
     setGameState('')
     setPageState(1)
   }
   const { setModalName, setModalProps } = useModalState()
+  const { lodingState, setLodingState } = useLodingState()
   const handleInviteGame = () => {
     console.log(gameMode)
     setModalProps({ modalType: 'GAME', gameMode: gameMode })
     setModalName('friendUsers')
+  }
+
+  const serchCancelHandler = async () => {
+    try {
+      await instance.delete('/game/match').then((res) => {
+        console.log(res)
+      })
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
+
+  const handleSerchGame = async () => {
+    try {
+      await instance
+        .post('/game/match', { gameType: gameMode === 'Normal' ? 'NORMAL_MATCH' : 'SPECIAL_MATCH' })
+        .then((res) => {
+          console.log(res)
+        })
+      setLodingState({
+        isLoding: true,
+        lodingTitle: 'searchGame',
+        cancelHandler: serchCancelHandler,
+      })
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 
   return (
@@ -51,7 +81,9 @@ export default function NormalGame({ setPageState, setGameState }: props) {
             width={40}
           />
         </section>
-        <button className={styles.gameBtn}>Matching</button>
+        <button className={styles.gameBtn} onClick={handleSerchGame}>
+          Matching
+        </button>
         <button className={styles.gameBtn} onClick={handleInviteGame}>
           Invite a Friend
         </button>

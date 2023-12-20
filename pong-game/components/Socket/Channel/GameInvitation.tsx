@@ -1,5 +1,5 @@
 import { socket } from '@/socket/socket'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 import styles from './GameInvitation.module.scss'
 import { instance } from '@/util/axios'
@@ -15,6 +15,7 @@ interface toastData {
 
 export default function GameInvitation() {
   const router: NextRouter = useRouter()
+
   const notify = (props: toastData) =>
     toast(
       (t) => {
@@ -22,7 +23,7 @@ export default function GameInvitation() {
           console.log('acceptHandler')
           try {
             await instance.post('/game/accept', { gameInvitationId: invitationId }).then((res) => {
-              // console.log(res)
+              console.log('수락 성공')
             })
           } catch (e) {
             console.log(e.message)
@@ -32,6 +33,7 @@ export default function GameInvitation() {
           console.log('declineHandler')
           try {
             await instance.delete(`/game/refuse/${invitationId}`).then((res) => {
+              console.log('거절 성공')
             })
           } catch (e) {
             console.log(e.message)
@@ -97,10 +99,12 @@ export default function GameInvitation() {
         router.push('/match')
       }
     })
+
     return () => {
       if (router.pathname !== '/match') {
         socket.off('gameInvitation')
       }
+
       console.log('clean up')
     }
   }, [socket, router.pathname])

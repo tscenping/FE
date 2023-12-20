@@ -3,6 +3,7 @@ import { create } from 'zustand'
 interface LodingProps {
   isLoding: boolean
   lodingTitle?: 'inviteGame' | 'searchGame'
+  gameInvitationId?:number
   cancelHandler?: () => void
 }
 
@@ -14,6 +15,7 @@ interface LodingState{
 export const useLodingState = create<LodingState>((set) => ({
   lodingState: {
     isLoding: false,
+    gameInvitationId: null,
   },
   setLodingState: (lodingState: LodingProps) => set({ lodingState })
   })) 

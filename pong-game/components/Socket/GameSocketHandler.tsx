@@ -7,6 +7,7 @@ export default function GameSocketHandler() {
   useEffect(() => {
     if ( router.pathname === '/match'){
       gameSocket.connect()
+      gameSocket.emit('gameRequest')
 
       // gameSocket.on('connect', () => {
       //   console.log('game connect')
@@ -15,7 +16,7 @@ export default function GameSocketHandler() {
     }
     return () => {
       gameSocket.disconnect()
-      
+
     }
   }, [gameSocket, router.pathname])
   return <></>
