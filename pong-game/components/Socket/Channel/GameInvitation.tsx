@@ -1,5 +1,5 @@
 import { socket } from '@/socket/socket'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 import styles from './GameInvitation.module.scss'
 import { instance } from '@/util/axios'
@@ -15,17 +15,15 @@ interface toastData {
 
 export default function GameInvitation() {
   const router: NextRouter = useRouter()
-  const [toastId, setToastId] = useState(null)
+
   const notify = (props: toastData) =>
     toast(
       (t) => {
-        const [requestFlag, setRequestFlag] = useState(false)
         const acceptHandler = async (invitationId: number) => {
           console.log('acceptHandler')
           try {
             await instance.post('/game/accept', { gameInvitationId: invitationId }).then((res) => {
-              console.log(res)
-              setRequestFlag(true)
+              console.log('수락 성공')
             })
           } catch (e) {
             console.log(e.message)
@@ -35,29 +33,29 @@ export default function GameInvitation() {
           console.log('declineHandler')
           try {
             await instance.delete(`/game/refuse/${invitationId}`).then((res) => {
-              setRequestFlag(true)
+              console.log('거절 성공')
             })
           } catch (e) {
             console.log(e.message)
           }
         }
 
-        useEffect(() => {
-          console.log('useEffect')
-          const invitationId = props.invitationId
-          const cancelTimeout = setTimeout(() => {
-            if (!requestFlag) {
-              toast.remove(t.id)
-            }
-          }, 7500)
-          return () => {
-            clearTimeout(cancelTimeout)
-            if (!requestFlag) {
-              console.log(123, invitationId)
-              declineHandler(invitationId)
-            }
-          }
-        }, [])
+        // useEffect(() => {
+        //   console.log('useEffect')
+        //   const invitationId = props.invitationId
+        //   const cancelTimeout = setTimeout(() => {
+        //     if (!requestFlag) {
+        //       toast.remove(t.id)
+        //     }
+        //   }, 7500)
+        //   return () => {
+        //     clearTimeout(cancelTimeout)
+        //     if (!requestFlag) {
+        //       console.log(123, invitationId)
+        //       declineHandler(invitationId)
+        //     }
+        //   }
+        // }, [])
 
         return (
           <div className={styles.toastBackGround}>
@@ -82,20 +80,18 @@ export default function GameInvitation() {
           </div>
         )
       },
-      { duration: 8000 },
+      { duration: 9000 },
     )
 
   useEffect(() => {
     if (router.pathname !== '/match') {
       socket.on('gameInvitation', (data: toastData) => {
-        toast.remove(toastId)
-        console.log('toast 호출')
-        const temp = notify({
+        toast.remove()
+        notify({
           invitationId: data.invitationId,
           invitingUserNickname: data.invitingUserNickname,
           gameType: data.gameType,
         })
-        setToastId(temp)
       })
     }
     socket.on('gameStarted', (data) => {
@@ -103,14 +99,15 @@ export default function GameInvitation() {
         router.push('/match')
       }
     })
+
     return () => {
       if (router.pathname !== '/match') {
         socket.off('gameInvitation')
-        toast.remove(toastId)
       }
+
       console.log('clean up')
     }
-  }, [socket, router.pathname, toastId])
+  }, [socket, router.pathname])
 
   return <></>
 }

@@ -22,12 +22,16 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
   const responseModal = useResponseModalState()
 
   const logoutHandler = async () => {
-    await instance.patch('/auth/signout', {}).then(function (res) {
-      console.log(res)
-    })
-    socket.disconnect()
-    setMyNickname(null)
-    setAvatar(null)
+    try {
+      await instance.patch('/auth/signout', {}).then(function (res) {
+        console.log(res)
+      })
+      socket.disconnect()
+      setMyNickname(null)
+      setAvatar(null)
+    } catch (e) {
+      console.log(e.message)
+    }
   }
   const logoutModal = () => {
     setModalName('response')

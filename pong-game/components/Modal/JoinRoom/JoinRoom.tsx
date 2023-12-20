@@ -36,7 +36,7 @@ function JoinRoom(): JSX.Element {
         setChannelUserInfo(response.data.channelUsers)
         setMyChannelUserType(response.data.myChannelUserType)
         setChannelAuth(response.data.myChannelUserType)
-        setPasswordInputRender('CHANNEL')
+        setPasswordInputRender('CHANNEL') 
         setChannelTitle(title)
         setReadyChannelId(null)
         setTitle(null)

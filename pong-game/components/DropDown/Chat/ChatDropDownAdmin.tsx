@@ -24,8 +24,16 @@ export default function ChatDropDownAdmin(props: ChatDropDownOwnerProps) {
             channelUserId={props.channelUserId}
             nickname={props.nickname}
           />
-          <ChatMute channelUserId={props.channelUserId} />
-          {/* <ChatBan channelUserId={props.channelUserId} /> */}
+          <ChatMute
+            channelUserType={props.channelUserType}
+            channelUserId={props.channelUserId}
+            nickname={props.nickname}
+          />
+          <ChatBan
+            channelUserType={props.channelUserType}
+            channelUserId={props.channelUserId}
+            nickname={props.nickname}
+          />
         </>
       )}
       {/* <EditFriend isFriend={props.isFriend} /> */}

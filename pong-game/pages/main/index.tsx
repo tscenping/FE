@@ -1,98 +1,62 @@
 import styles from './index.module.scss'
-import { useState, useEffect, JSXElementConstructor } from 'react'
+import { useState, useEffect } from 'react'
 
 import PageTitle from '@/components/UI/PageTitle'
-import RankGame from '@/components/Game/RankGame'
 import NormalGame from '@/components/Game/NormalGame'
 import { useRouter, NextRouter } from 'next/router'
-import toast from 'react-hot-toast'
-import { gameSocket } from '@/socket/gameSocket'
+import { socket } from '@/socket/socket'
+import { instance } from '@/util/axios'
+import { useLodingState } from '@/store/loding'
+import { useMatchGameState } from '@/store/game'
+
+interface gameMatchedData {
+  gameId: number
+}
 
 export default function Home() {
   const [gameState, setGameState] = useState<string>('')
   const [pageState, setPageState] = useState(1)
   const router: NextRouter = useRouter()
-  // useEffect(() => {
-  //   gameSocket.on('gameInvitation', (data) => {
-  //     console.log(data)
-  //   })
-  // }, [])
+  const { setLodingState } = useLodingState()
+  const { setMatchGameState } = useMatchGameState()
 
-  const onClickLadderBtn = () => {
-    // setGameState('rank')
-    router.push('/match')
+  const onClickLadderBtn = async () => {
+    try {
+      await instance.post('/game/match', { gameType: 'LADDER' }).then((res) => {
+        console.log(res)
+      })
+      setLodingState({
+        isLoding: true,
+        lodingTitle: 'searchGame',
+        gameType: 'LADDER',
+      })
+      router.push('/match')
+    } catch (e) {
+      console.log(e.message)
+    }
   }
   const onClickNomalBtn = () => {
     setGameState('nomal')
     setPageState(2)
   }
-  // useEffect(() => {
-  //   gameSocket.on('gameInvitation', (data) => {
-  //     console.log(123)
-  //     console.log(data)
-  //   })
-  // }, [gameSocket])
-  // const ToastHandler = () => {
-  //   console.log(123)
-  // }
-  // const notify = () =>
-  // toast((t) => (
-  //   <div className={styles.toastBackGround}>
-  //     <section className={styles.toastMsg}>him님이 게임에 초대하였습니다.</section>
-  //     <section className={styles.responseBtn}>
-  //       <button onClick={() => toast.dismiss(t.id)} className={styles.acceptBtn}>
-  //         수락
-  //       </button>
-  //       <button onClick={() => toast.dismiss(t.id)} className={styles.declineBtn}>
-  //         거절
-  //       </button>
-  //     </section>
-  //   </div>
-  // ))
-  //   // toast.custom(
-  //   (t) => (
-  //     <div className={styles.toastBackGround}>
-  //       <section className={styles.toastMsg}>
-  //         him님이 게임에 초대하였습니다. 수락하시겠습니까?{' '}
-  //       </section>
-  //       <section className={styles.responseBtn}>
-  //         <button onClick={() => toast.dismiss(t.id)} className={styles.acceptBtn}>
-  //           수락
-  //         </button>
-  //         <button onClick={() => toast.dismiss(t.id)} className={styles.declineBtn}>
-  //           거절
-  //         </button>
-  //       </section>
-  //     </div>
-  //   ),
-  //   {
-  //     duration: 10000,
-  //     position: 'top-center',
 
-  //     style: {backgroundColor: 'white'},
-  //     className: '',
+  const gameMatchHandler = (data: gameMatchedData) => {
+    setMatchGameState({ gameId: data.gameId })
+    setLodingState({ isLoding: false })
+    router.push('/match')
+  }
 
-  //     icon: '👏',
-
-  //     iconTheme: {
-  //       primary: '#000',
-  //       secondary: '#fff',
-  //     },
-
-  //     ariaProps: {
-  //       role: 'status',
-  //       'aria-live': 'polite',
-  //     },
-  //   },
-  // )
+  useEffect(() => {
+    socket.on('gameMatched', gameMatchHandler)
+    return () => {
+      socket.off('gameMatched')
+    }
+  }, [])
   return (
     <div className={styles.backGround}>
-      {/* <button onClick={notify}>Make me a toast</button> */}
       {gameState ? (
-        gameState === 'nomal' ? (
+        gameState === 'nomal' && (
           <NormalGame setPageState={setPageState} setGameState={setGameState} />
-        ) : (
-          <RankGame />
         )
       ) : (
         <div>

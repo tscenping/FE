@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import GameInvitation from './Channel/GameInvitation'
 import PrivateInvitation from './Channel/PrivateInvitation'
 import ChannelMessage from './Channel/ChannelMesage'
+import GameInvitationReply from './Channel/GameInvitationReply'
 
 export default function ChannelSocketHandler() {
   useEffect(() => {
@@ -21,6 +22,7 @@ export default function ChannelSocketHandler() {
       <ChannelMessage />
       <GameInvitation />
       <PrivateInvitation />
+      <GameInvitationReply />
     </>
   )
 }

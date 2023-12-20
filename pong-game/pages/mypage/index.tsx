@@ -41,9 +41,13 @@ export default function Mypage(props) {
   const [userProfile, setUserProfile] = useState<MyPageProfileProps>(props.data)
   const { myNickname, setAvatar } = useNickNameImage()
   const getGameHistoryHandler = async () => {
-    await instance.get(`/users/games/:${myNickname}/?page=${page}`, {}).then(function (res) {
-      setGameHistories(res.data)
-    })
+    try {
+      await instance.get(`/users/games/:${myNickname}/?page=${page}`, {}).then(function (res) {
+        setGameHistories(res.data)
+      })
+    } catch (e) {
+      console.log(e.message)
+    }
   }
   // const getUserProfileHandler = async () => {
   //   await instance.get(`/users/me`, {}).then(function (res) {
@@ -126,11 +130,15 @@ export async function getServerSideProps(context) {
         rejectUnauthorized: false,
       }),
     })
-    const response = await instance({
-      url: 'https://localhost:3000/users/me',
-      method: 'get',
-      headers: header,
-    })
-    return { props: { data: response.data } }
+    try {
+      const response = await instance({
+        url: 'https://localhost:3000/users/me',
+        method: 'get',
+        headers: header,
+      })
+      return { props: { data: response.data } }
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 }

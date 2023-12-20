@@ -1,18 +1,23 @@
 import { gameSocket } from '@/socket/gameSocket'
+import { useRouter, NextRouter } from 'next/router'
 import { useEffect } from 'react'
 
 export default function GameSocketHandler() {
+  const router: NextRouter = useRouter()
   useEffect(() => {
-    gameSocket.connect()
+    if ( router.pathname === '/match'){
+      gameSocket.connect()
+      gameSocket.emit('gameRequest')
 
-    gameSocket.on('connect', () => {
-      console.log('game connect')
-    })
+      // gameSocket.on('connect', () => {
+      //   console.log('game connect')
+      // })
 
+    }
     return () => {
       gameSocket.disconnect()
-      gameSocket.off('connect')
+
     }
-  }, [gameSocket])
+  }, [gameSocket, router.pathname])
   return <></>
 }

@@ -23,6 +23,7 @@ interface DropDownChatingProps {
 type DropDownKey = 'OWNER' | 'ADMIN' | 'MEMBER'
 
 export default function DropDownChating(props: DropDownChatingProps) {
+  console.log("dorpdown props : ", props)
   const dropDownContent: { [key in DropDownKey]: JSX.Element | null } = {
     OWNER: (
       <ChatDropDownOwner
@@ -43,7 +44,6 @@ export default function DropDownChating(props: DropDownChatingProps) {
     ),
     MEMBER: <ChatDropDownCommon />,
   }
-  console.log(props.myChannelUserType)
 
   return (
     <ul className={styles.DropDownChating}>

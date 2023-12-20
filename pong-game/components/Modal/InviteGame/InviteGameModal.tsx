@@ -26,12 +26,14 @@ export default function InviteGameModal() {
           gameType: gameMode === 'Normal' ? 'NORMAL_INVITE' : 'SPECIAL_INVITE',
         })
         .then((res) => {
+          // console.log(res)
+          // console.log('gameInvitationId', res.data.gameInvitationId)
+          setGameInvitationId(res.data.gameInvitationId)
           setLodingState({
             isLoding: true,
             lodingTitle: 'inviteGame',
-            cancelHandler: inviteCancelHandler,
+            gameInvitationId: res.data.gameInvitationId,
           })
-          setGameInvitationId(res.data.gameInvitationId)
         })
       setModalName(null)
     } catch (error) {
@@ -39,18 +41,11 @@ export default function InviteGameModal() {
     }
   }
 
-  const inviteCancelHandler = async () => {
-    try {
-      await instance
-        .delete(`/game/invite`, {
-          data: {
-            gameInvitationId: gameInvitationId,
-          },
-        })
-        .then((res) => {})
-      setModalName(null)
-    } catch (error) {}
-  }
+  // const inviteCancelHandler = async () => {
+  //   try {
+  //     await instance.delete(`/game/invite/${lodingState.gameInvitationId}`, {}).then((res) => {})
+  //   } catch (error) {}
+  // }
 
   const modalOffHandler = () => {
     setModalName(null)

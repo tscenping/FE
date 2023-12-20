@@ -30,9 +30,17 @@ export default function EditFriend(props: EditFriendProps) {
   const changeArrayItem = (newType, idToChange) => {
     const result = channelUserInfo.map((item) => {
       if (item.nickname === idToChange) {
+        if (newType) {
+          return {
+            ...item,
+            isFriend: newType,
+            isBlocked: false,
+          }
+        }
         return {
           ...item,
           isFriend: newType,
+          isBlocked: false,
         }
       } else {
         return {
@@ -42,16 +50,6 @@ export default function EditFriend(props: EditFriendProps) {
     })
     setChannelUserInfo(result)
   }
-  // function changeArrayItem(newType, idToChange) {
-  //   const itemToChange = channelUserInfo.find((item) => item.nickname === idToChange)
-  //   if (itemToChange) {
-  //     itemToChange.channelUserType = newType
-  //   }
-  //   const resData = channelUserInfo.filter(({ nickname }) => nickname != idToChange)
-  //   console.log(resData)
-  //   resData.push(itemToChange)
-  //   setChannelUserInfo(resData)
-  // }
 
   const addFriendHandler = async () => {
     props.setIsDropDownView(false)
@@ -125,3 +123,14 @@ export default function EditFriend(props: EditFriendProps) {
     </li>
   )
 }
+
+// function changeArrayItem(newType, idToChange) {
+//   const itemToChange = channelUserInfo.find((item) => item.nickname === idToChange)
+//   if (itemToChange) {
+//     itemToChange.channelUserType = newType
+//   }
+//   const resData = channelUserInfo.filter(({ nickname }) => nickname != idToChange)
+//   console.log(resData)
+//   resData.push(itemToChange)
+//   setChannelUserInfo(resData)
+// }
