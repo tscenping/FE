@@ -25,16 +25,6 @@ export default function NormalGame({ setPageState, setGameState }: props) {
     setModalName('friendUsers')
   }
 
-  const serchCancelHandler = async () => {
-    try {
-      await instance.delete('/game/match').then((res) => {
-        console.log(res)
-      })
-    } catch (e) {
-      console.log(e.message)
-    }
-  }
-
   const handleSerchGame = async () => {
     try {
       await instance
@@ -45,7 +35,7 @@ export default function NormalGame({ setPageState, setGameState }: props) {
       setLodingState({
         isLoding: true,
         lodingTitle: 'searchGame',
-        cancelHandler: serchCancelHandler,
+        gameType: gameMode === 'Normal' ? 'NORMAL_MATCH' : 'SPECIAL_MATCH',
       })
     } catch (e) {
       console.log(e.message)

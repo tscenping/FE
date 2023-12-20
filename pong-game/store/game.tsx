@@ -2,8 +2,6 @@ import { create } from 'zustand'
 
 interface MatchGameProps {
   gameId: number
-  // lodingTitle?: 'inviteGame' | 'searchGame'
-  // cancelHandler?: () => void
 }
 
 interface MatchGameState{

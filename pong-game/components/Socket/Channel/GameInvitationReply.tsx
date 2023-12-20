@@ -26,9 +26,12 @@ export default function GameInvitationReply() {
       setModalName('response')
       responseModal.setResponseModalState('게임초대', '상대방이 게임 초대를 거절하였습니다.', null)
     }
+    console.log(data.gameId)
   }
   useEffect(() => {
+    if (router.pathname !== '/match') {
     socket.on('gameInvitationReply', gameInvitationReplyHandler)
+    }
 
     return () => {
       socket.off('gameInvitationReply')

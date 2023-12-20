@@ -33,7 +33,6 @@ export default function InviteGameModal() {
             isLoding: true,
             lodingTitle: 'inviteGame',
             gameInvitationId: res.data.gameInvitationId,
-            // cancelHandler: inviteCancelHandler,
           })
         })
       setModalName(null)

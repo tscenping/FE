@@ -19,15 +19,6 @@ export default function Home() {
   const router: NextRouter = useRouter()
   const { setLodingState } = useLodingState()
   const { setMatchGameState } = useMatchGameState()
-  const serchCancelHandler = async () => {
-    try {
-      await instance.delete('/game/match').then((res) => {
-        console.log(res)
-      })
-    } catch (e) {
-      console.log(e.message)
-    }
-  }
 
   const onClickLadderBtn = async () => {
     try {
@@ -37,7 +28,7 @@ export default function Home() {
       setLodingState({
         isLoding: true,
         lodingTitle: 'searchGame',
-        cancelHandler: serchCancelHandler,
+        gameType: 'LADDER',
       })
       router.push('/match')
     } catch (e) {
