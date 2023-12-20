@@ -1,9 +1,9 @@
 import { create } from 'zustand'
 
 interface ModalProps {
-  nickname?: string  // 상대방 닉네임
+  nickname?: string // 상대방 닉네임
   userId?: number
-  avatar?: string  //상대방 아바타
+  avatar?: string //상대방 아바타
   gameMode?: 'Normal' | 'Special'
   modalType?: 'DM' | 'INVITE' | 'EDIT' | 'GAME'
 }
@@ -23,6 +23,7 @@ interface ModalState {
     | 'inviteFriend'
     | 'channelSetting'
     | 'inviteGame'
+    | 'mfa'
     | null
   setModalName: (
     modalName:
@@ -39,6 +40,7 @@ interface ModalState {
       | 'inviteFriend'
       | 'channelSetting'
       | 'inviteGame'
+      | 'mfa'
       | null,
   ) => void
   modalProps?: ModalProps | null

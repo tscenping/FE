@@ -1,6 +1,11 @@
 import { useEffect } from 'react'
 import styles from './ChannelNotice.module.scss'
-import { useJoinChannel, useJoinProtectedChannel, useNavBarState } from '@/store/chat'
+import {
+  useJoinChannel,
+  useJoinProtectedChannel,
+  useNavBarState,
+  useGetChannels,
+} from '@/store/chat'
 import { instance } from '@/util/axios'
 import { useNickNameImage } from '@/store/login'
 import { useModalState, useResponseModalState } from '@/store/store'
@@ -25,16 +30,20 @@ interface ChannelNoticeProps {
 function ChannelNotice(props: ChannelNoticeProps): JSX.Element {
   const {
     channelTitle,
+    channelType,
     setChannelUserInfo,
     setChannelId,
     setChannelLogEmpty,
     setMyChannelUserType,
+    setChannelTitle,
+    setChannelType,
   } = useJoinChannel()
   const { myNickname } = useNickNameImage()
   const { setModalName } = useModalState()
   const { setResponseModalState } = useResponseModalState()
   const { setPasswordInputRender } = useJoinProtectedChannel()
   const { setTabState } = useNavBarState()
+  const { setTotalDm, totalDm } = useGetChannels()
 
   const getChannelUsersHandler = async () => {
     const response = await instance(`/channels/enter/${props.channelId}`, {
@@ -55,11 +64,23 @@ function ChannelNotice(props: ChannelNoticeProps): JSX.Element {
         props.eventType === 'BAN' ||
         props.channelUserInfo
       ) {
-        const filterChannelUsers = props.channelUserInfo
-          ? props.channelUserInfo.filter((channelUser) => props.nickname !== channelUser.nickname)
-          : []
+        if (channelType === 'DM') {
+          setResponseModalState('', '상대방이 채널을 나갔습니다.', null)
+          setModalName('response')
+          setChannelId(null)
+          setChannelLogEmpty([])
+          setChannelUserInfo(null)
+          setChannelTitle(null)
+          setPasswordInputRender('DEFAULT')
+          setChannelType(null)
+          setTotalDm(totalDm - 1)
+        } else {
+          const filterChannelUsers = props.channelUserInfo
+            ? props.channelUserInfo.filter((channelUser) => props.nickname !== channelUser.nickname)
+            : []
 
-        setChannelUserInfo(filterChannelUsers)
+          setChannelUserInfo(filterChannelUsers)
+        }
       }
       if (
         props.eventType === 'ADMIN' ||

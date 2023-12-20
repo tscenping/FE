@@ -13,6 +13,7 @@ import FriendUsersModal from '../Modal/FriendUsersModal/FriendUsersModal'
 import InviteFriend from '../Modal/InviteFriend/InviteFriend'
 import ChannelSetting from '../Modal/ChannelSetting/ChannelSetting'
 import InviteGameModal from '../Modal/InviteGame/InviteGameModal'
+import Mfa from '../Modal/Mfa/Mfa'
 
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
@@ -28,7 +29,14 @@ function ModalOverlay(): JSX.Element {
   return (
     <>
       {modalName !== null && (
-        <div className={styles.modalOverlay} onClick={() => setModalName(null)}></div>
+        <div
+          className={styles.modalOverlay}
+          onClick={() => {
+            if (modalName !== 'mfa') {
+              setModalName(null)
+            }
+          }}
+        ></div>
       )}
     </>
   )
@@ -47,7 +55,8 @@ function ModalContent({}): JSX.Element {
     joinDmRoom: <JoinDmRoom />,
     inviteFriend: <InviteFriend />,
     channelSetting: <ChannelSetting />,
-    inviteGame: <InviteGameModal/>
+    inviteGame: <InviteGameModal />,
+    mfa: <Mfa />,
   }
   return (
     <>

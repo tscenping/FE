@@ -7,32 +7,41 @@
   align-items: center;
   font-size: 24px;
   // width: 500px;
-  .toastMsg{
-    // width: 300px;
+  .toastMessage {
+    font-size: 1.5rem;
+    width: 100%;
+    .invitedUser {
+      font-family: 'Pretendard-SemiBold';
+      font-size: 2rem;
+    }
+    .gameType {
+      font-family: 'Pretendard-SemiBold';
+      font-size: 2rem;
+    }
   }
   .responseBtn {
+    font-family: 'Pretendard-Regular';
     display: flex;
-    margin-left: 24px;
-    .acceptBtn {
-      all: unset;
-      text-align: center;
-      width: 90px;
-      height: 60px;
+    // margin-left: 24px;
+    button {
+      font-family: 'Pretendard-Regular';
+      width: 80px;
+      padding: 8px 16px;
+      font-size: 1.5rem;
+      margin-left: 16px;
+      border: none;
+      border-radius: 20px;
       background-color: $main_500;
       color: white;
-      border-radius: 20px;
-      // margin-right: 24px;
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover {
+        transform: scale(1.1);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
     }
-
-    .declineBtn {
-      all: unset;
-      text-align: center;
-      width: 90px;
-      height: 60px;
-      background-color: $main_500;
-      color: white;
-      border-radius: 20px;
-      // padding: 10px;
+    .acceptBtn {
+      margin-right: 16px;
     }
   }
 }
