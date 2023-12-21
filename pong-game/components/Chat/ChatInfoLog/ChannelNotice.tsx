@@ -134,7 +134,7 @@ function ChannelNotice(props: ChannelNoticeProps): JSX.Element {
       <div></div>
       {eventMessage && (
         <strong className={styles.channelNoticeMessage}>
-          "{props.nickname}"님이 {eventMessage}
+          &quot;{props.nickname}&quot;님이 {eventMessage}
         </strong>
       )}
       <div></div>
