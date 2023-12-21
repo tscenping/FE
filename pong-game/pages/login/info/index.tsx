@@ -1,7 +1,8 @@
-import LoginPageComponent from '@/components/Login/LoginPageComponent'
 import React from 'react'
+import { GetServerSidePropsContext } from 'next'
+import LoginPageComponent from '@/components/Login/LoginPageComponent'
 
-function LoginInfoPage({ sendCode }) {
+function LoginInfoPage() {
   return (
     <>
       <LoginPageComponent />
@@ -9,7 +10,7 @@ function LoginInfoPage({ sendCode }) {
   )
 }
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { query } = context
   const sendCode = JSON.stringify({ code: query.code })
 
