@@ -6,7 +6,6 @@ import CreateRoomInput from './CreateRoomInput/CreateRoomInput'
 import { instance } from '@/util/axios'
 import { useModalState } from '@/store/store'
 import { useGetChannels, useJoinChannel, useJoinProtectedChannel } from '@/store/chat'
-import { socket } from '@/socket/socket'
 
 function CreateChatRoom(): JSX.Element {
   const { tabState, setTabState } = useCreateRoomNavBarState()
