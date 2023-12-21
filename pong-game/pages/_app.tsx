@@ -10,7 +10,7 @@ import Loding from '@/components/Loding/Loding'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 export default function App({ Component, pageProps }: AppProps) {
-    const queryClient = new QueryClient()
+  const queryClient = new QueryClient()
   return (
     <>
       <Reset />
