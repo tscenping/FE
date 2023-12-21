@@ -1,6 +1,6 @@
 import { gameSocket } from '@/socket/gameSocket'
 import styles from './GameFrame.module.scss'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 interface DrawProps {
   x: number
