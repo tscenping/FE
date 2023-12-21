@@ -16,7 +16,7 @@ function ChatLog(): JSX.Element {
     if (message.eventType) {
       return (
         <ChannelNotice
-          ket={message.channelId}
+          key={message.channelId}
           nickname={message.nickname}
           eventType={message.eventType}
           channelId={message.channelId}
