@@ -69,7 +69,7 @@ function Mfa(): JSX.Element {
         <QRCode value={mfaQrCode} />
       </section>
       <span className={styles.qrCodeExplanation}>
-        "Authenticator" 어플로 위 QR 코드를 촬영 후 나온
+        &quot;Authenticator&quot; 어플로 위 QR 코드를 촬영 후 나온
         <br />
         여섯자리 숫자를 입력해주세요.
       </span>
