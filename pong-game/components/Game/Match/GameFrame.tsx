@@ -79,11 +79,11 @@ export default function GameFrame() {
       // 공
       context.fillStyle = ballColor
       // context.fillRect(ball.x, ball.y, ball.width, ball.height)
-      context.beginPath(); // 경로 그리기 시작
-      context.arc(canvas.width / 2, canvas.height / 2, ballRadius, 0, Math.PI * 2); // 원 그리기
-      context.fillStyle = ballColor; // 공의 색상 지정
-      context.fill(); // 채우기
-      context.closePath(); // 경로 그리기 종료
+      context.beginPath() // 경로 그리기 시작
+      context.arc(canvas.width / 2, canvas.height / 2, ballRadius, 0, Math.PI * 2) // 원 그리기
+      context.fillStyle = ballColor // 공의 색상 지정
+      context.fill() // 채우기
+      context.closePath() // 경로 그리기 종료
 
       // 라켓 이동 최댓값
       myRacket.y += myRacket.dy
@@ -97,7 +97,6 @@ export default function GameFrame() {
         gameSocket.off('matchStatus')
       }
     }
-      
 
     const matchStatusHandler = (data: MatchStatusData) => {
       myRacket.x = data.myRacket.x
@@ -154,212 +153,204 @@ export default function GameFrame() {
 
 // ball 변하는 값
 export type ball = {
-	x: number;
-	y: number;
-	vx: number;
-	vy: number;
-	xVelocity: number; // 속력: 속도 * 방향
-	yVelocity: number;
-	accel: number; // 새로운 판마다 증가
-};
+  x: number
+  y: number
+  vx: number
+  vy: number
+  xVelocity: number // 속력: 속도 * 방향
+  yVelocity: number
+  accel: number // 새로운 판마다 증가
+}
 
 // racket 변하는 값
 export type racket = {
-	y: number;
-	action: string; // up, down
-};
+  y: number
+  action: string // up, down
+}
 
 export class UpdateDto {
-	racketLeft: {
-		x: number;
-		y: number;
-	};
-	racketRight: {
-		x: number;
-		y: number;
-	};
-	ball: {
-		x: number;
-		y: number;
-	};
-	scoreLeft: boolean;
-	scoreRight: boolean;
+  racketLeft: {
+    x: number
+    y: number
+  }
+  racketRight: {
+    x: number
+    y: number
+  }
+  ball: {
+    x: number
+    y: number
+  }
+  scoreLeft: boolean
+  scoreRight: boolean
 
-	isScoreChanged(): boolean {
-		return this.scoreRight || this.scoreRight;
-	}
+  isScoreChanged(): boolean {
+    return this.scoreRight || this.scoreRight
+  }
 }
 
 export class ViewMapDto {
-	ball: ball;
-	ballSpeed: number;
-	racketLeft: racket;
-	racketRight: racket;
-	racketSize: number;
-	private updateDto: UpdateDto;
+  ball: ball
+  ballSpeed: number
+  racketLeft: racket
+  racketRight: racket
+  racketSize: number
+  private updateDto: UpdateDto
 
-	constructor(
-		ballSpeed: number,
-		racketSize: number,
+  constructor(
+    ballSpeed: number,
+    racketSize: number,
 
-		// 고정값
-		readonly canvasWidth = 1400,
-		readonly canvasHeight = 1000,
+    // 고정값
+    readonly canvasWidth = 1400,
+    readonly canvasHeight = 1000,
 
-		readonly ballRadius = 2,
+    readonly ballRadius = 2,
 
-		readonly racketWidth = canvasWidth * 0.1,
-		readonly racketHeight = canvasHeight * 0.4,
-		readonly racketLeftX = 0,
-		readonly racketRightX = canvasWidth - racketWidth,
-		readonly racketSpeed = 6,
+    readonly racketWidth = canvasWidth * 0.1,
+    readonly racketHeight = canvasHeight * 0.4,
+    readonly racketLeftX = 0,
+    readonly racketRightX = canvasWidth - racketWidth,
+    readonly racketSpeed = 6,
 
-		readonly deltaTime = 1 / 60,
-	) {
-		this.updateDto = new UpdateDto();
-		this.ball.x = canvasWidth / 2;
-		this.ball.y = canvasHeight / 2;
-		this.ballSpeed = ballSpeed;
-		this.ball.xVelocity =
-			ballSpeed * (Math.random() < 0.5 ? 0 : 1) === 0 ? 1 : -1;
-		this.ball.yVelocity =
-			ballSpeed * (Math.random() < 0.5 ? 0 : 1) === 0 ? 1 : -1;
-		this.ball.accel = 0;
+    readonly deltaTime = 1 / 60,
+  ) {
+    this.updateDto = new UpdateDto()
+    this.ball.x = canvasWidth / 2
+    this.ball.y = canvasHeight / 2
+    this.ballSpeed = ballSpeed
+    this.ball.xVelocity = ballSpeed * (Math.random() < 0.5 ? 0 : 1) === 0 ? 1 : -1
+    this.ball.yVelocity = ballSpeed * (Math.random() < 0.5 ? 0 : 1) === 0 ? 1 : -1
+    this.ball.accel = 0
 
-		this.racketLeft.y = canvasHeight / 2 - racketHeight / 2;
-		this.racketRight.y = canvasHeight / 2 - racketHeight / 2;
-		this.racketSize = racketSize;
-	}
+    this.racketLeft.y = canvasHeight / 2 - racketHeight / 2
+    this.racketRight.y = canvasHeight / 2 - racketHeight / 2
+    this.racketSize = racketSize
+  }
 
-	async init() {
-		this.ball.vx = 0;
-		this.ball.vy = 0;
-		this.updateDto.scoreLeft = false;
-		this.updateDto.scoreRight = false;
+  async init() {
+    this.ball.vx = 0
+    this.ball.vy = 0
+    this.updateDto.scoreLeft = false
+    this.updateDto.scoreRight = false
 
-		this.ball.x = this.canvasWidth / 2;
-		this.ball.y = this.canvasHeight / 2;
-		this.ball.xVelocity =
-			this.ballSpeed * (Math.random() < 0.5 ? 0 : 1) === 0 ? 1 : -1;
-		this.ball.yVelocity =
-			this.ballSpeed * (Math.random() < 0.5 ? 0 : 1) === 0 ? 1 : -1;
+    this.ball.x = this.canvasWidth / 2
+    this.ball.y = this.canvasHeight / 2
+    this.ball.xVelocity = this.ballSpeed * (Math.random() < 0.5 ? 0 : 1) === 0 ? 1 : -1
+    this.ball.yVelocity = this.ballSpeed * (Math.random() < 0.5 ? 0 : 1) === 0 ? 1 : -1
 
-		this.ball.accel += 0.2;
-		this.racketLeft.y = this.canvasHeight / 2 - this.racketHeight / 2;
-		this.racketRight.y = this.canvasHeight / 2 - this.racketHeight / 2;
-	}
+    this.ball.accel += 0.2
+    this.racketLeft.y = this.canvasHeight / 2 - this.racketHeight / 2
+    this.racketRight.y = this.canvasHeight / 2 - this.racketHeight / 2
+  }
 
-	private async updateBall() {
-		const ball = this.ball;
-		const dt = this.deltaTime;
+  private async updateBall() {
+    const ball = this.ball
+    const dt = this.deltaTime
 
-		// 공의 위치 업데이트
-		const x = ball.x + ball.xVelocity * dt + ball.accel * dt * dt * 0.5;
-		const y = ball.y + ball.yVelocity * dt + ball.accel * dt * dt * 0.5;
-		// 공의 속력 업데이트
-		ball.xVelocity += ball.accel * dt * (ball.xVelocity > 0 ? 1 : -1);
-		ball.yVelocity += ball.accel * dt * (ball.yVelocity > 0 ? 1 : -1);
+    // 공의 위치 업데이트
+    const x = ball.x + ball.xVelocity * dt + ball.accel * dt * dt * 0.5
+    const y = ball.y + ball.yVelocity * dt + ball.accel * dt * dt * 0.5
+    // 공의 속력 업데이트
+    ball.xVelocity += ball.accel * dt * (ball.xVelocity > 0 ? 1 : -1)
+    ball.yVelocity += ball.accel * dt * (ball.yVelocity > 0 ? 1 : -1)
 
-		this.ball.vx = x - ball.x;
-		this.ball.vy = y - ball.y;
-		this.ball.x = x;
-		this.ball.y = y;
-	}
+    this.ball.vx = x - ball.x
+    this.ball.vy = y - ball.y
+    this.ball.x = x
+    this.ball.y = y
+  }
 
-	updateRacketLeft(action: string) {
-		const racket = this.racketLeft;
+  updateRacketLeft(action: string) {
+    const racket = this.racketLeft
 
-		if (action === 'arrowUp') racket.y -= this.racketSpeed;
-		else if (action === 'arrowDown') racket.y += this.racketSpeed;
+    if (action === 'arrowUp') racket.y -= this.racketSpeed
+    else if (action === 'arrowDown') racket.y += this.racketSpeed
 
-		if (racket.y <= 0) racket.y = 0;
-		if (racket.y + this.racketHeight >= this.canvasHeight)
-			racket.y = this.canvasHeight - this.racketHeight;
-	}
+    if (racket.y <= 0) racket.y = 0
+    if (racket.y + this.racketHeight >= this.canvasHeight)
+      racket.y = this.canvasHeight - this.racketHeight
+  }
 
-	updateRacketRight(action: string) {
-		const racket = this.racketRight;
+  updateRacketRight(action: string) {
+    const racket = this.racketRight
 
-		if (action === 'up') racket.y -= this.racketSpeed;
-		else if (action === 'down') racket.y += this.racketSpeed;
+    if (action === 'up') racket.y -= this.racketSpeed
+    else if (action === 'down') racket.y += this.racketSpeed
 
-		if (racket.y <= 0) racket.y = 0;
-		if (racket.y + this.racketHeight >= this.canvasHeight)
-			racket.y = this.canvasHeight - this.racketHeight;
-	}
+    if (racket.y <= 0) racket.y = 0
+    if (racket.y + this.racketHeight >= this.canvasHeight)
+      racket.y = this.canvasHeight - this.racketHeight
+  }
 
-	async changes() {
-		const updateDto = this.updateDto;
-		const ball = this.ball;
-		await this.updateBall();
+  async changes() {
+    const updateDto = this.updateDto
+    const ball = this.ball
+    await this.updateBall()
 
-		// racket, 천장, 바닥에 부딪히는지
-		await this.detectCollision();
+    // racket, 천장, 바닥에 부딪히는지
+    await this.detectCollision()
 
-		//score
-		if (ball.x + this.ballRadius >= this.canvasWidth)
-			updateDto.scoreRight = true; // right
-		else if (ball.x - this.ballRadius <= 0) updateDto.scoreLeft = true; // left
+    //score
+    if (ball.x + this.ballRadius >= this.canvasWidth) updateDto.scoreRight = true // right
+    else if (ball.x - this.ballRadius <= 0) updateDto.scoreLeft = true // left
 
-		// 내보내기
-		updateDto.racketLeft = {
-			x: this.racketLeftX,
-			y: this.racketLeft.y,
-		};
-		updateDto.racketRight = {
-			x: this.racketRightX,
-			y: this.racketRight.y,
-		};
-		updateDto.ball = {
-			x: this.ball.x,
-			y: this.ball.y,
-		};
+    // 내보내기
+    updateDto.racketLeft = {
+      x: this.racketLeftX,
+      y: this.racketLeft.y,
+    }
+    updateDto.racketRight = {
+      x: this.racketRightX,
+      y: this.racketRight.y,
+    }
+    updateDto.ball = {
+      x: this.ball.x,
+      y: this.ball.y,
+    }
 
-		return updateDto;
-	}
+    return updateDto
+  }
 
-	private async detectCollision() {
-		const ball = this.ball;
-		let dx, dy;
+  private async detectCollision() {
+    const ball = this.ball
+    let dx, dy
 
-		// 새로운 방향이 양수면 오른쪽 racket, 음수면 왼쪽 racket이랑 부딪히는지 검사
-		if (this.ball.vx > 0) {
-			dx = Math.abs(ball.x - this.getRacketRightCenter().cx);
-			dy = Math.abs(ball.y - this.getRacketRightCenter().cy);
-			if (
-				dx <= this.ballRadius + this.racketWidth / 2 &&
-				dy <= this.ballRadius + this.racketHeight / 2
-			)
-				ball.xVelocity *= -1;
-		} else if (this.ball.vx < 0) {
-			dx = Math.abs(ball.x - this.getRacketLeftCenter().cx);
-			dy = Math.abs(ball.y - this.getRacketLeftCenter().cy);
-			if (
-				dx <= this.ballRadius + this.racketWidth / 2 &&
-				dy <= this.ballRadius + this.racketHeight / 2
-			)
-				ball.xVelocity *= -1;
-		}
+    // 새로운 방향이 양수면 오른쪽 racket, 음수면 왼쪽 racket이랑 부딪히는지 검사
+    if (this.ball.vx > 0) {
+      dx = Math.abs(ball.x - this.getRacketRightCenter().cx)
+      dy = Math.abs(ball.y - this.getRacketRightCenter().cy)
+      if (
+        dx <= this.ballRadius + this.racketWidth / 2 &&
+        dy <= this.ballRadius + this.racketHeight / 2
+      )
+        ball.xVelocity *= -1
+    } else if (this.ball.vx < 0) {
+      dx = Math.abs(ball.x - this.getRacketLeftCenter().cx)
+      dy = Math.abs(ball.y - this.getRacketLeftCenter().cy)
+      if (
+        dx <= this.ballRadius + this.racketWidth / 2 &&
+        dy <= this.ballRadius + this.racketHeight / 2
+      )
+        ball.xVelocity *= -1
+    }
 
-		// 바닥, 천장
-		if (
-			ball.y + this.ballRadius >= this.canvasHeight ||
-			ball.y - this.ballRadius <= 0
-		)
-			ball.yVelocity *= -1;
-	}
+    // 바닥, 천장
+    if (ball.y + this.ballRadius >= this.canvasHeight || ball.y - this.ballRadius <= 0)
+      ball.yVelocity *= -1
+  }
 
-	private getRacketLeftCenter() {
-		return {
-			cx: this.racketLeftX + this.racketWidth / 2,
-			cy: this.racketLeft.y + this.racketHeight / 2,
-		};
-	}
+  private getRacketLeftCenter() {
+    return {
+      cx: this.racketLeftX + this.racketWidth / 2,
+      cy: this.racketLeft.y + this.racketHeight / 2,
+    }
+  }
 
-	private getRacketRightCenter() {
-		return {
-			cx: this.racketRightX + this.racketWidth / 2,
-			cy: this.racketRight.y + this.racketHeight / 2,
-		};
-	}
+  private getRacketRightCenter() {
+    return {
+      cx: this.racketRightX + this.racketWidth / 2,
+      cy: this.racketRight.y + this.racketHeight / 2,
+    }
+  }
 }
