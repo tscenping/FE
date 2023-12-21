@@ -1,14 +1,10 @@
 import PageTitle from '@/components/UI/PageTitle'
 import styles from './rank.module.scss'
-import Pagination from 'react-js-pagination'
 import { useEffect, useState } from 'react'
 import CustomPagination from '@/components/Pagination/CustomPagination'
 import RankUserList from '@/components/Rank/RankUserList'
-import { instance } from '@/util/axios'
-import cookie from 'cookie'
 import axios from 'axios'
 import https from 'https'
-import { GetStaticProps, GetStaticPropsContext } from 'next'
 
 interface RankInfo {
   rankUsers: RankUsers[]
