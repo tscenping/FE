@@ -18,8 +18,8 @@ function ExitRoom(): JSX.Element {
   } = useGetChannels()
   const { channelId, setChannelUserInfo, channelTitle, setChannelId } = useJoinChannel()
   const { setModalName } = useModalState() //"확인" 버튼을 클릭했을 때, "취소" 버튼을 클릭했을 때 모달을 꺼주기 위한 set함수
-  const { myNickname } = useNickNameImage()
-  const exitRoomHandler = async (e) => {
+
+  const exitRoomHandler = async () => {
     //"확인" 버튼을 클릭했을 때, api요청을 실행할 함수
     const datas = { channelId: channelId }
     try {
@@ -59,7 +59,7 @@ function ExitRoom(): JSX.Element {
     }
   }
 
-  const closeModalHandler = (e) => {
+  const closeModalHandler = () => {
     //취소 버튼 눌렀을 시 모달 off
     setModalName(null)
   }
