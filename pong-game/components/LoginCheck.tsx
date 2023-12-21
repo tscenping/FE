@@ -1,5 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react'
-import LoginPageComponent from './Login/LoginPageComponent'
+import { ReactNode, useEffect } from 'react'
 import { useNickNameImage } from '@/store/login'
 import { instance } from '@/util/axios'
 import { useRouter, NextRouter } from 'next/router'
