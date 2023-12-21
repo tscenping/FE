@@ -5,13 +5,10 @@ import { useNavBarState } from '@/store/chat'
 import addDmChat from '@/public/img/chat/addDmChat.svg'
 import makeChatRoom from '@/public/img/chat/makeChat.svg'
 import { useModalState } from '@/store/store'
-import { useGetFriends } from '@/store/friend'
-import { instance } from '@/util/axios'
 
 function ChatListNavBarContainer(): JSX.Element {
   const { setModalName, setModalProps } = useModalState()
   const { tabState } = useNavBarState()
-  const { setAllFriends, setTotalFriendCount } = useGetFriends()
 
   const createRoomModalHandler = async () => {
     setModalName('createChatRoom')
