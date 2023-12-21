@@ -7,13 +7,6 @@ import { instance } from '@/util/axios'
 import { useGetFriends } from '@/store/friend'
 import { useModalState } from '@/store/store'
 
-interface userinfoProps {
-  id: number
-  nickname: string
-  avatar: string
-  status: string
-}
-
 function FriendUsersModal(): JSX.Element {
   const [page, setPage] = useState(1)
   const { setModalName, modalProps } = useModalState()
