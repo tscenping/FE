@@ -1,6 +1,7 @@
 import LoginPageComponent from '@/components/Login/LoginPageComponent'
+import { GetServerSidePropsContext } from 'next'
 
-function LoginPage({ sendCode }) {
+function LoginPage() {
   return (
     <>
       <LoginPageComponent />
@@ -8,7 +9,7 @@ function LoginPage({ sendCode }) {
   )
 }
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { query } = context
   const sendCode = JSON.stringify({ code: query.code })
 
