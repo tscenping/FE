@@ -25,7 +25,7 @@ export default function DropDownUserProfile({
   calledFrom,
   setIsDropDownView,
 }: DropDownUserProfileProps) {
-  const { modalName, setModalName } = useModalState()
+  const { modalName } = useModalState()
 
   return (
     <ul className={styles.DropDownUserProfile}>
@@ -54,12 +54,12 @@ export default function DropDownUserProfile({
             setIsDropDownView={setIsDropDownView}
             nickname={nickname}
           />
-            <DirectMsg
-                setIsDropDownView={setIsDropDownView}
-                avatar={avatar}
-                nickname={nickname}
-                userId={id}
-            />
+          <DirectMsg
+            setIsDropDownView={setIsDropDownView}
+            avatar={avatar}
+            nickname={nickname}
+            userId={id}
+          />
         </>
       )}
     </ul>
