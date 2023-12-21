@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useJoinChannel } from '@/store/chat'
 import { useGetUser } from '@/store/friend'
 import { useModalState, useResponseModalState } from '@/store/store'
