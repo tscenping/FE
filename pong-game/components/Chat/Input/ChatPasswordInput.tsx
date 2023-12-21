@@ -1,4 +1,4 @@
-import { RefObject, useState } from 'react'
+import { RefObject } from 'react'
 import styles from './ChatpasswordInput.module.scss'
 
 interface ChatPasswordInputProps {
@@ -6,8 +6,6 @@ interface ChatPasswordInputProps {
 }
 
 function ChatPasswordInput(props: ChatPasswordInputProps): JSX.Element {
-  const [password, setPassword] = useState('')
-
   return (
     <>
       <input
