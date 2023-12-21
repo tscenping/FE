@@ -18,7 +18,7 @@ export default function NormalGame({ setPageState, setGameState }: props) {
     setPageState(1)
   }
   const { setModalName, setModalProps } = useModalState()
-  const { lodingState, setLodingState } = useLodingState()
+  const { setLodingState } = useLodingState()
   const handleInviteGame = () => {
     console.log(gameMode)
     setModalProps({ modalType: 'GAME', gameMode: gameMode })
