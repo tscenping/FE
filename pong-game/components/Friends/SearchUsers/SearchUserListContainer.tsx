@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import styles from './SearchUserListContainer.module.scss'
-import profileImage from '@/public/img/chat/userProfileImage.svg'
 import toggle from '@/public/img/chat/userToggle.svg'
 import React, { useState } from 'react'
 import DropDown from '@/components/DropDown/DropDown'
