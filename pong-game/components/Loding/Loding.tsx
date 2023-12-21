@@ -31,7 +31,6 @@ export default function Loding({ children }: { children: ReactNode }): JSX.Eleme
     setLodingState({ isLoding: false })
   }
 
-
   const inviteCancelHandler = async () => {
     try {
       await instance.delete(`/game/invite/${lodingState.gameInvitationId}`, {}).then((res) => {
@@ -40,7 +39,6 @@ export default function Loding({ children }: { children: ReactNode }): JSX.Eleme
     } catch (error) {}
     setLodingState({ isLoding: false })
   }
-
 
   const autoCancelHandler = () => {
     console.log('auto')
