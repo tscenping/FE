@@ -16,8 +16,7 @@ function FriendsMainContents(): JSX.Element {
 
   const getAllFriend = async () => {
     try {
-      const response = await instance({
-        url: `https://localhost:3000/users/friends/?page=${friendPage}`,
+      const response = await instance(`/users/friends/?page=${friendPage}`, {
         method: 'get',
       })
       setAllFriends(response.data.friends)
@@ -29,8 +28,7 @@ function FriendsMainContents(): JSX.Element {
   }
   const getAllBlock = async () => {
     try {
-      const response = await instance({
-        url: `https://localhost:3000/users/blocks/?page=${friendPage}`,
+      const response = await instance(`/users/blocks/?page=${friendPage}`, {
         method: 'get',
       })
       setAllBlocks(response.data.blocks)

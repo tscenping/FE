@@ -34,10 +34,12 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
     if (props.isJoined) {
       try {
         if (channelId !== props.channelId) {
-          const response = await instance({
-            url: `https://localhost:3000/channels/enter/${props.channelId}`, //쿼리스트링으로 해당 채널의 id값을 붙여주고 "/enter/:channelId" api요청 실행
-            method: 'get',
-          })
+          const response = await instance(
+            `/channels/enter/${props.channelId}`, //쿼리스트링으로 해당 채널의 id값을 붙여주고 "/enter/:channelId" api요청 실행
+            {
+              method: 'get',
+            },
+          )
           setChannelLogEmpty([])
           setChannelAuth(response.data.myChannelUserType)
           setChannelType(props.channelType)
@@ -55,10 +57,12 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
         //참여 목록에서 이미 참여했던 채널을 다시 들어가려는 경우
         try {
           if (channelId !== props.channelId) {
-            const response = await instance({
-              url: `https://localhost:3000/channels/enter/${props.channelId}`, //쿼리스트링으로 해당 채널의 id값을 붙여주고 "/enter/:channelId" api요청 실행
-              method: 'get',
-            })
+            const response = await instance(
+              `/channels/enter/${props.channelId}`, //쿼리스트링으로 해당 채널의 id값을 붙여주고 "/enter/:channelId" api요청 실행
+              {
+                method: 'get',
+              },
+            )
             setChannelLogEmpty([])
             setChannelAuth(response.data.myChannelUserType)
             setChannelType(props.channelType)

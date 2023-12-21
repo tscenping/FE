@@ -25,8 +25,7 @@ function JoinRoom(): JSX.Element {
   const joinRoomHandler = async () => {
     try {
       const datas = { channelId: readyChannelId, password: null }
-      const response = await instance({
-        url: 'https://localhost:3000/channels/join',
+      const response = await instance('/channels/join', {
         method: 'post',
         data: JSON.stringify(datas),
       })
@@ -36,7 +35,7 @@ function JoinRoom(): JSX.Element {
         setChannelUserInfo(response.data.channelUsers)
         setMyChannelUserType(response.data.myChannelUserType)
         setChannelAuth(response.data.myChannelUserType)
-        setPasswordInputRender('CHANNEL') 
+        setPasswordInputRender('CHANNEL')
         setChannelTitle(title)
         setReadyChannelId(null)
         setTitle(null)

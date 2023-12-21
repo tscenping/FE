@@ -63,7 +63,7 @@ function InputNickImage(): JSX.Element {
     } else {
       const finalData = { nickname: inputRef.current.value, avatar: uploadImage }
       try {
-        const response = await instance('https://localhost:3000/auth/signup', {
+        const response = await instance('/auth/signup', {
           method: 'patch',
           data: JSON.stringify(finalData),
         })

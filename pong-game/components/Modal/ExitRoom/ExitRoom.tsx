@@ -24,26 +24,22 @@ function ExitRoom(): JSX.Element {
     const datas = { channelId: channelId }
     try {
       console.log(datas)
-      const response = await instance({
-        url: 'https://localhost:3000/channels/exit',
+      const response = await instance('/channels/exit', {
         method: 'patch',
         data: JSON.stringify(datas),
       })
       console.log(response)
       if (response.statusText === 'OK') {
         socket.off('message')
-        const responseAll = await instance({
+        const responseAll = await instance('/channels/all/?page=1', {
           method: 'get',
-          url: 'https://localhost:3000/channels/all/?page=1',
         })
         console.log(responseAll)
-        const responseMe = await instance({
+        const responseMe = await instance('/channels/me/?page=1', {
           method: 'get',
-          url: 'https://localhost:3000/channels/me/?page=1',
         })
-        const responseDm = await instance({
+        const responseDm = await instance('/channels/dm?page=1', {
           method: 'get',
-          url: 'https://localhost:3000/channels/dm?page=1',
         })
         setAllChannels(responseAll.data.channels)
         setMeChannels(responseMe.data.channels)

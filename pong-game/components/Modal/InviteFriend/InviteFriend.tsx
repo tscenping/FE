@@ -12,8 +12,7 @@ function InviteFriend(): JSX.Element {
   const inviteUserHandler = async () => {
     try {
       const datas = { channelId: channelId, invitedUserId: readyChannelId }
-      const response = await instance({
-        url: 'https://localhost:3000/channels/invite',
+      const response = await instance('/channels/invite', {
         method: 'post',
         data: JSON.stringify(datas),
       })

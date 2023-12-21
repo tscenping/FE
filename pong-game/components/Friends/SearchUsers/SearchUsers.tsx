@@ -16,8 +16,7 @@ function SearchUsers(): JSX.Element {
       inputRef.current.value = ''
     }
     try {
-      const response = await instance({
-        url: `https://localhost:3000/users/profile/${inputRef.current.value}`,
+      const response = await instance(`/users/profile/${inputRef.current.value}`, {
         method: 'get',
       })
       if (response.statusText === 'OK') {

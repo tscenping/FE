@@ -22,8 +22,7 @@ function JoinDmRoom(): JSX.Element {
   const joinDmHandler = async () => {
     const datas = { name: null, channelType: 'DM', password: null, userId: readyChannelId }
     try {
-      const responseCreate = await instance({
-        url: 'https://localhost:3000/channels',
+      const responseCreate = await instance('/channels', {
         method: 'post',
         data: JSON.stringify(datas),
       })
@@ -37,8 +36,7 @@ function JoinDmRoom(): JSX.Element {
         if (modalProps.modalType === 'DM') {
           router.replace('/chat')
         }
-        const responseDm = await instance({
-          url: 'https://localhost:3000/channels/dm/?page=1',
+        const responseDm = await instance('/channels/dm/?page=1', {
           method: 'get',
         })
         if (responseDm.statusText === 'OK') {

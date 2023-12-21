@@ -34,8 +34,7 @@ function ChannelSetting(): JSX.Element {
     }
 
     try {
-      const response = await instance({
-        url: 'https://localhost:3000/channels/password',
+      const response = await instance('/channels/password', {
         method: 'patch',
         data: JSON.stringify(datas),
       })

@@ -21,8 +21,7 @@ function FriendUsersModal(): JSX.Element {
   const { allFriends, setAllFriends, totalFriendCount } = useGetFriends()
   const getAllFriendHandler = async () => {
     try {
-      const response = await instance({
-        url: `https://localhost:3000/users/friends/?page=${page}`,
+      const response = await instance(`/users/friends/?page=${page}`, {
         method: 'get',
       })
       setAllFriends(response.data.friends)

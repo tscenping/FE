@@ -25,8 +25,7 @@ function ChatRoomList(): JSX.Element {
 
   const getAllChannels = async () => {
     try {
-      const response = await instance({
-        url: `https://localhost:3000/channels/all/?page=${page}`,
+      const response = await instance(`channels/all/?page=${page}`, {
         method: 'get',
       })
       setAllChannels(response.data.channels)
@@ -38,8 +37,7 @@ function ChatRoomList(): JSX.Element {
 
   const getMeChannels = async () => {
     try {
-      const response = await instance({
-        url: `https://localhost:3000/channels/me/?page=${page}`,
+      const response = await instance(`channels/me/?page=${page}`, {
         method: 'get',
       })
       setMeChannels(response.data.channels)
@@ -51,8 +49,7 @@ function ChatRoomList(): JSX.Element {
 
   const getDmChannels = async () => {
     try {
-      const response = await instance({
-        url: `https://localhost:3000/channels/dm/?page=${page}`,
+      const response = await instance(`/channels/dm/?page=${page}`, {
         method: 'get',
       })
       setDmChannels(response.data.dmChannels)
