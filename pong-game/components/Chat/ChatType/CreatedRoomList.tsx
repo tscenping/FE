@@ -84,7 +84,6 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
           setPasswordInputRender('PASSWORD') //chat log에서 어떤 컴포넌트를 렌더링 시킬지 판단하는 전역 상태변수
           setChannelUserInfo(null)
         } else {
-          const datas = { channelId: props.channelId, password: null }
           try {
             setReadyChannelId(props.channelId)
             setTitle(props.title)

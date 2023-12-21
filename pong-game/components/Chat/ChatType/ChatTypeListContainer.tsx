@@ -6,7 +6,6 @@ import { useNavBarState } from '@/store/chat'
 import EnteredRoomListSection from './EnteredRoomListSection'
 import { instance } from '@/util/axios'
 import { useGetChannels } from '@/store/chat'
-import { useGetFriends } from '@/store/friend'
 
 function ChatTypeListContainer(): JSX.Element {
   const { tabState } = useNavBarState()
