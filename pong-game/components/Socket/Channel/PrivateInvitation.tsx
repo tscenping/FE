@@ -10,8 +10,14 @@ import styles from './PrivateInvitation.module.scss'
 function PrivateInvitation(): JSX.Element {
   const router = useRouter()
   const { allBlocks } = useGetBlocks()
-  const { setChannelLogEmpty, setChannelTitle, setChannelId, setChannelType, setChannelUserInfo } =
-    useJoinChannel()
+  const {
+    setChannelLogEmpty,
+    setChannelTitle,
+    setChannelId,
+    setChannelType,
+    setChannelUserInfo,
+    setChannelAuth,
+  } = useJoinChannel()
   const { setPasswordInputRender } = useJoinProtectedChannel()
   const { setTabState } = useNavBarState()
 
@@ -37,6 +43,7 @@ function PrivateInvitation(): JSX.Element {
       setChannelUserInfo(responseEnter.data.channelUsers)
       setChannelType('PRIVATE')
       setTabState('JOINED')
+      setChannelAuth('MEMBER')
       toast.remove(t.id)
     } catch (error) {
       toast.remove(t.id)
