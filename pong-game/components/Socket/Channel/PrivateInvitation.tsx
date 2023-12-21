@@ -52,7 +52,7 @@ function PrivateInvitation(): JSX.Element {
   }
 
   const cancelHandler = async (t, invitationId) => {
-    const response = await instance(`/channels/refuse/${invitationId}`, {
+    await instance(`/channels/refuse/${invitationId}`, {
       method: 'delete',
     })
     toast.remove(t.id)
