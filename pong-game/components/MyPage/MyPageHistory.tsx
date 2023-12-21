@@ -14,7 +14,6 @@ interface GameHistoryProps {
   totalItemsCount: number
 }
 
-
 export default function MyPageHistory(props: GameHistoryProps) {
   return (
     <div className={styles.historyList}>
