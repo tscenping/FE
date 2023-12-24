@@ -72,17 +72,19 @@ export default function Mypage(props) {
         subTitle="프로필 사진, 상태메세지 변경과 내 전적을 확인할 수 있어요."
       />
       {/* serverSide 데이터 페칭으로 한 데이터 props로 전달 */}
-      <MyPageProfile
-        nickName={userProfile.nickname}
-        avatar={userProfile.avatar}
-        statusMessage={userProfile.statusMessage}
-        loseCount={userProfile.loseCount}
-        winCount={userProfile.winCount}
-        totalCount={userProfile.totalCount}
-        ladderRank={userProfile.ladderRank}
-        ladderScore={userProfile.ladderScore}
-        ladderMaxScore={userProfile.ladderMaxScore}
-      />
+      {userProfile && (
+        <MyPageProfile
+          nickName={userProfile.nickname}
+          avatar={userProfile.avatar}
+          statusMessage={userProfile.statusMessage}
+          loseCount={userProfile.loseCount}
+          winCount={userProfile.winCount}
+          totalCount={userProfile.totalCount}
+          ladderRank={userProfile.ladderRank}
+          ladderScore={userProfile.ladderScore}
+          ladderMaxScore={userProfile.ladderMaxScore}
+        />
+      )}
       <section className={styles.history}>
         <div className={styles.historyList}>
           {gameHistories && (
