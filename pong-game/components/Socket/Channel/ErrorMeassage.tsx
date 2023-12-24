@@ -6,7 +6,7 @@ export default function ErrorMeassage() {
     socket.on('error', (error: any) => {
       console.log(error)
       alert(error.message)
-      socket.disconnect()
+      // socket.disconnect()
     })
 
     return () => {
