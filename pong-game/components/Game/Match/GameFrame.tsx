@@ -42,7 +42,7 @@ export default function GameFrame() {
     } else if (e.key === 'ArrowUp') {
       gameSocket.emit('matchKeyDown', {
         gameId: matchGameState.gameId,
-        keyStatus: 'down',
+        keyDown: 'down',
         keyName: 'arrowUp',
       })
       // myRacket.dy = -5
