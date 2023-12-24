@@ -1,17 +1,17 @@
 import Image from 'next/image'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import Link from 'next/link'
 import noticeIcon from '@/public/img/layout/notice.svg'
 import logoIcon from '@/public/img/layout/PONG GAME.svg'
 import logoutIcon from '@/public/img/layout/logout.svg'
 import styles from './Layout.module.scss'
 import NotiBar from '../NotiBar/NotiBar'
-import SideBarContent from './sideBar/SideBarContent'
 import { useRouter, NextRouter } from 'next/router'
 import { useNickNameImage } from '@/store/login'
 import { instance } from '@/util/axios'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { socket } from '@/socket/socket'
+import SideBarContent from './SideBar/SideBarContent'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)
@@ -20,7 +20,6 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
   const { setAvatar, setMyNickname } = useNickNameImage()
   const { setModalName } = useModalState()
   const responseModal = useResponseModalState()
-
   const logoutHandler = async () => {
     try {
       await instance.patch('/auth/signout', {}).then(function (res) {
@@ -37,6 +36,10 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
     setModalName('response')
     responseModal.setResponseModalState('로그아웃', '로그아웃 하시겠습니까?', logoutHandler)
   }
+
+  useEffect(()=>{
+console.log('layout')
+  },[])
 
   return (
     <>

@@ -6,6 +6,7 @@ import GameInvitation from './Channel/GameInvitation'
 import PrivateInvitation from './Channel/PrivateInvitation'
 import ChannelMessage from './Channel/ChannelMesage'
 import GameInvitationReply from './Channel/GameInvitationReply'
+import ErrorMeassage from './Channel/ErrorMeassage'
 
 export default function ChannelSocketHandler() {
   const router = useRouter()
@@ -29,6 +30,7 @@ export default function ChannelSocketHandler() {
       <GameInvitation />
       <PrivateInvitation />
       <GameInvitationReply />
+      <ErrorMeassage/>
     </>
   )
 }

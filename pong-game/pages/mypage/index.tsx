@@ -72,37 +72,41 @@ export default function Mypage(props) {
         subTitle="프로필 사진, 상태메세지 변경과 내 전적을 확인할 수 있어요."
       />
       {/* serverSide 데이터 페칭으로 한 데이터 props로 전달 */}
-      <MyPageProfile
-        nickName={userProfile.nickname}
-        avatar={userProfile.avatar}
-        statusMessage={userProfile.statusMessage}
-        loseCount={userProfile.loseCount}
-        winCount={userProfile.winCount}
-        totalCount={userProfile.totalCount}
-        ladderRank={userProfile.ladderRank}
-        ladderScore={userProfile.ladderScore}
-        ladderMaxScore={userProfile.ladderMaxScore}
-      />
-      <section className={styles.history}>
-        <div className={styles.historyList}>
-          {gameHistories && (
-            <MyPageHistory
-              gameHistories={gameHistories.gameHistories}
-              totalItemsCount={gameHistories.totalItemsCount}
-            />
-          )}
-        </div>
-        <div className={styles.pagenation}>
-          {gameHistories && gameHistories.totalItemsCount > 5 && (
-            <CustomPagination
-              page={page}
-              setPage={setPage}
-              itemsCountPerPage={5}
-              totalItemsCount={gameHistories.totalItemsCount}
-            />
-          )}
-        </div>
-      </section>
+      {userProfile && (
+        <>
+          <MyPageProfile
+            nickName={userProfile.nickname}
+            avatar={userProfile.avatar}
+            statusMessage={userProfile.statusMessage}
+            loseCount={userProfile.loseCount}
+            winCount={userProfile.winCount}
+            totalCount={userProfile.totalCount}
+            ladderRank={userProfile.ladderRank}
+            ladderScore={userProfile.ladderScore}
+            ladderMaxScore={userProfile.ladderMaxScore}
+          />
+          <section className={styles.history}>
+            <div className={styles.historyList}>
+              {gameHistories && (
+                <MyPageHistory
+                  gameHistories={gameHistories.gameHistories}
+                  totalItemsCount={gameHistories.totalItemsCount}
+                />
+              )}
+            </div>
+            <div className={styles.pagenation}>
+              {gameHistories && gameHistories.totalItemsCount > 5 && (
+                <CustomPagination
+                  page={page}
+                  setPage={setPage}
+                  itemsCountPerPage={5}
+                  totalItemsCount={gameHistories.totalItemsCount}
+                />
+              )}
+            </div>
+          </section>
+        </>
+      )}
     </div>
   )
 }

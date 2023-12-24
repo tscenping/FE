@@ -72,7 +72,7 @@ function LoginPageContents(): JSX.Element {
         }
       } catch (error) {
         console.error('Error fetching data:', error)
-        if (error.response.status === 401) {
+        if (error.response && error.response.status === 401) {
           router.replace('/login')
         }
       }
