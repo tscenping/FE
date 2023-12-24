@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import styles from './ChatRoomList.module.scss'
 import ChatListNavBarContainer from './ChatInfoLog/ChatListNavBarContainer'
 import ChatTypeListContainer from './ChatType/ChatTypeListContainer'
@@ -23,10 +23,9 @@ function ChatRoomList(): JSX.Element {
   } = useGetChannels()
   const { tabState } = useNavBarState()
 
-  const getAllChannels = async () => {
+  const getAllChannels = useCallback(async () => {
     try {
-      const response = await instance({
-        url: `https://localhost:3000/channels/all/?page=${page}`,
+      const response = await instance(`channels/all/?page=1`, {
         method: 'get',
       })
       setAllChannels(response.data.channels)
@@ -34,12 +33,11 @@ function ChatRoomList(): JSX.Element {
     } catch (error) {
       console.log('Error : ', error)
     }
-  }
+  }, [setAllChannels, setTotalAll])
 
-  const getMeChannels = async () => {
+  const getMeChannels = useCallback(async () => {
     try {
-      const response = await instance({
-        url: `https://localhost:3000/channels/me/?page=${page}`,
+      const response = await instance(`channels/me/?page=1`, {
         method: 'get',
       })
       setMeChannels(response.data.channels)
@@ -47,12 +45,11 @@ function ChatRoomList(): JSX.Element {
     } catch (error) {
       console.log('Error : ', error)
     }
-  }
+  }, [setMeChannels, setTotalMe])
 
-  const getDmChannels = async () => {
+  const getDmChannels = useCallback(async () => {
     try {
-      const response = await instance({
-        url: `https://localhost:3000/channels/dm/?page=${page}`,
+      const response = await instance(`/channels/dm/?page=1`, {
         method: 'get',
       })
       setDmChannels(response.data.dmChannels)
@@ -60,12 +57,13 @@ function ChatRoomList(): JSX.Element {
     } catch (error) {
       console.log('Error : ', error)
     }
-  }
+  }, [setDmChannels, setTotalDm])
+
   useEffect(() => {
     getAllChannels()
     getMeChannels()
     getDmChannels()
-  }, [])
+  }, [getAllChannels, getDmChannels, getMeChannels])
 
   return (
     <div className={styles.chatListNavBar}>

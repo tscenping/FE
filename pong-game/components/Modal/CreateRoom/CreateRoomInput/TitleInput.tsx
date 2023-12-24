@@ -27,6 +27,7 @@ function TitleInput(props: TitleInputProps): JSX.Element {
         placeholder="Please enter a title"
         id="inputTitle"
         ref={props.titleRef}
+        value={title}
         onChange={titleHandleChange}
       ></input>
     </section>

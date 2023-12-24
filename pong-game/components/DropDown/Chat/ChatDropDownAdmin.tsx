@@ -1,11 +1,6 @@
 import ChatBan from '../Function/ChatBan'
 import ChatKick from '../Function/ChatKick'
 import ChatMute from '../Function/ChatMute'
-import EditFriend from '../Function/EditFriend'
-import EditBlock from '../Function/EditBlock'
-import InviteGame from '../Function/InviteGame'
-import DirectMsg from '../Function/DirectMsg'
-import OpenProfile from '../Function/OpenProfile'
 
 interface ChatDropDownOwnerProps {
   channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'

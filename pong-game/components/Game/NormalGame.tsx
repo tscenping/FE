@@ -18,7 +18,7 @@ export default function NormalGame({ setPageState, setGameState }: props) {
     setPageState(1)
   }
   const { setModalName, setModalProps } = useModalState()
-  const { lodingState, setLodingState } = useLodingState()
+  const { setLodingState } = useLodingState()
   const handleInviteGame = () => {
     console.log(gameMode)
     setModalProps({ modalType: 'GAME', gameMode: gameMode })
@@ -28,14 +28,16 @@ export default function NormalGame({ setPageState, setGameState }: props) {
   const handleSerchGame = async () => {
     try {
       await instance
-        .post('/game/match', { gameType: gameMode === 'Normal' ? 'NORMAL_MATCH' : 'SPECIAL_MATCH' })
+        .post('/game/match', {
+          gameType: gameMode === 'Normal' ? 'NORMAL_MATCHING' : 'SPECIAL_MATCHING',
+        })
         .then((res) => {
           console.log(res)
         })
       setLodingState({
         isLoding: true,
         lodingTitle: 'searchGame',
-        gameType: gameMode === 'Normal' ? 'NORMAL_MATCH' : 'SPECIAL_MATCH',
+        gameType: gameMode === 'Normal' ? 'NORMAL_MATCHING' : 'SPECIAL_MATCHING',
       })
     } catch (e) {
       console.log(e.message)

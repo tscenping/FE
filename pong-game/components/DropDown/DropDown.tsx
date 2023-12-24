@@ -1,8 +1,7 @@
-import styles1 from './DropDown.module.scss'
 import styles from '@/pages/rank/rank.module.scss'
 import DropDownUserProfile from './UserProfile/DropDownUserProfile'
 import DropDownChating from './Chat/DropDownChating'
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import useOutsideClickHandler from '@/hooks/useOutsideClickHandler'
 
 interface dropDownProps {
@@ -41,7 +40,7 @@ export default function DropDown({
   dropDownState,
   userProfile,
   chating,
-  avatar
+  avatar,
 }: dropDownProps) {
   const content: { [key: string]: JSX.Element | null } = {
     userProfile: (

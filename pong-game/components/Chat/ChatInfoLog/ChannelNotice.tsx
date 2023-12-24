@@ -75,11 +75,7 @@ function ChannelNotice(props: ChannelNoticeProps): JSX.Element {
           setChannelType(null)
           setTotalDm(totalDm - 1)
         } else {
-          const filterChannelUsers = props.channelUserInfo
-            ? props.channelUserInfo.filter((channelUser) => props.nickname !== channelUser.nickname)
-            : []
-
-          setChannelUserInfo(filterChannelUsers)
+          getChannelUsersHandler()
         }
       }
       if (
@@ -134,7 +130,7 @@ function ChannelNotice(props: ChannelNoticeProps): JSX.Element {
       <div></div>
       {eventMessage && (
         <strong className={styles.channelNoticeMessage}>
-          "{props.nickname}"님이 {eventMessage}
+          &quot;{props.nickname}&quot;님이 {eventMessage}
         </strong>
       )}
       <div></div>

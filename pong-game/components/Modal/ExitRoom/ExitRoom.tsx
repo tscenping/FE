@@ -3,7 +3,6 @@ import { useGetChannels, useJoinChannel, useJoinProtectedChannel } from '@/store
 import { useModalState } from '@/store/store'
 import { instance } from '@/util/axios'
 import { socket } from '@/socket/socket'
-import { useNickNameImage } from '@/store/login'
 
 function ExitRoom(): JSX.Element {
   const { setPasswordInputRender } = useJoinProtectedChannel() //채널 나가기 모달에 띄워줄 채널 타이틀, api요청에 필요한 채널 id, 채널 나가기 성공할 경우 컴포넌트를 바꿔줄 플래그
@@ -18,32 +17,28 @@ function ExitRoom(): JSX.Element {
   } = useGetChannels()
   const { channelId, setChannelUserInfo, channelTitle, setChannelId } = useJoinChannel()
   const { setModalName } = useModalState() //"확인" 버튼을 클릭했을 때, "취소" 버튼을 클릭했을 때 모달을 꺼주기 위한 set함수
-  const { myNickname } = useNickNameImage()
-  const exitRoomHandler = async (e) => {
+
+  const exitRoomHandler = async () => {
     //"확인" 버튼을 클릭했을 때, api요청을 실행할 함수
     const datas = { channelId: channelId }
     try {
       console.log(datas)
-      const response = await instance({
-        url: 'https://localhost:3000/channels/exit',
+      const response = await instance('/channels/exit', {
         method: 'patch',
         data: JSON.stringify(datas),
       })
       console.log(response)
       if (response.statusText === 'OK') {
         socket.off('message')
-        const responseAll = await instance({
+        const responseAll = await instance('/channels/all/?page=1', {
           method: 'get',
-          url: 'https://localhost:3000/channels/all/?page=1',
         })
         console.log(responseAll)
-        const responseMe = await instance({
+        const responseMe = await instance('/channels/me/?page=1', {
           method: 'get',
-          url: 'https://localhost:3000/channels/me/?page=1',
         })
-        const responseDm = await instance({
+        const responseDm = await instance('/channels/dm?page=1', {
           method: 'get',
-          url: 'https://localhost:3000/channels/dm?page=1',
         })
         setAllChannels(responseAll.data.channels)
         setMeChannels(responseMe.data.channels)
@@ -63,7 +58,7 @@ function ExitRoom(): JSX.Element {
     }
   }
 
-  const closeModalHandler = (e) => {
+  const closeModalHandler = () => {
     //취소 버튼 눌렀을 시 모달 off
     setModalName(null)
   }

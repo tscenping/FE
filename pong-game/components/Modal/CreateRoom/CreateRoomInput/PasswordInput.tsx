@@ -28,6 +28,7 @@ function PasswordInput(props: PasswordInputProps): JSX.Element {
             placeholder="If you want a password, please enter it"
             ref={props.passwordRef}
             id="inputPassword"
+            value={password}
             onChange={passwordHandleChange}
           ></input>
         </section>

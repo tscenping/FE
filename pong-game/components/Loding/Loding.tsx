@@ -13,7 +13,7 @@ interface LodingProps {
   gameType?: 'NORMAL_MATCH' | 'SPECIAL_MATCH' | 'LADDER'
 }
 
-export default function Loding({ children }: { children: ReactNode }): JSX.Element {
+export default function Loding(): JSX.Element {
   const { lodingState, setLodingState } = useLodingState()
   const lodingText = {
     inviteGame: '게임 초대중',
@@ -31,7 +31,6 @@ export default function Loding({ children }: { children: ReactNode }): JSX.Eleme
     setLodingState({ isLoding: false })
   }
 
-
   const inviteCancelHandler = async () => {
     try {
       await instance.delete(`/game/invite/${lodingState.gameInvitationId}`, {}).then((res) => {
@@ -40,7 +39,6 @@ export default function Loding({ children }: { children: ReactNode }): JSX.Eleme
     } catch (error) {}
     setLodingState({ isLoding: false })
   }
-
 
   const autoCancelHandler = () => {
     console.log('auto')
@@ -83,10 +81,10 @@ export default function Loding({ children }: { children: ReactNode }): JSX.Eleme
               </button>
             </div>
           </section>
-          {children}
+          {/* {children} */}
         </>
       ) : (
-        <>{children}</>
+        <></>
       )}
     </>
   )

@@ -27,8 +27,7 @@ function DmChat(props: DmChantProps): JSX.Element {
   const joinDmChatHandler = async () => {
     try {
       if (channelId !== props.channelId) {
-        const response = await instance({
-          url: `https://localhost:3000/channels/enter/${props.channelId}`,
+        const response = await instance(`/channels/enter/${props.channelId}`, {
           method: 'get',
         })
         console.log(response)

@@ -1,11 +1,8 @@
 import { instance } from '@/util/axios'
-import { useEffect, useState } from 'react'
-
-import io from 'socket.io-client'
+import { useState } from 'react'
 
 export default function Admin() {
   const [nickname, setNickname] = useState<string>('')
-  
 
   const blockHandler = async () => {
     if (nickname === '') {

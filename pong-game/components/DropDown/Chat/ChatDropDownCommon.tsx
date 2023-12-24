@@ -1,6 +1,3 @@
-export default function ChatDropDownCommon(){
-  return (
-    <>
-    </>
-  )
+export default function ChatDropDownCommon() {
+  return <></>
 }

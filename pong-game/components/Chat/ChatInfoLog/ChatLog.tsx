@@ -16,6 +16,7 @@ function ChatLog(): JSX.Element {
     if (message.eventType) {
       return (
         <ChannelNotice
+          key={message.channelId}
           nickname={message.nickname}
           eventType={message.eventType}
           channelId={message.channelId}
@@ -26,13 +27,21 @@ function ChatLog(): JSX.Element {
     if (myNickname !== message.nickname) {
       return (
         <OpponentMessage
+          key={message.channelId}
           nickname={message.nickname}
           message={message.message}
           time={message.time}
         />
       )
     } else {
-      return <MyMessage nickname={message.nickname} message={message.message} time={message.time} />
+      return (
+        <MyMessage
+          key={message.channelId}
+          nickname={message.nickname}
+          message={message.message}
+          time={message.time}
+        />
+      )
     }
   })
 

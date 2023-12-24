@@ -23,7 +23,7 @@ interface DropDownChatingProps {
 type DropDownKey = 'OWNER' | 'ADMIN' | 'MEMBER'
 
 export default function DropDownChating(props: DropDownChatingProps) {
-  console.log("dorpdown props : ", props)
+  console.log('dorpdown props : ', props)
   const dropDownContent: { [key in DropDownKey]: JSX.Element | null } = {
     OWNER: (
       <ChatDropDownOwner
@@ -70,12 +70,12 @@ export default function DropDownChating(props: DropDownChatingProps) {
             setIsDropDownView={props.setIsDropDownView}
             nickname={props.nickname}
           />
-            <DirectMsg
-                setIsDropDownView={props.setIsDropDownView}
-                avatar={props.avatar}
-                nickname={props.nickname}
-                userId={props.id}
-            />
+          <DirectMsg
+            setIsDropDownView={props.setIsDropDownView}
+            avatar={props.avatar}
+            nickname={props.nickname}
+            userId={props.id}
+          />
         </>
       )}
     </ul>

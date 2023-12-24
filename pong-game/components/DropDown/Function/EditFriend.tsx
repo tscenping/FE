@@ -1,7 +1,7 @@
 import { useJoinChannel } from '@/store/chat'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { instance } from '@/util/axios'
-import { useGetFriends, useFriendSetPage, useGetUser } from '@/store/friend'
+import { useGetFriends, useGetUser } from '@/store/friend'
 
 interface EditFriendProps {
   isFriend: boolean
@@ -86,6 +86,7 @@ export default function EditFriend(props: EditFriendProps) {
           withCredentials: true,
         })
         .then(function (res) {
+          console.log(res)
           setTotalFriendCount(totalFriendCount - 1)
           if (props.calledFrom === 'searchUserList') {
             changeItem(false)

@@ -35,7 +35,7 @@ function FrinedUsersListContainer(): JSX.Element {
         socket.off('userStatus', handleUserStatus)
       }
     }
-  }, [allFriends, socket])
+  }, [allFriends, setAllFriends])
 
   return (
     <>

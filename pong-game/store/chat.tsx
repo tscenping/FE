@@ -142,9 +142,11 @@ interface useReadyToChannelProps {
   title: string
   readyChannelId?: number
   dmAvatar?: string
+  readyChannelType?: string
   setTitle: (v: string) => void
   setReadyChannelId: (v: number) => void
   setDmAvatar: (v: string) => void
+  setReadyChannelType: (v: string) => void
 }
 
 export const useReadyToChannel = create<useReadyToChannelProps>((set) => ({
@@ -152,6 +154,7 @@ export const useReadyToChannel = create<useReadyToChannelProps>((set) => ({
   setTitle: (title) => set({ title }),
   setReadyChannelId: (readyChannelId) => set({ readyChannelId }),
   setDmAvatar: (dmAvatar) => set({ dmAvatar }),
+  setReadyChannelType: (readyChannelType) => set({ readyChannelType }),
 }))
 
 // // "Protected" 채널에 join할때 사용하는 전역 상태 변수

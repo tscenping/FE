@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './ReseponseModal.module.scss'
 import { useModalState, useResponseModalState } from '@/store/store'
 
 export default function ReseponseModal() {
-  const { modalName, setModalName } = useModalState()
+  const { setModalName } = useModalState()
   const { title, content, onConfirm } = useResponseModalState()
   const handleConfirm = () => {
     onConfirm()

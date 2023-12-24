@@ -4,7 +4,7 @@ interface LodingProps {
   isLoding: boolean
   lodingTitle?: 'inviteGame' | 'searchGame'
   gameInvitationId?: number
-  gameType?: 'NORMAL_MATCH' | 'SPECIAL_MATCH' | 'LADDER'
+  gameType?: 'NORMAL_MATCHING' | 'SPECIAL_MATCHING' | 'LADDER'
 }
 
 interface LodingState {

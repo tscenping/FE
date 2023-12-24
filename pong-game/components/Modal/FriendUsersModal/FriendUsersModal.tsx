@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import styles from './FriendUsersModal.module.scss'
 import ModalPageTitle from '@/components/UI/ModalPageTitle'
 import CustomPagination from '@/components/Pagination/CustomPagination'
@@ -7,36 +7,30 @@ import { instance } from '@/util/axios'
 import { useGetFriends } from '@/store/friend'
 import { useModalState } from '@/store/store'
 
-interface userinfoProps {
-  id: number
-  nickname: string
-  avatar: string
-  status: string
-}
-
 function FriendUsersModal(): JSX.Element {
   const [page, setPage] = useState(1)
   const { setModalName, modalProps } = useModalState()
 
   const { allFriends, setAllFriends, totalFriendCount } = useGetFriends()
-  const getAllFriendHandler = async () => {
+
+  const getAllFriendHandler = useCallback(async () => {
     try {
-      const response = await instance({
-        url: `https://localhost:3000/users/friends/?page=${page}`,
+      const response = await instance(`/users/friends/?page=${page}`, {
         method: 'get',
       })
       setAllFriends(response.data.friends)
     } catch (error) {
       console.log('Error : ', error)
     }
-  }
+  }, [page, setAllFriends])
+
   const modalOffHandler = () => {
     setModalName(null)
   }
 
   useEffect(() => {
     getAllFriendHandler()
-  }, [page])
+  }, [page, getAllFriendHandler])
 
   return (
     <div className={styles.createDmRoomContent}>

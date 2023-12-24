@@ -1,5 +1,4 @@
 import { useModalState } from '@/store/store'
-import profileImage from '../../public/img/mypage/profileImage.svg'
 import styles from './RankUserList.module.scss'
 import Image from 'next/image'
 

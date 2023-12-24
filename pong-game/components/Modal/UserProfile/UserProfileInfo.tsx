@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import styles from './UserProfileInfo.module.scss'
 import friendEdit from '@/public/img/modal/friendEdit.svg'
-import { useModalState } from '@/store/store'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import DropDown from '@/components/DropDown/DropDown'
 import { useNickNameImage } from '@/store/login'
 
@@ -41,7 +40,7 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
     isBlocked,
   } = userProfileInfo.userProfileProps
   const [dropDownState, setDropDownState] = useState(false)
-  const {myNickname} = useNickNameImage()
+  const { myNickname } = useNickNameImage()
   const baseImg = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
   function LineThreeContent(props: { title: string; content: string }) {
@@ -73,14 +72,16 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
             <Image src={avatar ? avatar : baseImg} alt={'profileImage'} width={80} height={80} />
           </div>
           <div className={styles.nickName}>{nickname}</div>
-          { myNickname !== nickname &&  <Image
-            src={friendEdit}
-            alt={'friendEdit'}
-            width={30}
-            height={30}
-            onClick={() => setDropDownState((prev) => !prev)}
-            className={styles.friendEditBtn}
-          />}
+          {myNickname !== nickname && (
+            <Image
+              src={friendEdit}
+              alt={'friendEdit'}
+              width={30}
+              height={30}
+              onClick={() => setDropDownState((prev) => !prev)}
+              className={styles.friendEditBtn}
+            />
+          )}
           <div>
             {dropDownState && (
               <DropDown

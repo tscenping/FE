@@ -55,8 +55,7 @@ const ChangeImage = (): JSX.Element => {
 
   const imageChangeHandler = async () => {
     try {
-      const response = await instance({
-        url: 'https://localhost:3000/users/me/avatar',
+      await instance('/users/me/avatar', {
         method: 'patch',
         data: JSON.stringify({ avatar: uploadImage }),
       })

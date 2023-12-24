@@ -27,17 +27,19 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
     channelId,
   } = useJoinChannel()
   const { setModalName } = useModalState()
-  const { setTitle, setReadyChannelId } = useReadyToChannel()
+  const { setTitle, setReadyChannelId, setReadyChannelType } = useReadyToChannel()
   const passwordIconClassName = props.channelType === 'PROTECTED' ? styles.show : styles.none
 
   const joinChannelHandler = async () => {
     if (props.isJoined) {
       try {
         if (channelId !== props.channelId) {
-          const response = await instance({
-            url: `https://localhost:3000/channels/enter/${props.channelId}`, //쿼리스트링으로 해당 채널의 id값을 붙여주고 "/enter/:channelId" api요청 실행
-            method: 'get',
-          })
+          const response = await instance(
+            `/channels/enter/${props.channelId}`, //쿼리스트링으로 해당 채널의 id값을 붙여주고 "/enter/:channelId" api요청 실행
+            {
+              method: 'get',
+            },
+          )
           setChannelLogEmpty([])
           setChannelAuth(response.data.myChannelUserType)
           setChannelType(props.channelType)
@@ -55,10 +57,12 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
         //참여 목록에서 이미 참여했던 채널을 다시 들어가려는 경우
         try {
           if (channelId !== props.channelId) {
-            const response = await instance({
-              url: `https://localhost:3000/channels/enter/${props.channelId}`, //쿼리스트링으로 해당 채널의 id값을 붙여주고 "/enter/:channelId" api요청 실행
-              method: 'get',
-            })
+            const response = await instance(
+              `/channels/enter/${props.channelId}`, //쿼리스트링으로 해당 채널의 id값을 붙여주고 "/enter/:channelId" api요청 실행
+              {
+                method: 'get',
+              },
+            )
             setChannelLogEmpty([])
             setChannelAuth(response.data.myChannelUserType)
             setChannelType(props.channelType)
@@ -77,12 +81,13 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
           setChannelTitle(props.title) //비밀번호 입력창에 채널 타이틀을 띄우기 위한 title 전역 상태변수
           setChannelProtectedId(props.channelId) //"/join" api요청에 같이 보낼 데이터인 채널 id 전역 상태 변수
           setChannelId(props.channelId)
+          setReadyChannelType(props.channelType)
           setPasswordInputRender('PASSWORD') //chat log에서 어떤 컴포넌트를 렌더링 시킬지 판단하는 전역 상태변수
           setChannelUserInfo(null)
         } else {
-          const datas = { channelId: props.channelId, password: null }
           try {
             setReadyChannelId(props.channelId)
+
             setTitle(props.title)
             setModalName('joinRoom') //"PUBLIC"채널에 join 할 시에는 모달창을 띄워서 한번 더 참여 여부를 물어본다.
           } catch (error) {

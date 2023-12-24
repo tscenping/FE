@@ -30,7 +30,7 @@ export default function Home() {
         lodingTitle: 'searchGame',
         gameType: 'LADDER',
       })
-      router.push('/match')
+      // router.push('/match')
     } catch (e) {
       console.log(e.message)
     }
@@ -51,7 +51,8 @@ export default function Home() {
     return () => {
       socket.off('gameMatched')
     }
-  }, [])
+  }, [gameMatchHandler])
+
   return (
     <div className={styles.backGround}>
       {gameState ? (

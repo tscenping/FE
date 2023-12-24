@@ -5,10 +5,10 @@ import stick from '../../public/img/login/stick.svg'
 import LoginButton from './LoginButton/LoginButton'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import axios from 'axios'
 import Loading from './Loading'
 import { useNickNameImage } from '@/store/login'
 import { useModalState } from '@/store/store'
+import { instance } from '@/util/axios'
 
 interface siginInResponse {
   userId: number
@@ -24,10 +24,10 @@ function LoginPageContents(): JSX.Element {
     useNickNameImage()
   const { setModalName } = useModalState()
   const router = useRouter()
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
     setCodeValue(urlParams.get('code'))
-    console.log(codeValue)
   }, [router])
 
   useEffect(() => {
@@ -44,38 +44,31 @@ function LoginPageContents(): JSX.Element {
         }
       }
     }
-  }, [responseData, router, mfaQrCode])
+  }, [responseData, router, mfaQrCode, setAvatar, setModalName, setMyNickname])
 
   useEffect(() => {
     if (!codeValue) {
       return
     }
     console.log(codeValue)
-    const headers = { 'Content-Type': 'application/json' }
-    const instance = axios.create({})
+    // const headers = { 'Content-Type': 'application/json' }
+    // const instance = axios.create({})
     const fetchData = async () => {
       try {
         if (!document.cookie) {
-          console.log(codeValue)
-          const response = await instance
-            .post(
-              'https://localhost:3000/auth/signin',
-              { code: codeValue },
-              {
-                headers,
-                withCredentials: true,
-              },
-            )
-            .then((res) => {
-              console.log(res.data)
-              setResponseData(res.data)
-              setIsMfaEnabled(res.data.isMfaEnabled)
-              setUserId(res.data.userId)
-              if (res.data.mfaUrl && res.data.isMfaEnabled) {
-                setMfaQrCOde(res.data.mfaUrl)
-                setModalName('mfa')
-              }
-            })
+          const datas = { code: codeValue }
+          await instance('/auth/signin', {
+            method: 'post',
+            data: JSON.stringify(datas),
+          }).then((res) => {
+            setResponseData(res.data)
+            setIsMfaEnabled(res.data.isMfaEnabled)
+            setUserId(res.data.userId)
+            if (res.data.mfaUrl && res.data.isMfaEnabled) {
+              setMfaQrCOde(res.data.mfaUrl)
+              setModalName('mfa')
+            }
+          })
         }
       } catch (error) {
         console.error('Error fetching data:', error)
@@ -85,7 +78,7 @@ function LoginPageContents(): JSX.Element {
       }
     }
     fetchData()
-  }, [codeValue])
+  }, [codeValue, router, setIsMfaEnabled, setMfaQrCOde, setModalName, setUserId])
 
   return (
     <>

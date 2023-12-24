@@ -43,8 +43,7 @@ function ChatPassword(): JSX.Element {
     try {
       //전달받은 channelId와 입력한 해당 채널의 비밀번호 값을 통해서 "/join" api요청을 보낸다.
       console.log(datas)
-      const response = await instance({
-        url: 'https://localhost:3000/channels/join',
+      const response = await instance('/channels/join', {
         method: 'post',
         data: datas,
       })

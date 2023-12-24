@@ -5,7 +5,7 @@ import { useModalState, useResponseModalState } from '@/store/store'
 import MyPageHistory from '@/components/MyPage/MyPageHistory'
 import CustomPagination from '@/components/Pagination/CustomPagination'
 import UserProfileInfo from './UserProfileInfo'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { instance } from '@/util/axios'
 
 interface GameHistoryContents {
@@ -44,7 +44,7 @@ export default function UserProfile() {
   const [gameHistories, setGameHistories] = useState<GameHistoryProps>()
   const responseModal = useResponseModalState()
 
-  const getUserProfileHandler = async () => {
+  const getUserProfileHandler = useCallback(async () => {
     try {
       if (userNickname === undefined) return
       await instance.get(`/users/profile/${userNickname}`, {}).then(function (res) {
@@ -56,8 +56,9 @@ export default function UserProfile() {
       setModalName('response')
       responseModal.setResponseModalState('알림', '잘못된 접근입니다.', null)
     }
-  }
-  const getGameHistoryHandler = async () => {
+  }, [responseModal, setModalName, userNickname])
+
+  const getGameHistoryHandler = useCallback(async () => {
     try {
       if (userNickname === undefined) return
       await instance.get(`/users/games/${userNickname}/?page=${page}`, {}).then(function (res) {
@@ -68,18 +69,19 @@ export default function UserProfile() {
       setModalName('response')
       responseModal.setResponseModalState('알림', '잘못된 접근입니다.', null)
     }
-  }
+  }, [page, responseModal, setModalName, userNickname])
+
   useEffect(() => {
     setUserNickname(modalProps.nickname)
   }, [modalProps])
 
   useEffect(() => {
     getUserProfileHandler()
-  }, [userNickname])
+  }, [userNickname, getUserProfileHandler])
 
   useEffect(() => {
     getGameHistoryHandler()
-  }, [page])
+  }, [page, getGameHistoryHandler])
 
   return (
     <div className={styles.backGround}>

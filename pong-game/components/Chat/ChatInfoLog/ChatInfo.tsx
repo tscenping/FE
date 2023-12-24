@@ -28,7 +28,7 @@ function ChatInfo(): JSX.Element {
     setModalName('friendUsers')
   }
 
-  const exitChannelHandler = (e) => {
+  const exitChannelHandler = () => {
     setModalName('exitRoom')
   }
 

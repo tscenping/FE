@@ -8,7 +8,6 @@ import DropDown from '@/components/DropDown/DropDown'
 import { useState } from 'react'
 import { useJoinChannel } from '@/store/chat'
 import { useNickNameImage } from '@/store/login'
-import toast, { Toaster } from 'react-hot-toast'
 
 interface ChatUserListElementProps {
   channelUserId?: number

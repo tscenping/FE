@@ -6,7 +6,6 @@ import CreateRoomInput from './CreateRoomInput/CreateRoomInput'
 import { instance } from '@/util/axios'
 import { useModalState } from '@/store/store'
 import { useGetChannels, useJoinChannel, useJoinProtectedChannel } from '@/store/chat'
-import { socket } from '@/socket/socket'
 
 function CreateChatRoom(): JSX.Element {
   const { tabState, setTabState } = useCreateRoomNavBarState()
@@ -59,22 +58,19 @@ function CreateChatRoom(): JSX.Element {
     }
     console.log(datas)
     try {
-      const response = await instance({
+      const response = await instance('/channels', {
         method: 'post',
-        url: 'https://localhost:3000/channels',
         data: JSON.stringify(datas),
       })
       console.log(response)
       if (response.statusText === 'Created') {
         //채널 생성에 성공한다면 모달창을 꺼주고 채널뷰를 생성한 채널뷰로 바꿔줘야한다.(채널뷰 변경 추가예정)
         setChannelLogEmpty([])
-        const responseAll = await instance({
+        const responseAll = await instance('/channels/all/?page=1', {
           method: 'get',
-          url: 'https://localhost:3000/channels/all/?page=1',
         })
-        const responseMe = await instance({
+        const responseMe = await instance('channels/me/?page=1', {
           method: 'get',
-          url: 'https://localhost:3000/channels/me/?page=1',
         })
 
         //"chat"페이지의 채널 목록과 페이지 네이션 전역상태변수 초기화
