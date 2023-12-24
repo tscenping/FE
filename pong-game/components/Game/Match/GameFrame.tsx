@@ -1,6 +1,7 @@
 import { gameSocket } from '@/socket/gameSocket'
 import styles from './GameFrame.module.scss'
 import React, { useEffect, useRef } from 'react'
+import { useMatchGameState } from '@/store/game'
 
 interface DrawProps {
   x: number
@@ -23,6 +24,7 @@ const ballRadius = 10
 
 export default function GameFrame() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const { matchGameState } = useMatchGameState()
   const myRacket: DrawProps = {
     x: 10,
     y: height / 2 - 100,
@@ -111,11 +113,19 @@ export default function GameFrame() {
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowDown') {
-        gameSocket.emit('matchKeyDown', { gameId: 1, keyDown: 'down', keyName: 'arrowDown' })
+        gameSocket.emit('matchKeyDown', {
+          gameId: matchGameState.gameId,
+          keyStatus: 'down',
+          keyName: 'arrowDown',
+        })
         myRacket.dy = 5
         console.log('arrowDown')
       } else if (e.key === 'ArrowUp') {
-        gameSocket.emit('matchKeyDown', { gameId: 1, keyDown: 'down', keyName: 'arrowUp' })
+        gameSocket.emit('matchKeyDown', {
+          gameId: matchGameState.gameId,
+          keyStatus: 'down',
+          keyName: 'arrowUp',
+        })
         myRacket.dy = -5
         console.log('arrowUp')
       }
@@ -124,12 +134,20 @@ export default function GameFrame() {
     document.addEventListener('keyup', function (e) {
       if (e.key === 'ArrowUp') {
         // socket.emit('message', { channelId: channelId, message: messageRef.current.value })
-        gameSocket.emit('matchKeyDown', { gameId: 1, keyDown: 'up', keyName: 'arrowUp' })
+        gameSocket.emit('matchKeyDown', {
+          gameId: matchGameState.gameId,
+          keyStatus: 'up',
+          keyName: 'arrowUp',
+        })
         myRacket.dy = 0
         console.log(111)
       } else if (e.key === 'ArrowDown') {
         // socket.emit('message', { channelId: channelId, message: messageRef.current.value })
-        gameSocket.emit('matchKeyDown', { gameId: 1, keyDown: 'up', keyName: 'arrowDown' })
+        gameSocket.emit('matchKeyDown', {
+          gameId: matchGameState.gameId,
+          keyStatus: 'up',
+          keyName: 'arrowDown',
+        })
         myRacket.dy = 0
         console.log(222)
       }

@@ -4,6 +4,7 @@ import Resizer from 'react-image-file-resizer'
 import styles from './InputNickImage.module.scss'
 import { instance } from '@/util/axios'
 import NickNameInput from './NickNameInput'
+import { useRouter } from 'next/router'
 
 const defaultProfileImage = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
@@ -12,6 +13,7 @@ function InputNickImage(): JSX.Element {
   const [imagePreview, setImagePreview] = useState<string>(defaultProfileImage)
   const [isValidNick, setIsValidNick] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
   const patternSpecial = /[~₩;'"!@#$%^&*()_+|<>?:{}\s]/ //특수문자 입력 정규식
 
   /* 아바타 사진 리사이징 및 base64 변환 함수 */
@@ -68,7 +70,8 @@ function InputNickImage(): JSX.Element {
           data: JSON.stringify(finalData),
         })
         if (response.statusText === 'OK') {
-          window.location.href = 'https://localhost:8001/main'
+          // window.location.href = 'https://localhost:8001/main'
+          router.replace('/main')
         }
       } catch (error) {
         console.log('Error : ', error)

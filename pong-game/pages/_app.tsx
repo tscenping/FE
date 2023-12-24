@@ -16,19 +16,20 @@ export default function App({ Component, pageProps }: AppProps) {
       <Reset />
       <LoginCheck>
         <QueryClientProvider client={queryClient}>
-          <Loding>
-            <Layout>
-              <SocketConnect />
-              <Component {...pageProps} />
-              <Toaster
-                toastOptions={{
-                  style: {
-                    maxWidth: 850,
-                  },
-                }}
-              />
-            </Layout>
-          </Loding>
+          {/* <Loding> */}
+          <Loding />
+          <Layout>
+            <SocketConnect />
+            <Component {...pageProps} />
+            <Toaster
+              toastOptions={{
+                style: {
+                  maxWidth: 850,
+                },
+              }}
+            />
+          </Layout>
+          {/* </Loding> */}
         </QueryClientProvider>
       </LoginCheck>
       <ModalLayout />

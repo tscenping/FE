@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import toast from 'react-hot-toast'
 import { instance } from '@/util/axios'
 import { useRouter } from 'next/router'
@@ -21,35 +21,48 @@ function PrivateInvitation(): JSX.Element {
   const { setPasswordInputRender } = useJoinProtectedChannel()
   const { setTabState } = useNavBarState()
 
-  const acceptHandler = async (t, invitationId) => {
-    const datas = { invitationId: invitationId }
-    try {
-      const response = await instance('/channels/accept', {
-        method: 'post',
-        data: JSON.stringify(datas),
-      })
-      if (router.pathname !== '/chat') {
-        router.replace('/chat')
+  const acceptHandler = useCallback(
+    async (t, invitationId) => {
+      const datas = { invitationId: invitationId }
+      try {
+        const response = await instance('/channels/accept', {
+          method: 'post',
+          data: JSON.stringify(datas),
+        })
+        if (router.pathname !== '/chat') {
+          router.replace('/chat')
+        }
+        const postData = { channelId: response.data.channelId, password: null }
+        const responseEnter = await instance(`/channels/enter/${response.data.channelId}`, {
+          method: 'get',
+          data: JSON.stringify(postData),
+        })
+        setChannelLogEmpty([])
+        setPasswordInputRender('CHANNEL')
+        setChannelTitle(response.data.channelName)
+        setChannelId(response.data.channelId)
+        setChannelUserInfo(responseEnter.data.channelUsers)
+        setChannelType('PRIVATE')
+        setTabState('JOINED')
+        setChannelAuth('MEMBER')
+        toast.remove(t.id)
+      } catch (error) {
+        toast.remove(t.id)
+        console.log('Error : ', error)
       }
-      const postData = { channelId: response.data.channelId, password: null }
-      const responseEnter = await instance(`/channels/enter/${response.data.channelId}`, {
-        method: 'get',
-        data: JSON.stringify(postData),
-      })
-      setChannelLogEmpty([])
-      setPasswordInputRender('CHANNEL')
-      setChannelTitle(response.data.channelName)
-      setChannelId(response.data.channelId)
-      setChannelUserInfo(responseEnter.data.channelUsers)
-      setChannelType('PRIVATE')
-      setTabState('JOINED')
-      setChannelAuth('MEMBER')
-      toast.remove(t.id)
-    } catch (error) {
-      toast.remove(t.id)
-      console.log('Error : ', error)
-    }
-  }
+    },
+    [
+      router,
+      setChannelAuth,
+      setChannelId,
+      setChannelLogEmpty,
+      setChannelTitle,
+      setChannelType,
+      setChannelUserInfo,
+      setPasswordInputRender,
+      setTabState,
+    ],
+  )
 
   const cancelHandler = async (t, invitationId) => {
     await instance(`/channels/refuse/${invitationId}`, {
@@ -94,7 +107,7 @@ function PrivateInvitation(): JSX.Element {
     return () => {
       socket.off('privateAlert')
     }
-  }, [socket, allBlocks, router.pathname])
+  }, [allBlocks, router.pathname, acceptHandler])
   return <></>
 }
 

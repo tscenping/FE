@@ -38,7 +38,7 @@ interface MyPageProfileProps {
 export default function Mypage(props) {
   const [page, setPage] = useState(1)
   const [gameHistories, setGameHistories] = useState<GameHistoryProps>()
-  const [userProfile, setUserProfile] = useState<MyPageProfileProps>(props.data)
+  const [userProfile, setUserProfile] = useState<MyPageProfileProps>(null)
   const { myNickname, setAvatar } = useNickNameImage()
   const getGameHistoryHandler = async () => {
     try {
@@ -57,6 +57,7 @@ export default function Mypage(props) {
 
   useEffect(() => {
     getGameHistoryHandler
+    setUserProfile(props.data)
     setAvatar(props.data.avatar)
   }, [page])
 

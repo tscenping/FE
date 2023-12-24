@@ -7,7 +7,7 @@ function ChatDmRoomListSection(): JSX.Element {
 
   return (
     <>
-      {dmChannels.length > 0 ? (
+      {dmChannels && dmChannels.length > 0 ? (
         <ul className={styles.chatDmRoomListSection}>
           {dmChannels.map((dmChannel) => (
             <DmChat

@@ -26,6 +26,7 @@ function SearchInputContainer({ inputRef }: searchInputContainerProps): JSX.Elem
         className={styles.searchInput}
         onChange={nickNameHandler}
         required
+        value={nickName}
         maxLength={10}
         ref={inputRef}
       />

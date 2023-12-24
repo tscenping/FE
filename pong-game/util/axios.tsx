@@ -1,7 +1,7 @@
 import axios from 'axios'
 import https from 'https'
 
-import { NextRouter, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 const baseURL = process.env.NEXT_PUBLIC_API_ENDPOINT
 
@@ -45,7 +45,7 @@ instance.interceptors.response.use(
     } else if (error.response && error.response.status === 404) {
       alert('잘못된 요청입니다.')
     } else if (error.response && error.response.status === 401) {
-      alert('인증이 만료되었습니다. 다시 로그인해주세요.')
+      window.location.href = 'https://localhost:8001/login'
     }
     return Promise.reject(error)
   },

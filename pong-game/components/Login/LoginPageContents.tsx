@@ -24,10 +24,10 @@ function LoginPageContents(): JSX.Element {
     useNickNameImage()
   const { setModalName } = useModalState()
   const router = useRouter()
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
     setCodeValue(urlParams.get('code'))
-    console.log(codeValue)
   }, [router])
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function LoginPageContents(): JSX.Element {
         }
       }
     }
-  }, [responseData, router, mfaQrCode])
+  }, [responseData, router, mfaQrCode, setAvatar, setModalName, setMyNickname])
 
   useEffect(() => {
     if (!codeValue) {
@@ -78,7 +78,7 @@ function LoginPageContents(): JSX.Element {
       }
     }
     fetchData()
-  }, [codeValue])
+  }, [codeValue, router, setIsMfaEnabled, setMfaQrCOde, setModalName, setUserId])
 
   return (
     <>

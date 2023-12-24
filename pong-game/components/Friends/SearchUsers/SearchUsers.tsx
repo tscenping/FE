@@ -30,11 +30,13 @@ function SearchUsers(): JSX.Element {
       inputRef.current.value = ''
     }
   }
+
   useEffect(() => {
     return () => {
       setUser(null)
     }
-  }, [])
+  }, [setUser])
+
   return (
     <div className={styles.searchUsers}>
       <form className={styles.searchInputContainer} onSubmit={searchNicknameHandler}>

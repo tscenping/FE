@@ -30,7 +30,7 @@ export default function GameInvitationReply() {
   }
   useEffect(() => {
     if (router.pathname !== '/match') {
-    socket.on('gameInvitationReply', gameInvitationReplyHandler)
+      socket.on('gameInvitationReply', gameInvitationReplyHandler)
     }
 
     return () => {

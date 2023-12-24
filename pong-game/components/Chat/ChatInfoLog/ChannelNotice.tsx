@@ -75,11 +75,7 @@ function ChannelNotice(props: ChannelNoticeProps): JSX.Element {
           setChannelType(null)
           setTotalDm(totalDm - 1)
         } else {
-          const filterChannelUsers = props.channelUserInfo
-            ? props.channelUserInfo.filter((channelUser) => props.nickname !== channelUser.nickname)
-            : []
-
-          setChannelUserInfo(filterChannelUsers)
+          getChannelUsersHandler()
         }
       }
       if (

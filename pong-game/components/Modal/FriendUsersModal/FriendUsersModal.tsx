@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import styles from './FriendUsersModal.module.scss'
 import ModalPageTitle from '@/components/UI/ModalPageTitle'
 import CustomPagination from '@/components/Pagination/CustomPagination'
@@ -12,7 +12,8 @@ function FriendUsersModal(): JSX.Element {
   const { setModalName, modalProps } = useModalState()
 
   const { allFriends, setAllFriends, totalFriendCount } = useGetFriends()
-  const getAllFriendHandler = async () => {
+
+  const getAllFriendHandler = useCallback(async () => {
     try {
       const response = await instance(`/users/friends/?page=${page}`, {
         method: 'get',
@@ -21,14 +22,15 @@ function FriendUsersModal(): JSX.Element {
     } catch (error) {
       console.log('Error : ', error)
     }
-  }
+  }, [page, setAllFriends])
+
   const modalOffHandler = () => {
     setModalName(null)
   }
 
   useEffect(() => {
     getAllFriendHandler()
-  }, [page])
+  }, [page, getAllFriendHandler])
 
   return (
     <div className={styles.createDmRoomContent}>

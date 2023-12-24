@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import FriendTypeNaviContainer from './FriendTypeNaviContainer'
 import FrinedUsersListContainer from './FriendUsersListContainer'
 import BlockUsersListContainer from './BlockUsersListContainer'
@@ -14,7 +14,7 @@ function FriendsMainContents(): JSX.Element {
   const { setAllBlocks, setTotalBlockCount, totalBlockCount } = useGetBlocks()
   const { setUser } = useGetUser()
 
-  const getAllFriend = async () => {
+  const getAllFriend = useCallback(async () => {
     try {
       const response = await instance(`/users/friends/?page=${friendPage}`, {
         method: 'get',
@@ -25,8 +25,9 @@ function FriendsMainContents(): JSX.Element {
     } catch (error) {
       console.log('Error : ', error)
     }
-  }
-  const getAllBlock = async () => {
+  }, [friendPage, setAllFriends, setTotalFriendCount, setUser])
+
+  const getAllBlock = useCallback(async () => {
     try {
       const response = await instance(`/users/blocks/?page=${friendPage}`, {
         method: 'get',
@@ -37,12 +38,12 @@ function FriendsMainContents(): JSX.Element {
     } catch (error) {
       console.log('Error : ', error)
     }
-  }
+  }, [friendPage, setAllBlocks, setTotalBlockCount, setUser])
 
   useEffect(() => {
     if (tabState === 'ALL') getAllFriend()
     if (tabState === 'BLOCK') getAllBlock()
-  }, [friendPage, tabState, totalFriendCount, totalBlockCount])
+  }, [friendPage, tabState, totalFriendCount, totalBlockCount, getAllBlock, getAllFriend])
 
   return (
     <div className={styles.frindPageContainer}>
