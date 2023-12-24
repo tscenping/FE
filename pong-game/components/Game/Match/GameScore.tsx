@@ -22,18 +22,30 @@ interface PlayerData {
   }
 }
 
+interface ScoreData {
+  leftScore: number
+  rightScore: number
+}
+
 const baseImg = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
 export default function GameScore() {
   const { matchGameState } = useMatchGameState()
   const [playerData, setPlayerData] = useState<PlayerData>()
   const { myNickname, avatar } = useNickNameImage()
-  const scoreHandler = (data: any) => {
-    console.log(data)
+  const [myPosition, setMyPosition] = useState<string>('LEFT')
+  const [score, setScore] = useState<ScoreData>({ leftScore: 0, rightScore: 0 })
+  const scoreHandler = (data: { myScore; rivalScore }) => {
+    if (myPosition === 'LEFT') {
+      setScore({ leftScore: data.myScore, rightScore: data.rivalScore })
+    } else {
+      setScore({ leftScore: data.rivalScore, rightScore: data.myScore })
+    }
   }
 
   useEffect(() => {
     gameSocket.once('serverGameReady', (data: GameMatchData) => {
+      setMyPosition(data.myPosition)
       console.log('serverGameReady')
       if (data.myPosition === 'LEFT') {
         setPlayerData({
@@ -59,10 +71,13 @@ export default function GameScore() {
         })
       }
       console.log(data)
-      gameSocket.emit('clientGameReady', { gameId: matchGameState.gameId })
+      // gameSocket.emit('clientGameReady', { gameId: matchGameState.gameId })
       console.log('clientGameReady')
     })
     gameSocket.on('matchScore', scoreHandler)
+    return () => {
+      gameSocket.off('matchScore')
+    }
   }, [])
   return (
     <>
@@ -77,7 +92,7 @@ export default function GameScore() {
           />
           <div className={styles.leftNickname}>{playerData?.leftPlayer.nickname}</div>
         </section>
-        <section className={styles.score}>3 : 5</section>
+        <section className={styles.score}>{score.leftScore} : {score.rightScore}</section>
         <section className={styles.rightProfile}>
           <div className={styles.rightNickname}>{playerData?.rightPlayer.nickname}</div>
           <Image

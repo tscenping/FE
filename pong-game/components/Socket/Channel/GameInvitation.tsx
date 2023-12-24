@@ -4,6 +4,8 @@ import toast from 'react-hot-toast'
 import styles from './GameInvitation.module.scss'
 import { instance } from '@/util/axios'
 import { useRouter, NextRouter } from 'next/router'
+import { useLodingState } from '@/store/loding'
+import { useModalState } from '@/store/store'
 
 interface toastData {
   invitationId: number
@@ -20,10 +22,14 @@ export default function GameInvitation() {
     toast(
       (t) => {
         const acceptHandler = async (invitationId: number) => {
+          const { setLodingState } = useLodingState()
+          const { setModalName } = useModalState()
           console.log('acceptHandler')
           try {
             await instance.post('/game/accept', { gameInvitationId: invitationId }).then((res) => {
               console.log('수락 성공')
+              setLodingState({ isLoding: false })
+              setModalName(null)
             })
           } catch (e) {
             console.log(e.message)

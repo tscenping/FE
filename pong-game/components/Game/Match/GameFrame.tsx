@@ -8,6 +8,7 @@ interface DrawProps {
   y: number
   dx?: number
   dy?: number
+  radius?: number
   width: number
   height: number
 }
@@ -22,8 +23,8 @@ interface GameFrameProps {
   gameId: number
 }
 
-const height = 800
-const width = 1200
+const canvasHeight = 800
+const canvasWidth = 1200
 const ballRadius = 10
 
 // export default function GameFrame(props: GameFrameProps) {
@@ -34,7 +35,7 @@ export default function GameFrame() {
     if (e.key === 'ArrowDown') {
       gameSocket.emit('matchKeyDown', {
         gameId: matchGameState.gameId,
-        keyDown: 'down',
+        keyStatus: 'down',
         keyName: 'arrowDown',
       })
       // myRacket.dy = 5
@@ -42,7 +43,7 @@ export default function GameFrame() {
     } else if (e.key === 'ArrowUp') {
       gameSocket.emit('matchKeyDown', {
         gameId: matchGameState.gameId,
-        keyDown: 'down',
+        keyStatus: 'down',
         keyName: 'arrowUp',
       })
       // myRacket.dy = -5
@@ -63,7 +64,7 @@ export default function GameFrame() {
       // socket.emit('message', { channelId: channelId, message: messageRef.current.value })
       gameSocket.emit('matchKeyDown', {
         gameId: matchGameState.gameId,
-        keyDown: 'up',
+        keyStatus: 'up',
         keyName: 'arrowDown',
       })
       myRacket.dy = 0
@@ -73,24 +74,24 @@ export default function GameFrame() {
 
   const myRacket: DrawProps = {
     x: 10,
-    y: height / 2 - 100,
+    y: canvasHeight / 2 - 100,
     dx: 0,
     dy: 0,
-    width: 15,
+    width: canvasWidth * 0.05,
     height: 200,
   }
 
   const rivalRacket: DrawProps = {
-    x: width - 10,
-    y: height / 2 - 100,
+    x: canvasWidth - 10,
+    y: canvasHeight / 2 - 100,
     dx: 0,
     dy: 0,
     width: -15,
     height: 200,
   }
   const ball: DrawProps = {
-    x: width / 2 - 10,
-    y: height / 2 - 10,
+    x: canvasWidth / 2 - 10,
+    y: canvasHeight / 2 - 10,
     dx: 0,
     dy: 0,
     width: 20,
@@ -104,10 +105,15 @@ export default function GameFrame() {
   const matchStatusHandler = (data: MatchStatusData) => {
     myRacket.x = data.myRacket.x
     myRacket.y = data.myRacket.y
+    myRacket.width = data.myRacket.width
+    myRacket.height = data.myRacket.height
     rivalRacket.x = data.rivalRacket.x
+    rivalRacket.width = data.rivalRacket.width
+    rivalRacket.height = data.rivalRacket.height
     rivalRacket.y = data.rivalRacket.y
     ball.x = data.ball.x
     ball.y = data.ball.y
+    ball.radius = data.ball.radius
     console.log(11111)
   }
 
@@ -145,7 +151,7 @@ export default function GameFrame() {
         context.fillStyle = ballColor
         // context.fillRect(ball.x, ball.y, ball.width, ball.height)
         context.beginPath() // 경로 그리기 시작
-        context.arc(canvas.width / 2, canvas.height / 2, ballRadius, 0, Math.PI * 2) // 원 그리기
+        context.arc(canvas.width / 2, canvas.height / 2, ball.radius, 0, Math.PI * 2) // 원 그리기
         context.fillStyle = ballColor // 공의 색상 지정
         context.fill() // 채우기
         context.closePath() // 경로 그리기 종료
@@ -178,13 +184,13 @@ export default function GameFrame() {
         console.log('event listener removed')
       }
     })
-  })
+  },[])
 
   return (
     <canvas
       ref={canvasRef}
-      width={width}
-      height={height}
+      width={canvasWidth}
+      height={canvasHeight}
       className={styles.pongGameCanvas}
     ></canvas>
   )

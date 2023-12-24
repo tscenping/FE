@@ -7,9 +7,11 @@ import PrivateInvitation from './Channel/PrivateInvitation'
 import ChannelMessage from './Channel/ChannelMesage'
 import GameInvitationReply from './Channel/GameInvitationReply'
 import ErrorMeassage from './Channel/ErrorMeassage'
+import { useNickNameImage } from '@/store/login'
 
 export default function ChannelSocketHandler() {
   const router = useRouter()
+  const {myNickname} = useNickNameImage()
   useEffect(() => {
     try {
       const socketResponse = socket.connect()
@@ -20,17 +22,18 @@ export default function ChannelSocketHandler() {
       console.log('Error : ', error)
     }
     return () => {
+      socket.close()
       socket.disconnect()
-      socket.off('connect')
+      // socket.off('connect')
     }
-  }, [])
+  }, [router.pathname, myNickname])
   return (
     <>
       <ChannelMessage />
       <GameInvitation />
       <PrivateInvitation />
       <GameInvitationReply />
-      <ErrorMeassage/>
+      <ErrorMeassage />
     </>
   )
 }
