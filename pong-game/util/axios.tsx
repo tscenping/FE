@@ -45,7 +45,7 @@ instance.interceptors.response.use(
     } else if (error.response && error.response.status === 404) {
       alert('잘못된 요청입니다.')
     } else if (error.response && error.response.status === 401) {
-      window.location.href = 'https://localhost:8001/login'
+      // window.location.href = 'https://localhost:8001/login'
     }
     return Promise.reject(error)
   },

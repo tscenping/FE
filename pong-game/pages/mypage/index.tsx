@@ -56,10 +56,10 @@ export default function Mypage(props) {
   // }
 
   useEffect(() => {
-    getGameHistoryHandler
+    // getGameHistoryHandler()
     setUserProfile(props.data)
     setAvatar(props.data.avatar)
-  }, [page])
+  }, [page, setAvatar, props.data])
 
   // useEffect(() => {
   //   getUserProfileHandler

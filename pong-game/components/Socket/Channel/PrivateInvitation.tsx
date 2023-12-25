@@ -5,10 +5,12 @@ import { useRouter } from 'next/router'
 import { socket } from '@/socket/socket'
 import { useGetBlocks } from '@/store/friend'
 import { useJoinChannel, useJoinProtectedChannel, useNavBarState } from '@/store/chat'
+import { useModalState } from '@/store/store'
 import styles from './PrivateInvitation.module.scss'
 
 function PrivateInvitation(): JSX.Element {
   const router = useRouter()
+  const { setModalName } = useModalState()
   const { allBlocks } = useGetBlocks()
   const {
     setChannelLogEmpty,
@@ -37,6 +39,7 @@ function PrivateInvitation(): JSX.Element {
           method: 'get',
           data: JSON.stringify(postData),
         })
+        setModalName(null)
         setChannelLogEmpty([])
         setPasswordInputRender('CHANNEL')
         setChannelTitle(response.data.channelName)
@@ -61,6 +64,7 @@ function PrivateInvitation(): JSX.Element {
       setChannelUserInfo,
       setPasswordInputRender,
       setTabState,
+      setModalName,
     ],
   )
 

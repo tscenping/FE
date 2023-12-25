@@ -20,7 +20,7 @@ interface siginInResponse {
 function LoginPageContents(): JSX.Element {
   const [responseData, setResponseData] = useState<siginInResponse>()
   const [codeValue, setCodeValue] = useState<string>('')
-  const { setAvatar, setMyNickname, setIsMfaEnabled, setMfaQrCOde, setUserId, mfaQrCode } =
+  const { setAvatar, setMyNickname, setIsMfaEnabled, setMfaQrCOde, setUserId, isMfaEnabled } =
     useNickNameImage()
   const { setModalName } = useModalState()
   const router = useRouter()
@@ -37,14 +37,14 @@ function LoginPageContents(): JSX.Element {
         setMyNickname(null)
         router.replace('/login/info')
       } else {
-        if (mfaQrCode) {
+        if (isMfaEnabled) {
           setModalName('mfa')
         } else {
           router.replace('/main')
         }
       }
     }
-  }, [responseData, router, mfaQrCode, setAvatar, setModalName, setMyNickname])
+  }, [responseData, router, isMfaEnabled, setAvatar, setModalName, setMyNickname])
 
   useEffect(() => {
     if (!codeValue) {
@@ -64,7 +64,7 @@ function LoginPageContents(): JSX.Element {
             setResponseData(res.data)
             setIsMfaEnabled(res.data.isMfaEnabled)
             setUserId(res.data.userId)
-            if (res.data.mfaUrl && res.data.isMfaEnabled) {
+            if (res.data.isMfaEnabled) {
               setMfaQrCOde(res.data.mfaUrl)
               setModalName('mfa')
             }

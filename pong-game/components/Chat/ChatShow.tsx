@@ -19,7 +19,6 @@ function ChatShow(): JSX.Element {
     e.preventDefault()
     try {
       socket.emit('message', { channelId: channelId, message: messageRef.current.value })
-      console.log(channelId)
     } catch (error) {
       console.log('Error : ', error)
     }
