@@ -14,12 +14,18 @@ export default function ChannelSocketHandler() {
   const { myNickname } = useNickNameImage()
   useEffect(() => {
     try {
-      if (myNickname !== 'nickname') {
+      if (myNickname && myNickname !== 'nickname') {
         const socketResponse = socket.connect()
 
         socket.on('connect', () => {
           console.log('channel connect')
         })
+        const interval = setInterval(() => {
+          socket.emit('ping')
+        }, 20000) // 20초마다 ping을 보냄
+        return () => {
+          clearInterval(interval)
+        }
       }
     } catch (error) {
       console.log('Error : ', error)

@@ -77,8 +77,8 @@ export default function GameFrame() {
     y: canvasHeight / 2 - 100,
     dx: 0,
     dy: 0,
-    width: canvasWidth * 0.05,
-    height: 200,
+    width: canvasWidth * 0.01,
+    height: canvasHeight * 0.25,
   }
 
   const rivalRacket: DrawProps = {
@@ -86,8 +86,8 @@ export default function GameFrame() {
     y: canvasHeight / 2 - 100,
     dx: 0,
     dy: 0,
-    width: -15,
-    height: 200,
+    width: canvasWidth * 0.01 * -1,
+    height: canvasHeight * 0.25,
   }
   const ball: DrawProps = {
     x: canvasWidth / 2 - 10,
@@ -148,6 +148,23 @@ export default function GameFrame() {
     //배경
     context.fillStyle = canvasColor
     context.fillRect(0, 0, canvas.width, canvas.height)
+    context.fillStyle = 'lightgrey'
+    context.fillRect(canvas.width / 2 - 5, 0, 10, canvas.height)
+
+    // 라켓
+    context.fillStyle = raketColor
+    context.fillRect(myRacket.x, myRacket.y, myRacket.width, myRacket.height)
+    context.fillRect(rivalRacket.x, rivalRacket.y, rivalRacket.width, rivalRacket.height)
+
+    // 공
+    context.fillStyle = ballColor
+    // context.fillRect(ball.x, ball.y, ball.width, ball.height)
+    context.beginPath() // 경로 그리기 시작
+    context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2) // 원 그리기
+    context.fillStyle = ballColor // 공의 색상 지정
+    context.fill() // 채우기
+    context.closePath() // 경로 그리기 종료
+
     gameSocket.on('matchStatus', matchStatusHandler)
     gameSocket.once('gameStart', () => {
       console.log('gameStart')
@@ -174,7 +191,7 @@ export default function GameFrame() {
         context.fillStyle = ballColor
         // context.fillRect(ball.x, ball.y, ball.width, ball.height)
         context.beginPath() // 경로 그리기 시작
-        context.arc(ball.x, ball.y / 2, ball.radius, 0, Math.PI * 2) // 원 그리기
+        context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2) // 원 그리기
         context.fillStyle = ballColor // 공의 색상 지정
         context.fill() // 채우기
         context.closePath() // 경로 그리기 종료

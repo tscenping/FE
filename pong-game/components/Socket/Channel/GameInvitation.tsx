@@ -17,13 +17,12 @@ interface toastData {
 
 export default function GameInvitation() {
   const router: NextRouter = useRouter()
-
+  const { setLodingState } = useLodingState()
+  const { setModalName } = useModalState()
   const notify = (props: toastData) =>
     toast(
       (t) => {
         const acceptHandler = async (invitationId: number) => {
-          const { setLodingState } = useLodingState()
-          const { setModalName } = useModalState()
           console.log('acceptHandler')
           try {
             await instance.post('/game/accept', { gameInvitationId: invitationId }).then((res) => {
