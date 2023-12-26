@@ -138,7 +138,7 @@ export default function GameFrame() {
     ball.x = data.ball.x
     ball.y = data.ball.y
     ball.radius = data.ball.radius
-    console.log ('ball : ', ball)
+    console.log('ball : ', ball)
     console.log(22222)
     console.log(data)
   }
@@ -149,13 +149,10 @@ export default function GameFrame() {
   }
 
   useEffect(() => {
+    if (!canvasRef.current) return
     gameSocket.emit('gameRequest', { gameId: matchGameState.gameId })
     gameSocket.once('serverGameReady', matchInitHandler)
     gameSocket.once('matchEnd', matchEndHandler)
-  }, [])
-
-  useEffect(() => {
-    if (!canvasRef.current) return
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
     context.clearRect(0, 0, canvas.width, canvas.height)
