@@ -11,13 +11,16 @@ import { useNickNameImage } from '@/store/login'
 
 export default function ChannelSocketHandler() {
   const router = useRouter()
-  const {myNickname} = useNickNameImage()
+  const { myNickname } = useNickNameImage()
   useEffect(() => {
     try {
-      const socketResponse = socket.connect()
-      socket.on('connect', () => {
-        console.log('channel connect')
-      })
+      if (myNickname !== 'nickname') {
+        const socketResponse = socket.connect()
+
+        socket.on('connect', () => {
+          console.log('channel connect')
+        })
+      }
     } catch (error) {
       console.log('Error : ', error)
     }
@@ -26,7 +29,7 @@ export default function ChannelSocketHandler() {
       socket.disconnect()
       // socket.off('connect')
     }
-  }, [router.pathname, myNickname])
+  }, [myNickname])
   return (
     <>
       <ChannelMessage />

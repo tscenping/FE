@@ -71,7 +71,7 @@ export default function GameScore() {
         })
       }
       console.log(data)
-      // gameSocket.emit('clientGameReady', { gameId: matchGameState.gameId })
+      gameSocket.emit('clientGameReady', { gameId: matchGameState.gameId })
       console.log('clientGameReady')
     })
     gameSocket.on('matchScore', scoreHandler)

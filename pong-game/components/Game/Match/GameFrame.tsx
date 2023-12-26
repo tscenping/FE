@@ -105,6 +105,22 @@ export default function GameFrame() {
   const matchStatusHandler = (data: MatchStatusData) => {
     myRacket.x = data.myRacket.x
     myRacket.y = data.myRacket.y
+    // myRacket.width = data.myRacket.width
+    // myRacket.height = data.myRacket.height
+    rivalRacket.x = data.rivalRacket.x
+    // rivalRacket.width = data.rivalRacket.width
+    // rivalRacket.height = data.rivalRacket.height
+    rivalRacket.y = data.rivalRacket.y
+    ball.x = data.ball.x
+    ball.y = data.ball.y
+    // ball.radius = data.ball.radius
+    console.log(11111)
+    console.log(data)
+  }
+
+  const matchInitHandler = (data: MatchStatusData) => {
+    myRacket.x = data.myRacket.x
+    myRacket.y = data.myRacket.y
     myRacket.width = data.myRacket.width
     myRacket.height = data.myRacket.height
     rivalRacket.x = data.rivalRacket.x
@@ -114,17 +130,24 @@ export default function GameFrame() {
     ball.x = data.ball.x
     ball.y = data.ball.y
     ball.radius = data.ball.radius
-    console.log(11111)
+    console.log(22222)
+    console.log(data)
   }
 
   useEffect(() => {
     gameSocket.emit('gameRequest', { gameId: matchGameState.gameId })
+    gameSocket.once('serverGameReady', matchInitHandler)
   }, [])
 
   useEffect(() => {
     if (!canvasRef.current) return
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    //배경
+    context.fillStyle = canvasColor
+    context.fillRect(0, 0, canvas.width, canvas.height)
     gameSocket.on('matchStatus', matchStatusHandler)
     gameSocket.once('gameStart', () => {
       console.log('gameStart')
@@ -151,7 +174,7 @@ export default function GameFrame() {
         context.fillStyle = ballColor
         // context.fillRect(ball.x, ball.y, ball.width, ball.height)
         context.beginPath() // 경로 그리기 시작
-        context.arc(canvas.width / 2, canvas.height / 2, ball.radius, 0, Math.PI * 2) // 원 그리기
+        context.arc(ball.x, ball.y / 2, ball.radius, 0, Math.PI * 2) // 원 그리기
         context.fillStyle = ballColor // 공의 색상 지정
         context.fill() // 채우기
         context.closePath() // 경로 그리기 종료
@@ -184,7 +207,7 @@ export default function GameFrame() {
         console.log('event listener removed')
       }
     })
-  },[])
+  }, [])
 
   return (
     <canvas
