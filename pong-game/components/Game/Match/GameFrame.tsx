@@ -1,7 +1,8 @@
 import { gameSocket } from '@/socket/gameSocket'
 import styles from './GameFrame.module.scss'
 import React, { useEffect, useRef } from 'react'
-import { useMatchGameState } from '@/store/game'
+import { useMatchGameState, useMatchResultState } from '@/store/game'
+import { useModalState } from '@/store/store'
 
 interface DrawProps {
   x: number
@@ -23,14 +24,26 @@ interface GameFrameProps {
   gameId: number
 }
 
+interface MatchResultProps {
+  rivalName: string
+  rivalAvatar: string
+  rivalScore: number // 상대 매치 점수
+  myScore: number // 나의 매치 점수
+  isWin: boolean // 승리 여부
+  myRadderScore: number | null // 나의 래더 점수
+  rivalRadderScore: number | null // 상대방 래더 점수
+  gameType: 'NORMAL' | 'SPECIAL' | 'RADDER' // 진행했던 게임 타입
+}
+
 const canvasHeight = 800
 const canvasWidth = 1200
 const ballRadius = 10
 
-// export default function GameFrame(props: GameFrameProps) {
 export default function GameFrame() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { matchGameState } = useMatchGameState()
+  const { setMatchResultState } = useMatchResultState()
+  const { setModalName } = useModalState()
   const keyDownEventHandler = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       gameSocket.emit('matchKeyDown', {
@@ -38,7 +51,6 @@ export default function GameFrame() {
         keyStatus: 'down',
         keyName: 'arrowDown',
       })
-      // myRacket.dy = 5
       console.log('arrowDown', 2)
     } else if (e.key === 'ArrowUp') {
       gameSocket.emit('matchKeyDown', {
@@ -46,13 +58,11 @@ export default function GameFrame() {
         keyStatus: 'down',
         keyName: 'arrowUp',
       })
-      // myRacket.dy = -5
       console.log('arrowUp')
     }
   }
   const keyUpEventHandler = (e: KeyboardEvent) => {
     if (e.key === 'ArrowUp') {
-      // socket.emit('message', { channelId: channelId, message: messageRef.current.value })
       gameSocket.emit('matchKeyDown', {
         gameId: matchGameState.gameId,
         keyStatus: 'up',
@@ -61,14 +71,12 @@ export default function GameFrame() {
       myRacket.dy = 0
       console.log(111)
     } else if (e.key === 'ArrowDown') {
-      // socket.emit('message', { channelId: channelId, message: messageRef.current.value })
       gameSocket.emit('matchKeyDown', {
         gameId: matchGameState.gameId,
         keyStatus: 'up',
         keyName: 'arrowDown',
       })
       myRacket.dy = 0
-      console.log(222)
     }
   }
 
@@ -130,13 +138,20 @@ export default function GameFrame() {
     ball.x = data.ball.x
     ball.y = data.ball.y
     ball.radius = data.ball.radius
+    console.log ('ball : ', ball)
     console.log(22222)
     console.log(data)
+  }
+
+  const matchEndHandler = (data: MatchResultProps) => {
+    setMatchResultState(data)
+    setModalName('matchResult')
   }
 
   useEffect(() => {
     gameSocket.emit('gameRequest', { gameId: matchGameState.gameId })
     gameSocket.once('serverGameReady', matchInitHandler)
+    gameSocket.once('matchEnd', matchEndHandler)
   }, [])
 
   useEffect(() => {
@@ -158,7 +173,6 @@ export default function GameFrame() {
 
     // 공
     context.fillStyle = ballColor
-    // context.fillRect(ball.x, ball.y, ball.width, ball.height)
     context.beginPath() // 경로 그리기 시작
     context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2) // 원 그리기
     context.fillStyle = ballColor // 공의 색상 지정

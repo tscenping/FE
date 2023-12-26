@@ -14,6 +14,7 @@ import InviteFriend from '../Modal/InviteFriend/InviteFriend'
 import ChannelSetting from '../Modal/ChannelSetting/ChannelSetting'
 import InviteGameModal from '../Modal/InviteGame/InviteGameModal'
 import Mfa from '../Modal/Mfa/Mfa'
+import GameResult from '../Modal/GameResult/GameResult'
 
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
@@ -57,6 +58,7 @@ function ModalContent({}): JSX.Element {
     channelSetting: <ChannelSetting />,
     inviteGame: <InviteGameModal />,
     mfa: <Mfa />,
+    matchResult: <GameResult/>
   }
   return (
     <>

@@ -46,7 +46,6 @@ export default function GameScore() {
   useEffect(() => {
     gameSocket.once('serverGameReady', (data: GameMatchData) => {
       setMyPosition(data.myPosition)
-      console.log('serverGameReady')
       if (data.myPosition === 'LEFT') {
         setPlayerData({
           leftPlayer: {
@@ -70,9 +69,7 @@ export default function GameScore() {
           },
         })
       }
-      console.log(data)
       gameSocket.emit('clientGameReady', { gameId: matchGameState.gameId })
-      console.log('clientGameReady')
     })
     gameSocket.on('matchScore', scoreHandler)
     return () => {
@@ -81,6 +78,7 @@ export default function GameScore() {
   }, [])
   return (
     <>
+    {playerData && 
       <div className={styles.scoreHeader}>
         <section className={styles.leftProfile}>
           <Image
@@ -92,7 +90,9 @@ export default function GameScore() {
           />
           <div className={styles.leftNickname}>{playerData?.leftPlayer.nickname}</div>
         </section>
-        <section className={styles.score}>{score.leftScore} : {score.rightScore}</section>
+        <section className={styles.score}>
+          {score.leftScore} : {score.rightScore}
+        </section>
         <section className={styles.rightProfile}>
           <div className={styles.rightNickname}>{playerData?.rightPlayer.nickname}</div>
           <Image
@@ -104,6 +104,7 @@ export default function GameScore() {
           />
         </section>
       </div>
+      }
     </>
   )
 }

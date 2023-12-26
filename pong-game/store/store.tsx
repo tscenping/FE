@@ -24,6 +24,7 @@ interface ModalState {
     | 'channelSetting'
     | 'inviteGame'
     | 'mfa'
+    | 'matchResult'
     | null
   setModalName: (
     modalName:
@@ -41,6 +42,7 @@ interface ModalState {
       | 'channelSetting'
       | 'inviteGame'
       | 'mfa'
+      | 'matchResult'
       | null,
   ) => void
   modalProps?: ModalProps | null
