@@ -6,6 +6,7 @@ import { socket } from '@/socket/socket'
 import { useGetBlocks } from '@/store/friend'
 import { useJoinChannel, useJoinProtectedChannel, useNavBarState } from '@/store/chat'
 import { useModalState } from '@/store/store'
+import { useErrorCheck } from '@/store/login'
 import styles from './PrivateInvitation.module.scss'
 
 function PrivateInvitation(): JSX.Element {
@@ -22,6 +23,7 @@ function PrivateInvitation(): JSX.Element {
   } = useJoinChannel()
   const { setPasswordInputRender } = useJoinProtectedChannel()
   const { setTabState } = useNavBarState()
+  const { setApiError } = useErrorCheck()
 
   const acceptHandler = useCallback(
     async (t, invitationId) => {
@@ -50,6 +52,7 @@ function PrivateInvitation(): JSX.Element {
         setChannelAuth('MEMBER')
         toast.remove(t.id)
       } catch (error) {
+        if (error.response.status === 401) setApiError(401)
         toast.remove(t.id)
         console.log('Error : ', error)
       }
@@ -65,6 +68,7 @@ function PrivateInvitation(): JSX.Element {
       setPasswordInputRender,
       setTabState,
       setModalName,
+      setApiError,
     ],
   )
 

@@ -5,6 +5,7 @@ import PageTitle from '../UI/PageTitle'
 import { useModalState } from '@/store/store'
 import { useLodingState } from '@/store/loding'
 import { instance } from '@/util/axios'
+import { useErrorCheck } from '@/store/login'
 
 interface props {
   setPageState: (newPageState: number) => void // setPageState 함수
@@ -19,6 +20,8 @@ export default function NormalGame({ setPageState, setGameState }: props) {
   }
   const { setModalName, setModalProps } = useModalState()
   const { setLodingState } = useLodingState()
+  const { setApiError } = useErrorCheck()
+
   const handleInviteGame = () => {
     console.log(gameMode)
     setModalProps({ modalType: 'GAME', gameMode: gameMode })
@@ -40,6 +43,7 @@ export default function NormalGame({ setPageState, setGameState }: props) {
         gameType: gameMode === 'Normal' ? 'NORMAL_MATCHING' : 'SPECIAL_MATCHING',
       })
     } catch (e) {
+      if (e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

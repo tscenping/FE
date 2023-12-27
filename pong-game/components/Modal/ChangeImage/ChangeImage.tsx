@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { useModalState } from '@/store/store'
 import { instance } from '@/util/axios'
 import { useNickNameImage } from '@/store/login'
+import { useErrorCheck } from '@/store/login'
 
 const defaultProfileImage = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
@@ -14,6 +15,8 @@ const ChangeImage = (): JSX.Element => {
   const { setAvatar } = useNickNameImage()
   const [uploadImage, setUploadImage] = useState<string>(modalProps.avatar) //기본 이미지를 초기값으로 세팅
   const [imagePreview, setImagePreview] = useState<string>(modalProps.avatar)
+  const { setApiError } = useErrorCheck()
+
   /* 아바타 사진 리사이징 및 base64 변환 함수 */
   const resizeFile = (file) =>
     new Promise((resolve) => {
@@ -62,6 +65,7 @@ const ChangeImage = (): JSX.Element => {
       setModalName(null)
       setAvatar(uploadImage)
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }

@@ -6,6 +6,7 @@ import styles from './ChatPassword.module.scss'
 import ChatPasswordInput from '../Input/ChatPasswordInput'
 import { useJoinChannel, useJoinProtectedChannel, useNavBarState } from '@/store/chat'
 import { instance } from '@/util/axios'
+import { useErrorCheck } from '@/store/login'
 
 function ChatPassword(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -20,8 +21,9 @@ function ChatPassword(): JSX.Element {
     setChannelId,
     setChannelAuth,
   } = useJoinChannel()
-
   const { setTabState } = useNavBarState()
+  const { setApiError } = useErrorCheck()
+
   const passwordHandler = async (e) => {
     e.preventDefault()
     const koreanRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g
@@ -61,6 +63,7 @@ function ChatPassword(): JSX.Element {
         setTabState('JOINED')
       }
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
       //틀린 비밀번호일 때 예외처리 해야한다.
     }

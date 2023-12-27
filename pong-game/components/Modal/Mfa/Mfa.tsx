@@ -6,6 +6,7 @@ import { useNickNameImage } from '@/store/login'
 import { useModalState } from '@/store/store'
 import QRCode from 'react-qr-code'
 import ModalPageTitle from '@/components/UI/ModalPageTitle'
+import { useErrorCheck } from '@/store/login'
 
 function Mfa(): JSX.Element {
   const [inputValues, setInputValues] = useState(['', '', '', '', '', '']) // 여러 input에 대한 상태 배열
@@ -18,10 +19,10 @@ function Mfa(): JSX.Element {
     useRef<HTMLInputElement>(),
     useRef<HTMLInputElement>(),
   ] // 각 input에 대한 ref 배열
-
   const { mfaQrCode, userId } = useNickNameImage()
   const { setModalName } = useModalState()
   const router = useRouter()
+  const { setApiError } = useErrorCheck()
 
   const handleInputChange = (index, e) => {
     const value = e.target.value
@@ -57,9 +58,8 @@ function Mfa(): JSX.Element {
         router.replace('/main')
       }
     } catch (error) {
-      if (error.response.status === 401) {
-        setError('wrongNumber')
-      }
+      if (error.response.data.message === 'MFA 인증에 실패했습니다.') setError('wrongNumber')
+      else if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }

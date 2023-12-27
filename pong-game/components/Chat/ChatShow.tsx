@@ -8,11 +8,13 @@ import ChatPassword from './ChatInfoLog/ChatPassword'
 import MessageInput from './Input/MessageInput'
 import { useJoinProtectedChannel, useJoinChannel } from '@/store/chat'
 import { socket } from '@/socket/socket'
+import { useErrorCheck } from '@/store/login'
 
 function ChatShow(): JSX.Element {
   const messageRef = useRef<HTMLInputElement>(null)
   const { passwordInputRender } = useJoinProtectedChannel()
   const { channelId } = useJoinChannel()
+  const { setApiError } = useErrorCheck()
   const showType = passwordInputRender === 'CHANNEL' ? styles.show : styles.none
 
   const messageHandler = (e) => {
@@ -20,6 +22,7 @@ function ChatShow(): JSX.Element {
     try {
       socket.emit('message', { channelId: channelId, message: messageRef.current.value })
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
     messageRef.current.value = ''

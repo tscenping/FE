@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 import styles from './GameInvitation.module.scss'
 import { instance } from '@/util/axios'
 import { useRouter, NextRouter } from 'next/router'
+import { useErrorCheck } from '@/store/login'
 
 interface toastData {
   invitationId: number
@@ -15,6 +16,7 @@ interface toastData {
 
 export default function GameInvitation() {
   const router: NextRouter = useRouter()
+  const { setApiError } = useErrorCheck()
 
   const notify = (props: toastData) =>
     toast(
@@ -26,6 +28,7 @@ export default function GameInvitation() {
               console.log('수락 성공')
             })
           } catch (e) {
+            if (e.response.status === 401) setApiError(401)
             console.log(e.message)
           }
         }
@@ -36,6 +39,7 @@ export default function GameInvitation() {
               console.log('거절 성공')
             })
           } catch (e) {
+            if (e.response.status === 401) setApiError(401)
             console.log(e.message)
           }
         }

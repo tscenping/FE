@@ -7,6 +7,7 @@ import CustomPagination from '@/components/Pagination/CustomPagination'
 import UserProfileInfo from './UserProfileInfo'
 import { useEffect, useState, useCallback } from 'react'
 import { instance } from '@/util/axios'
+import { useErrorCheck } from '@/store/login'
 
 interface GameHistoryContents {
   rivalName: string
@@ -43,6 +44,7 @@ export default function UserProfile() {
   const [page, setPage] = useState(1)
   const [gameHistories, setGameHistories] = useState<GameHistoryProps>()
   const responseModal = useResponseModalState()
+  const { setApiError } = useErrorCheck()
 
   const getUserProfileHandler = useCallback(async () => {
     try {
@@ -53,10 +55,11 @@ export default function UserProfile() {
       })
     } catch (e) {
       // alert('존재하지 않는 유저입니다.')
+      if (e.response.status === 401) setApiError(401)
       setModalName('response')
       responseModal.setResponseModalState('알림', '잘못된 접근입니다.', null)
     }
-  }, [responseModal, setModalName, userNickname])
+  }, [responseModal, setModalName, userNickname, setApiError])
 
   const getGameHistoryHandler = useCallback(async () => {
     try {
@@ -66,10 +69,11 @@ export default function UserProfile() {
       })
     } catch (e) {
       // alert('존재하지 않는 유저입니다.')
+      if (e.response.status === 401) setApiError(401)
       setModalName('response')
       responseModal.setResponseModalState('알림', '잘못된 접근입니다.', null)
     }
-  }, [page, responseModal, setModalName, userNickname])
+  }, [page, responseModal, setModalName, userNickname, setApiError])
 
   useEffect(() => {
     setUserNickname(modalProps.nickname)

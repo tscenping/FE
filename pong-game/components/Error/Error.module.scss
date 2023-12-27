@@ -1,0 +1,20 @@
+@import '../../styles/colors.scss';
+
+.errorContainer {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  a {
+    margin-top: 32px;
+    font-family: 'Pretendard_SemiBold';
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: $gray_scale_700;
+    transition: 0.3s;
+    &:hover {
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+  }
+}

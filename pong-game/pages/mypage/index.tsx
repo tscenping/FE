@@ -115,7 +115,7 @@ export async function getServerSideProps(context) {
   if (!Object.keys(mycookie).length) {
     return {
       redirect: {
-        destination: '/login',
+        destination: '/error',
         permanent: false,
       },
     }

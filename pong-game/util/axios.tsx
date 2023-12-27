@@ -1,8 +1,6 @@
 import axios from 'axios'
 import https from 'https'
 
-import { useRouter } from 'next/router'
-
 const baseURL = process.env.NEXT_PUBLIC_API_ENDPOINT
 
 const instance = axios.create({
@@ -34,7 +32,7 @@ instance.interceptors.response.use(
     // const { setResponseModalState }= useResponseModalState()
     // const router: NextRouter = useRouter()
     if (error.response && error.response.status === 400) {
-      alert('유효하지 않은 요청입니다.')
+      alert(error.response.data.message)
       console.log(error.response.data.message)
       // setResponseModalState('에러', error.response.data.message, null)
       // setModalName('response')

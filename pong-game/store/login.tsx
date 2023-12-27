@@ -2,6 +2,19 @@ import { create } from 'zustand'
 
 const defaultProfileImage = process.env.NEXT_PUBLIC_API_DEFAULT_PROFILE_IMAGE
 
+interface useErrorCheckProps {
+  duplicateLoginError: boolean
+  apiError?: number
+  setDuplicateError: (v: boolean) => void
+  setApiError: (v: number) => void
+}
+
+export const useErrorCheck = create<useErrorCheckProps>((set) => ({
+  duplicateLoginError: false,
+  setDuplicateError: (duplicateLoginError) => set({ duplicateLoginError }),
+  setApiError: (apiError) => set({ apiError }),
+}))
+
 interface useNicknameImageProps {
   avatar: string
   myNickname: string
@@ -17,7 +30,7 @@ interface useNicknameImageProps {
 
 export const useNickNameImage = create<useNicknameImageProps>((set) => ({
   userId: null,
-  myNickname: 'nickname',
+  myNickname: 'nicknameDefault',
   avatar: defaultProfileImage,
   setMyNickname: (myNickname) => set({ myNickname }),
   setAvatar: (avatar) => set({ avatar }),

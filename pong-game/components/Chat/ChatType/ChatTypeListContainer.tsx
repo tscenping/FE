@@ -6,9 +6,12 @@ import { useNavBarState } from '@/store/chat'
 import EnteredRoomListSection from './EnteredRoomListSection'
 import { instance } from '@/util/axios'
 import { useGetChannels } from '@/store/chat'
+import { useRouter } from 'next/router'
+import { useErrorCheck } from '@/store/login'
 
 function ChatTypeListContainer(): JSX.Element {
   const { tabState } = useNavBarState()
+  const router = useRouter()
   const {
     setAllChannels,
     setTotalAll,
@@ -19,6 +22,7 @@ function ChatTypeListContainer(): JSX.Element {
     totalDm,
     page,
   } = useGetChannels()
+  const { setApiError } = useErrorCheck()
 
   const getAllChannels = useCallback(async () => {
     try {
@@ -28,9 +32,10 @@ function ChatTypeListContainer(): JSX.Element {
       setAllChannels(response.data.channels)
       setTotalAll(response.data.totalDataSize)
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
-  }, [page, setAllChannels, setTotalAll])
+  }, [page, setAllChannels, setTotalAll, setApiError])
 
   const getMeChannels = useCallback(async () => {
     try {
@@ -40,9 +45,10 @@ function ChatTypeListContainer(): JSX.Element {
       setMeChannels(response.data.channels)
       setTotalMe(response.data.totalDataSize)
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
-  }, [page, setMeChannels, setTotalMe])
+  }, [page, setMeChannels, setTotalMe, setApiError])
 
   const getDmChannels = useCallback(async () => {
     try {
@@ -52,9 +58,10 @@ function ChatTypeListContainer(): JSX.Element {
       setDmChannels(response.data.dmChannels)
       setTotalDm(response.data.totalItemCount)
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
-  }, [page, setDmChannels, setTotalDm])
+  }, [page, setDmChannels, setTotalDm, setApiError])
 
   //"tabState의 변화에 따라서 api요청 보내도록 구현"
   //"ChatRoomListTab.tsx"의 "span"요소에서 할 경우 재 렌더링 문제가 발생해서 위치 변경

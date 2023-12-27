@@ -9,6 +9,7 @@ import Loading from './Loading'
 import { useNickNameImage } from '@/store/login'
 import { useModalState } from '@/store/store'
 import { instance } from '@/util/axios'
+import { useErrorCheck } from '@/store/login'
 
 interface siginInResponse {
   userId: number
@@ -24,6 +25,7 @@ function LoginPageContents(): JSX.Element {
     useNickNameImage()
   const { setModalName } = useModalState()
   const router = useRouter()
+  const { setApiError } = useErrorCheck()
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -72,13 +74,11 @@ function LoginPageContents(): JSX.Element {
         }
       } catch (error) {
         console.error('Error fetching data:', error)
-        if (error.response.status === 401) {
-          router.replace('/login')
-        }
+        if (error.response.status === 401) setApiError(401)
       }
     }
     fetchData()
-  }, [codeValue, router, setIsMfaEnabled, setMfaQrCOde, setModalName, setUserId])
+  }, [codeValue, router, setIsMfaEnabled, setMfaQrCOde, setModalName, setUserId, setApiError])
 
   return (
     <>
