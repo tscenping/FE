@@ -67,7 +67,7 @@ function ChatUserListElement(props: ChatUserListElementProps): JSX.Element {
           className={styles.dropdown}
         />
       )}
-      {dropDownState && (
+      {dropDownState && channelUserType && (
         <DropDown
           isDropDownView={dropDownState}
           setIsDropDownView={setDropDownState}

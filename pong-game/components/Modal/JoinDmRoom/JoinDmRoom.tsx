@@ -9,6 +9,7 @@ import {
   useReadyToChannel,
 } from '@/store/chat'
 import { instance } from '@/util/axios'
+import { useErrorCheck } from '@/store/login'
 
 function JoinDmRoom(): JSX.Element {
   const { title, readyChannelId, dmAvatar } = useReadyToChannel()
@@ -18,6 +19,7 @@ function JoinDmRoom(): JSX.Element {
     useJoinChannel()
   const { setDmChannels, setTotalDm } = useGetChannels()
   const router = useRouter()
+  const { setApiError } = useErrorCheck()
 
   const joinDmHandler = async () => {
     const datas = { name: null, channelType: 'DM', password: null, userId: readyChannelId }
@@ -46,6 +48,7 @@ function JoinDmRoom(): JSX.Element {
       }
       setModalName(null)
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }

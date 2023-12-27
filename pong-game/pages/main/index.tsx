@@ -8,6 +8,7 @@ import { socket } from '@/socket/socket'
 import { instance } from '@/util/axios'
 import { useLodingState } from '@/store/loding'
 import { useMatchGameState } from '@/store/game'
+import { useErrorCheck } from '@/store/login'
 
 interface gameMatchedData {
   gameId: number
@@ -19,6 +20,7 @@ export default function Home() {
   const router: NextRouter = useRouter()
   const { lodingState, setLodingState } = useLodingState()
   const { setMatchGameState } = useMatchGameState()
+  const { setApiError } = useErrorCheck()
 
   const onClickLadderBtn = async () => {
     try {
@@ -32,6 +34,7 @@ export default function Home() {
       })
       // router.push('/match')
     } catch (e) {
+      if (e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

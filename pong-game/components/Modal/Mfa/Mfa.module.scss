@@ -5,17 +5,29 @@
   flex-direction: column;
   padding: 8px 40px;
   align-items: center;
+  width: 400px;
   .qrCode {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 16px 0px;
+    margin: 24px 0px;
+    .newQrCodeExplanation {
+      margin-top: 16px;
+      width: inherit;
+      font-family: 'Pretendard-SemiBold';
+      color: $gray_scale_800;
+      text-align: center;
+      font-size: 1.5rem;
+      line-height: 32px;
+    }
   }
   .qrCodeExplanation {
     width: inherit;
     font-family: 'Pretendard-Regular';
     color: $gray_scale_500;
     text-align: center;
+    font-size: 1.5rem;
+    line-height: 32px;
   }
   .mfaCodeForm {
     width: 100%;
@@ -43,6 +55,7 @@
     .errorMessage {
       color: $error;
       margin-bottom: 16px;
+      font-size: 1.5rem;
     }
     button {
       width: 80px;

@@ -24,6 +24,7 @@ interface ModalState {
     | 'channelSetting'
     | 'inviteGame'
     | 'mfa'
+    | 'duplicateLogin'
     | 'matchResult'
     | null
   setModalName: (
@@ -42,6 +43,7 @@ interface ModalState {
       | 'channelSetting'
       | 'inviteGame'
       | 'mfa'
+      | 'duplicateLogin'
       | 'matchResult'
       | null,
   ) => void

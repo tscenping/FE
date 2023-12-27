@@ -4,12 +4,14 @@ import SearchInputContainer from './SearchInputContainer'
 import SearchUsersListContainer from './SearchUsersListContainer'
 import { instance } from '@/util/axios'
 import { useGetUser } from '@/store/friend'
+import { useErrorCheck } from '@/store/login'
 
 function SearchUsers(): JSX.Element {
   const inputRef = useRef<HTMLInputElement>()
   const { setUser } = useGetUser()
-
+  const { setApiError } = useErrorCheck()
   const patternSpecial = /[~₩;'"!@#$%^&*()_+|<>?:{}\s]/ //특수문자 입력 정규식
+
   const searchNicknameHandler = async (e: FormEvent) => {
     e.preventDefault()
     if (patternSpecial.test(inputRef.current.value)) {
@@ -23,6 +25,7 @@ function SearchUsers(): JSX.Element {
         setUser(response.data)
       }
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
 

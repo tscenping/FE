@@ -2,6 +2,7 @@ import Image from 'next/image'
 import styles from './DmChat.module.scss'
 import { instance } from '@/util/axios'
 import { useJoinChannel, useJoinProtectedChannel } from '@/store/chat'
+import { useErrorCheck } from '@/store/login'
 
 interface DmChantProps {
   channelId: number //해당 dm 고유 id
@@ -20,7 +21,7 @@ function DmChat(props: DmChantProps): JSX.Element {
     setChannelType,
     channelId,
   } = useJoinChannel()
-
+  const { setApiError } = useErrorCheck()
   const userStatus =
     props.status === 'ONLINE' ? styles.profileImageOnline : styles.profileImageOffline
 
@@ -39,6 +40,7 @@ function DmChat(props: DmChantProps): JSX.Element {
         setChannelUserInfo(response.data.channelUsers)
       }
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }

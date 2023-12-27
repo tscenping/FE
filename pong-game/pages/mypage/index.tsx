@@ -62,7 +62,7 @@ export default function Mypage(props) {
     getGameHistoryHandler()
     setUserProfile(props.data)
     setAvatar(props.data.avatar)
-  }, [page, myNickname])
+  }, [page, setAvatar, props.data])
 
   // useEffect(() => {
   //   getUserProfileHandler
@@ -120,7 +120,7 @@ export async function getServerSideProps(context) {
   if (!Object.keys(mycookie).length) {
     return {
       redirect: {
-        destination: '/login',
+        destination: '/error',
         permanent: false,
       },
     }

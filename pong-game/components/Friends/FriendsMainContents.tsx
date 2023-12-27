@@ -7,12 +7,14 @@ import { useFriendSetPage, useGetFriends, useGetBlocks, useGetUser } from '@/sto
 import { instance } from '@/util/axios'
 import CustomPagination from '../Pagination/CustomPagination'
 import styles from './FriendsMainContents.module.scss'
+import { useErrorCheck } from '@/store/login'
 
 function FriendsMainContents(): JSX.Element {
   const { tabState, friendPage, setFriendPage } = useFriendSetPage()
   const { setAllFriends, setTotalFriendCount, totalFriendCount } = useGetFriends()
   const { setAllBlocks, setTotalBlockCount, totalBlockCount } = useGetBlocks()
   const { setUser } = useGetUser()
+  const { setApiError } = useErrorCheck()
 
   const getAllFriend = useCallback(async () => {
     try {
@@ -23,9 +25,10 @@ function FriendsMainContents(): JSX.Element {
       setTotalFriendCount(response.data.totalItemCount)
       setUser(null)
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
-  }, [friendPage, setAllFriends, setTotalFriendCount, setUser])
+  }, [friendPage, setAllFriends, setTotalFriendCount, setUser, setApiError])
 
   const getAllBlock = useCallback(async () => {
     try {
@@ -36,9 +39,10 @@ function FriendsMainContents(): JSX.Element {
       setTotalBlockCount(response.data.totalItemCount)
       setUser(null)
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
-  }, [friendPage, setAllBlocks, setTotalBlockCount, setUser])
+  }, [friendPage, setAllBlocks, setTotalBlockCount, setUser, setApiError])
 
   useEffect(() => {
     if (tabState === 'ALL') getAllFriend()

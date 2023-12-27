@@ -12,6 +12,7 @@ import { instance } from '@/util/axios'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { socket } from '@/socket/socket'
 import SideBarContent from './SideBar/SideBarContent'
+import { useErrorCheck } from '@/store/login'
 
 function Layout({ children }: { children: ReactNode }): JSX.Element {
   const [viewNotiBar, setViewNotiBar] = useState<boolean>(false)
@@ -20,6 +21,8 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
   const { setAvatar, setMyNickname } = useNickNameImage()
   const { setModalName } = useModalState()
   const responseModal = useResponseModalState()
+  const { setApiError } = useErrorCheck()
+
   const logoutHandler = async () => {
     try {
       await instance.patch('/auth/signout', {}).then(function (res) {
@@ -29,6 +32,7 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
       setMyNickname(null)
       setAvatar(null)
     } catch (e) {
+      if (e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }
@@ -36,10 +40,6 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
     setModalName('response')
     responseModal.setResponseModalState('로그아웃', '로그아웃 하시겠습니까?', logoutHandler)
   }
-
-  useEffect(()=>{
-console.log('layout')
-  },[])
 
   return (
     <>

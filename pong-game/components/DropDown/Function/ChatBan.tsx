@@ -1,5 +1,7 @@
 import { useModalState, useResponseModalState } from '@/store/store'
 import { instance } from '@/util/axios'
+import { useErrorCheck } from '@/store/login'
+
 interface ChatBanProps {
   channelUserId: number
   nickname: string
@@ -8,6 +10,7 @@ interface ChatBanProps {
 export default function ChatBan(props: ChatBanProps) {
   const { setModalName } = useModalState()
   const responseModal = useResponseModalState()
+  const { setApiError } = useErrorCheck()
 
   const chatUserBanHandler = async () => {
     try {
@@ -19,6 +22,7 @@ export default function ChatBan(props: ChatBanProps) {
           console.log(res)
         })
     } catch (e) {
+      if (e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

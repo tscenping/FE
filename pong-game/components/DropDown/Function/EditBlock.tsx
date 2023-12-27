@@ -3,6 +3,8 @@ import { useGetUser } from '@/store/friend'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { instance } from '@/util/axios'
 import { useGetBlocks } from '@/store/friend'
+import { useErrorCheck } from '@/store/login'
+
 interface EditBlockProps {
   isBlocked: boolean
   friendId: number
@@ -10,11 +12,13 @@ interface EditBlockProps {
   calledFrom?: 'searchUserList'
   setIsDropDownView: (v: boolean) => void
 }
+
 export default function EditBlock(props: EditBlockProps) {
   const { channelUserInfo, setChannelUserInfo } = useJoinChannel()
   const responseModal = useResponseModalState()
   const { setModalName } = useModalState()
   const { user, setUser } = useGetUser()
+  const { setApiError } = useErrorCheck()
 
   const changeItem = (newType) => {
     const result = user
@@ -71,6 +75,7 @@ export default function EditBlock(props: EditBlockProps) {
           changeArrayItem(true, props.nickname)
         })
     } catch (e) {
+      if (e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }
@@ -95,6 +100,7 @@ export default function EditBlock(props: EditBlockProps) {
           // }
         })
     } catch (e) {
+      if (e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

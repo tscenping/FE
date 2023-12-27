@@ -12,11 +12,11 @@ function ChatLog(): JSX.Element {
   const { myNickname } = useNickNameImage()
   const messageEndRef = useRef<HTMLDivElement | null>(null)
 
-  const channelMessage = channelLog.map((message) => {
+  const channelMessage = channelLog.map((message, index) => {
     if (message.eventType) {
       return (
         <ChannelNotice
-          key={message.channelId}
+          key={index}
           nickname={message.nickname}
           eventType={message.eventType}
           channelId={message.channelId}
@@ -27,7 +27,7 @@ function ChatLog(): JSX.Element {
     if (myNickname !== message.nickname) {
       return (
         <OpponentMessage
-          key={message.channelId}
+          key={index}
           nickname={message.nickname}
           message={message.message}
           time={message.time}
@@ -36,7 +36,7 @@ function ChatLog(): JSX.Element {
     } else {
       return (
         <MyMessage
-          key={message.channelId}
+          key={index}
           nickname={message.nickname}
           message={message.message}
           time={message.time}

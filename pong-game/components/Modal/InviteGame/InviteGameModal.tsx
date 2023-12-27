@@ -6,12 +6,15 @@ import { useModalState } from '@/store/store'
 import { instance } from '@/util/axios'
 import CustomRadio from '@/function/Game/CustomRadio'
 import { useLodingState } from '@/store/loding'
+import { useErrorCheck } from '@/store/login'
 
 export default function InviteGameModal() {
   const { setModalName, modalProps } = useModalState()
   const { lodingState, setLodingState } = useLodingState()
   const [gameInvitationId, setGameInvitationId] = useState(null)
   const [gameMode, setGameMode] = useState<'Normal' | 'Special'>(modalProps.gameMode)
+  const { setApiError } = useErrorCheck()
+
   useEffect(() => {
     console.log(modalProps.gameMode)
   }, [])
@@ -37,6 +40,7 @@ export default function InviteGameModal() {
         })
       setModalName(null)
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }

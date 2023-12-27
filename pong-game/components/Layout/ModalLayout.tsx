@@ -14,6 +14,7 @@ import InviteFriend from '../Modal/InviteFriend/InviteFriend'
 import ChannelSetting from '../Modal/ChannelSetting/ChannelSetting'
 import InviteGameModal from '../Modal/InviteGame/InviteGameModal'
 import Mfa from '../Modal/Mfa/Mfa'
+import DuplicateLogin from '../Modal/DuplicateLogin/DuplicateLogin'
 import GameResult from '../Modal/GameResult/GameResult'
 
 function ModalOverlay(): JSX.Element {
@@ -33,7 +34,7 @@ function ModalOverlay(): JSX.Element {
         <div
           className={styles.modalOverlay}
           onClick={() => {
-            if (modalName !== 'mfa') {
+            if (modalName !== 'mfa' && modalName !== 'duplicateLogin') {
               setModalName(null)
             }
           }}
@@ -58,6 +59,7 @@ function ModalContent({}): JSX.Element {
     channelSetting: <ChannelSetting />,
     inviteGame: <InviteGameModal />,
     mfa: <Mfa />,
+    duplicateLogin: <DuplicateLogin />,
     matchResult: <GameResult/>
   }
   return (

@@ -6,6 +6,7 @@ import { useNickNameImage } from '@/store/login'
 import { useModalState } from '@/store/store'
 import QRCode from 'react-qr-code'
 import ModalPageTitle from '@/components/UI/ModalPageTitle'
+import { useErrorCheck } from '@/store/login'
 
 function Mfa(): JSX.Element {
   const [inputValues, setInputValues] = useState(['', '', '', '', '', '']) // 여러 input에 대한 상태 배열
@@ -18,10 +19,10 @@ function Mfa(): JSX.Element {
     useRef<HTMLInputElement>(),
     useRef<HTMLInputElement>(),
   ] // 각 input에 대한 ref 배열
-
   const { mfaQrCode, userId } = useNickNameImage()
   const { setModalName } = useModalState()
   const router = useRouter()
+  const { setApiError } = useErrorCheck()
 
   const handleInputChange = (index, e) => {
     const value = e.target.value
@@ -40,10 +41,13 @@ function Mfa(): JSX.Element {
   }
 
   const mfaSubmit = async (e) => {
-    const mfaCode = inputRefs.map((ref) => ref.current?.value).join('')
-    const datas = { userId: userId, token: mfaCode }
-    console.log(datas)
     e.preventDefault()
+    const mfaCode = inputRefs.map((ref) => ref.current?.value).join('')
+    if (mfaCode.length < 6) {
+      setError('notEnoughNumber')
+      return
+    }
+    const datas = { userId: userId, token: mfaCode }
     try {
       const response = await instance('/auth/signin/mfa', {
         method: 'patch',
@@ -54,9 +58,8 @@ function Mfa(): JSX.Element {
         router.replace('/main')
       }
     } catch (error) {
-      if (error.response.status === 401) {
-        setError('wrongNumber')
-      }
+      if (error.response.data.message === 'MFA 인증에 실패했습니다.') setError('wrongNumber')
+      else if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }
@@ -65,11 +68,17 @@ function Mfa(): JSX.Element {
   return (
     <section className={styles.mfaModalContainer}>
       <ModalPageTitle title="2차인증" subTitle="" />
-      <section className={styles.qrCode}>
-        <QRCode value={mfaQrCode} />
-      </section>
+      {mfaQrCode && (
+        <section className={styles.qrCode}>
+          <QRCode value={mfaQrCode} />
+          <strong className={styles.newQrCodeExplanation}>
+            새로운 QR Code 발급시
+            <br /> 해당 QR Code로 인증을 진행해 주세요.
+          </strong>
+        </section>
+      )}
       <span className={styles.qrCodeExplanation}>
-        &quot;Authenticator&quot; 어플로 위 QR 코드를 촬영 후 나온
+        &quot;Google Authenticator&quot; 어플로 2차인증
         <br />
         여섯자리 숫자를 입력해주세요.
       </span>
@@ -88,6 +97,9 @@ function Mfa(): JSX.Element {
           ))}
         </div>
         {error === 'wrongNumber' && <p className={styles.errorMessage}>잘못된 인증 번호 입니다.</p>}
+        {error === 'notEnoughNumber' && (
+          <p className={styles.errorMessage}>여섯 자리를 모두 입력해주세요.</p>
+        )}
         <button>제 출</button>
       </form>
     </section>

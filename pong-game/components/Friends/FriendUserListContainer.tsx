@@ -8,6 +8,7 @@ import { instance } from '@/util/axios'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { useGetBlocks } from '@/store/friend'
 import { useJoinChannel } from '@/store/chat'
+import { useErrorCheck } from '@/store/login'
 
 interface FriendUserListContainerprops {
   nickname: string
@@ -24,6 +25,8 @@ function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Eleme
   const { channelUserInfo, setChannelUserInfo } = useJoinChannel()
   const { setModalName } = useModalState()
   const { setResponseModalState } = useResponseModalState()
+  const { setApiError } = useErrorCheck()
+
   const baseImg = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
   const userStyle = props.isBlocked //block유저이면 styles.block, block유저가 아니면 OFFLINE, ONLINE에 따라서 css 적용
@@ -64,6 +67,7 @@ function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Eleme
           changeArrayItem(false, props.nickname)
         })
     } catch (e) {
+      if (e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

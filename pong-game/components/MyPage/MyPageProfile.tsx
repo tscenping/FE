@@ -5,6 +5,8 @@ import React, { useState, ChangeEvent, useRef, useEffect } from 'react'
 import { instance } from '@/util/axios'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { useNickNameImage } from '@/store/login'
+import { useErrorCheck } from '@/store/login'
+import { useRouter } from 'next/router'
 
 interface MatchHistoryProps {
   rivalName: string
@@ -54,6 +56,9 @@ export default function MyPageProfile({
   const { setResponseModalState } = useResponseModalState()
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const { avatar, isMfaEnabled, setIsMfaEnabled } = useNickNameImage()
+  const { setApiError } = useErrorCheck()
+  const router = useRouter()
+
   const handleEditProfileMsg = () => {
     if (editProfileMsgFlag) {
       submitStatusMessage()
@@ -82,6 +87,7 @@ export default function MyPageProfile({
           console.log(res)
         })
     } catch (e) {
+      if (e.response.status === 401) setApiError(401)
       alert('입력 메세지를 확인하세요. 모음, 자음만 입력 불가. ')
     }
   }
@@ -102,6 +108,7 @@ export default function MyPageProfile({
         setIsMfaEnabled(response.data.isMfaEnabled)
       }
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }
@@ -115,18 +122,26 @@ export default function MyPageProfile({
       })
       if (response.statusText === 'OK') {
         setIsMfaEnabled(response.data.isMfaEnabled)
+        await instance('/auth/signout', {
+          method: 'patch',
+        })
       }
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }
 
   const mfaEnabledHandler = async () => {
     if (isMfaEnabled) {
-      setResponseModalState('2차인증', '2차 인증을 비활성화 하시겠습니까?', mfaEnabledActive)
+      setResponseModalState('2차인증', '2차 인증 보안을 비활성화 하시겠습니까?', mfaEnabledActive)
       setModalName('response')
     } else {
-      setResponseModalState('2차인증', '2차 인증을 활성화 하시겠습니까?', mfaEnabledInactive)
+      setResponseModalState(
+        '2차인증',
+        '2차 인증 보안을 활성화하시겠습니까? (활성화 할 시 로그인 페이지로 이동합니다.)',
+        mfaEnabledInactive,
+      )
       setModalName('response')
     }
   }
