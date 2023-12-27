@@ -42,17 +42,17 @@ export default function UserProfileInfo(userProfileInfo: UserProfileInfo) {
   const [dropDownState, setDropDownState] = useState(false)
   const { myNickname } = useNickNameImage()
   const baseImg = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
+  console.log('userProfileInfo', userProfileInfo)
 
   function LineThreeContent(props: { title: string; content: string }) {
     return (
       <div className={styles.lineThreeContent}>
         <span className={styles.recordText}>{props.title}</span>
         <br />
-        <span className={styles.recordText}>{props.content}</span>
+        <span className={styles.recordText}>{props.content ? props.content : '-'}</span>
       </div>
     )
   }
-  console.log(myNickname, nickname)
 
   function RenderLadderScore() {
     return (

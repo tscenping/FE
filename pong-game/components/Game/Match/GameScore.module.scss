@@ -16,6 +16,8 @@
       font-size: 32px;
     }
     .leftAvatar {
+      object-fit: cover;
+      border-radius: 50%;
       margin: 0 24px 0 24px;
     }
   }
@@ -24,10 +26,13 @@
     width: 35%;
     align-items: center;
     justify-content: flex-end;
+
     .rightNickname {
       font-size: 32px;
     }
     .rightAvatar {
+      object-fit: cover;
+      border-radius: 50%;
       margin: 0 24px 0 24px;
     }
   }

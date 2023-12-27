@@ -11,11 +11,11 @@ import { instance } from '@/util/axios'
 import { useNickNameImage } from '@/store/login'
 
 interface GameHistoryContents {
-  rivalName: string
-  rivalAvatar: string
-  rivalScore: number
-  myScore: number
-  isWinner: boolean
+  rivalname: string
+  rivalavatar: string
+  rivalscore: number
+  myscore: number
+  iswinner: boolean
 }
 
 interface GameHistoryProps {
@@ -42,9 +42,12 @@ export default function Mypage(props) {
   const { myNickname, setAvatar } = useNickNameImage()
   const getGameHistoryHandler = async () => {
     try {
-      await instance.get(`/users/games/:${myNickname}/?page=${page}`, {}).then(function (res) {
-        setGameHistories(res.data)
-      })
+      if (myNickname !== 'nickname') {
+        await instance.get(`/users/games/${myNickname}/?page=${page}`, {}).then(function (res) {
+          setGameHistories(res.data)
+          console.log(res.data)
+        })
+      }
     } catch (e) {
       console.log(e.message)
     }
@@ -56,7 +59,7 @@ export default function Mypage(props) {
   // }
 
   useEffect(() => {
-    // getGameHistoryHandler()
+    getGameHistoryHandler()
     setUserProfile(props.data)
     setAvatar(props.data.avatar)
   }, [page, setAvatar, props.data])
@@ -73,38 +76,40 @@ export default function Mypage(props) {
       />
       {/* serverSide 데이터 페칭으로 한 데이터 props로 전달 */}
       {userProfile && (
-        <MyPageProfile
-          nickName={userProfile.nickname}
-          avatar={userProfile.avatar}
-          statusMessage={userProfile.statusMessage}
-          loseCount={userProfile.loseCount}
-          winCount={userProfile.winCount}
-          totalCount={userProfile.totalCount}
-          ladderRank={userProfile.ladderRank}
-          ladderScore={userProfile.ladderScore}
-          ladderMaxScore={userProfile.ladderMaxScore}
-        />
+        <>
+          <MyPageProfile
+            nickName={userProfile.nickname}
+            avatar={userProfile.avatar}
+            statusMessage={userProfile.statusMessage}
+            loseCount={userProfile.loseCount}
+            winCount={userProfile.winCount}
+            totalCount={userProfile.totalCount}
+            ladderRank={userProfile.ladderRank}
+            ladderScore={userProfile.ladderScore}
+            ladderMaxScore={userProfile.ladderMaxScore}
+          />
+          <section className={styles.history}>
+            <div className={styles.historyList}>
+              {gameHistories && (
+                <MyPageHistory
+                  gameHistories={gameHistories.gameHistories}
+                  totalItemsCount={gameHistories.totalItemsCount}
+                />
+              )}
+            </div>
+            <div className={styles.pagenation}>
+              {gameHistories && gameHistories.totalItemsCount > 5 && (
+                <CustomPagination
+                  page={page}
+                  setPage={setPage}
+                  itemsCountPerPage={5}
+                  totalItemsCount={gameHistories.totalItemsCount}
+                />
+              )}
+            </div>
+          </section>
+        </>
       )}
-      <section className={styles.history}>
-        <div className={styles.historyList}>
-          {gameHistories && (
-            <MyPageHistory
-              gameHistories={gameHistories.gameHistories}
-              totalItemsCount={gameHistories.totalItemsCount}
-            />
-          )}
-        </div>
-        <div className={styles.pagenation}>
-          {gameHistories && gameHistories.totalItemsCount > 5 && (
-            <CustomPagination
-              page={page}
-              setPage={setPage}
-              itemsCountPerPage={5}
-              totalItemsCount={gameHistories.totalItemsCount}
-            />
-          )}
-        </div>
-      </section>
     </div>
   )
 }

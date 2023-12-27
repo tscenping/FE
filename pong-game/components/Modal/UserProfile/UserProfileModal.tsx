@@ -10,11 +10,11 @@ import { instance } from '@/util/axios'
 import { useErrorCheck } from '@/store/login'
 
 interface GameHistoryContents {
-  rivalName: string
-  rivalAvatar: string
-  rivalScore: number
-  myScore: number
-  isWinner: boolean
+  rivalname: string
+  rivalavatar: string
+  rivalscore: number
+  myscore: number
+  iswinner: boolean
 }
 
 interface GameHistoryProps {
@@ -66,6 +66,7 @@ export default function UserProfile() {
       if (userNickname === undefined) return
       await instance.get(`/users/games/${userNickname}/?page=${page}`, {}).then(function (res) {
         setGameHistories(res.data)
+        console.log(res.data)
       })
     } catch (e) {
       // alert('존재하지 않는 유저입니다.')
@@ -104,6 +105,7 @@ export default function UserProfile() {
               {gameHistories && (
                 <MyPageHistory
                   gameHistories={gameHistories.gameHistories}
+                  targetNickname={userNickname}
                   totalItemsCount={gameHistories.totalItemsCount}
                 />
               )}

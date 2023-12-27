@@ -8,16 +8,19 @@ export default function GameSocketHandler() {
   const { matchGameState } = useMatchGameState()
 
   useEffect(() => {
-    console.log(matchGameState)
-    if (router.pathname === '/match') {
+    // console.log(matchGameState)
+    if (router.pathname === '/match' && matchGameState.gameId !== -1) {
       gameSocket.connect()
-      gameSocket.emit('gameRequest', { gameId: matchGameState.gameId })
+
+      // gameSocket.emit('gameRequest', { gameId: matchGameState.gameId })
       // gameSocket.on('connect', () => {
       //   console.log('game connect')
       // })
     }
     return () => {
-      gameSocket.disconnect()
+      if (router.pathname === '/match' && matchGameState.gameId !== -1) {
+        gameSocket.disconnect()
+      }
     }
   }, [router.pathname])
   return <></>

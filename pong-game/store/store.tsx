@@ -25,6 +25,7 @@ interface ModalState {
     | 'inviteGame'
     | 'mfa'
     | 'duplicateLogin'
+    | 'matchResult'
     | null
   setModalName: (
     modalName:
@@ -43,6 +44,7 @@ interface ModalState {
       | 'inviteGame'
       | 'mfa'
       | 'duplicateLogin'
+      | 'matchResult'
       | null,
   ) => void
   modalProps?: ModalProps | null

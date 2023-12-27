@@ -15,6 +15,7 @@ import ChannelSetting from '../Modal/ChannelSetting/ChannelSetting'
 import InviteGameModal from '../Modal/InviteGame/InviteGameModal'
 import Mfa from '../Modal/Mfa/Mfa'
 import DuplicateLogin from '../Modal/DuplicateLogin/DuplicateLogin'
+import GameResult from '../Modal/GameResult/GameResult'
 
 function ModalOverlay(): JSX.Element {
   const { modalName, setModalName } = useModalState()
@@ -33,7 +34,7 @@ function ModalOverlay(): JSX.Element {
         <div
           className={styles.modalOverlay}
           onClick={() => {
-            if (modalName !== 'mfa' && modalName !== 'duplicateLogin') {
+            if (modalName !== 'mfa' && modalName !== 'duplicateLogin'&& modalName !== 'matchResult') {
               setModalName(null)
             }
           }}
@@ -59,6 +60,7 @@ function ModalContent({}): JSX.Element {
     inviteGame: <InviteGameModal />,
     mfa: <Mfa />,
     duplicateLogin: <DuplicateLogin />,
+    matchResult: <GameResult/>
   }
   return (
     <>

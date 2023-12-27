@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import profileImage from '@/public/img/mypage/profileImage.svg'
 import styles from './MatchHistory.module.scss'
+import { useNickNameImage } from '@/store/login'
 
 interface MatchHistoryProps {
   rivalName: string
@@ -8,6 +8,7 @@ interface MatchHistoryProps {
   rivalScore: number
   myScore: number
   isWinner: boolean
+  targetNickname?: string
 }
 
 export default function MatchHistory({
@@ -16,20 +17,24 @@ export default function MatchHistory({
   rivalScore,
   myScore,
   isWinner,
+  targetNickname,
 }: MatchHistoryProps) {
+  const { myNickname, avatar } = useNickNameImage()
+
+  // console.log(rivalAvatar, avatar)
   return (
     <div className={styles.historyList}>
       <section className={styles.historyContent}>
         <div className={styles.result}>{isWinner && 'Win'}</div>
         <div className={styles.leftUser}>
           <Image
-            src={profileImage}
+            src={avatar}
             alt={'profileImage'}
             // className={styles.radioImg}
             width={64}
-            // height={40}
+            height={64}
           />
-          abcdefghhhh
+          {targetNickname ? targetNickname : myNickname}
         </div>
         <div className={styles.score}>
           {myScore} : {rivalScore}
@@ -37,11 +42,11 @@ export default function MatchHistory({
         <div className={styles.rightUser}>
           {rivalName}
           <Image
-            src={profileImage}
+            src={rivalAvatar}
             alt={'profileImage'}
             // className={styles.radioImg}
             width={64}
-            // height={40}
+            height={64}
           />
         </div>
         <div className={styles.result}>{!isWinner && 'Win'}</div>

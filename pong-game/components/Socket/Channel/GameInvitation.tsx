@@ -4,6 +4,8 @@ import toast from 'react-hot-toast'
 import styles from './GameInvitation.module.scss'
 import { instance } from '@/util/axios'
 import { useRouter, NextRouter } from 'next/router'
+import { useLodingState } from '@/store/loding'
+import { useModalState } from '@/store/store'
 import { useErrorCheck } from '@/store/login'
 
 interface toastData {
@@ -18,6 +20,8 @@ export default function GameInvitation() {
   const router: NextRouter = useRouter()
   const { setApiError } = useErrorCheck()
 
+  const { setLodingState } = useLodingState()
+  const { setModalName } = useModalState()
   const notify = (props: toastData) =>
     toast(
       (t) => {
@@ -26,6 +30,8 @@ export default function GameInvitation() {
           try {
             await instance.post('/game/accept', { gameInvitationId: invitationId }).then((res) => {
               console.log('수락 성공')
+              setLodingState({ isLoding: false })
+              setModalName(null)
             })
           } catch (e) {
             if (e.response.status === 401) setApiError(401)
