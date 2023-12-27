@@ -34,7 +34,7 @@ function ModalOverlay(): JSX.Element {
         <div
           className={styles.modalOverlay}
           onClick={() => {
-            if (modalName !== 'mfa' && modalName !== 'duplicateLogin') {
+            if (modalName !== 'mfa' && modalName !== 'duplicateLogin'&& modalName !== 'matchResult') {
               setModalName(null)
             }
           }}

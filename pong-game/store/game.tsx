@@ -26,7 +26,7 @@ export const useMatchGameState = create<MatchGameState>((set) => ({
     isWin: boolean  // 승리 여부
     myRadderScore: number | null // 나의 래더 점수
     rivalRadderScore: number | null // 상대방 래더 점수
-    gameType: 'NORMAL' | 'SPECIAL' | 'RADDER' // 진행했던 게임 타입
+    gameType: 'NORMAL' | 'SPECIAL' | 'RADDER' | 'NONE' // 진행했던 게임 타입
   }
   
   interface MatchResultState{

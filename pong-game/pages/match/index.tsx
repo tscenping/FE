@@ -13,6 +13,12 @@ export default function Game() {
   useEffect(() => {
     setLodingState({ isLoding: false })
     setModalName(null)
+    console.log(1)
+    document.body.style.overflowY = 'hidden'
+    document.body.style.overflowX = 'hidden'
+    return ()=>{
+      document.body.style.overflow = 'auto'
+    }
   }, [])
 
   return (

@@ -25,6 +25,17 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
     }
   }
 
+  useEffect(()=>{
+    const intervalState = setInterval(()=>{
+      if(!document.cookie){
+        router.push('/login')
+      }
+    }, 5000)
+    return ()=>{
+      clearInterval(intervalState)
+    }
+  },[])
+
   useEffect(() => {
     if (isLoginPage) {
       if (document.cookie) {
