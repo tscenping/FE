@@ -57,44 +57,47 @@ export default function Home() {
   }, [gameMatchHandler])
 
   return (
-    <div className={styles.backGround}>
-      {!lodingState.isLoding &&
-        (gameState ? (
-          gameState === 'nomal' && (
-            <NormalGame setPageState={setPageState} setGameState={setGameState} />
-          )
-        ) : (
-          <div>
-            <section>
-              <div className={styles.title}>
-                <PageTitle
-                  title="Game Start"
-                  subTitle="일반게임과 래더게임 중 하나를 선택해주세요."
-                />
-              </div>
-            </section>
-            <section className={styles.btn}>
-              <button className={styles.gameBtn} onClick={onClickLadderBtn}>
-                Ladder
-              </button>
-              <button className={styles.gameBtn} onClick={onClickNomalBtn}>
-                Normal
-              </button>
-            </section>
-          </div>
-        ))}
-      <section className={styles.pageNation}>
-        {pageState === 1 ? (
-          <div className={styles.nowPage}></div>
-        ) : (
-          <div className={styles.prvPage}></div>
-        )}
-        {pageState === 2 ? (
-          <div className={styles.nowPage}></div>
-        ) : (
-          <div className={styles.prvPage}></div>
-        )}
-      </section>
-    </div>
+    <>
+      {!lodingState.isLoding && (
+        <div className={styles.backGround}>
+          {gameState ? (
+            gameState === 'nomal' && (
+              <NormalGame setPageState={setPageState} setGameState={setGameState} />
+            )
+          ) : (
+            <div>
+              <section>
+                <div className={styles.title}>
+                  <PageTitle
+                    title="Game Start"
+                    subTitle="일반게임과 래더게임 중 하나를 선택해주세요."
+                  />
+                </div>
+              </section>
+              <section className={styles.btn}>
+                <button className={styles.gameBtn} onClick={onClickLadderBtn}>
+                  Ladder
+                </button>
+                <button className={styles.gameBtn} onClick={onClickNomalBtn}>
+                  Normal
+                </button>
+              </section>
+            </div>
+          )}
+          <section className={styles.pageNation}>
+            {pageState === 1 ? (
+              <div className={styles.nowPage}></div>
+            ) : (
+              <div className={styles.prvPage}></div>
+            )}
+            {pageState === 2 ? (
+              <div className={styles.nowPage}></div>
+            ) : (
+              <div className={styles.prvPage}></div>
+            )}
+          </section>
+        </div>
+      )}
+    </>
   )
 }

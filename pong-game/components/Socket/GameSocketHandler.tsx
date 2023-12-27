@@ -11,6 +11,13 @@ export default function GameSocketHandler() {
     // console.log(matchGameState)
     if (router.pathname === '/match' && matchGameState.gameId !== -1) {
       gameSocket.connect()
+      gameSocket.on('connect', () => {
+        console.log('gameSocket connect')
+      })
+      gameSocket.on('disconnect', () => {
+        console.log('gameSocket disconnect')
+        router.push('/main')
+      })
 
       // gameSocket.emit('gameRequest', { gameId: matchGameState.gameId })
       // gameSocket.on('connect', () => {
@@ -19,6 +26,8 @@ export default function GameSocketHandler() {
     }
     return () => {
       if (router.pathname === '/match' && matchGameState.gameId !== -1) {
+        gameSocket.off('connect')
+        gameSocket.off('disconnect')
         gameSocket.disconnect()
       }
     }
