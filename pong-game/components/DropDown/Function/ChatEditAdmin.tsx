@@ -1,6 +1,7 @@
 import { useJoinChannel } from '@/store/chat'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { instance } from '@/util/axios'
+import { useErrorCheck } from '@/store/login'
 
 interface ChatEditAdminProps {
   channelUserType: 'OWNER' | 'ADMIN' | 'MEMBER'
@@ -13,6 +14,8 @@ export default function ChatEditAdmin(props: ChatEditAdminProps) {
   const { setModalName } = useModalState()
   const responseModal = useResponseModalState()
   const { channelUserInfo, setChannelUserInfo } = useJoinChannel()
+  const { setApiError } = useErrorCheck()
+
   const changeArrayItem = (newType, idToChange) => {
     const result = channelUserInfo.map((item) => {
       if (item.nickname === idToChange) {
@@ -47,6 +50,7 @@ export default function ChatEditAdmin(props: ChatEditAdminProps) {
           }
         })
     } catch (e) {
+      if (e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

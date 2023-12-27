@@ -5,6 +5,7 @@ import CustomPagination from '@/components/Pagination/CustomPagination'
 import RankUserList from '@/components/Rank/RankUserList'
 import axios from 'axios'
 import https from 'https'
+import { useRouter } from 'next/router'
 
 interface RankInfo {
   rankUsers: RankUsers[]
@@ -19,10 +20,11 @@ interface RankUsers {
 
 export default function Rank(props) {
   const [page, setPage] = useState(1)
-  const [rankData, setRankData] = useState<RankInfo>(props.data)
+  const [rankData, setRankData] = useState<RankInfo>(null)
   const [paginatedRankUsers, setPaginatedRankUsers] = useState<RankUsers[]>(
     props.data.rankUsers.slice(0, 10),
   )
+  const router = useRouter()
   // console.log(props.data)
   // useEffect(() => {}, [])
   // const getRankListHandler = async () => {
@@ -39,8 +41,9 @@ export default function Rank(props) {
   // }
   useEffect(() => {
     setPaginatedRankUsers(props.data.rankUsers.slice((page - 1) * 10, page * 10))
-    // console.log(rankData.totalItemCount)
-  }, [page]) // 여기에 api호출 넣으면 될듯~
+    setRankData(props.data)
+    if (!document.cookie) router.push('/error')
+  }, [page, props.data, setRankData]) // 여기에 api호출 넣으면 될듯~
 
   return (
     <div className={styles.backGround}>

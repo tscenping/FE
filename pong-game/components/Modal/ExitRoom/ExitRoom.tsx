@@ -3,6 +3,7 @@ import { useGetChannels, useJoinChannel, useJoinProtectedChannel } from '@/store
 import { useModalState } from '@/store/store'
 import { instance } from '@/util/axios'
 import { socket } from '@/socket/socket'
+import { useErrorCheck } from '@/store/login'
 
 function ExitRoom(): JSX.Element {
   const { setPasswordInputRender } = useJoinProtectedChannel() //채널 나가기 모달에 띄워줄 채널 타이틀, api요청에 필요한 채널 id, 채널 나가기 성공할 경우 컴포넌트를 바꿔줄 플래그
@@ -17,6 +18,7 @@ function ExitRoom(): JSX.Element {
   } = useGetChannels()
   const { channelId, setChannelUserInfo, channelTitle, setChannelId } = useJoinChannel()
   const { setModalName } = useModalState() //"확인" 버튼을 클릭했을 때, "취소" 버튼을 클릭했을 때 모달을 꺼주기 위한 set함수
+  const { setApiError } = useErrorCheck()
 
   const exitRoomHandler = async () => {
     //"확인" 버튼을 클릭했을 때, api요청을 실행할 함수
@@ -54,6 +56,7 @@ function ExitRoom(): JSX.Element {
         setPasswordInputRender('DEFAULT') //"chatlog"의 컴포넌트를 "DEFAULT"로 바꿔준다.
       }
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }

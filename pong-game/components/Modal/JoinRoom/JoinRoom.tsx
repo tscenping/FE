@@ -7,6 +7,7 @@ import {
   useNavBarState,
 } from '@/store/chat'
 import { useModalState } from '@/store/store'
+import { useErrorCheck } from '@/store/login'
 
 function JoinRoom(): JSX.Element {
   const { title, readyChannelId, setReadyChannelId, setTitle, readyChannelType } =
@@ -23,6 +24,7 @@ function JoinRoom(): JSX.Element {
   } = useJoinChannel()
   const { setModalName } = useModalState()
   const { setTabState } = useNavBarState()
+  const { setApiError } = useErrorCheck()
 
   const joinRoomHandler = async () => {
     try {
@@ -46,6 +48,7 @@ function JoinRoom(): JSX.Element {
         setModalName(null)
       }
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       setModalName(null)
     }
   }

@@ -5,10 +5,13 @@ import { useRouter } from 'next/router'
 import { socket } from '@/socket/socket'
 import { useGetBlocks } from '@/store/friend'
 import { useJoinChannel, useJoinProtectedChannel, useNavBarState } from '@/store/chat'
+import { useModalState } from '@/store/store'
+import { useErrorCheck } from '@/store/login'
 import styles from './PrivateInvitation.module.scss'
 
 function PrivateInvitation(): JSX.Element {
   const router = useRouter()
+  const { setModalName } = useModalState()
   const { allBlocks } = useGetBlocks()
   const {
     setChannelLogEmpty,
@@ -20,6 +23,7 @@ function PrivateInvitation(): JSX.Element {
   } = useJoinChannel()
   const { setPasswordInputRender } = useJoinProtectedChannel()
   const { setTabState } = useNavBarState()
+  const { setApiError } = useErrorCheck()
 
   const acceptHandler = useCallback(
     async (t, invitationId) => {
@@ -37,6 +41,7 @@ function PrivateInvitation(): JSX.Element {
           method: 'get',
           data: JSON.stringify(postData),
         })
+        setModalName(null)
         setChannelLogEmpty([])
         setPasswordInputRender('CHANNEL')
         setChannelTitle(response.data.channelName)
@@ -47,6 +52,7 @@ function PrivateInvitation(): JSX.Element {
         setChannelAuth('MEMBER')
         toast.remove(t.id)
       } catch (error) {
+        if (error.response.status === 401) setApiError(401)
         toast.remove(t.id)
         console.log('Error : ', error)
       }
@@ -61,6 +67,8 @@ function PrivateInvitation(): JSX.Element {
       setChannelUserInfo,
       setPasswordInputRender,
       setTabState,
+      setModalName,
+      setApiError,
     ],
   )
 

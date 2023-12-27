@@ -6,12 +6,13 @@ import UserList from './UserList'
 import { instance } from '@/util/axios'
 import { useGetFriends } from '@/store/friend'
 import { useModalState } from '@/store/store'
+import { useErrorCheck } from '@/store/login'
 
 function FriendUsersModal(): JSX.Element {
   const [page, setPage] = useState(1)
   const { setModalName, modalProps } = useModalState()
-
   const { allFriends, setAllFriends, totalFriendCount } = useGetFriends()
+  const { setApiError } = useErrorCheck()
 
   const getAllFriendHandler = useCallback(async () => {
     try {
@@ -20,9 +21,10 @@ function FriendUsersModal(): JSX.Element {
       })
       setAllFriends(response.data.friends)
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
-  }, [page, setAllFriends])
+  }, [page, setAllFriends, setApiError])
 
   const modalOffHandler = () => {
     setModalName(null)

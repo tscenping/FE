@@ -6,6 +6,7 @@ import { instance } from '@/util/axios'
 import { useGetChannels } from '@/store/chat'
 import CustomPagination from '../Pagination/CustomPagination'
 import { useNavBarState } from '@/store/chat'
+import { useErrorCheck } from '@/store/login'
 
 function ChatRoomList(): JSX.Element {
   const {
@@ -22,6 +23,7 @@ function ChatRoomList(): JSX.Element {
     totalMe,
   } = useGetChannels()
   const { tabState } = useNavBarState()
+  const { setApiError } = useErrorCheck()
 
   const getAllChannels = useCallback(async () => {
     try {
@@ -31,9 +33,10 @@ function ChatRoomList(): JSX.Element {
       setAllChannels(response.data.channels)
       setTotalAll(response.data.totalDataSize)
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
-  }, [setAllChannels, setTotalAll])
+  }, [setAllChannels, setTotalAll, setApiError])
 
   const getMeChannels = useCallback(async () => {
     try {
@@ -43,9 +46,10 @@ function ChatRoomList(): JSX.Element {
       setMeChannels(response.data.channels)
       setTotalMe(response.data.totalDataSize)
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
-  }, [setMeChannels, setTotalMe])
+  }, [setMeChannels, setTotalMe, setApiError])
 
   const getDmChannels = useCallback(async () => {
     try {
@@ -55,9 +59,10 @@ function ChatRoomList(): JSX.Element {
       setDmChannels(response.data.dmChannels)
       setTotalDm(response.data.totalItemCount)
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
-  }, [setDmChannels, setTotalDm])
+  }, [setDmChannels, setTotalDm, setApiError])
 
   useEffect(() => {
     getAllChannels()

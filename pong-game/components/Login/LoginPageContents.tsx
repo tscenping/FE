@@ -9,6 +9,7 @@ import Loading from './Loading'
 import { useNickNameImage } from '@/store/login'
 import { useModalState } from '@/store/store'
 import { instance } from '@/util/axios'
+import { useErrorCheck } from '@/store/login'
 
 interface siginInResponse {
   userId: number
@@ -20,10 +21,11 @@ interface siginInResponse {
 function LoginPageContents(): JSX.Element {
   const [responseData, setResponseData] = useState<siginInResponse>()
   const [codeValue, setCodeValue] = useState<string>('')
-  const { setAvatar, setMyNickname, setIsMfaEnabled, setMfaQrCOde, setUserId, mfaQrCode } =
+  const { setAvatar, setMyNickname, setIsMfaEnabled, setMfaQrCOde, setUserId, isMfaEnabled } =
     useNickNameImage()
   const { setModalName } = useModalState()
   const router = useRouter()
+  const { setApiError } = useErrorCheck()
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -37,14 +39,14 @@ function LoginPageContents(): JSX.Element {
         setMyNickname(null)
         router.replace('/login/info')
       } else {
-        if (mfaQrCode) {
+        if (isMfaEnabled) {
           setModalName('mfa')
         } else {
           router.replace('/main')
         }
       }
     }
-  }, [responseData, router, mfaQrCode, setAvatar, setModalName, setMyNickname])
+  }, [responseData, router, isMfaEnabled, setAvatar, setModalName, setMyNickname])
 
   useEffect(() => {
     if (!codeValue) {
@@ -64,7 +66,7 @@ function LoginPageContents(): JSX.Element {
             setResponseData(res.data)
             setIsMfaEnabled(res.data.isMfaEnabled)
             setUserId(res.data.userId)
-            if (res.data.mfaUrl && res.data.isMfaEnabled) {
+            if (res.data.isMfaEnabled) {
               setMfaQrCOde(res.data.mfaUrl)
               setModalName('mfa')
             }
@@ -72,13 +74,11 @@ function LoginPageContents(): JSX.Element {
         }
       } catch (error) {
         console.error('Error fetching data:', error)
-        if (error.response.status === 401) {
-          router.replace('/login')
-        }
+        if (error.response.status === 401) setApiError(401)
       }
     }
     fetchData()
-  }, [codeValue, router, setIsMfaEnabled, setMfaQrCOde, setModalName, setUserId])
+  }, [codeValue, router, setIsMfaEnabled, setMfaQrCOde, setModalName, setUserId, setApiError])
 
   return (
     <>

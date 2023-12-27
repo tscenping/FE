@@ -1,5 +1,6 @@
 import { useModalState, useResponseModalState } from '@/store/store'
 import { instance } from '@/util/axios'
+import { useErrorCheck } from '@/store/login'
 
 interface ChatMuteProps {
   channelUserId: number
@@ -10,6 +11,8 @@ interface ChatMuteProps {
 export default function ChatMute(props: ChatMuteProps) {
   const { setModalName } = useModalState()
   const responseModal = useResponseModalState()
+  const { setApiError } = useErrorCheck()
+
   const chatUserMuteHandler = async () => {
     console.log(process.env.NEXT_PUBLIC_API_ENDPOINT)
     try {
@@ -21,6 +24,7 @@ export default function ChatMute(props: ChatMuteProps) {
           console.log(res)
         })
     } catch (e) {
+      if (e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

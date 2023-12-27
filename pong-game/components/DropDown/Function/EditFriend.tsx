@@ -2,6 +2,7 @@ import { useJoinChannel } from '@/store/chat'
 import { useModalState, useResponseModalState } from '@/store/store'
 import { instance } from '@/util/axios'
 import { useGetFriends, useGetUser } from '@/store/friend'
+import { useErrorCheck } from '@/store/login'
 
 interface EditFriendProps {
   isFriend: boolean
@@ -10,13 +11,14 @@ interface EditFriendProps {
   calledFrom?: 'searchUserList'
   setIsDropDownView: (v: boolean) => void
 }
+
 export default function EditFriend(props: EditFriendProps) {
   const { setModalName } = useModalState()
   const responseModal = useResponseModalState()
   const { channelUserInfo, setChannelUserInfo } = useJoinChannel()
   const { setTotalFriendCount, totalFriendCount } = useGetFriends()
-
   const { user, setUser } = useGetUser()
+  const { setApiError } = useErrorCheck()
 
   const changeItem = (newType) => {
     const result = user
@@ -71,6 +73,7 @@ export default function EditFriend(props: EditFriendProps) {
           changeArrayItem(true, props.nickname)
         })
     } catch (e) {
+      if (e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }
@@ -94,6 +97,7 @@ export default function EditFriend(props: EditFriendProps) {
           changeArrayItem(false, props.nickname)
         })
     } catch (e) {
+      if (e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

@@ -2,9 +2,11 @@ import { ReactNode, useEffect } from 'react'
 import { useNickNameImage } from '@/store/login'
 import { instance } from '@/util/axios'
 import { useRouter, NextRouter } from 'next/router'
+import { useErrorCheck } from '@/store/login'
 
 export default function LoginCheck({ children }: { children: ReactNode }) {
   const { setMyNickname, setAvatar, avatar, myNickname } = useNickNameImage()
+  const { setApiError, apiError } = useErrorCheck()
   const router: NextRouter = useRouter()
   const isLoginPage = router.pathname === '/login'
   const isSignPage = router.pathname === '/login/info'
@@ -17,7 +19,8 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
           setAvatar(res.data.avatar)
         }
       })
-    } catch (e) {
+    } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       router.push('/login/info')
     }
   }
@@ -33,8 +36,7 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
       }
     } else if (isSignPage && myNickname !== null && avatar !== null) {
       router.push('/main')
-    }
-    if (!document.cookie && !isLoginPage) {
+    } else if (!document.cookie && !isLoginPage && !apiError && router.pathname !== '/error') {
       router.push('/login')
     }
   }, [router.pathname])
@@ -60,7 +62,7 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
     if (isLoginPage) {
       return
     } else {
-      if (!document.cookie) {
+      if (!document.cookie && !apiError) {
         router.push('/login')
       } else if (myNickname === null || avatar === null) {
         router.push('/login/info')

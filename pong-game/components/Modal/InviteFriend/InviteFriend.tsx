@@ -3,11 +3,13 @@ import Image from 'next/image'
 import { useReadyToChannel, useJoinChannel } from '@/store/chat'
 import { useModalState } from '@/store/store'
 import { instance } from '@/util/axios'
+import { useErrorCheck } from '@/store/login'
 
 function InviteFriend(): JSX.Element {
   const { title, readyChannelId, dmAvatar } = useReadyToChannel()
   const { channelId } = useJoinChannel()
   const { setModalName } = useModalState()
+  const { setApiError } = useErrorCheck()
 
   const inviteUserHandler = async () => {
     try {
@@ -20,6 +22,7 @@ function InviteFriend(): JSX.Element {
         setModalName(null)
       }
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }

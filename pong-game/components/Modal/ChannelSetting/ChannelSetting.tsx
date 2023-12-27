@@ -5,6 +5,7 @@ import { useSettingRoomNavBarState, useJoinChannel } from '@/store/chat'
 import PasswordInput from './PasswordInput'
 import { instance } from '@/util/axios'
 import { useModalState, useResponseModalState } from '@/store/store'
+import { useErrorCheck } from '@/store/login'
 
 function ChannelSetting(): JSX.Element {
   const [error, setError] = useState('')
@@ -13,6 +14,7 @@ function ChannelSetting(): JSX.Element {
   const { setModalName } = useModalState()
   const responseModal = useResponseModalState()
   const passwordRef = useRef<HTMLInputElement>()
+  const { setApiError } = useErrorCheck()
   const koreanRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g
 
   const passwordSubmitHandler = async (e) => {
@@ -43,6 +45,7 @@ function ChannelSetting(): JSX.Element {
         setModalName('response')
       }
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }

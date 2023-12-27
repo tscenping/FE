@@ -6,6 +6,7 @@ import CreateRoomInput from './CreateRoomInput/CreateRoomInput'
 import { instance } from '@/util/axios'
 import { useModalState } from '@/store/store'
 import { useGetChannels, useJoinChannel, useJoinProtectedChannel } from '@/store/chat'
+import { useErrorCheck } from '@/store/login'
 
 function CreateChatRoom(): JSX.Element {
   const { tabState, setTabState } = useCreateRoomNavBarState()
@@ -23,6 +24,7 @@ function CreateChatRoom(): JSX.Element {
   } = useJoinChannel()
   const titleRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
+  const { setApiError } = useErrorCheck()
 
   const createChannelHandler = async (channelType, password = null) => {
     const koreanRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g
@@ -93,6 +95,7 @@ function CreateChatRoom(): JSX.Element {
       titleRef.current.value = '' //기존에 남아있던 값을 비워준다.
       channelType !== 'PRIVATE' ? (passwordRef.current.value = '') : '' //채널의 타입이 "PRIVATE"가 아니라면 패스워드값을 비워준다.
     } catch (error) {
+      if (error.response.status === 401) setApiError(401)
       console.log('Api Request fail : ', error)
     }
   }

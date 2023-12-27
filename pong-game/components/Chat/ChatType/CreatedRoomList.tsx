@@ -4,6 +4,7 @@ import passwordRoom from '../../../public/img/chat/lock.svg'
 import { instance } from '@/util/axios'
 import { useJoinChannel, useJoinProtectedChannel, useReadyToChannel } from '@/store/chat'
 import { useModalState } from '@/store/store'
+import { useErrorCheck } from '@/store/login'
 
 interface CreatedRoomListProps {
   title: string //해당 채널의 타이틀
@@ -28,6 +29,8 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
   } = useJoinChannel()
   const { setModalName } = useModalState()
   const { setTitle, setReadyChannelId, setReadyChannelType } = useReadyToChannel()
+  const { setApiError } = useErrorCheck()
+
   const passwordIconClassName = props.channelType === 'PROTECTED' ? styles.show : styles.none
 
   const joinChannelHandler = async () => {
@@ -50,6 +53,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
           setChannelId(props.channelId)
         }
       } catch (error) {
+        if (error.response.status === 401) setApiError(401)
         console.log('Error : ', error)
       }
     } else {
@@ -73,6 +77,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
             setChannelId(props.channelId)
           }
         } catch (error) {
+          if (error.response.status === 401) setApiError(401)
           console.log('Error : ', error)
         }
       } else {
@@ -87,10 +92,10 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
         } else {
           try {
             setReadyChannelId(props.channelId)
-
             setTitle(props.title)
             setModalName('joinRoom') //"PUBLIC"채널에 join 할 시에는 모달창을 띄워서 한번 더 참여 여부를 물어본다.
           } catch (error) {
+            if (error.response.status === 401) setApiError(401)
             console.log('Error : ', error)
           }
         }

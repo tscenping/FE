@@ -5,6 +5,7 @@ import styles from './InputNickImage.module.scss'
 import { instance } from '@/util/axios'
 import NickNameInput from './NickNameInput'
 import { useRouter } from 'next/router'
+import { useErrorCheck } from '@/store/login'
 
 const defaultProfileImage = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
@@ -14,6 +15,7 @@ function InputNickImage(): JSX.Element {
   const [isValidNick, setIsValidNick] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
+  const { setApiError } = useErrorCheck()
   const patternSpecial = /[~₩;'"!@#$%^&*()_+|<>?:{}\s]/ //특수문자 입력 정규식
 
   /* 아바타 사진 리사이징 및 base64 변환 함수 */
@@ -74,6 +76,7 @@ function InputNickImage(): JSX.Element {
           router.replace('/main')
         }
       } catch (error) {
+        if (error.response.status === 401) setApiError(401)
         console.log('Error : ', error)
       }
       setIsValidNick(false)
