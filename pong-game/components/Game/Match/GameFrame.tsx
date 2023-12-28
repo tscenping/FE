@@ -138,12 +138,53 @@ export default function GameFrame() {
 
     setTimeout(() => {
       gameSocket.emit('gameRequest', { gameId: matchGameState.gameId })
-      console.log('gameRequest')
+      console.log('gameRequest', matchGameState.gameId)
     }, 1000)
 
     const canvas = canvasRef.current
     const context = canvas.getContext('2d')
 
+    function loop() {
+      requestAnimationFrame(loop)
+
+      //초기화
+      context.clearRect(0, 0, canvas.width, canvas.height)
+
+      //배경
+      context.fillStyle = canvasColor
+      context.fillRect(0, 0, canvas.width, canvas.height)
+
+      //중앙선
+      context.fillStyle = 'lightgrey'
+      context.fillRect(canvas.width / 2 - 5, 0, 10, canvas.height)
+
+      // 라켓
+      context.fillStyle = raketColor
+      context.fillRect(myRacket.x, myRacket.y, myRacket.width, myRacket.height)
+      context.fillRect(rivalRacket.x, rivalRacket.y, rivalRacket.width, rivalRacket.height)
+
+      // 공
+      context.fillStyle = ballColor
+      // context.fillRect(ball.x, ball.y, ball.width, ball.height)
+      context.beginPath() // 경로 그리기 시작
+      context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2) // 원 그리기
+      context.fillStyle = ballColor // 공의 색상 지정
+      context.fill() // 채우기
+      context.closePath() // 경로 그리기 종료
+
+      // 라켓 이동 최댓값
+      myRacket.y += myRacket.dy
+      if (myRacket.y < 0) {
+        myRacket.y = 0
+      } else if (myRacket.y > canvas.height - myRacket.height) {
+        myRacket.y = canvas.height - myRacket.height
+      }
+
+      return () => {
+        gameSocket.off('matchStatus')
+      }
+    }
+    const animationId = requestAnimationFrame(loop)
     setTimeout(() => {
       context.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -170,46 +211,6 @@ export default function GameFrame() {
     gameSocket.on('matchStatus', matchStatusHandler)
     gameSocket.once('gameStart', () => {
       console.log('gameStart')
-      function loop() {
-        requestAnimationFrame(loop)
-
-        //초기화
-        context.clearRect(0, 0, canvas.width, canvas.height)
-
-        //배경
-        context.fillStyle = canvasColor
-        context.fillRect(0, 0, canvas.width, canvas.height)
-
-        //중앙선
-        context.fillStyle = 'lightgrey'
-        context.fillRect(canvas.width / 2 - 5, 0, 10, canvas.height)
-
-        // 라켓
-        context.fillStyle = raketColor
-        context.fillRect(myRacket.x, myRacket.y, myRacket.width, myRacket.height)
-        context.fillRect(rivalRacket.x, rivalRacket.y, rivalRacket.width, rivalRacket.height)
-
-        // 공
-        context.fillStyle = ballColor
-        // context.fillRect(ball.x, ball.y, ball.width, ball.height)
-        context.beginPath() // 경로 그리기 시작
-        context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2) // 원 그리기
-        context.fillStyle = ballColor // 공의 색상 지정
-        context.fill() // 채우기
-        context.closePath() // 경로 그리기 종료
-
-        // 라켓 이동 최댓값
-        myRacket.y += myRacket.dy
-        if (myRacket.y < 0) {
-          myRacket.y = 0
-        } else if (myRacket.y > canvas.height - myRacket.height) {
-          myRacket.y = canvas.height - myRacket.height
-        }
-
-        return () => {
-          gameSocket.off('matchStatus')
-        }
-      }
 
       //키 입력 이벤트 리스너
 
@@ -217,16 +218,23 @@ export default function GameFrame() {
       // function (e) {
 
       document.addEventListener('keyup', keyUpEventHandler)
-      const animationId = requestAnimationFrame(loop)
 
       return () => {
         document.removeEventListener('keydown', keyDownEventHandler)
         document.removeEventListener('keyup', keyUpEventHandler)
-        gameSocket.off('matchStatus')
-        cancelAnimationFrame(animationId)
         console.log('event listener removed')
+        gameSocket.off('matchStatus')
       }
     })
+    return () => {
+      document.removeEventListener('keydown', keyDownEventHandler)
+      document.removeEventListener('keyup', keyUpEventHandler)
+      console.log('event listener removed')
+      cancelAnimationFrame(animationId)
+      gameSocket.off('serverGameReady')
+      gameSocket.off('matchStatus')
+      gameSocket.off('gameStart')
+    }
   }, [])
 
   return (

@@ -86,7 +86,7 @@ export default function GameResult() {
               {matchResultState.isWin && (
                 <Image src={winImg} alt={'winImg'} width={32} height={32} />
               )}
-              <Image src={avatar} alt={'leftImg'} width={120} height={120} />
+              <Image src={avatar} alt={'leftImg'} width={120} height={120} className={styles.profileimg}/>
             </span>
             <div className={styles.score}>
               {matchResultState.myScore} : {matchResultState.rivalScore}
@@ -95,7 +95,7 @@ export default function GameResult() {
               {!matchResultState.isWin && (
                 <Image src={winImg} alt={'winImg'} width={24} height={24} />
               )}
-              <Image src={matchResultState.rivalAvatar} alt={'leftImg'} width={120} height={120} />
+              <Image src={matchResultState.rivalAvatar} alt={'leftImg'} width={120} height={120} className={styles.profileimg}/>
             </span>
           </li>
           <li className={styles.lineTwo}>

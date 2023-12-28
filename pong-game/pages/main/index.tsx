@@ -24,14 +24,15 @@ export default function Home() {
 
   const onClickLadderBtn = async () => {
     try {
-      await instance.post('/game/match', { gameType: 'LADDER' }).then((res) => {
-        console.log(res)
-      })
       setLodingState({
         isLoding: true,
         lodingTitle: 'searchGame',
         gameType: 'LADDER',
       })
+      await instance.post('/game/match', { gameType: 'LADDER' }).then((res) => {
+        console.log(res)
+      })
+
       // router.push('/match')
     } catch (e) {
       if (e.response.status === 401) setApiError(401)

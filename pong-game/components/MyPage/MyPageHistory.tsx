@@ -13,6 +13,7 @@ interface GameHistoryProps {
   gameHistories: GameHistoryContents[]
   targetNickname?: string
   totalItemsCount: number
+  userAvatar?: string
 }
 
 export default function MyPageHistory(props: GameHistoryProps) {
@@ -24,6 +25,7 @@ export default function MyPageHistory(props: GameHistoryProps) {
           rivalName={history.rivalname}
           rivalAvatar={history.rivalavatar}
           rivalScore={history.rivalscore}
+          userAvatar={props.userAvatar}
           targetNickname={props.targetNickname}
           myScore={history.myscore}
           isWinner={history.iswinner}

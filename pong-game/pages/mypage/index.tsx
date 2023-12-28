@@ -20,7 +20,7 @@ interface GameHistoryContents {
 
 interface GameHistoryProps {
   gameHistories: GameHistoryContents[]
-  totalItemsCount: number
+  totalItemCount: number
 }
 
 interface MyPageProfileProps {
@@ -62,6 +62,7 @@ export default function Mypage(props) {
     getGameHistoryHandler()
     setUserProfile(props.data)
     setAvatar(props.data.avatar)
+    
   }, [page, setAvatar, props.data])
 
   // useEffect(() => {
@@ -93,17 +94,17 @@ export default function Mypage(props) {
               {gameHistories && (
                 <MyPageHistory
                   gameHistories={gameHistories.gameHistories}
-                  totalItemsCount={gameHistories.totalItemsCount}
+                  totalItemsCount={gameHistories.totalItemCount}
                 />
               )}
             </div>
             <div className={styles.pagenation}>
-              {gameHistories && gameHistories.totalItemsCount > 5 && (
+              {gameHistories && gameHistories.totalItemCount > 5 && (
                 <CustomPagination
                   page={page}
                   setPage={setPage}
                   itemsCountPerPage={5}
-                  totalItemsCount={gameHistories.totalItemsCount}
+                  totalItemsCount={gameHistories.totalItemCount}
                 />
               )}
             </div>

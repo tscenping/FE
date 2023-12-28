@@ -56,6 +56,20 @@ export default function GameScore() {
   const [score, setScore] = useState<ScoreData>({ leftScore: 0, rightScore: 0 })
 
   useEffect(() => {
+    gameSocket.once('matchEnd', (endData: MatchResultProps) => {
+      console.log('matchEnd', endData)
+      setModalName('matchResult')
+      setMatchResultState({
+        rivalAvatar: endData.rivalAvatar,
+        rivalName: endData.rivalName,
+        rivalScore: endData.rivalScore,
+        myScore: endData.myScore,
+        isWin: endData.isWin,
+        myLadderScore: endData.myLadderScore,
+        rivalLadderScore: endData.rivalLadderScore,
+        gameType: endData.gameType,
+      })
+    })
     gameSocket.once('serverGameReady', (data: GameMatchData) => {
       // console.log('scors : serverGameReady')
       // console.log(data.myPosition)
@@ -83,21 +97,7 @@ export default function GameScore() {
           },
         })
       }
-      gameSocket.once('matchEnd', (endData: MatchResultProps) => {
-        console.log('matchEnd', endData)
-        setModalName('matchResult')
-        console.log('data', data, 'endData', endData)
-        setMatchResultState({
-          rivalAvatar: data.rivalAvatar,
-          rivalName: data.rivalNickname,
-          rivalScore: endData.rivalScore,
-          myScore: endData.myScore,
-          isWin: endData.isWin,
-          myLadderScore: endData.myLadderScore,
-          rivalLadderScore: endData.rivalLadderScore,
-          gameType: endData.gameType,
-        })
-      })
+
       gameSocket.emit('clientGameReady', { gameId: matchGameState.gameId })
 
       setMatchResultState({
@@ -117,8 +117,9 @@ export default function GameScore() {
     }
     gameSocket.on('matchScore', scoreHandler)
     return () => {
-      gameSocket.off('matchScore')
       gameSocket.off('serverGameReady')
+      gameSocket.off('matchScore')
+      gameSocket.off('matchEnd')
     }
   }, [myPosition])
   return (

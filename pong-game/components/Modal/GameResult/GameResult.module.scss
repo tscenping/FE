@@ -146,4 +146,8 @@
     cursor: pointer;
     transition: 0.3s;
   }
+  .profileimg {
+    border-radius: 50%;
+    object-fit: cover;
+  }
 }
