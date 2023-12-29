@@ -92,7 +92,7 @@ export const getStaticProps = async () => {
   })
   try {
     const response = await instance({
-      url: 'https://localhost:3000/users/rank',
+      url: 'https://backend:3000/users/rank',
       method: 'get',
       headers: header,
     })

@@ -141,7 +141,7 @@ export async function getServerSideProps(context) {
       }),
     })
     try {
-      const response = await instance('https://localhost:3000/users/me', {
+      const response = await instance('https://backend:3000/users/me', {
         method: 'get',
         headers: header,
       })
