@@ -44,7 +44,7 @@ export default function DropDownUserProfile({
         calledFrom={calledFrom}
       />
       {modalName !== 'userProfile' && (
-        <OpenProfile nickname={nickname} setIsDropDownView={setIsDropDownView} />
+        <OpenProfile nickname={nickname} userAvatar={avatar}setIsDropDownView={setIsDropDownView} />
       )}
       {!isBlocked && (
         <>

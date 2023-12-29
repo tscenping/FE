@@ -6,6 +6,7 @@ interface MatchHistoryProps {
   rivalName: string
   rivalAvatar: string
   rivalScore: number
+  userAvatar?: string
   myScore: number
   isWinner: boolean
   targetNickname?: string
@@ -17,6 +18,7 @@ export default function MatchHistory({
   rivalScore,
   myScore,
   isWinner,
+  userAvatar,
   targetNickname,
 }: MatchHistoryProps) {
   const { myNickname, avatar } = useNickNameImage()
@@ -28,7 +30,7 @@ export default function MatchHistory({
         <div className={styles.result}>{isWinner && 'Win'}</div>
         <div className={styles.leftUser}>
           <Image
-            src={avatar}
+            src={userAvatar ? userAvatar : avatar}
             alt={'profileImage'}
             // className={styles.radioImg}
             width={64}

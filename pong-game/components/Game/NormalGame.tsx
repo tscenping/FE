@@ -6,6 +6,7 @@ import { useModalState } from '@/store/store'
 import { useLodingState } from '@/store/loding'
 import { instance } from '@/util/axios'
 import { useErrorCheck } from '@/store/login'
+import { useRouter } from 'next/router'
 
 interface props {
   setPageState: (newPageState: number) => void // setPageState 함수
@@ -14,6 +15,7 @@ interface props {
 
 export default function NormalGame({ setPageState, setGameState }: props) {
   const [gameMode, setGameMode] = useState<'Normal' | 'Special'>('Normal')
+  const router = useRouter()
   const handlePrvBtn = () => {
     setGameState('')
     setPageState(1)
@@ -45,6 +47,7 @@ export default function NormalGame({ setPageState, setGameState }: props) {
     } catch (e) {
       if (e && e.response.status === 401) setApiError(401)
       console.log(e.message)
+      // router.reload()
     }
   }
 

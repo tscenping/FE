@@ -114,7 +114,8 @@ export default function GameInvitation() {
       if (router.pathname !== '/match') {
         socket.off('gameInvitation')
       }
-
+      
+      socket.off('gameStarted')
       console.log('clean up')
     }
   }, [socket, router.pathname])
