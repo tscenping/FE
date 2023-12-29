@@ -16,7 +16,7 @@ export default function GameSocketHandler() {
       })
       gameSocket.on('disconnect', () => {
         console.log('gameSocket disconnect')
-        // router.push('/main')
+        router.replace('/main')
       })
 
       // gameSocket.emit('gameRequest', { gameId: matchGameState.gameId })

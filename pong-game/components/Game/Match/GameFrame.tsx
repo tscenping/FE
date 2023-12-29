@@ -137,8 +137,13 @@ export default function GameFrame() {
     gameSocket.once('serverGameReady', matchInitHandler)
 
     setTimeout(() => {
-      gameSocket.emit('gameRequest', { gameId: matchGameState.gameId })
-      console.log('gameRequest', matchGameState.gameId)
+      if (matchGameState.gameId !== -1 && gameSocket.connected) {
+        console.log('gameSocket', gameSocket)
+        gameSocket.emit('gameRequest', { gameId: matchGameState.gameId })
+        console.log('gameRequest', matchGameState.gameId)
+      } else {
+        console.log('gameRequest 안보냈음 -1이라')
+      }
     }, 1000)
 
     const canvas = canvasRef.current
