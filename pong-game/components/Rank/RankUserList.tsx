@@ -20,7 +20,7 @@ export default function RankUserList({
 
   function setModalPropsValue(nickname: string) {
     setModalName('userProfile')
-    setModalProps({ nickname: nickname })
+    setModalProps({ nickname: nickname, avatar: avatar })
   }
   return (
     <>

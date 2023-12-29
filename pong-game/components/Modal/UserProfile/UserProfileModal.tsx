@@ -106,6 +106,7 @@ export default function UserProfile() {
                 <MyPageHistory
                   gameHistories={gameHistories.gameHistories}
                   targetNickname={userNickname}
+                  userAvatar={modalProps.avatar}
                   totalItemsCount={gameHistories.totalItemsCount}
                 />
               )}

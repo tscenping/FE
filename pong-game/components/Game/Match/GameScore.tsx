@@ -33,9 +33,15 @@ interface MatchResultProps {
   rivalScore: number // 상대 매치 점수
   myScore: number // 나의 매치 점수
   isWin: boolean // 승리 여부
-  myRadderScore: number | null // 나의 래더 점수
-  rivalRadderScore: number | null // 상대방 래더 점수
-  gameType: 'NORMAL' | 'SPECIAL' | 'RADDER' | 'NONE' // 진행했던 게임 타입
+  myLadderScore: number | null // 나의 래더 점수
+  rivalLadderScore: number | null // 상대방 래더 점수
+  gameType:
+    | 'LADDER'
+    | 'NONE'
+    | 'NORMAL_MATCHING'
+    | 'SPECIAL_MATCHING'
+    | 'SPECIAL_INVITE'
+    | 'NORMAL_INVITE'
 }
 
 const baseImg = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
@@ -50,6 +56,20 @@ export default function GameScore() {
   const [score, setScore] = useState<ScoreData>({ leftScore: 0, rightScore: 0 })
 
   useEffect(() => {
+    gameSocket.once('matchEnd', (endData: MatchResultProps) => {
+      console.log('matchEnd', endData)
+      setModalName('matchResult')
+      setMatchResultState({
+        rivalAvatar: endData.rivalAvatar,
+        rivalName: endData.rivalName,
+        rivalScore: endData.rivalScore,
+        myScore: endData.myScore,
+        isWin: endData.isWin,
+        myLadderScore: endData.myLadderScore,
+        rivalLadderScore: endData.rivalLadderScore,
+        gameType: endData.gameType,
+      })
+    })
     gameSocket.once('serverGameReady', (data: GameMatchData) => {
       // console.log('scors : serverGameReady')
       // console.log(data.myPosition)
@@ -77,20 +97,7 @@ export default function GameScore() {
           },
         })
       }
-      gameSocket.once('matchEnd', (endData: MatchResultProps) => {
-        console.log('matchEnd')
-        setModalName('matchResult')
-        setMatchResultState({
-          rivalAvatar: data.rivalAvatar,
-          rivalName: data.rivalNickname,
-          rivalScore: endData.rivalScore,
-          myScore: endData.myScore,
-          isWin: endData.isWin,
-          myRadderScore: endData.myRadderScore,
-          rivalRadderScore: endData.rivalRadderScore,
-          gameType: endData.gameType,
-        })
-      })
+
       gameSocket.emit('clientGameReady', { gameId: matchGameState.gameId })
 
       setMatchResultState({
@@ -101,7 +108,7 @@ export default function GameScore() {
     })
     const scoreHandler = (data: { myScore; rivalScore }) => {
       console.log(myPosition)
-      console.log(data)
+      console.log('matchScore', data)
       if (myPosition === 'LEFT') {
         setScore({ leftScore: data.myScore, rightScore: data.rivalScore })
       } else {
@@ -110,8 +117,9 @@ export default function GameScore() {
     }
     gameSocket.on('matchScore', scoreHandler)
     return () => {
-      gameSocket.off('matchScore')
       gameSocket.off('serverGameReady')
+      gameSocket.off('matchScore')
+      gameSocket.off('matchEnd')
     }
   }, [myPosition])
   return (
@@ -143,23 +151,6 @@ export default function GameScore() {
           </section>
         </div>
       )}
-      <button
-        onClick={() => {
-          setModalName('matchResult')
-          setMatchResultState({
-            rivalAvatar: playerData.leftPlayer.avatar,
-            rivalName: playerData.leftPlayer.nickname,
-            rivalScore: 3,
-            myScore: 6,
-            isWin: true,
-            myRadderScore: 1200,
-            rivalRadderScore: 1200,
-            gameType: 'NORMAL'
-          })
-        }}
-      >
-        게임 종료
-      </button>
     </>
   )
 }
