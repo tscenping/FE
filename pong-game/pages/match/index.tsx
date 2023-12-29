@@ -16,7 +16,7 @@ export default function Game() {
     console.log(1)
     document.body.style.overflowY = 'hidden'
     document.body.style.overflowX = 'hidden'
-    return ()=>{
+    return () => {
       document.body.style.overflow = 'auto'
     }
   }, [])

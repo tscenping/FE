@@ -33,7 +33,7 @@ export default function GameResult() {
 
   const closeHandler = () => {
     setModalName(null)
-    router.push('/main')
+    router.replace('/main')
   }
 
   return (

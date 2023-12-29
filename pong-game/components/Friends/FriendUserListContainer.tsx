@@ -29,26 +29,34 @@ function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Eleme
 
   const baseImg = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
-  const userStyle = props.isBlocked //block유저이면 styles.block, block유저가 아니면 OFFLINE, ONLINE에 따라서 css 적용
+  const userStyle = props.isBlocked
     ? styles.block
     : props.status === 'ONLINE'
     ? styles.online
+    : props.status === 'OFFLINE'
+    ? styles.offline
+    : props.status === 'INGAME'
+    ? styles.inGame
     : styles.offline
 
   const changeArrayItem = (newType, idToChange) => {
-    const result = channelUserInfo.map((item) => {
-      if (item.nickname === idToChange) {
-        return {
-          ...item,
-          isBlocked: newType,
+    if (!channelUserInfo) {
+      return
+    } else {
+      const result = channelUserInfo.map((item) => {
+        if (item.nickname === idToChange) {
+          return {
+            ...item,
+            isBlocked: newType,
+          }
+        } else {
+          return {
+            ...item,
+          }
         }
-      } else {
-        return {
-          ...item,
-        }
-      }
-    })
-    setChannelUserInfo(result)
+      })
+      setChannelUserInfo(result)
+    }
   }
 
   const cancelBlockApi = async () => {
@@ -67,7 +75,8 @@ function FriendUserListContainer(props: FriendUserListContainerprops): JSX.Eleme
           changeArrayItem(false, props.nickname)
         })
     } catch (e) {
-      if (e.response.status === 401) setApiError(401)
+      console.log(e)
+      if (e && e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

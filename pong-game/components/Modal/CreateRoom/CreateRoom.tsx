@@ -74,7 +74,6 @@ function CreateChatRoom(): JSX.Element {
         const responseMe = await instance('channels/me/?page=1', {
           method: 'get',
         })
-
         //"chat"페이지의 채널 목록과 페이지 네이션 전역상태변수 초기화
         setAllChannels(responseAll.data.channels)
         setTotalAll(responseAll.data.totalDataSize)
@@ -95,7 +94,7 @@ function CreateChatRoom(): JSX.Element {
       titleRef.current.value = '' //기존에 남아있던 값을 비워준다.
       channelType !== 'PRIVATE' ? (passwordRef.current.value = '') : '' //채널의 타입이 "PRIVATE"가 아니라면 패스워드값을 비워준다.
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Api Request fail : ', error)
     }
   }

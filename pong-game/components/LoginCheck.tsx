@@ -20,21 +20,21 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
         }
       })
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       router.push('/login/info')
     }
   }
 
-  useEffect(()=>{
-    const intervalState = setInterval(()=>{
-      if(!document.cookie){
-        router.push('/login')
-      }
-    }, 5000)
-    return ()=>{
-      clearInterval(intervalState)
-    }
-  },[])
+  // useEffect(() => {
+  //   const intervalState = setInterval(() => {
+  //     if (!document.cookie) {
+  //       router.push('/error')
+  //     }
+  //   }, 5000)
+  //   return () => {
+  //     clearInterval(intervalState)
+  //   }
+  // }, [])
 
   useEffect(() => {
     if (isLoginPage) {
@@ -42,7 +42,7 @@ export default function LoginCheck({ children }: { children: ReactNode }) {
         if (myNickname !== null && avatar !== null) {
           router.push('/main')
         } else if (myNickname === null || avatar === null) {
-          router.push('/login/info')
+          router.replace('/login/info')
         }
       }
     } else if (isSignPage && myNickname !== null && avatar !== null) {

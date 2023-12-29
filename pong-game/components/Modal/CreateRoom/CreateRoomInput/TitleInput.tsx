@@ -9,7 +9,7 @@ function TitleInput(props: TitleInputProps): JSX.Element {
   const [title, setTitle] = useState('')
 
   const titleHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const filteredValue = e.target.value.replace(/[`~₩;'"!@#$%^&*()_+|<>?:{}\s]/g, '')
+    const filteredValue = e.target.value.replace(/[`~₩;' "!@#$%=^&*()_+|<>?:{}\\\[\]\\/s]/g, '')
     const truncatedValue = filteredValue.slice(0, 10)
     setTitle(filteredValue)
     if (props.titleRef.current) {

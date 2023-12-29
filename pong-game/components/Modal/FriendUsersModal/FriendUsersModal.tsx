@@ -21,7 +21,7 @@ function FriendUsersModal(): JSX.Element {
       })
       setAllFriends(response.data.friends)
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }, [page, setAllFriends, setApiError])

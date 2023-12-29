@@ -32,28 +32,32 @@ export default function EditBlock(props: EditBlockProps) {
   const { setTotalBlockCount, totalBlockCount } = useGetBlocks()
 
   const changeArrayItem = (newType, idToChange) => {
-    const result = channelUserInfo.map((item) => {
-      if (item.nickname === idToChange) {
-        if (newType) {
+    if (!channelUserInfo) {
+      return
+    } else {
+      const result = channelUserInfo.map((item) => {
+        if (item.nickname === idToChange) {
+          if (newType) {
+            return {
+              ...item,
+              isBlocked: newType,
+              isFriend: false,
+            }
+          }
           return {
             ...item,
             isBlocked: newType,
-            isFriend: false,
+          }
+        } else {
+          return {
+            ...item,
           }
         }
-        return {
-          ...item,
-          isBlocked: newType,
-        }
-      } else {
-        return {
-          ...item,
-        }
-      }
-    })
-    setChannelUserInfo(result)
-    console.log(channelUserInfo)
+      })
+      setChannelUserInfo(result)
+    }
   }
+
   const blockHandler = async () => {
     props.setIsDropDownView(false)
     try {
@@ -75,7 +79,8 @@ export default function EditBlock(props: EditBlockProps) {
           changeArrayItem(true, props.nickname)
         })
     } catch (e) {
-      if (e.response.status === 401) setApiError(401)
+      console.log(e)
+      if (e && e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }
@@ -100,7 +105,7 @@ export default function EditBlock(props: EditBlockProps) {
           // }
         })
     } catch (e) {
-      if (e.response.status === 401) setApiError(401)
+      if (e && e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

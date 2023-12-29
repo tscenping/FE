@@ -30,27 +30,32 @@ export default function EditFriend(props: EditFriendProps) {
   }
 
   const changeArrayItem = (newType, idToChange) => {
-    const result = channelUserInfo.map((item) => {
-      if (item.nickname === idToChange) {
-        if (newType) {
+    if (!channelUserInfo) {
+      //채널에서 나가기 할 경우 "channelUserInfo === null" 이 경우를 피할 분기문
+      return
+    } else {
+      const result = channelUserInfo.map((item) => {
+        if (item.nickname === idToChange) {
+          if (newType) {
+            return {
+              ...item,
+              isFriend: newType,
+              isBlocked: false,
+            }
+          }
           return {
             ...item,
             isFriend: newType,
             isBlocked: false,
           }
+        } else {
+          return {
+            ...item,
+          }
         }
-        return {
-          ...item,
-          isFriend: newType,
-          isBlocked: false,
-        }
-      } else {
-        return {
-          ...item,
-        }
-      }
-    })
-    setChannelUserInfo(result)
+      })
+      setChannelUserInfo(result)
+    }
   }
 
   const addFriendHandler = async () => {
@@ -73,7 +78,7 @@ export default function EditFriend(props: EditFriendProps) {
           changeArrayItem(true, props.nickname)
         })
     } catch (e) {
-      if (e.response.status === 401) setApiError(401)
+      if (e && e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }
@@ -97,7 +102,7 @@ export default function EditFriend(props: EditFriendProps) {
           changeArrayItem(false, props.nickname)
         })
     } catch (e) {
-      if (e.response.status === 401) setApiError(401)
+      if (e && e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

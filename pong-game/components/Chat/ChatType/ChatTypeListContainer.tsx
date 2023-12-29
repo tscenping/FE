@@ -6,12 +6,11 @@ import { useNavBarState } from '@/store/chat'
 import EnteredRoomListSection from './EnteredRoomListSection'
 import { instance } from '@/util/axios'
 import { useGetChannels } from '@/store/chat'
-import { useRouter } from 'next/router'
 import { useErrorCheck } from '@/store/login'
 
 function ChatTypeListContainer(): JSX.Element {
   const { tabState } = useNavBarState()
-  const router = useRouter()
+
   const {
     setAllChannels,
     setTotalAll,
@@ -32,7 +31,7 @@ function ChatTypeListContainer(): JSX.Element {
       setAllChannels(response.data.channels)
       setTotalAll(response.data.totalDataSize)
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }, [page, setAllChannels, setTotalAll, setApiError])
@@ -45,7 +44,7 @@ function ChatTypeListContainer(): JSX.Element {
       setMeChannels(response.data.channels)
       setTotalMe(response.data.totalDataSize)
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }, [page, setMeChannels, setTotalMe, setApiError])
@@ -58,7 +57,7 @@ function ChatTypeListContainer(): JSX.Element {
       setDmChannels(response.data.dmChannels)
       setTotalDm(response.data.totalItemCount)
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }, [page, setDmChannels, setTotalDm, setApiError])

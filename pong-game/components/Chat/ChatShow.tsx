@@ -22,7 +22,7 @@ function ChatShow(): JSX.Element {
     try {
       socket.emit('message', { channelId: channelId, message: messageRef.current.value })
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
     messageRef.current.value = ''

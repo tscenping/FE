@@ -63,7 +63,7 @@ function ChatPassword(): JSX.Element {
         setTabState('JOINED')
       }
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
       //틀린 비밀번호일 때 예외처리 해야한다.
     }

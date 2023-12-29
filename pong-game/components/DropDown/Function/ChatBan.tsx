@@ -22,7 +22,7 @@ export default function ChatBan(props: ChatBanProps) {
           console.log(res)
         })
     } catch (e) {
-      if (e.response.status === 401) setApiError(401)
+      if (e && e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

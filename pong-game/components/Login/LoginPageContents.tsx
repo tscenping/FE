@@ -74,7 +74,7 @@ function LoginPageContents(): JSX.Element {
         }
       } catch (error) {
         console.error('Error fetching data:', error)
-        if (error.response.status === 401) setApiError(401)
+        if (error && error.response.status === 401) setApiError(401)
       }
     }
     fetchData()

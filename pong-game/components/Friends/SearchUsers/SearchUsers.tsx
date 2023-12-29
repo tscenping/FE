@@ -10,7 +10,7 @@ function SearchUsers(): JSX.Element {
   const inputRef = useRef<HTMLInputElement>()
   const { setUser } = useGetUser()
   const { setApiError } = useErrorCheck()
-  const patternSpecial = /[~₩;'"!@#$%^&*()_+|<>?:{}\s]/ //특수문자 입력 정규식
+  const patternSpecial = /[`~₩;' "!@#$%^&*()_+|<>?:{}=\\\[\]\\/s]/
 
   const searchNicknameHandler = async (e: FormEvent) => {
     e.preventDefault()
@@ -25,7 +25,7 @@ function SearchUsers(): JSX.Element {
         setUser(response.data)
       }
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
 

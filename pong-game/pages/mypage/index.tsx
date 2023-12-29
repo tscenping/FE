@@ -42,11 +42,13 @@ export default function Mypage(props) {
   const { myNickname, setAvatar } = useNickNameImage()
   const getGameHistoryHandler = async () => {
     try {
-      if (myNickname !== 'nickname') {
-        await instance.get(`/users/games/${myNickname}/?page=${page}`, {}).then(function (res) {
-          setGameHistories(res.data)
-          console.log(res.data)
-        })
+      if (props.data.nickname) {
+        await instance
+          .get(`/users/games/${props.data.nickname}/?page=${page}`, {})
+          .then(function (res) {
+            setGameHistories(res.data)
+            console.log(res.data)
+          })
       }
     } catch (e) {
       console.log(e.message)
@@ -59,10 +61,10 @@ export default function Mypage(props) {
   // }
 
   useEffect(() => {
-    getGameHistoryHandler()
     setUserProfile(props.data)
+    getGameHistoryHandler()
     setAvatar(props.data.avatar)
-  }, [page, setAvatar, props.data])
+  }, [page, setAvatar, props.data, setUserProfile])
 
   // useEffect(() => {
   //   getUserProfileHandler

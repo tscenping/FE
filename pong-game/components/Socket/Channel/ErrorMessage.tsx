@@ -9,9 +9,10 @@ export default function ErrorMeassage() {
 
   useEffect(() => {
     socket.on('error', (error: any) => {
-      socket.disconnect()
       setDuplicateError(true)
+      console.log('active')
       router.push('/error')
+      socket.disconnect()
     })
 
     return () => {

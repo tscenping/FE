@@ -10,7 +10,7 @@ function NickNameInput(props: NickNameInputProps): JSX.Element {
   const [nickName, setNickName] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const filteredValue = e.target.value.replace(/[`~₩;'"!@#$%^&*()_+|<>?:{}\s]/g, '')
+    const filteredValue = e.target.value.replace(/[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]/g, '')
     const truncatedValue = filteredValue.slice(0, 10)
     setNickName(truncatedValue)
     if (props.inputRef.current) {

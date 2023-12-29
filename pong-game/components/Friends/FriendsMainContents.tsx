@@ -25,7 +25,8 @@ function FriendsMainContents(): JSX.Element {
       setTotalFriendCount(response.data.totalItemCount)
       setUser(null)
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      console.log(error)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }, [friendPage, setAllFriends, setTotalFriendCount, setUser, setApiError])
@@ -39,7 +40,7 @@ function FriendsMainContents(): JSX.Element {
       setTotalBlockCount(response.data.totalItemCount)
       setUser(null)
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }, [friendPage, setAllBlocks, setTotalBlockCount, setUser, setApiError])

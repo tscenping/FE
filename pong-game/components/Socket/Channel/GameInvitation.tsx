@@ -34,7 +34,7 @@ export default function GameInvitation() {
               setModalName(null)
             })
           } catch (e) {
-            if (e.response.status === 401) setApiError(401)
+            if (e && e.response.status === 401) setApiError(401)
             console.log(e.message)
           }
         }
@@ -45,7 +45,7 @@ export default function GameInvitation() {
               console.log('거절 성공')
             })
           } catch (e) {
-            if (e.response.status === 401) setApiError(401)
+            if (e && e.response.status === 401) setApiError(401)
             console.log(e.message)
           }
         }

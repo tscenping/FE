@@ -34,7 +34,11 @@ function ModalOverlay(): JSX.Element {
         <div
           className={styles.modalOverlay}
           onClick={() => {
-            if (modalName !== 'mfa' && modalName !== 'duplicateLogin'&& modalName !== 'matchResult') {
+            if (
+              modalName !== 'mfa' &&
+              modalName !== 'duplicateLogin' &&
+              modalName !== 'matchResult'
+            ) {
               setModalName(null)
             }
           }}
@@ -60,7 +64,7 @@ function ModalContent({}): JSX.Element {
     inviteGame: <InviteGameModal />,
     mfa: <Mfa />,
     duplicateLogin: <DuplicateLogin />,
-    matchResult: <GameResult/>
+    matchResult: <GameResult />,
   }
   return (
     <>

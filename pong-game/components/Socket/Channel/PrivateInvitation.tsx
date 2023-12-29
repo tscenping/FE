@@ -52,7 +52,7 @@ function PrivateInvitation(): JSX.Element {
         setChannelAuth('MEMBER')
         toast.remove(t.id)
       } catch (error) {
-        if (error.response.status === 401) setApiError(401)
+        if (error && error.response.status === 401) setApiError(401)
         toast.remove(t.id)
         console.log('Error : ', error)
       }
