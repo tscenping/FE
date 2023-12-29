@@ -33,7 +33,7 @@ function ChatRoomList(): JSX.Element {
       setAllChannels(response.data.channels)
       setTotalAll(response.data.totalDataSize)
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }, [setAllChannels, setTotalAll, setApiError])
@@ -46,7 +46,7 @@ function ChatRoomList(): JSX.Element {
       setMeChannels(response.data.channels)
       setTotalMe(response.data.totalDataSize)
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }, [setMeChannels, setTotalMe, setApiError])
@@ -59,7 +59,7 @@ function ChatRoomList(): JSX.Element {
       setDmChannels(response.data.dmChannels)
       setTotalDm(response.data.totalItemCount)
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }, [setDmChannels, setTotalDm, setApiError])

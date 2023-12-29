@@ -11,7 +11,7 @@ function SearchInputContainer({ inputRef }: searchInputContainerProps): JSX.Elem
   const [nickName, setNickName] = useState('')
 
   const nickNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const filteredValue = e.target.value.replace(/[`~₩;'"!@#$%^&*()_+|<>?:{}\s]/g, '')
+    const filteredValue = e.target.value.replace(/[`~₩;' "!@#$%^&*()_+|<>?:={}\\\[\]\\/s]/g, '')
     const truncatedValue = filteredValue.slice(0, 10)
     setNickName(truncatedValue)
     if (inputRef.current) {

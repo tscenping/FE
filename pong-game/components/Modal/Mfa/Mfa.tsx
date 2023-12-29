@@ -58,8 +58,9 @@ function Mfa(): JSX.Element {
         router.replace('/main')
       }
     } catch (error) {
-      if (error.response.data.message === 'MFA 인증에 실패했습니다.') setError('wrongNumber')
-      else if (error.response.status === 401) setApiError(401)
+      if (error && error.response.data.message === 'MFA 인증에 실패했습니다.')
+        setError('wrongNumber')
+      else if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }

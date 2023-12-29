@@ -55,7 +55,7 @@ export default function UserProfile() {
       })
     } catch (e) {
       // alert('존재하지 않는 유저입니다.')
-      if (e.response.status === 401) setApiError(401)
+      if (e && e.response.status === 401) setApiError(401)
       setModalName('response')
       responseModal.setResponseModalState('알림', '잘못된 접근입니다.', null)
     }
@@ -70,7 +70,7 @@ export default function UserProfile() {
       })
     } catch (e) {
       // alert('존재하지 않는 유저입니다.')
-      if (e.response.status === 401) setApiError(401)
+      if (e && e.response.status === 401) setApiError(401)
       setModalName('response')
       responseModal.setResponseModalState('알림', '잘못된 접근입니다.', null)
     }

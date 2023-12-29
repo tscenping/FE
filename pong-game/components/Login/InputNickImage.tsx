@@ -6,6 +6,7 @@ import { instance } from '@/util/axios'
 import NickNameInput from './NickNameInput'
 import { useRouter } from 'next/router'
 import { useErrorCheck } from '@/store/login'
+import { useModalState, useResponseModalState } from '@/store/store'
 
 const defaultProfileImage = process.env.NEXT_PUBLIC_API_DEFAULT_PRIFILE_IMAGE
 
@@ -14,9 +15,11 @@ function InputNickImage(): JSX.Element {
   const [imagePreview, setImagePreview] = useState<string>(defaultProfileImage)
   const [isValidNick, setIsValidNick] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
+  const { setModalName } = useModalState()
+  const { setResponseModalState } = useResponseModalState()
   const router = useRouter()
   const { setApiError } = useErrorCheck()
-  const patternSpecial = /[~₩;'"!@#$%^&*()_+|<>?:{}\s]/ //특수문자 입력 정규식
+  const patternSpecial = /[~₩;' "!@#$%^&*()_+|<>?:{}\\//=s]/ //특수문자 입력 정규식
 
   /* 아바타 사진 리사이징 및 base64 변환 함수 */
   const resizeFile = (file) =>
@@ -72,11 +75,12 @@ function InputNickImage(): JSX.Element {
           data: JSON.stringify(finalData),
         })
         if (response.statusText === 'OK') {
-          // window.location.href = 'https://localhost:8001/main'
+          setResponseModalState('', '42 PONG에 오신걸 환영해요!', null)
+          setModalName('response')
           router.replace('/main')
         }
       } catch (error) {
-        if (error.response.status === 401) setApiError(401)
+        if (error && error.response.status === 401) setApiError(401)
         console.log('Error : ', error)
       }
       setIsValidNick(false)

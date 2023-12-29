@@ -1,6 +1,5 @@
 import '@/styles/globals.css'
 import { Reset } from 'styled-reset'
-import { useRouter } from 'next/router'
 import type { AppProps } from 'next/app'
 import Layout from '@/components/Layout/Layout'
 import ModalLayout from '@/components/Layout/ModalLayout'

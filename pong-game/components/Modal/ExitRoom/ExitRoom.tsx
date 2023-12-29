@@ -56,7 +56,7 @@ function ExitRoom(): JSX.Element {
         setPasswordInputRender('DEFAULT') //"chatlog"의 컴포넌트를 "DEFAULT"로 바꿔준다.
       }
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       console.log('Error : ', error)
     }
   }

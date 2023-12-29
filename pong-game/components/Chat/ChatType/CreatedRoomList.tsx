@@ -53,7 +53,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
           setChannelId(props.channelId)
         }
       } catch (error) {
-        if (error.response.status === 401) setApiError(401)
+        if (error && error.response.status === 401) setApiError(401)
         console.log('Error : ', error)
       }
     } else {
@@ -77,7 +77,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
             setChannelId(props.channelId)
           }
         } catch (error) {
-          if (error.response.status === 401) setApiError(401)
+          if (error && error.response.status === 401) setApiError(401)
           console.log('Error : ', error)
         }
       } else {
@@ -95,7 +95,7 @@ function CreatedRoomList(props: CreatedRoomListProps): JSX.Element {
             setTitle(props.title)
             setModalName('joinRoom') //"PUBLIC"채널에 join 할 시에는 모달창을 띄워서 한번 더 참여 여부를 물어본다.
           } catch (error) {
-            if (error.response.status === 401) setApiError(401)
+            if (error && error.response.status === 401) setApiError(401)
             console.log('Error : ', error)
           }
         }

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import Link from 'next/link'
 import noticeIcon from '@/public/img/layout/notice.svg'
 import logoIcon from '@/public/img/layout/PONG GAME.svg'
@@ -32,7 +32,7 @@ function Layout({ children }: { children: ReactNode }): JSX.Element {
       setMyNickname(null)
       setAvatar(null)
     } catch (e) {
-      if (e.response.status === 401) setApiError(401)
+      if (e && e.response.status === 401) setApiError(401)
       console.log(e.message)
     }
   }

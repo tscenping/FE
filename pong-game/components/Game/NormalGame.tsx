@@ -1,4 +1,4 @@
-import styles from './normalGame.module.scss'
+import styles from './NormalGame.module.scss'
 import { useState } from 'react'
 import CustomRadio from '@/function/Game/CustomRadio'
 import PageTitle from '../UI/PageTitle'
@@ -45,7 +45,7 @@ export default function NormalGame({ setPageState, setGameState }: props) {
         gameType: gameMode === 'Normal' ? 'NORMAL_MATCHING' : 'SPECIAL_MATCHING',
       })
     } catch (e) {
-      if (e.response.status === 401) setApiError(401)
+      if (e && e.response.status === 401) setApiError(401)
       console.log(e.message)
       // router.reload()
     }

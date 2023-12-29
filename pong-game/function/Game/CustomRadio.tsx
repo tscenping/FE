@@ -4,34 +4,41 @@ import normalBtn from '../../public/img/game/normal.svg'
 import selectSpecialBtn from '../../public/img/game/selectSpecial.svg'
 import selectNormalBtn from '../../public/img/game/selectNormal.svg'
 import Image from 'next/image'
-import styles from './customRadio.module.scss'
+import styles from './CustomRadio.module.scss'
 
-interface radioOption{
-  value: 'Normal' | 'Special';
-  name: string;
-  id: string;
+interface radioOption {
+  value: 'Normal' | 'Special'
+  name: string
+  id: string
   setGameMode: (value: 'Normal' | 'Special') => void
-  gameMode: 'Normal' | 'Special';
-  width: number;
+  gameMode: 'Normal' | 'Special'
+  width: number
 }
 
-export default function CustomRadio({value, name, id, setGameMode, gameMode, width}:radioOption) {
+export default function CustomRadio({
+  value,
+  name,
+  id,
+  setGameMode,
+  gameMode,
+  width,
+}: radioOption) {
   return (
     <section className={styles.customRadio}>
       <input
         type="radio"
         value={value} // special
-        name={name}//"gameModeGroup"
-        id={id}//"special"
+        name={name} //"gameModeGroup"
+        id={id} //"special"
         checked={gameMode == value}
-        onChange={()=>setGameMode(value)}
+        onChange={() => setGameMode(value)}
         className={styles.radioBox}
       />
       <label htmlFor={value}>
         {gameMode == value ? (
           <div className={styles.selectSpecialText}>
             <Image
-              src={(value == 'Normal' ? selectNormalBtn : selectSpecialBtn)}
+              src={value == 'Normal' ? selectNormalBtn : selectSpecialBtn}
               alt={'prvBtn'}
               className={styles.radioImg}
               width={width}
@@ -42,7 +49,7 @@ export default function CustomRadio({value, name, id, setGameMode, gameMode, wid
         ) : (
           <div className={styles.specialText}>
             <Image
-              src={(value == 'Normal' ? normalBtn : specialBtn)}
+              src={value == 'Normal' ? normalBtn : specialBtn}
               alt={'prvBtn'}
               className={styles.radioImg}
               width={width}

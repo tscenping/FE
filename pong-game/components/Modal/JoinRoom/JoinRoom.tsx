@@ -48,7 +48,7 @@ function JoinRoom(): JSX.Element {
         setModalName(null)
       }
     } catch (error) {
-      if (error.response.status === 401) setApiError(401)
+      if (error && error.response.status === 401) setApiError(401)
       setModalName(null)
     }
   }
